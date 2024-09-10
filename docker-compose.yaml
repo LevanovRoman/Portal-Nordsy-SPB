@@ -1,0 +1,9 @@
+services:
+  postgres:
+    image: postgres:13.3
+    environment:
+      POSTGRES_DB: "portal"
+      POSTGRES_USER: "portal"
+      POSTGRES_PASSWORD: "portalnew"
+    ports:
+      - "5450:5432"
