@@ -1,5 +1,4 @@
 package com.myapp.portalnordsyspb.entities;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,21 +12,22 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "area_criterion")
-public class AreaCriterion {
+@Table(name = "ac_week")
+public class AcWeek {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name = "area_id")
-    private Area area;
+    @JoinColumn(name = "area_criterion_id")
+    private AreaCriterion areaCriterion;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name = "criterion_id")
-    private Criterion criterion;
+    @JoinColumn(name = "week_id")
+    private Week week;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "areaCriterion")
-    private List<AcWeek> acWeekList;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "acWeek")
+//    private List<Result> resultList;
+    private int result;
 }
