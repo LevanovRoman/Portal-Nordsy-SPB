@@ -22,5 +22,5 @@ public class Week {
     private int number;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "week")
-    private List<AcWeek> acWeekList;
+    private List<Result> resultList;
 }

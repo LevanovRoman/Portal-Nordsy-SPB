@@ -1,5 +1,6 @@
 package com.myapp.portalnordsyspb.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,6 +23,7 @@ public class Area {
 
     private String name;
 
+    @JsonIgnore
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "department_id")
     private Department department;
@@ -29,6 +31,7 @@ public class Area {
 //    @ManyToMany(mappedBy = "areaList", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 //    private List<Criterion> criterionList = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "area")
     private List<AreaCriterion> areaCriterionList;
 }

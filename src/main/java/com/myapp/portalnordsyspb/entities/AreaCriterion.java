@@ -29,5 +29,5 @@ public class AreaCriterion {
     private Criterion criterion;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "areaCriterion")
-    private List<AcWeek> acWeekList;
+    private List<Result> resultList;
 }

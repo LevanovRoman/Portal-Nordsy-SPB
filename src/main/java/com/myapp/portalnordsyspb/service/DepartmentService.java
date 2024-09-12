@@ -1,5 +1,6 @@
 package com.myapp.portalnordsyspb.service;
 
+import com.myapp.portalnordsyspb.dto.DepartmentDto;
 import com.myapp.portalnordsyspb.entities.Department;
 
 import java.util.List;
@@ -7,4 +8,6 @@ import java.util.List;
 public interface DepartmentService {
 
     List<Department> getAllDepartments();
+
+    List<DepartmentDto> getListDepartments();
 }
