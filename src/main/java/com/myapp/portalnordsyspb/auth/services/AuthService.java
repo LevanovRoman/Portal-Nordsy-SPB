@@ -6,6 +6,8 @@ import com.myapp.portalnordsyspb.auth.repositories.UserRepository;
 import com.myapp.portalnordsyspb.auth.utils.AuthResponse;
 import com.myapp.portalnordsyspb.auth.utils.LoginRequest;
 import com.myapp.portalnordsyspb.auth.utils.RegisterRequest;
+import com.myapp.portalnordsyspb.exceptions.CustomUserNotFoundException;
+import com.myapp.portalnordsyspb.exceptions.EmailAlreadyExistException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -24,6 +26,10 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
 
     public AuthResponse register(RegisterRequest registerRequest) {
+
+        if (userRepository.existsByEmail(registerRequest.getEmail())){
+            throw new EmailAlreadyExistException("Такая почта уже существует!");
+        }
         var user = User.builder()
                 .name(registerRequest.getName())
                 .email(registerRequest.getEmail())
@@ -43,6 +49,9 @@ public class AuthService {
     }
 
     public AuthResponse login(LoginRequest loginRequest) {
+
+        var user = userRepository.findByEmail(loginRequest.getEmail())
+                .orElseThrow(() -> new CustomUserNotFoundException("Пользователь не найден!"));
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginRequest.getEmail(),
@@ -50,8 +59,8 @@ public class AuthService {
                 )
         );
 
-        var user = userRepository.findByEmail(loginRequest.getEmail())
-                .orElseThrow(() -> new UsernameNotFoundException("User not found!"));
+//        var user = userRepository.findByEmail(loginRequest.getEmail())
+//                .orElseThrow(() -> new CustomUserNotFoundException("Пользователь не найден!"));
         var accessToken = jwtService.generateToken(user);
         var refreshToken = refreshTokenService.createRefreshToken(loginRequest.getEmail());
 

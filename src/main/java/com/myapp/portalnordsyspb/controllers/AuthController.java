@@ -9,6 +9,7 @@ import com.myapp.portalnordsyspb.auth.utils.AuthResponse;
 import com.myapp.portalnordsyspb.auth.utils.LoginRequest;
 import com.myapp.portalnordsyspb.auth.utils.RefreshTokenRequest;
 import com.myapp.portalnordsyspb.auth.utils.RegisterRequest;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,12 +31,12 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest registerRequest) {
+    public ResponseEntity<AuthResponse> register(@RequestBody @Valid RegisterRequest registerRequest) {
         return ResponseEntity.ok(authService.register(registerRequest));
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<AuthResponse> login(@RequestBody @Valid LoginRequest loginRequest) {
         return ResponseEntity.ok(authService.login(loginRequest));
     }
 

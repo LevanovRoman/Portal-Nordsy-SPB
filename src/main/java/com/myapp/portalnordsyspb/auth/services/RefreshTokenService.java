@@ -4,6 +4,8 @@ import com.myapp.portalnordsyspb.auth.entities.RefreshToken;
 import com.myapp.portalnordsyspb.auth.entities.User;
 import com.myapp.portalnordsyspb.auth.repositories.RefreshTokenRepository;
 import com.myapp.portalnordsyspb.auth.repositories.UserRepository;
+import com.myapp.portalnordsyspb.exceptions.RefreshTokenExpiredException;
+import com.myapp.portalnordsyspb.exceptions.RefreshTokenNotFoundException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +26,7 @@ public class RefreshTokenService {
 
     public RefreshToken createRefreshToken(String username) {
         User user = userRepository.findByEmail(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found with email : " + username));
+                .orElseThrow(() -> new UsernameNotFoundException("Пользователь с почтой : " + username + " не найден."));
 
         RefreshToken refreshToken = user.getRefreshToken();
 
@@ -44,11 +46,11 @@ public class RefreshTokenService {
 
     public RefreshToken verifyRefreshToken(String refreshToken) {
         RefreshToken refToken = refreshTokenRepository.findByRefreshToken(refreshToken)
-                .orElseThrow(() -> new RuntimeException("Refresh token not found!"));
+                .orElseThrow(() -> new RefreshTokenNotFoundException("Refresh token не найден!"));
 
         if (refToken.getExpirationTime().compareTo(Instant.now()) < 0) {
             refreshTokenRepository.delete(refToken);
-            throw new RuntimeException("Refresh Token expired");
+            throw new RefreshTokenExpiredException("Refresh Token срок действия истёк!");
         }
 
         return refToken;

@@ -2,6 +2,7 @@ package com.myapp.portalnordsyspb.service;
 
 import com.myapp.portalnordsyspb.dto.AreaDto;
 import com.myapp.portalnordsyspb.entities.Area;
+import com.myapp.portalnordsyspb.exceptions.AreaNotFoundException;
 import com.myapp.portalnordsyspb.repositories.AreaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,8 @@ public class AreaServiceImpl implements AreaService{
     public AreaDto getAreaDtoById(Long id) {
         Optional<Area> area = areaRepository.findById(id);
         AreaDto areaDto = new AreaDto();
-        areaDto.setName(area.get().getName());
+//        areaDto.setName(area.get().getName());
+        areaDto.setName(area.orElseThrow(()-> new AreaNotFoundException("Участок не найден.")).getName());
         areaDto.setResultList(resultService.getResultListByAreaId(id));
         return areaDto;
     }
