@@ -1,5 +1,6 @@
 package com.myapp.portalnordsyspb.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,6 +22,7 @@ public class Week {
 
     private int number;
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "week")
     private List<Result> resultList;
 }

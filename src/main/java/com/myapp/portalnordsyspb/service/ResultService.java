@@ -10,4 +10,6 @@ public interface ResultService {
     List<Result> getAllResults();
 
     List<ResultDto> getResultList();
+
+    List<ResultDto> getResultListByAreaId(Long areaId);
 }

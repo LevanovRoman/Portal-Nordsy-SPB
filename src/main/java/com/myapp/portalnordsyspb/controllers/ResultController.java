@@ -1,13 +1,13 @@
 package com.myapp.portalnordsyspb.controllers;
 
 import com.myapp.portalnordsyspb.dto.ResultDto;
-import com.myapp.portalnordsyspb.entities.Department;
 import com.myapp.portalnordsyspb.entities.Result;
 import com.myapp.portalnordsyspb.service.ResultService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,11 +22,13 @@ public class ResultController {
 
     @Operation(summary = "Просмотр всех результатов")
     @GetMapping
-    public ResponseEntity<List<ResultDto>> getAllResults(){
-//        List<Result> resultList = resultService.getAllResults();
-//        resultList.forEach(x -> System.out.println(x.getAreaCriterion().getCriterion().getName() + " " + x.getAreaCriterion().getArea().getName() + " " + x.getValue()));
+    public ResponseEntity<List<Result>> getAllResults(){
+        return ResponseEntity.ok(resultService.getAllResults());
+    }
 
-        return ResponseEntity.ok(resultService.getResultList());
+    @GetMapping("/area/{areaId}")
+    public ResponseEntity<List<ResultDto>> getAllResultsByAreaId(@PathVariable long areaId){
+        return ResponseEntity.ok(resultService.getResultListByAreaId(areaId));
     }
 
 }

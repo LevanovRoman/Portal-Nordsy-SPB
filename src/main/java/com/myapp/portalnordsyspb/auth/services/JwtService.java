@@ -18,13 +18,11 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
-//    private static final String SECRET_KEY = "BF7FD11ACE545745B7BA1AF98B6F156D127BC7BB544BAB6A4FD74E4FC7";
-
     @Value("${spring.app.SECRET_KEY}")
     private String SECRET_KEY;
 
     @Value("${spring.app.jwtExpirationMs}")
-    private int jwtExpirationMs;
+    private long jwtExpirationMs;
 
     // extract username from JWT
     public String extractUsername(String token) {

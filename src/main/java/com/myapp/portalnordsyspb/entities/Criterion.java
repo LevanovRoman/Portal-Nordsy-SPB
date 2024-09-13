@@ -1,12 +1,12 @@
 package com.myapp.portalnordsyspb.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,16 +22,7 @@ public class Criterion {
 
     private String name;
 
-//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @JoinTable(
-//            name = "criterion_area",
-//            joinColumns = @JoinColumn(name = "criterion_id"),
-//            inverseJoinColumns = @JoinColumn(name = "area_id")
-//    )
-//    private List<Area> areaList = new ArrayList<>();
-//
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "criterion")
-//    private List<Result> resultList;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "criterion")
-    private List<AreaCriterion> areaCriterionList;
+    private List<Result> resultList;
 }

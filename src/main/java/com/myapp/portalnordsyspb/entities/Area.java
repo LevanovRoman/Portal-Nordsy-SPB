@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -28,10 +27,7 @@ public class Area {
     @JoinColumn(name = "department_id")
     private Department department;
 
-//    @ManyToMany(mappedBy = "areaList", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    private List<Criterion> criterionList = new ArrayList<>();
-
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "area")
-    private List<AreaCriterion> areaCriterionList;
+    private List<Result> resultList;
 }

@@ -1,10 +1,9 @@
 package com.myapp.portalnordsyspb.service;
 
+import com.myapp.portalnordsyspb.dto.AreaDto;
 import com.myapp.portalnordsyspb.dto.DepartmentDto;
-import com.myapp.portalnordsyspb.dto.ResultDto;
 import com.myapp.portalnordsyspb.entities.Area;
 import com.myapp.portalnordsyspb.entities.Department;
-import com.myapp.portalnordsyspb.entities.Result;
 import com.myapp.portalnordsyspb.repositories.AreaRepository;
 import com.myapp.portalnordsyspb.repositories.DepartmentRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +18,7 @@ public class DepartmentServiceImpl implements DepartmentService{
 
     private final DepartmentRepository departmentRepository;
     private final AreaRepository areaRepository;
+    private final AreaService areaService;
 
     @Override
     public List<Department> getAllDepartments() {
@@ -34,7 +34,12 @@ public class DepartmentServiceImpl implements DepartmentService{
             DepartmentDto departmentDto = new DepartmentDto();
             departmentDto.setDepartment(department.getNumber());
             List<Area> areaList = areaRepository.findByDepartmentId(department.getId());
-            departmentDto.setArea(areaList);
+            List<AreaDto> areaDtoList = new ArrayList<>();
+            for (Area area : areaList){
+                AreaDto areaDto = areaService.getAreaDtoById(area.getId());
+                areaDtoList.add(areaDto);
+            }
+            departmentDto.setArea(areaDtoList);
             departmentDtoList.add(departmentDto);
         }
         return departmentDtoList;
