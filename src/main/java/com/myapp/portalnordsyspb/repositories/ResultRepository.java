@@ -6,5 +6,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface ResultRepository extends JpaRepository<Result, Long> {
+
     List<Result> findAllByAreaId(Long area_id);
+
+    List<Result> findAllByAreaIdAndWeekNumber(Long area_id, int weekNumber);
+
+//    List<Result> findTop2ByOrderByAreaIdDesc(Long area_id);
 }

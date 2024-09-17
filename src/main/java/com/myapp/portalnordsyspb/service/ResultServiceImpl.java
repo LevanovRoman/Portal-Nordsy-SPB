@@ -1,6 +1,7 @@
 package com.myapp.portalnordsyspb.service;
 
 import com.myapp.portalnordsyspb.dto.ResultDto;
+import com.myapp.portalnordsyspb.dto.ResultWeekDto;
 import com.myapp.portalnordsyspb.entities.Result;
 import com.myapp.portalnordsyspb.repositories.ResultRepository;
 import lombok.RequiredArgsConstructor;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -16,45 +18,37 @@ public class ResultServiceImpl implements ResultService{
     private final ResultRepository resultRepository;
 
     @Override
-    public List<Result> getAllResults() {
-        return resultRepository.findAll();
+    public List<ResultDto> getListResultsByAreaId(Long areaId) {
+        return resultRepository.findAllByAreaId(areaId)
+                .stream()
+                .map(this::convertResultToDto)
+                .toList();
     }
 
     @Override
-    public List<ResultDto> getResultList() {
-        return List.of();
+    public List<ResultWeekDto> getListResultsByAreaIdAndWeekNumber(Long areaId, int weekNumber) {
+        return resultRepository.findAllByAreaIdAndWeekNumber(areaId, weekNumber)
+                .stream()
+                .map(this::convertResultWeekToDto)
+                .toList();
     }
 
-//    @Override
-//    public List<ResultDto> getResultList() {
-//        List<Result> resultList = resultRepository.findAll();
-//        List<ResultDto> resultDtoList = new ArrayList<>();
-//        for (Result result : resultList){
-//            ResultDto resultDto = new ResultDto();
-//            resultDto.setValue(result.getValue());
-//            resultDto.setWeek(result.getWeek().getNumber());
-//            resultDto.setCriterion(result.getAreaCriterion().getCriterion().getName());
-//            resultDto.setArea(result.getAreaCriterion().getArea().getName());
-//            resultDto.setDepartment(result.getAreaCriterion().getArea().getDepartment().getNumber());
-//            resultDtoList.add(resultDto);
-//        }
-//
-//        return resultDtoList;
+    private ResultDto convertResultToDto(Result result){
+        ResultDto resultDto = new ResultDto();
+        resultDto.setCriterion(result.getCriterion().getName());
+        resultDto.setWeek(result.getWeek().getNumber());
+        resultDto.setValue(result.getValue());
+        return resultDto;
+    }
+
+    private ResultWeekDto convertResultWeekToDto(Result result){
+        ResultWeekDto resultWeekDto = new ResultWeekDto();
+        resultWeekDto.setCriterion(result.getCriterion().getName());
+        resultWeekDto.setValue(result.getValue());
+        return resultWeekDto;
+    }
+
+//    public List<Result> getResultFor2Week(Long areaId){
+//        return resultRepository.findTop2ByOrderByAreaIdDesc(areaId);
 //    }
-
-    @Override
-    public List<ResultDto> getResultListByAreaId(Long areaId) {
-        List<Result> resultList = resultRepository.findAllByAreaId(areaId);
-        List<ResultDto> resultDtoList = new ArrayList<>();
-        for (Result result : resultList){
-            ResultDto resultDto = new ResultDto();
-            resultDto.setValue(result.getValue());
-            resultDto.setWeek(result.getWeek().getNumber());
-            resultDto.setCriterion(result.getCriterion().getName());
-//            resultDto.setArea(result.getArea().getName());
-//            resultDto.setDepartment(result.getAreaCriterion().getArea().getDepartment().getNumber());
-            resultDtoList.add(resultDto);
-        }
-        return resultDtoList;
-    }
 }

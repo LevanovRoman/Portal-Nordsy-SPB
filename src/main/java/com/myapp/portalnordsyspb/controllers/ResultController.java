@@ -20,15 +20,20 @@ public class ResultController {
 
     private final ResultService resultService;
 
-    @Operation(summary = "Просмотр всех результатов")
-    @GetMapping
-    public ResponseEntity<List<Result>> getAllResults(){
-        return ResponseEntity.ok(resultService.getAllResults());
-    }
+//    @Operation(summary = "Просмотр всех результатов")
+//    @GetMapping
+//    public ResponseEntity<List<Result>> getAllResults(){
+//        return ResponseEntity.ok(resultService.getAllResults());
+//    }
+//
+//    @GetMapping("/area/{areaId}")
+//    public ResponseEntity<List<ResultDto>> getAllResultsByAreaId(@PathVariable long areaId){
+//        return ResponseEntity.ok(resultService.getResultListByAreaId(areaId));
+//    }
 
-    @GetMapping("/area/{areaId}")
-    public ResponseEntity<List<ResultDto>> getAllResultsByAreaId(@PathVariable long areaId){
-        return ResponseEntity.ok(resultService.getResultListByAreaId(areaId));
-    }
+//    @GetMapping("/area/{areaId}")
+//    public ResponseEntity<List<Result>> getAllResultsByAreaId(@PathVariable long areaId){
+//        return ResponseEntity.ok(resultService.getResultFor2Week(areaId));
+//    }
 
 }
