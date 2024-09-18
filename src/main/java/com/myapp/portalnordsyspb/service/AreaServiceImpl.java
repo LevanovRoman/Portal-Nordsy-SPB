@@ -1,6 +1,7 @@
 package com.myapp.portalnordsyspb.service;
 
 import com.myapp.portalnordsyspb.dto.AreaDto;
+import com.myapp.portalnordsyspb.dto.AreaSiteDto;
 import com.myapp.portalnordsyspb.dto.AreaWeekDto;
 import com.myapp.portalnordsyspb.entities.Area;
 import com.myapp.portalnordsyspb.exceptions.AreaNotFoundException;
@@ -36,12 +37,30 @@ public class AreaServiceImpl implements AreaService{
                 .toList();
     }
 
+//    @Override
+//    public List<AreaWeekDto> getListAreasByDepartmentIdAndWeek(Long departmentId, int weekNumber) {
+//        return areaRepository.findAllByDepartmentId(departmentId)
+//                .stream()
+//                .map(x -> convertAreaToDtoWeek(x, weekNumber))
+//                .toList();
+//    }
+
     @Override
-    public List<AreaWeekDto> getListAreasByDepartmentIdAndWeek(Long departmentId, int weekNumber) {
+    public List<AreaSiteDto> getListAreaSiteDtoByDepartmentId(Long departmentId) {
         return areaRepository.findAllByDepartmentId(departmentId)
                 .stream()
-                .map(x -> convertAreaToDtoWeek(x, weekNumber))
+                .map(this::convertAreaToSiteDto)
                 .toList();
+    }
+
+    private AreaSiteDto convertAreaToSiteDto(Area area) {
+        AreaSiteDto areaSiteDto = new AreaSiteDto();
+        areaSiteDto.setName(area.getName());
+        areaSiteDto.setResultLastWeekDtoList(
+                resultService.getListResultsByAreaIdForLastWeek(area.getId()));
+        areaSiteDto.setResultTotalFourWeeksDtoList(
+                resultService.getListResultResultTotalFourWeeks(area.getId()));
+        return areaSiteDto;
     }
 
     private AreaDto convertAreaToDto(Area area){
@@ -51,10 +70,10 @@ public class AreaServiceImpl implements AreaService{
         return areaDto;
     }
 
-    private AreaWeekDto convertAreaToDtoWeek(Area area, int weekNumber){
-        AreaWeekDto areaWeekDto = new AreaWeekDto();
-        areaWeekDto.setName(area.getName());
-        areaWeekDto.setResultWeekList(resultService.getListResultsByAreaIdAndWeekNumber(area.getId(), weekNumber));
-        return areaWeekDto;
-    }
+//    private AreaWeekDto convertAreaToDtoWeek(Area area, int weekNumber){
+//        AreaWeekDto areaWeekDto = new AreaWeekDto();
+//        areaWeekDto.setName(area.getName());
+//        areaWeekDto.setResultWeekList(resultService.getListResultsByAreaIdAndWeekNumber(area.getId(), weekNumber));
+//        return areaWeekDto;
+//    }
 }

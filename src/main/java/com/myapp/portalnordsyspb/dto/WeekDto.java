@@ -9,9 +9,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResultWeekDto {
+
+public class WeekDto {
+
+    private  int number;
 
     private int value;
-
-    private String criterion;
 }

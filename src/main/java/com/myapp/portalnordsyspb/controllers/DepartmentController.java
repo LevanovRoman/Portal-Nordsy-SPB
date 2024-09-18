@@ -1,6 +1,7 @@
 package com.myapp.portalnordsyspb.controllers;
 
 import com.myapp.portalnordsyspb.dto.DepartmentDto;
+import com.myapp.portalnordsyspb.dto.DepartmentSiteDto;
 import com.myapp.portalnordsyspb.dto.DepartmentWeekDto;
 import com.myapp.portalnordsyspb.dto.requestDto.TotalWeekSetDto;
 import com.myapp.portalnordsyspb.entities.Department;
@@ -29,10 +30,15 @@ public class DepartmentController {
         return ResponseEntity.ok(departmentService.getListDepartments());
     }
 
-    @GetMapping("/list/{weekNumber}")
-    public ResponseEntity<List<DepartmentWeekDto>> getListDepartmentsByWeek(@PathVariable int weekNumber){
-        return ResponseEntity.ok(departmentService.getListDepartmentsByWeek(weekNumber));
+    @GetMapping("/list/site")
+    public ResponseEntity<List<DepartmentSiteDto>> getListDepartmentSite(){
+        return ResponseEntity.ok(departmentService.getListDepartmentSite());
     }
+
+//    @GetMapping("/list/{weekNumber}")
+//    public ResponseEntity<List<DepartmentWeekDto>> getListDepartmentsByWeek(@PathVariable int weekNumber){
+//        return ResponseEntity.ok(departmentService.getListDepartmentsByWeek(weekNumber));
+//    }
 
 //    @PostMapping("/{weekNumber}")
 //    public ResponseEntity<?> addTotalWeekSet(@PathVariable int weekNumber,

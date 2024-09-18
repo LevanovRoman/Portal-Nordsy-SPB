@@ -11,10 +11,9 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AreaWeekDto {
+public class DepartmentSiteDto {
 
-    private String name;
+    private int department;
 
-    private List<ResultLastWeekDto> resultWeekList;
+    private List<AreaSiteDto> areaSiteDtoList;
 }
-

@@ -11,5 +11,11 @@ public interface ResultRepository extends JpaRepository<Result, Long> {
 
     List<Result> findAllByAreaIdAndWeekNumber(Long area_id, int weekNumber);
 
+    List<Result> findAllByAreaIdAndWeekId(Long area_id, Long weekNumber);
+
+    List<Result> findAllByAreaIdAndCriterionId(Long area_id, Long criterion_id);
+
+    Result findByAreaIdAndWeekIdAndCriterionId(Long area_id, Long week_id, Long criterion_id);
+
 //    List<Result> findTop2ByOrderByAreaIdDesc(Long area_id);
 }

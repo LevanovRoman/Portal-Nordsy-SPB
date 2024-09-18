@@ -5,16 +5,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AreaWeekDto {
+public class ResultTotalFourWeeksDto {
 
-    private String name;
+    private int week;
 
-    private List<ResultLastWeekDto> resultWeekList;
+    private int value;
 }
-

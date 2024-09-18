@@ -11,9 +11,9 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ResultDto {
 
-    private int value;
-
     private String criterion;
 
     private int week;
+
+    private int value;
 }

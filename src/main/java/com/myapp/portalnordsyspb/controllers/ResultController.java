@@ -2,6 +2,8 @@ package com.myapp.portalnordsyspb.controllers;
 
 import com.myapp.portalnordsyspb.dto.ResultDto;
 import com.myapp.portalnordsyspb.entities.Result;
+import com.myapp.portalnordsyspb.entities.Week;
+import com.myapp.portalnordsyspb.repositories.WeekRepository;
 import com.myapp.portalnordsyspb.service.ResultService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +21,7 @@ import java.util.List;
 public class ResultController {
 
     private final ResultService resultService;
+    private final WeekRepository weekRepository;
 
 //    @Operation(summary = "Просмотр всех результатов")
 //    @GetMapping
@@ -35,5 +38,10 @@ public class ResultController {
 //    public ResponseEntity<List<Result>> getAllResultsByAreaId(@PathVariable long areaId){
 //        return ResponseEntity.ok(resultService.getResultFor2Week(areaId));
 //    }
+
+    @GetMapping("/area")
+    public ResponseEntity<List<Week>> getAllResultsByAreaId(){
+        return ResponseEntity.ok(weekRepository.findTop4ByOrderById());
+    }
 
 }

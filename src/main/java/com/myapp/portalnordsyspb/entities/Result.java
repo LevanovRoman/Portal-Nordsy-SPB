@@ -1,4 +1,5 @@
 package com.myapp.portalnordsyspb.entities;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,17 +20,17 @@ public class Result {
 
     private int value;
 
-//    @JsonIgnore
+    @JsonIgnore
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "criterion_id")
     private Criterion criterion;
 
-//    @JsonIgnore
+    @JsonIgnore
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "week_id")
     private Week week;
 
-//    @JsonIgnore
+    @JsonIgnore
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "area_id")
     private Area area;
