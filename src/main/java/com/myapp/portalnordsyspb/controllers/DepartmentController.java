@@ -1,6 +1,6 @@
 package com.myapp.portalnordsyspb.controllers;
 
-import com.myapp.portalnordsyspb.dto.DepartmentSiteDto;
+import com.myapp.portalnordsyspb.dto.responseDto.DepartmentTableDto;
 import com.myapp.portalnordsyspb.entities.Department;
 import com.myapp.portalnordsyspb.service.DepartmentService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -28,8 +28,8 @@ public class DepartmentController {
 //    }
 
     @GetMapping("/list/site")
-    public ResponseEntity<List<DepartmentSiteDto>> getListDepartmentSite(){
-        return ResponseEntity.ok(departmentService.getListDepartmentSite());
+    public ResponseEntity<List<DepartmentTableDto>> getListDepartmentTable(){
+        return ResponseEntity.ok(departmentService.getListDepartmentTable());
     }
 
 //    @GetMapping("/list/{weekNumber}")

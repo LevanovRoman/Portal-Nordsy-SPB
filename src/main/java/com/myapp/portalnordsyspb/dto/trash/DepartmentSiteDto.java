@@ -1,4 +1,4 @@
-package com.myapp.portalnordsyspb.dto;
+package com.myapp.portalnordsyspb.dto.trash;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

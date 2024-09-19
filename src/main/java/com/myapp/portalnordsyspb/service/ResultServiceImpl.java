@@ -1,8 +1,8 @@
 package com.myapp.portalnordsyspb.service;
 
-import com.myapp.portalnordsyspb.dto.ResultLastWeekDto;
-import com.myapp.portalnordsyspb.dto.ResultTotalFourWeeksDto;
 import com.myapp.portalnordsyspb.dto.requestDto.ResultRequestDto;
+import com.myapp.portalnordsyspb.dto.responseDto.ResultTableFourWeeksDto;
+import com.myapp.portalnordsyspb.dto.responseDto.ResultTableLastWeekDto;
 import com.myapp.portalnordsyspb.entities.Area;
 import com.myapp.portalnordsyspb.entities.Criterion;
 import com.myapp.portalnordsyspb.entities.Result;
@@ -26,17 +26,8 @@ public class ResultServiceImpl implements ResultService{
     private final CriterionService criterionService;
     private final AreaRepository areaRepository;
 
-//    @Override
-//    public List<ResultDto> getListResultsByAreaId(Long areaId) {
-//        return resultRepository.findAllByAreaId(areaId)
-//                .stream()
-//                .map(this::convertResultToDto)
-//                .toList();
-//    }
-
     @Override
-    public List<ResultLastWeekDto> getListResultsByAreaIdForLastWeek(Long areaId) {
-//        long lastWeekId = weekRepository.findTopByOrderByIdDesc().getId();
+    public List<ResultTableLastWeekDto> getListResultsByAreaIdForLastWeek(Long areaId) {
         long lastWeekId = weekService.getTopByOrderByIdDesc().getId();
         return resultRepository.findAllByAreaIdAndWeekId(areaId, lastWeekId)
                 .stream()
@@ -46,7 +37,7 @@ public class ResultServiceImpl implements ResultService{
     }
 
     @Override
-    public List<ResultTotalFourWeeksDto> getListResultResultTotalFourWeeks(Long areaId) {
+    public List<ResultTableFourWeeksDto> getListResultResultTotalFourWeeks(Long areaId) {
         return weekService.getTop4ByOrderByIdDesc()
                 .stream()
                 .map(x->convertResultTotalFourWeeksDto(areaId, x))
@@ -64,11 +55,11 @@ public class ResultServiceImpl implements ResultService{
         resultRepository.saveAll(resultList);
     }
 
-    private ResultLastWeekDto convertResultByAreaIdForLastWeek(Result result) {
-        ResultLastWeekDto resultLastWeekDto = new ResultLastWeekDto();
-        resultLastWeekDto.setCriterion(result.getCriterion().getName());
-        resultLastWeekDto.setValue(result.getValue());
-        return resultLastWeekDto;
+    private ResultTableLastWeekDto convertResultByAreaIdForLastWeek(Result result) {
+        return new ResultTableLastWeekDto(
+                result.getCriterion().getName(),
+                result.getValue()
+        );
     }
 
     private Result convertResultDtoToResult(ResultRequestDto resultRequestDto, Long weekId) {
@@ -86,13 +77,13 @@ public class ResultServiceImpl implements ResultService{
         return result;
     }
 
-    private ResultTotalFourWeeksDto convertResultTotalFourWeeksDto(Long areaId, Week week) {
-        ResultTotalFourWeeksDto resultTotalFourWeeksDto = new ResultTotalFourWeeksDto();
-        resultTotalFourWeeksDto.setWeek(week.getNumber());
-        resultTotalFourWeeksDto.setValue(resultRepository
-                .findByAreaIdAndWeekIdAndCriterionId(areaId, week.getId(), 1L)
-                .getValue());
-        return resultTotalFourWeeksDto;
+    private ResultTableFourWeeksDto convertResultTotalFourWeeksDto(Long areaId, Week week) {
+        return new ResultTableFourWeeksDto(
+                week.getNumber(),
+                resultRepository
+                        .findByAreaIdAndWeekIdAndCriterionId(areaId, week.getId(), 1L)
+                        .getValue()
+        );
     }
 
 //    private void saveResult(ResultRequestDto resultRequestDto, Long weekId) {

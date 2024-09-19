@@ -1,6 +1,6 @@
 package com.myapp.portalnordsyspb.service;
 
-import com.myapp.portalnordsyspb.dto.AreaSiteDto;
+import com.myapp.portalnordsyspb.dto.responseDto.AreaTableDto;
 import com.myapp.portalnordsyspb.entities.Area;
 import com.myapp.portalnordsyspb.repositories.AreaRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,10 +18,10 @@ public class AreaServiceImpl implements AreaService{
     private final ResultService resultService;
 
     @Override
-    public List<AreaSiteDto> getListAreaSiteDtoByDepartmentId(Long departmentId) {
+    public List<AreaTableDto> getListAreaTableDtoByDepartmentId(Long departmentId) {
         return areaRepository.findAllByDepartmentId(departmentId)
                 .stream()
-                .map(this::convertAreaToSiteDto)
+                .map(this::convertAreaTableToDto)
                 .toList();
     }
 
@@ -30,14 +30,12 @@ public class AreaServiceImpl implements AreaService{
         return areaRepository.findById(area_id);
     }
 
-    private AreaSiteDto convertAreaToSiteDto(Area area) {
-        AreaSiteDto areaSiteDto = new AreaSiteDto();
-        areaSiteDto.setName(area.getName());
-        areaSiteDto.setResultLastWeekDtoList(
-                resultService.getListResultsByAreaIdForLastWeek(area.getId()));
-        areaSiteDto.setResultTotalFourWeeksDtoList(
-                resultService.getListResultResultTotalFourWeeks(area.getId()));
-        return areaSiteDto;
+    private AreaTableDto convertAreaTableToDto(Area area) {
+        return new AreaTableDto(
+                area.getName(),
+                resultService.getListResultsByAreaIdForLastWeek(area.getId()),
+                resultService.getListResultResultTotalFourWeeks(area.getId())
+        );
     }
 
 //    @Override

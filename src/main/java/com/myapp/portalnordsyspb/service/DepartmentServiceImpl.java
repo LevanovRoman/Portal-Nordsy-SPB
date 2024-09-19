@@ -1,7 +1,6 @@
 package com.myapp.portalnordsyspb.service;
 
-import com.myapp.portalnordsyspb.dto.DepartmentDto;
-import com.myapp.portalnordsyspb.dto.DepartmentSiteDto;
+import com.myapp.portalnordsyspb.dto.responseDto.DepartmentTableDto;
 import com.myapp.portalnordsyspb.entities.Department;
 import com.myapp.portalnordsyspb.repositories.DepartmentRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,19 +21,18 @@ public class DepartmentServiceImpl implements DepartmentService{
     }
 
     @Override
-    public List<DepartmentSiteDto> getListDepartmentSite() {
+    public List<DepartmentTableDto> getListDepartmentTable() {
         return departmentRepository.findAll()
                 .stream()
-                .map(this::convertDepartmentSiteToDto)
+                .map(this::convertDepartmentTableToDto)
                 .toList();
     }
 
-    private DepartmentSiteDto convertDepartmentSiteToDto(Department department) {
-        DepartmentSiteDto departmentSiteDto = new DepartmentSiteDto();
-        departmentSiteDto.setDepartment(department.getNumber());
-        departmentSiteDto.setAreaSiteDtoList(areaService
-                .getListAreaSiteDtoByDepartmentId(department.getId()));
-        return departmentSiteDto;
+    private DepartmentTableDto convertDepartmentTableToDto(Department department) {
+        return new DepartmentTableDto(
+                department.getNumber(),
+                areaService.getListAreaTableDtoByDepartmentId(department.getId())
+        );
     }
 
 //    @Override

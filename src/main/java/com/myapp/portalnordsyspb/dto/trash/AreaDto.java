@@ -1,18 +1,20 @@
-package com.myapp.portalnordsyspb.dto;
+package com.myapp.portalnordsyspb.dto.trash;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+public class AreaDto {
 
-public class WeekDto {
+    private String name;
 
-    private  int number;
-
-    private int value;
+    private List<ResultDto> resultList;
 }
+

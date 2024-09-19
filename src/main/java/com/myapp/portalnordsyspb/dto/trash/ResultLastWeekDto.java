@@ -1,4 +1,4 @@
-package com.myapp.portalnordsyspb.dto;
+package com.myapp.portalnordsyspb.dto.trash;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,9 +9,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResultTotalFourWeeksDto {
+public class ResultLastWeekDto {
 
-    private int week;
+    private String criterion;
 
     private int value;
 }

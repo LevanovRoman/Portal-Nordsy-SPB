@@ -1,4 +1,4 @@
-package com.myapp.portalnordsyspb.dto;
+package com.myapp.portalnordsyspb.dto.trash;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,10 +11,10 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AreaDto {
+public class AreaWeekDto {
 
     private String name;
 
-    private List<ResultDto> resultList;
+    private List<ResultLastWeekDto> resultWeekList;
 }
 

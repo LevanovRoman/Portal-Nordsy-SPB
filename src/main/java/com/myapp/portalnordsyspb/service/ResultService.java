@@ -1,16 +1,16 @@
 package com.myapp.portalnordsyspb.service;
 
-import com.myapp.portalnordsyspb.dto.ResultLastWeekDto;
-import com.myapp.portalnordsyspb.dto.ResultTotalFourWeeksDto;
 import com.myapp.portalnordsyspb.dto.requestDto.ResultRequestDto;
+import com.myapp.portalnordsyspb.dto.responseDto.ResultTableFourWeeksDto;
+import com.myapp.portalnordsyspb.dto.responseDto.ResultTableLastWeekDto;
 
 import java.util.List;
 
 public interface ResultService {
 
-    List<ResultLastWeekDto> getListResultsByAreaIdForLastWeek(Long areaId);
+    List<ResultTableLastWeekDto> getListResultsByAreaIdForLastWeek(Long areaId);
 
-    List<ResultTotalFourWeeksDto> getListResultResultTotalFourWeeks(Long areaId);
+    List<ResultTableFourWeeksDto> getListResultResultTotalFourWeeks(Long areaId);
 
     void addResultsForWeek(List<ResultRequestDto> resultRequestDtoList);
 

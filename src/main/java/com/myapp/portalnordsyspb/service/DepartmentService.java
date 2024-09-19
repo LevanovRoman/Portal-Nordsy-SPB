@@ -1,6 +1,6 @@
 package com.myapp.portalnordsyspb.service;
 
-import com.myapp.portalnordsyspb.dto.DepartmentSiteDto;
+import com.myapp.portalnordsyspb.dto.responseDto.DepartmentTableDto;
 import com.myapp.portalnordsyspb.entities.Department;
 
 import java.util.List;
@@ -11,7 +11,7 @@ public interface DepartmentService {
 
 //    List<DepartmentDto> getListDepartments();
 
-    List<DepartmentSiteDto> getListDepartmentSite();
+    List<DepartmentTableDto> getListDepartmentTable();
 
 //    void createTotalWeekSet(TotalWeekSetDto totalWeekSetDto);
 
