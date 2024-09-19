@@ -1,17 +1,11 @@
 package com.myapp.portalnordsyspb.controllers;
 
-import com.myapp.portalnordsyspb.dto.ResultDto;
-import com.myapp.portalnordsyspb.entities.Result;
-import com.myapp.portalnordsyspb.entities.Week;
-import com.myapp.portalnordsyspb.repositories.WeekRepository;
+import com.myapp.portalnordsyspb.dto.requestDto.ResultRequestDto;
 import com.myapp.portalnordsyspb.service.ResultService;
-import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,7 +15,7 @@ import java.util.List;
 public class ResultController {
 
     private final ResultService resultService;
-    private final WeekRepository weekRepository;
+//    private final WeekRepository weekRepository;
 
 //    @Operation(summary = "Просмотр всех результатов")
 //    @GetMapping
@@ -39,9 +33,15 @@ public class ResultController {
 //        return ResponseEntity.ok(resultService.getResultFor2Week(areaId));
 //    }
 
-    @GetMapping("/area")
-    public ResponseEntity<List<Week>> getAllResultsByAreaId(){
-        return ResponseEntity.ok(weekRepository.findTop4ByOrderById());
+//    @GetMapping("/area")
+//    public ResponseEntity<List<Week>> getAllResultsByAreaId(){
+//        return ResponseEntity.ok(weekRepository.findTop4ByOrderByIdDesc());
+//    }
+
+    @PostMapping
+    public ResponseEntity<?> createResultForWeek(@RequestBody List<ResultRequestDto> resultRequestDtoList){
+        resultService.addResultsForWeek(resultRequestDtoList);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
 }

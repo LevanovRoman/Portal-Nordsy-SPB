@@ -1,9 +1,6 @@
 package com.myapp.portalnordsyspb.controllers;
 
-import com.myapp.portalnordsyspb.dto.DepartmentDto;
 import com.myapp.portalnordsyspb.dto.DepartmentSiteDto;
-import com.myapp.portalnordsyspb.dto.DepartmentWeekDto;
-import com.myapp.portalnordsyspb.dto.requestDto.TotalWeekSetDto;
 import com.myapp.portalnordsyspb.entities.Department;
 import com.myapp.portalnordsyspb.service.DepartmentService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -25,10 +22,10 @@ public class DepartmentController {
     public ResponseEntity<List<Department>> getAllDepartments(){
         return ResponseEntity.ok(departmentService.getAllDepartments());
     }
-    @GetMapping("/list")
-    public ResponseEntity<List<DepartmentDto>> getListDepartments(){
-        return ResponseEntity.ok(departmentService.getListDepartments());
-    }
+//    @GetMapping("/list")
+//    public ResponseEntity<List<DepartmentDto>> getListDepartments(){
+//        return ResponseEntity.ok(departmentService.getListDepartments());
+//    }
 
     @GetMapping("/list/site")
     public ResponseEntity<List<DepartmentSiteDto>> getListDepartmentSite(){
@@ -40,10 +37,16 @@ public class DepartmentController {
 //        return ResponseEntity.ok(departmentService.getListDepartmentsByWeek(weekNumber));
 //    }
 
-//    @PostMapping("/{weekNumber}")
-//    public ResponseEntity<?> addTotalWeekSet(@PathVariable int weekNumber,
-//                                             @RequestBody TotalWeekSetDto totalWeekSetDto){
-//        return ResponseEntity.ok(departmentService.addTotalWeekSet(weekNumber, totalWeekSetDto));
+//    @PostMapping
+//    public ResponseEntity<?> createTotalWeekSet(@RequestBody TotalWeekSetDto totalWeekSetDto){
+//        departmentService.createTotalWeekSet(totalWeekSetDto);
+//        return new ResponseEntity<>(HttpStatus.CREATED);
+//    }
+//
+//    @PostMapping("/create")
+//    public ResponseEntity<?> createTotalWeekSet(@RequestBody DepartmentRequestDto departmentRequestDto){
+//        departmentService.createDepartmentSet(departmentRequestDto);
+//        return new ResponseEntity<>(HttpStatus.CREATED);
 //    }
 
 }

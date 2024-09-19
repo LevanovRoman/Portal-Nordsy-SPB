@@ -24,6 +24,8 @@ public class SecurityConfiguration {
     private final AuthenticationProvider authenticationProvider;
 
     private static final String[] AUTH_WHITELIST = {
+            "/api/**",
+            "/actuator/**",
             "/api/v1/auth/**",
             "/v3/api-docs/**",
             "/v3/api-docs.yaml",

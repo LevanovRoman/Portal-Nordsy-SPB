@@ -1,7 +1,8 @@
 package com.myapp.portalnordsyspb.dto.requestDto;
 
 public record ResultRequestDto(
-        int value,
-        String criterion
+        long areaId,
+        long criterionId,
+        int value
 ) {
 }

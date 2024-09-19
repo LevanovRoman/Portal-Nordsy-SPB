@@ -9,5 +9,5 @@ public interface WeekRepository extends JpaRepository<Week, Long> {
 
     Week findTopByOrderByIdDesc();
 
-    List<Week> findTop4ByOrderById();
+    List<Week> findTop4ByOrderByIdDesc();
 }

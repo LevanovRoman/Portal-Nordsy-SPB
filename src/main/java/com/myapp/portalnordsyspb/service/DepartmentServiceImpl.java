@@ -2,36 +2,23 @@ package com.myapp.portalnordsyspb.service;
 
 import com.myapp.portalnordsyspb.dto.DepartmentDto;
 import com.myapp.portalnordsyspb.dto.DepartmentSiteDto;
-import com.myapp.portalnordsyspb.dto.DepartmentWeekDto;
-import com.myapp.portalnordsyspb.dto.requestDto.TotalWeekSetDto;
 import com.myapp.portalnordsyspb.entities.Department;
-import com.myapp.portalnordsyspb.repositories.AreaRepository;
 import com.myapp.portalnordsyspb.repositories.DepartmentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class DepartmentServiceImpl implements DepartmentService{
 
     private final DepartmentRepository departmentRepository;
-    private final AreaRepository areaRepository;
     private final AreaService areaService;
 
     @Override
     public List<Department> getAllDepartments() {
         return departmentRepository.findAll();
-    }
-
-    @Override
-    public List<DepartmentDto> getListDepartments() {
-        return departmentRepository.findAll()
-                .stream()
-                .map(this::convertDepartmentToDto)
-                .toList();
     }
 
     @Override
@@ -51,6 +38,38 @@ public class DepartmentServiceImpl implements DepartmentService{
     }
 
 //    @Override
+//    public List<DepartmentDto> getListDepartments() {
+//        return departmentRepository.findAll()
+//                .stream()
+//                .map(this::convertDepartmentToDto)
+//                .toList();
+//    }
+
+//    @Override
+//    public void createTotalWeekSet(TotalWeekSetDto totalWeekSetDto) {
+//        List<Department> departmentList = totalWeekSetDto.departmentRequestDtoList()
+//                .stream()
+//                .map(this::convertDepartmentRequestDto)
+//                .map(departmentRepository::save)
+//                .toList();
+//
+//    }
+
+//    private Department convertDepartmentRequestDto(DepartmentRequestDto departmentRequestDto) {
+//        Department department = new Department();
+//        department.setId(departmentRequestDto.departmentId());
+//        department.setNumber(departmentRequestDto.number());
+//        department.setAreaList(areaService.createAreaWeekSet(departmentRequestDto.areaRequestDtoList()));
+//        return department;
+//    }
+
+//    @Override
+//    public void createDepartmentSet(DepartmentRequestDto departmentRequestDto) {
+//        Department department = new Department();
+//
+//    }
+
+//    @Override
 //    public List<DepartmentWeekDto> getListDepartmentsByWeek(int weekNumber) {
 //        return departmentRepository.findAll()
 //                .stream()
@@ -58,17 +77,12 @@ public class DepartmentServiceImpl implements DepartmentService{
 //                .collect(Collectors.toList());
 //    }
 
-//    @Override
-//    public void addTotalWeekSet(int weekNumber, TotalWeekSetDto totalWeekSetDto) {
-//
+//    private DepartmentDto convertDepartmentToDto(Department department){
+//        DepartmentDto departmentDto = new DepartmentDto();
+//        departmentDto.setDepartment(department.getNumber());
+//        departmentDto.setArea(areaService.getListAreasByDepartmentId(department.getId()));
+//        return departmentDto;
 //    }
-
-    private DepartmentDto convertDepartmentToDto(Department department){
-        DepartmentDto departmentDto = new DepartmentDto();
-        departmentDto.setDepartment(department.getNumber());
-        departmentDto.setArea(areaService.getListAreasByDepartmentId(department.getId()));
-        return departmentDto;
-    }
 
 //    private DepartmentWeekDto convertDepartmentToDtoWeek(Department department, int weekNumber){
 //        DepartmentWeekDto departmentWeekDto = new DepartmentWeekDto();
