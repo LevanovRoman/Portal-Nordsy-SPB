@@ -5,6 +5,9 @@ import com.myapp.portalnordsyspb.repositories.WeekRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class WeekServiceImpl implements WeekService{
@@ -22,5 +25,20 @@ public class WeekServiceImpl implements WeekService{
     @Override
     public Week getLastWeek() {
         return weekRepository.findTopByOrderByIdDesc();
+    }
+
+    @Override
+    public Optional<Week> getWeekById(long week_id) {
+        return weekRepository.findById(week_id);
+    }
+
+    @Override
+    public Week getTopByOrderByIdDesc() {
+        return weekRepository.findTopByOrderByIdDesc();
+    }
+
+    @Override
+    public List<Week> getTop4ByOrderByIdDesc() {
+        return weekRepository.findTop4ByOrderByIdDesc();
     }
 }

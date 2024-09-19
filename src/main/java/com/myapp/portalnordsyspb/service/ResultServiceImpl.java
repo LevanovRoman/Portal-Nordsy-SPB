@@ -1,6 +1,5 @@
 package com.myapp.portalnordsyspb.service;
 
-import com.myapp.portalnordsyspb.dto.ResultDto;
 import com.myapp.portalnordsyspb.dto.ResultLastWeekDto;
 import com.myapp.portalnordsyspb.dto.ResultTotalFourWeeksDto;
 import com.myapp.portalnordsyspb.dto.requestDto.ResultRequestDto;
@@ -8,15 +7,15 @@ import com.myapp.portalnordsyspb.entities.Area;
 import com.myapp.portalnordsyspb.entities.Criterion;
 import com.myapp.portalnordsyspb.entities.Result;
 import com.myapp.portalnordsyspb.entities.Week;
+import com.myapp.portalnordsyspb.exceptions.AreaNotFoundException;
+import com.myapp.portalnordsyspb.exceptions.CriterionNotFoundException;
 import com.myapp.portalnordsyspb.repositories.AreaRepository;
-import com.myapp.portalnordsyspb.repositories.CriterionRepository;
 import com.myapp.portalnordsyspb.repositories.ResultRepository;
-import com.myapp.portalnordsyspb.repositories.WeekRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -24,9 +23,7 @@ public class ResultServiceImpl implements ResultService{
 
     private final ResultRepository resultRepository;
     private final WeekService weekService;
-
-    private final WeekRepository weekRepository;
-    private final CriterionRepository criterionRepository;
+    private final CriterionService criterionService;
     private final AreaRepository areaRepository;
 
 //    @Override
@@ -39,7 +36,8 @@ public class ResultServiceImpl implements ResultService{
 
     @Override
     public List<ResultLastWeekDto> getListResultsByAreaIdForLastWeek(Long areaId) {
-        long lastWeekId = weekRepository.findTopByOrderByIdDesc().getId();
+//        long lastWeekId = weekRepository.findTopByOrderByIdDesc().getId();
+        long lastWeekId = weekService.getTopByOrderByIdDesc().getId();
         return resultRepository.findAllByAreaIdAndWeekId(areaId, lastWeekId)
                 .stream()
                 .skip(1)
@@ -49,13 +47,14 @@ public class ResultServiceImpl implements ResultService{
 
     @Override
     public List<ResultTotalFourWeeksDto> getListResultResultTotalFourWeeks(Long areaId) {
-        return weekRepository.findTop4ByOrderByIdDesc()
+        return weekService.getTop4ByOrderByIdDesc()
                 .stream()
                 .map(x->convertResultTotalFourWeeksDto(areaId, x))
                 .toList().reversed();
     }
 
     @Override
+    @Transactional
     public void addResultsForWeek(List<ResultRequestDto> resultRequestDtoList) {
         Week weekLast = weekService.createWeek();
         long weekId = weekLast.getId();
@@ -74,12 +73,15 @@ public class ResultServiceImpl implements ResultService{
 
     private Result convertResultDtoToResult(ResultRequestDto resultRequestDto, Long weekId) {
         Result result = new Result();
-        Optional<Area> area = areaRepository.findById(resultRequestDto.areaId());
-        Optional<Criterion> criterion = criterionRepository.findById(resultRequestDto.criterionId());
-        Optional<Week> week = weekRepository.findById(weekId);
-        result.setArea(area.get());
-        result.setCriterion(criterion.get());
-        result.setWeek(week.get());
+        Area area = areaRepository.findById(resultRequestDto.areaId())
+                .orElseThrow(() -> new AreaNotFoundException("Цех не найден!"));
+        Criterion criterion = criterionService.getCriterionById(resultRequestDto.criterionId())
+                .orElseThrow(() -> new CriterionNotFoundException("Критерий не найден!"));
+        Week week = weekService.getWeekById(weekId)
+                .orElseThrow(() -> new CriterionNotFoundException("Неделя не найдена!"));
+        result.setArea(area);
+        result.setCriterion(criterion);
+        result.setWeek(week);
         result.setValue(resultRequestDto.value());
         return result;
     }

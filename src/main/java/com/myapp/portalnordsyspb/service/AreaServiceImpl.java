@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -22,6 +23,11 @@ public class AreaServiceImpl implements AreaService{
                 .stream()
                 .map(this::convertAreaToSiteDto)
                 .toList();
+    }
+
+    @Override
+    public Optional<Area> getAreaById(Long area_id) {
+        return areaRepository.findById(area_id);
     }
 
     private AreaSiteDto convertAreaToSiteDto(Area area) {
