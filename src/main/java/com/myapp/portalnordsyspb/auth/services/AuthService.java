@@ -6,12 +6,11 @@ import com.myapp.portalnordsyspb.auth.repositories.UserRepository;
 import com.myapp.portalnordsyspb.auth.utils.AuthResponse;
 import com.myapp.portalnordsyspb.auth.utils.LoginRequest;
 import com.myapp.portalnordsyspb.auth.utils.RegisterRequest;
-import com.myapp.portalnordsyspb.exceptions.CustomUserNotFoundException;
-import com.myapp.portalnordsyspb.exceptions.EmailAlreadyExistException;
+import com.myapp.portalnordsyspb.evaluationPU.exceptions.CustomUserNotFoundException;
+import com.myapp.portalnordsyspb.evaluationPU.exceptions.EmailAlreadyExistException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
