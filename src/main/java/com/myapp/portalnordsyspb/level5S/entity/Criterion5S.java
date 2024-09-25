@@ -1,12 +1,14 @@
 package com.myapp.portalnordsyspb.level5S.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
@@ -14,7 +16,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Criterion5S {
+public class Criterion5S  implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,12 +1,16 @@
 package com.myapp.portalnordsyspb.level5S.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.myapp.portalnordsyspb.evaluationPU.entity.Area;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.io.Serial;
+import java.io.Serializable;
 
 @Entity
 @Getter
@@ -15,7 +19,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "result5s")
-public class Result5S {
+public class Result5S  implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

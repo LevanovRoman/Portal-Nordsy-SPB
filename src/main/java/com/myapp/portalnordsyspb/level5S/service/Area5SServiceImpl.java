@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -23,7 +24,7 @@ public class Area5SServiceImpl implements Area5SService{
         return area5SRepository.findAllByDepartmentId(departmentId)
                 .stream()
                 .map(this::convertArea5STableToDto)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     @Override

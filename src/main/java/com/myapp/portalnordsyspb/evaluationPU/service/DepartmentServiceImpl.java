@@ -4,9 +4,11 @@ import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.DepartmentTableDto
 import com.myapp.portalnordsyspb.evaluationPU.entity.Department;
 import com.myapp.portalnordsyspb.evaluationPU.repository.DepartmentRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -21,11 +23,12 @@ public class DepartmentServiceImpl implements DepartmentService{
     }
 
     @Override
+    @Cacheable(value = "DepartmentService::getListDepartmentTable")
     public List<DepartmentTableDto> getListDepartmentTable() {
         return departmentRepository.findAll()
                 .stream()
                 .map(this::convertDepartmentTableToDto)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     private DepartmentTableDto convertDepartmentTableToDto(Department department) {

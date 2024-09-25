@@ -30,7 +30,7 @@ public class Department5SController {
 
     @GetMapping("/list")
     public ResponseEntity<List<Department5STableDto>> getListDepartmentTable(){
-        return ResponseEntity.ok(department5SService.getListDepartmentTable());
+        return ResponseEntity.ok(department5SService.getListDepartment5STable());
     }
 
 }

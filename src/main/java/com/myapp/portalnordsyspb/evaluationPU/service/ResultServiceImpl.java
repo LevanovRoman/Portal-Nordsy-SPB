@@ -13,9 +13,12 @@ import com.myapp.portalnordsyspb.evaluationPU.repository.ResultRepository;
 import com.myapp.portalnordsyspb.evaluationPU.exceptions.AreaNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -27,31 +30,37 @@ public class ResultServiceImpl implements ResultService{
     private final AreaRepository areaRepository;
 
     @Override
+//    @Cacheable(value = "ResultService::getListResultsByAreaIdForLastWeek", key = "#areaId")
     public List<ResultTableLastWeekDto> getListResultsByAreaIdForLastWeek(Long areaId) {
         long lastWeekId = weekService.getTopByOrderByIdDesc().getId();
         return resultRepository.findAllByAreaIdAndWeekId(areaId, lastWeekId)
                 .stream()
                 .skip(1)
                 .map(this::convertResultByAreaIdForLastWeek)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     @Override
-    public List<ResultTableFourWeeksDto> getListResultResultTotalFourWeeks(Long areaId) {
+//    @Cacheable(value = "ResultService::getListResultResultTotalFourWeeks", key = "#area_id")
+    public List<ResultTableFourWeeksDto> getListResultResultTotalFourWeeks(Long area_id) {
         return weekService.getTop4ByOrderByIdDesc()
                 .stream()
-                .map(x->convertResultTotalFourWeeksDto(areaId, x))
-                .toList().reversed();
+                .map(x->convertResultTotalFourWeeksDto(area_id, x))
+                .collect(Collectors.toList()).reversed();
     }
 
     @Override
     @Transactional
+//    @Caching(cacheable = {
+//            @Cacheable(value = "ResultService::getListResultsByAreaIdForLastWeek"),
+//            @Cacheable(value = "ResultService::getListResultResultTotalFourWeeks")
+//    })
     public void addResultsForWeek(List<ResultRequestDto> resultRequestDtoList) {
         Week weekLast = weekService.createWeek();
         long weekId = weekLast.getId();
         List<Result> resultList = resultRequestDtoList.stream()
                 .map(result -> convertResultDtoToResult(result, weekId))
-                .toList();
+                .collect(Collectors.toList());
         resultRepository.saveAll(resultList);
     }
 
