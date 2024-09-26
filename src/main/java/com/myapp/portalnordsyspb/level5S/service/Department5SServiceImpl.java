@@ -22,19 +22,19 @@ public class Department5SServiceImpl implements Department5SService{
         return department5SRepository.findAll();
     }
 
-    @Override
-    @Cacheable(value = "Department5SService::getListDepartment5STable")
-    public List<Department5STableDto> getListDepartment5STable() {
-        return department5SRepository.findAll()
-                .stream()
-                .map(this::convertDepartment5STableToDto)
-                .collect(Collectors.toList());
-    }
-
-    private Department5STableDto convertDepartment5STableToDto(Department5S department5S) {
-        return new Department5STableDto(
-                department5S.getNumber(),
-                area5SService.getListArea5STableDtoByDepartmentId(department5S.getId())
-        );
-    }
+//    @Override
+//    @Cacheable(value = "Department5SService::getListDepartment5STable")
+//    public List<Department5STableDto> getListDepartment5STable() {
+//        return department5SRepository.findAll()
+//                .stream()
+//                .map(this::convertDepartment5STableToDto)
+//                .collect(Collectors.toList());
+//    }
+//
+//    private Department5STableDto convertDepartment5STableToDto(Department5S department5S) {
+//        return new Department5STableDto(
+//                department5S.getNumber(),
+//                area5SService.getListArea5STableDtoByDepartmentId(department5S.getId())
+//        );
+//    }
 }

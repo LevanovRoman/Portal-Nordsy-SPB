@@ -8,5 +8,5 @@ import java.util.List;
 public interface Department5SService {
     List<Department5S> getAllDepartments();
 
-    List<Department5STableDto> getListDepartment5STable();
+//    List<Department5STableDto> getListDepartment5STable();
 }

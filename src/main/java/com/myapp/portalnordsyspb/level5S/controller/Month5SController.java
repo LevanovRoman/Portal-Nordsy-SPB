@@ -1,8 +1,6 @@
 package com.myapp.portalnordsyspb.level5S.controller;
 
-import com.myapp.portalnordsyspb.level5S.dto.Department5STableDto;
 import com.myapp.portalnordsyspb.level5S.dto.test.Month5SiteDto;
-import com.myapp.portalnordsyspb.level5S.repository.Month5SRepository;
 import com.myapp.portalnordsyspb.level5S.service.Month5SService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

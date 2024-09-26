@@ -28,9 +28,9 @@ public class Department5SController {
         return ResponseEntity.ok(department5SService.getAllDepartments());
     }
 
-    @GetMapping("/list")
-    public ResponseEntity<List<Department5STableDto>> getListDepartmentTable(){
-        return ResponseEntity.ok(department5SService.getListDepartment5STable());
-    }
+//    @GetMapping("/list")
+//    public ResponseEntity<List<Department5STableDto>> getListDepartmentTable(){
+//        return ResponseEntity.ok(department5SService.getListDepartment5STable());
+//    }
 
 }

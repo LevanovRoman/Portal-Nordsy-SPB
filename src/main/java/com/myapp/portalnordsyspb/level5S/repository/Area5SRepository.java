@@ -8,6 +8,4 @@ import java.util.List;
 public interface Area5SRepository extends JpaRepository<Area5S, Long> {
 
     List<Area5S> findAllByDepartmentId(Long departmentId);
-
-//    List<Area5S> findAllByMonth5SId(Long monthId);
 }
