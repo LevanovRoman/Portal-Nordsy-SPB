@@ -95,3 +95,12 @@ select ca.id, r.value, d.number, a.name, c.name, w.number from week w
                                                                    full join public.area a on a.id = ca.area_id
                                                                    full join public.department d on a.department_id = d.id
 where w.number = 31;
+
+
+select ca.id, r.value, d.number, a.name, c.name, w.number from month5s m
+    full join result r on w.id = r.week_id
+    full join area_criterion ca on r.area_criterion_id = ca.id
+    full join criterion c on ca.criterion_id = c.id
+    full join public.area a on a.id = ca.area_id
+    full join public.department d on a.department_id = d.id
+    where m.id = 1;

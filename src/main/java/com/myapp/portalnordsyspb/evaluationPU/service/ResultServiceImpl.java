@@ -30,7 +30,7 @@ public class ResultServiceImpl implements ResultService{
     private final AreaRepository areaRepository;
 
     @Override
-//    @Cacheable(value = "ResultService::getListResultsByAreaIdForLastWeek", key = "#areaId")
+    @Cacheable(value = "ResultService::getListResultsByAreaIdForLastWeek")
     public List<ResultTableLastWeekDto> getListResultsByAreaIdForLastWeek(Long areaId) {
         long lastWeekId = weekService.getTopByOrderByIdDesc().getId();
         return resultRepository.findAllByAreaIdAndWeekId(areaId, lastWeekId)
@@ -41,7 +41,7 @@ public class ResultServiceImpl implements ResultService{
     }
 
     @Override
-//    @Cacheable(value = "ResultService::getListResultResultTotalFourWeeks", key = "#area_id")
+//    @Cacheable(value = "ResultService::getListResultResultTotalFourWeeks")
     public List<ResultTableFourWeeksDto> getListResultResultTotalFourWeeks(Long area_id) {
         return weekService.getTop4ByOrderByIdDesc()
                 .stream()

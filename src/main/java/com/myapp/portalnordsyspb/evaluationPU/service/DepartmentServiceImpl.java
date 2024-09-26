@@ -23,7 +23,7 @@ public class DepartmentServiceImpl implements DepartmentService{
     }
 
     @Override
-    @Cacheable(value = "DepartmentService::getListDepartmentTable")
+//    @Cacheable(value = "DepartmentService::getListDepartmentTable")
     public List<DepartmentTableDto> getListDepartmentTable() {
         return departmentRepository.findAll()
                 .stream()
