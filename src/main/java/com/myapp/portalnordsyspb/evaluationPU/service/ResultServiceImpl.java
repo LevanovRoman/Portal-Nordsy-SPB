@@ -1,5 +1,6 @@
 package com.myapp.portalnordsyspb.evaluationPU.service;
 
+import com.myapp.portalnordsyspb.PortalNordsySpbApplication;
 import com.myapp.portalnordsyspb.evaluationPU.dto.requestDto.ResultRequestDto;
 import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.ResultTableFourWeeksDto;
 import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.ResultTableLastWeekDto;
@@ -13,8 +14,10 @@ import com.myapp.portalnordsyspb.evaluationPU.repository.ResultRepository;
 import com.myapp.portalnordsyspb.evaluationPU.exceptions.AreaNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,11 +31,14 @@ public class ResultServiceImpl implements ResultService{
     private final WeekService weekService;
     private final CriterionService criterionService;
     private final AreaRepository areaRepository;
+//    Logger log = LoggerFactory.getLogger(PortalNordsySpbApplication.class);
 
     @Override
     @Cacheable(value = "ResultService::getListResultsByAreaIdForLastWeek")
     public List<ResultTableLastWeekDto> getListResultsByAreaIdForLastWeek(Long areaId) {
+//        log.debug("Response {}", areaId);
         long lastWeekId = weekService.getTopByOrderByIdDesc().getId();
+//        log.debug("Request {}", areaId);
         return resultRepository.findAllByAreaIdAndWeekId(areaId, lastWeekId)
                 .stream()
                 .skip(1)
@@ -55,6 +61,7 @@ public class ResultServiceImpl implements ResultService{
 //            @Cacheable(value = "ResultService::getListResultsByAreaIdForLastWeek"),
 //            @Cacheable(value = "ResultService::getListResultResultTotalFourWeeks")
 //    })
+    @CacheEvict(value = "ResultService::getListResultsByAreaIdForLastWeek", allEntries = true)
     public void addResultsForWeek(List<ResultRequestDto> resultRequestDtoList) {
         Week weekLast = weekService.createWeek();
         long weekId = weekLast.getId();
