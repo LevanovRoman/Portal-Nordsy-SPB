@@ -1,6 +1,5 @@
 package com.myapp.portalnordsyspb.evaluationPU.service;
 
-import com.myapp.portalnordsyspb.PortalNordsySpbApplication;
 import com.myapp.portalnordsyspb.evaluationPU.dto.requestDto.ResultRequestDto;
 import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.ResultTableFourWeeksDto;
 import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.ResultTableLastWeekDto;
@@ -8,14 +7,12 @@ import com.myapp.portalnordsyspb.evaluationPU.entity.Area;
 import com.myapp.portalnordsyspb.evaluationPU.entity.Criterion;
 import com.myapp.portalnordsyspb.evaluationPU.entity.Result;
 import com.myapp.portalnordsyspb.evaluationPU.entity.Week;
-import com.myapp.portalnordsyspb.evaluationPU.exceptions.CriterionNotFoundException;
+import com.myapp.portalnordsyspb.exceptions.CriterionNotFoundException;
 import com.myapp.portalnordsyspb.evaluationPU.repository.AreaRepository;
 import com.myapp.portalnordsyspb.evaluationPU.repository.ResultRepository;
-import com.myapp.portalnordsyspb.evaluationPU.exceptions.AreaNotFoundException;
+import com.myapp.portalnordsyspb.exceptions.AreaNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;

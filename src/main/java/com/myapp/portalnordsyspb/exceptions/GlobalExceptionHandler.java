@@ -1,4 +1,4 @@
-package com.myapp.portalnordsyspb.evaluationPU.exceptions;
+package com.myapp.portalnordsyspb.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -61,4 +61,21 @@ public class GlobalExceptionHandler {
         error.put("error: ", ex.getMessage());
         return error;
     }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(ChapterNotFoundException.class)
+    public Map<String, String> chapterNotFound(ChapterNotFoundException ex){
+        Map<String, String> error = new HashMap<>();
+        error.put("error: ", ex.getMessage());
+        return error;
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(PostNotFoundException.class)
+    public Map<String, String> postNotFound(PostNotFoundException ex){
+        Map<String, String> error = new HashMap<>();
+        error.put("error: ", ex.getMessage());
+        return error;
+    }
+
 }

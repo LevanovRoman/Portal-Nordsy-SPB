@@ -1,4 +1,4 @@
-package com.myapp.portalnordsyspb.evaluationPU.exceptions;
+package com.myapp.portalnordsyspb.exceptions;
 
 public class RefreshTokenExpiredException extends RuntimeException {
     public RefreshTokenExpiredException(String message) {
