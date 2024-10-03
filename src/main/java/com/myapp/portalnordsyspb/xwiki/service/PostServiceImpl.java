@@ -8,12 +8,16 @@ import com.myapp.portalnordsyspb.xwiki.entity.Post;
 import com.myapp.portalnordsyspb.xwiki.repository.ChapterRepository;
 import com.myapp.portalnordsyspb.xwiki.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+//@EnableCaching
 @RequiredArgsConstructor
 public class PostServiceImpl implements PostService{
 
@@ -22,6 +26,7 @@ public class PostServiceImpl implements PostService{
 
 
     @Override
+    @Cacheable("posts")
     public List<PostResponseDto> getListPostResponseDtoByChapterId(Long chapter_id) {
         return postRepository.findAllByChapterId(chapter_id)
                 .stream()
@@ -30,9 +35,10 @@ public class PostServiceImpl implements PostService{
     }
 
     @Override
-    public Post getPostById(Long postId) {
-        return postRepository.findById(postId)
-                .orElseThrow(()->new PostNotFoundException("Пост с id = " + postId + " не найден"));
+//    @Cacheable(value = "post", key = "#id")
+    public Post getPostById(Long id) {
+        return postRepository.findById(id)
+                .orElseThrow(()->new PostNotFoundException("Пост с id = " + id + " не найден"));
     }
 
     @Override
@@ -48,21 +54,23 @@ public class PostServiceImpl implements PostService{
     }
 
     @Override
+    @CacheEvict(value = "posts")
     public PostRequestDto createPost(PostRequestDto postRequestDto) {
         Post post = new Post();
         return savePost(post, postRequestDto);
     }
 
     @Override
-    public PostRequestDto updatePost(PostRequestDto postRequestDto, Long postId) {
-        Post post = getPostById(postId);
+    @CacheEvict(value = "posts")
+    public PostRequestDto updatePost(PostRequestDto postRequestDto, Long id) {
+        Post post = getPostById(id);
         return savePost(post, postRequestDto);
     }
 
     @Override
+    @CacheEvict(value = "posts")
     public void deletePost(long id) {
-        Post post = postRepository.findById(id)
-                .orElseThrow(()->new PostNotFoundException("Пост с id = " + id + " не найден"));
+        Post post = getPostById(id);
         postRepository.delete(post);
     }
 
