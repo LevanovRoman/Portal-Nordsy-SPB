@@ -12,4 +12,5 @@ public interface ChapterService {
     Chapter getChapterById(Long chapterId);
     ChapterRequestDto createChapter(ChapterRequestDto chapterResponseDto);
     ChapterRequestDto updateChapter(ChapterRequestDto chapterResponseDto, long chapterId);
+    void deleteChapter(long id);
 }

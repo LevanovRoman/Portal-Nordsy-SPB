@@ -42,10 +42,9 @@ public class ChapterServiceImpl implements ChapterService{
 
         Chapter newChapter = chapterRepository.save(chapter);
 
-        ChapterRequestDto chapterResponse = new ChapterRequestDto(
+        return new ChapterRequestDto(
                 newChapter.getName()
         );
-        return chapterResponse;
     }
 
     // редактируем главу
@@ -57,12 +56,17 @@ public class ChapterServiceImpl implements ChapterService{
         return new ChapterRequestDto(updatedChapter.getName());
     }
 
+    @Override
+    public void deleteChapter(long id) {
+        Chapter chapter = getChapterById(id);
+        chapterRepository.delete(chapter);
+    }
+
     private ChapterResponseDto convertAllChaptersToChaptersResponseDto(Chapter chapter) {
         return new ChapterResponseDto(
                 chapter.getId(),
                 chapter.getName(),
                 postService.getListPostResponseDtoByChapterId(chapter.getId())
         );
-
     }
 }

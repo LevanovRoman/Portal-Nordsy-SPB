@@ -59,6 +59,13 @@ public class PostServiceImpl implements PostService{
         return savePost(post, postRequestDto);
     }
 
+    @Override
+    public void deletePost(long id) {
+        Post post = postRepository.findById(id)
+                .orElseThrow(()->new PostNotFoundException("Пост с id = " + id + " не найден"));
+        postRepository.delete(post);
+    }
+
     private PostRequestDto mapPostToPostRequestDto(Post post){
         return new PostRequestDto(
                 post.getTitle(),

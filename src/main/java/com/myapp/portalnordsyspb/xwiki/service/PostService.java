@@ -13,4 +13,5 @@ public interface PostService {
     PostRequestDto createPost(PostRequestDto postRequestDto);
     PostRequestDto savePost(Post post, PostRequestDto postRequestDto);
     PostRequestDto updatePost(PostRequestDto postRequestDto, Long postId);
+    void deletePost(long id);
 }

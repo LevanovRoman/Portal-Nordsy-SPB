@@ -33,4 +33,10 @@ public class ChapterController {
         ChapterRequestDto response = chapterService.updateChapter(chapterResponseDto, chapterId);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    @DeleteMapping("delete/{id}")
+    public ResponseEntity<String> deleteChapter(@PathVariable("id") long id){
+        chapterService.deleteChapter(id);
+        return new ResponseEntity<>("Глава удалена", HttpStatus.OK);
+    }
 }
