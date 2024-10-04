@@ -14,20 +14,19 @@ import java.util.Set;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class News {
+public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String title;
+    private String name;
 
-    @Column(columnDefinition="TEXT")
-    private String content;
-
-    @ManyToMany(mappedBy = "newsSet", fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "category_news_table",
+    joinColumns = {@JoinColumn(name = "category_id", referencedColumnName = "id")},
+    inverseJoinColumns = {@JoinColumn(name = "news_id", referencedColumnName = "id")})
     @JsonManagedReference
-    private Set<Category> categorySet;
+    private Set<News> newsSet;
 
-    private String photo;
 }
