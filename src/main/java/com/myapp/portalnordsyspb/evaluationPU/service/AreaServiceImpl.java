@@ -42,7 +42,8 @@ public class AreaServiceImpl implements AreaService{
     private AreaDto convertAreaToAreaDto(Area area) {
         return new AreaDto(
                 area.getId(),
-                area.getName()
+                area.getName(),
+                area.getDepartment().getNumber()
         );
     }
 

@@ -38,7 +38,8 @@ public class NewsServiceImpl implements NewsService{
 
         // set the value of field 'photo' as filename
         newsRequestDto.setPhoto(uploadedPhotoName);
-
+        System.out.println("NEWSSERVICE1");
+        System.out.println(newsRequestDto);
         // map dto to News object
         News news = new News();
         news.setTitle(newsRequestDto.getTitle());
@@ -46,19 +47,21 @@ public class NewsServiceImpl implements NewsService{
         List<Category> categoryList = newsRequestDto.getCategoryListString()
                         .stream().map(this::convertStringToCategory)
                         .toList();
+        System.out.println(categoryList);
         news.setCategoryList(categoryList);
         news.setPhoto(newsRequestDto.getPhoto());
 
         // save the news object -> saved News object
         News savedNews = newsRepository.save(news);
-
+        System.out.println("NEWSSERVICE2");
         // generate the photoUrl
         String photoUrl = baseUrl + "/api/photo/" + uploadedPhotoName;
-
+        System.out.println("LIST" + savedNews.getCategoryList());
        //  map News object to dto and return it
         List<String> stringListCategory = savedNews.getCategoryList()
                 .stream().map(this::convertCategoryToString)
                 .toList();
+        System.out.println("NEWSSERVICE3");
         NewsRequestDto response = new NewsRequestDto(
                 savedNews.getTitle(),
                 savedNews.getContent(),
@@ -66,6 +69,7 @@ public class NewsServiceImpl implements NewsService{
                 savedNews.getPhoto(),
                 photoUrl
         );
+        System.out.println("NEWSSERVICE4");
         return response;
     }
 
@@ -80,6 +84,7 @@ public class NewsServiceImpl implements NewsService{
     }
 
     private Category convertStringToCategory(String categoryString){
+        System.out.println("Category " + categoryString + categoryRepository.findByName(categoryString));
         return categoryRepository.findByName(categoryString);
     }
 

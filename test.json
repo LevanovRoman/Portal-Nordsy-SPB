@@ -2,7 +2,7 @@
   {
     "title": "First news",
     "content": "Avengers...",
-    "categoryListString": ["Общие понятия", "5C", "Потери"],
+    "categoryListString": ["One more category", "Another categ", "Final category"],
     "photo": "default.jpeg",
     "photoUrl": "url"
   }

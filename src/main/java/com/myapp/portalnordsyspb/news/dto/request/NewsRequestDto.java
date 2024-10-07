@@ -19,6 +19,8 @@ public class NewsRequestDto {
 //    private List<Category> categoryList;
     private List<String> categoryListString;
 
+//    private List<Long> categoryIdList;
+
     private String photo;
 
     private String photoUrl;

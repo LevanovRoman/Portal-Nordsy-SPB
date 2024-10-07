@@ -1,5 +1,6 @@
-INSERT INTO category (name) VALUES ('Общие понятия'), ('5C'), ('Потери'), ('Поток'),
-                                  ('Всеобщее обслуживание оборудование'), ('Решение проблем');
+INSERT INTO category (name) VALUES ('One more category'), ('Another categ'),
+                                   ('Else category'), ('Second categ'),
+                                  ('First categ'), ('Final category');
 
 INSERT INTO post (title, description, chapter_id)
 VALUES
