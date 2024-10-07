@@ -1,0 +1,10 @@
+[
+  {
+    "title": "First news",
+    "content": "Avengers...",
+    "categoryListString": ["Общие понятия", "5C", "Потери"],
+    "photo": "default.jpeg",
+    "photoUrl": "url"
+  }
+
+]

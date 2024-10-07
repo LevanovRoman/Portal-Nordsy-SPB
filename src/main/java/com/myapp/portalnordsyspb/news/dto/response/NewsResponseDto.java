@@ -1,4 +1,4 @@
-package com.myapp.portalnordsyspb.news.dto;
+package com.myapp.portalnordsyspb.news.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class NewsDto {
+public class NewsResponseDto {
 
     private Long id;
 

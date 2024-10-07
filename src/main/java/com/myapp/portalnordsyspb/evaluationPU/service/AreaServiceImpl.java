@@ -1,5 +1,6 @@
 package com.myapp.portalnordsyspb.evaluationPU.service;
 
+import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.AreaDto;
 import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.AreaTableDto;
 import com.myapp.portalnordsyspb.evaluationPU.entity.Area;
 import com.myapp.portalnordsyspb.evaluationPU.repository.AreaRepository;
@@ -29,6 +30,20 @@ public class AreaServiceImpl implements AreaService{
     @Override
     public Optional<Area> getAreaById(Long area_id) {
         return areaRepository.findById(area_id);
+    }
+
+    @Override
+    public List<AreaDto> getAreaDto() {
+        return areaRepository.findAll()
+                .stream().map(this::convertAreaToAreaDto)
+                .collect(Collectors.toList());
+    }
+
+    private AreaDto convertAreaToAreaDto(Area area) {
+        return new AreaDto(
+                area.getId(),
+                area.getName()
+        );
     }
 
     private AreaTableDto convertAreaTableToDto(Area area) {

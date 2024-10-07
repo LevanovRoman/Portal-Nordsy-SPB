@@ -1,5 +1,6 @@
 package com.myapp.portalnordsyspb.evaluationPU.service;
 
+import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.AreaAndCriterionDto;
 import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.DepartmentTableDto;
 import com.myapp.portalnordsyspb.evaluationPU.entity.Department;
 import com.myapp.portalnordsyspb.evaluationPU.repository.DepartmentRepository;
@@ -16,6 +17,7 @@ public class DepartmentServiceImpl implements DepartmentService{
 
     private final DepartmentRepository departmentRepository;
     private final AreaService areaService;
+    private final CriterionService criterionService;
 
     @Override
     public List<Department> getAllDepartments() {
@@ -29,6 +31,14 @@ public class DepartmentServiceImpl implements DepartmentService{
                 .stream()
                 .map(this::convertDepartmentTableToDto)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public AreaAndCriterionDto getListAreaDtoAndCriterionDto() {
+        return new AreaAndCriterionDto(
+                areaService.getAreaDto(),
+                criterionService.getCriterionDto()
+        );
     }
 
     private DepartmentTableDto convertDepartmentTableToDto(Department department) {

@@ -2,6 +2,7 @@ package com.myapp.portalnordsyspb.xwiki.controller;
 
 import com.myapp.portalnordsyspb.xwiki.dto.requestDto.ChapterRequestDto;
 import com.myapp.portalnordsyspb.xwiki.dto.responseDto.ChapterResponseDto;
+import com.myapp.portalnordsyspb.xwiki.dto.responseDto.ResponseDto;
 import com.myapp.portalnordsyspb.xwiki.service.ChapterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -35,8 +36,8 @@ public class ChapterController {
     }
 
     @DeleteMapping("delete/{id}")
-    public ResponseEntity<String> deleteChapter(@PathVariable("id") long id){
+    public ResponseEntity<ResponseDto> deleteChapter(@PathVariable("id") long id){
         chapterService.deleteChapter(id);
-        return new ResponseEntity<>("Глава удалена", HttpStatus.OK);
+        return new ResponseEntity<>(new ResponseDto("Chapter deleted"), HttpStatus.OK);
     }
 }

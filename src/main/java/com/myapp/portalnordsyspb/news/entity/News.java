@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Setter
@@ -25,9 +25,9 @@ public class News {
     @Column(columnDefinition="TEXT")
     private String content;
 
-    @ManyToMany(mappedBy = "newsSet", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "newsList", fetch = FetchType.LAZY)
     @JsonManagedReference
-    private Set<Category> categorySet;
+    private List<Category> categoryList;
 
     private String photo;
 }

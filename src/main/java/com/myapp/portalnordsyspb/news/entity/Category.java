@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -27,6 +28,6 @@ public class Category {
     joinColumns = {@JoinColumn(name = "category_id", referencedColumnName = "id")},
     inverseJoinColumns = {@JoinColumn(name = "news_id", referencedColumnName = "id")})
     @JsonManagedReference
-    private Set<News> newsSet;
+    private List<News> newsList;
 
 }

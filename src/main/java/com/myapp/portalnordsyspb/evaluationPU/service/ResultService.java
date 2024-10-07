@@ -1,6 +1,7 @@
 package com.myapp.portalnordsyspb.evaluationPU.service;
 
 import com.myapp.portalnordsyspb.evaluationPU.dto.requestDto.ResultRequestDto;
+import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.AreaAndCriterionDto;
 import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.ResultTableFourWeeksDto;
 import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.ResultTableLastWeekDto;
 

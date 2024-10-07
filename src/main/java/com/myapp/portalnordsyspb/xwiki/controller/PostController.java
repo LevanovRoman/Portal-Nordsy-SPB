@@ -1,5 +1,6 @@
 package com.myapp.portalnordsyspb.xwiki.controller;
 
+import com.myapp.portalnordsyspb.xwiki.dto.responseDto.ResponseDto;
 import com.myapp.portalnordsyspb.xwiki.dto.requestDto.PostRequestDto;
 import com.myapp.portalnordsyspb.xwiki.service.PostService;
 import lombok.RequiredArgsConstructor;
@@ -26,8 +27,8 @@ public class PostController {
     }
 
     @DeleteMapping("delete/{id}")
-    public ResponseEntity<String> deletePost(@PathVariable("id") long id){
+    public ResponseEntity<ResponseDto> deletePost(@PathVariable("id") long id){
         postService.deletePost(id);
-        return new ResponseEntity<>("Пост удалён", HttpStatus.OK);
+        return new ResponseEntity<>(new ResponseDto("Post deleted"), HttpStatus.OK);
     }
 }
