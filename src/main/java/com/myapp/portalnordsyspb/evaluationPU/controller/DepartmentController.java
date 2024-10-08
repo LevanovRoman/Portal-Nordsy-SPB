@@ -3,9 +3,12 @@ package com.myapp.portalnordsyspb.evaluationPU.controller;
 import com.myapp.portalnordsyspb.evaluationPU.dto.requestDto.ResultRequestDto;
 import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.AreaAndCriterionDto;
 import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.DepartmentTableDto;
+import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.ResultResponseDto;
+import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.WeekDto;
 import com.myapp.portalnordsyspb.evaluationPU.entity.Department;
 import com.myapp.portalnordsyspb.evaluationPU.service.DepartmentService;
 import com.myapp.portalnordsyspb.evaluationPU.service.ResultService;
+import com.myapp.portalnordsyspb.evaluationPU.service.WeekService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,6 +25,8 @@ public class DepartmentController {
     private final DepartmentService departmentService;
 
     private final ResultService resultService;
+
+    private final WeekService weekService;
 
     @Operation(summary = "Просмотр всех цехов")
     @GetMapping
@@ -40,10 +45,27 @@ public class DepartmentController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @PutMapping("/update-week-result/{weekId}")
+    public ResponseEntity<?> updateResultForWeek(@RequestBody List<ResultRequestDto> resultRequestDtoList,
+                                                 @PathVariable("weekId") long weekId){
+        resultService.updateResultsForWeek(resultRequestDtoList, weekId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
     @GetMapping("/areas-and-criterions")
     public ResponseEntity<AreaAndCriterionDto> getListAreaDtoAndCriterionDto(){
         return ResponseEntity.ok(departmentService.getListAreaDtoAndCriterionDto());
+    }
 
+    @GetMapping("/all-weeks")
+    public ResponseEntity<List<WeekDto>> getListWeekDto(){
+        return ResponseEntity.ok(weekService.getListWeekDto());
+    }
+
+    @GetMapping("/week-result/{weekId}")
+    public ResponseEntity<List<ResultResponseDto>> getListResultResponseDtoForWeek(@PathVariable("weekId") long weekId){
+        return ResponseEntity.ok(resultService.getListResultResponseDtoForWeek(weekId));
     }
 
 }

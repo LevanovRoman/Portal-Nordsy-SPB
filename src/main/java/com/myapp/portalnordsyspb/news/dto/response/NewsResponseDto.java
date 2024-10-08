@@ -4,16 +4,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class NewsResponseDto {
 
-    private Long id;
-
     private String title;
 
     private String content;
+
+    private List<String> categoryListString;
 
     private String photo;
 

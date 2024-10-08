@@ -12,8 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -38,57 +39,103 @@ public class NewsServiceImpl implements NewsService{
 
         // set the value of field 'photo' as filename
         newsRequestDto.setPhoto(uploadedPhotoName);
-        System.out.println("NEWSSERVICE1");
-        System.out.println(newsRequestDto);
+
         // map dto to News object
         News news = new News();
         news.setTitle(newsRequestDto.getTitle());
         news.setContent(newsRequestDto.getContent());
-        List<Category> categoryList = newsRequestDto.getCategoryListString()
-                        .stream().map(this::convertStringToCategory)
-                        .toList();
-        System.out.println(categoryList);
+//        List<Category> categoryList = newsRequestDto.getCategoryListString()
+//                        .stream().map(this::convertStringToCategory)
+//                        .toList();
+        List<Category> categoryList = newsRequestDto.getCategoryIdList()
+                .stream().map(this::convertIdToCategory)
+                .toList();
         news.setCategoryList(categoryList);
         news.setPhoto(newsRequestDto.getPhoto());
 
         // save the news object -> saved News object
         News savedNews = newsRepository.save(news);
-        System.out.println("NEWSSERVICE2");
+
         // generate the photoUrl
         String photoUrl = baseUrl + "/api/photo/" + uploadedPhotoName;
-        System.out.println("LIST" + savedNews.getCategoryList());
+
        //  map News object to dto and return it
-        List<String> stringListCategory = savedNews.getCategoryList()
-                .stream().map(this::convertCategoryToString)
+//        List<String> stringListCategory = savedNews.getCategoryList()
+//                .stream().map(this::convertCategoryToString)
+//                .toList();
+        List<Long> stringListCategoryId = savedNews.getCategoryList()
+                .stream().map(this::convertCategoryToId)
                 .toList();
-        System.out.println("NEWSSERVICE3");
         NewsRequestDto response = new NewsRequestDto(
                 savedNews.getTitle(),
                 savedNews.getContent(),
-                stringListCategory,
+                stringListCategoryId,
                 savedNews.getPhoto(),
                 photoUrl
         );
-        System.out.println("NEWSSERVICE4");
         return response;
     }
 
     @Override
     public NewsResponseDto getNewsById(Long newsId) {
-        return null;
+        // check the data in DB and if exists, fetch the data of given ID
+        News news = newsRepository.findById(newsId)
+                .orElseThrow(()-> new RuntimeException("Photo not found!"));
+        // generate photoUrl
+        String photoUrl = baseUrl + "/api/photo/" + news.getPhoto();
+
+        // map to NewsResponseDto object and return it
+        List<String> stringListCategoryName = news.getCategoryList()
+                .stream().map(this::convertCategoryToString)
+                .toList();
+        NewsResponseDto response = new NewsResponseDto(
+                news.getTitle(),
+                news.getContent(),
+                stringListCategoryName,
+                news.getPhoto(),
+                photoUrl
+        );
+        return response;
     }
 
     @Override
     public List<NewsResponseDto> getAllNews() {
-        return List.of();
+        // fetch all data from DB
+        List<News> newsList = newsRepository.findAll();
+
+        List<NewsResponseDto> newsResponseDtoList = new ArrayList<>();
+
+        /* iterate through the list, generate photoUrl for each news object,
+         and map to NewsResponseDto object */
+        for (News news : newsList){
+            String photoUrl = baseUrl + "/api/photo/" + news.getPhoto();
+            List<String> stringListCategoryName = news.getCategoryList()
+                    .stream().map(this::convertCategoryToString)
+                    .toList();
+            NewsResponseDto newsResponseDto = new NewsResponseDto(
+                    news.getTitle(),
+                    news.getContent(),
+                    stringListCategoryName,
+                    news.getPhoto(),
+                    photoUrl
+            );
+            newsResponseDtoList.add(newsResponseDto);
+        }
+        return newsResponseDtoList;
     }
 
-    private Category convertStringToCategory(String categoryString){
-        System.out.println("Category " + categoryString + categoryRepository.findByName(categoryString));
-        return categoryRepository.findByName(categoryString);
+//    private Category convertStringToCategory(String categoryString){
+//        System.out.println("Category " + categoryString + categoryRepository.findByName(categoryString));
+//        return categoryRepository.findByName(categoryString);
+//    }
+    private Category convertIdToCategory(Long categoryId){
+        return categoryRepository.findById(categoryId).get();
     }
 
     private String convertCategoryToString(Category category){
         return category.getName();
+    }
+    private Long convertCategoryToId(Category category){
+        return category.getId();
     }
 }

@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -25,9 +26,14 @@ public class News {
     @Column(columnDefinition="TEXT")
     private String content;
 
-    @ManyToMany(mappedBy = "newsList", fetch = FetchType.LAZY)
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "news_category",
+            joinColumns = @JoinColumn(name = "news_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id"))
     @JsonManagedReference
-    private List<Category> categoryList;
+    private List<Category> categoryList = new ArrayList<>();
 
     private String photo;
 }

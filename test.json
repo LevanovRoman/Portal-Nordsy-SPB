@@ -5,6 +5,13 @@
     "categoryListString": ["One more category", "Another categ", "Final category"],
     "photo": "default.jpeg",
     "photoUrl": "url"
+  },
+  {
+    "title": "First news",
+    "content": "Avengers...",
+    "categoryIdList": [1, 2, 3],
+    "photo": "default.jpeg",
+    "photoUrl": "url"
   }
 
 ]

@@ -1,5 +1,6 @@
 package com.myapp.portalnordsyspb.news.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -7,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -23,11 +25,8 @@ public class Category {
 
     private String name;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "category_news_table",
-    joinColumns = {@JoinColumn(name = "category_id", referencedColumnName = "id")},
-    inverseJoinColumns = {@JoinColumn(name = "news_id", referencedColumnName = "id")})
-    @JsonManagedReference
-    private List<News> newsList;
+    @ManyToMany(mappedBy = "categoryList", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonBackReference
+    private List<News> newsList = new ArrayList<>();
 
 }

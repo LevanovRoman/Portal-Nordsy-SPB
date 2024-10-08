@@ -1,6 +1,7 @@
 package com.myapp.portalnordsyspb.evaluationPU.service;
 
 import com.myapp.portalnordsyspb.evaluationPU.dto.requestDto.ResultRequestDto;
+import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.ResultResponseDto;
 import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.ResultTableFourWeeksDto;
 import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.ResultTableLastWeekDto;
 import com.myapp.portalnordsyspb.evaluationPU.entity.Area;
@@ -66,6 +67,29 @@ public class ResultServiceImpl implements ResultService{
                 .map(result -> convertResultDtoToResult(result, weekId))
                 .collect(Collectors.toList());
         resultRepository.saveAll(resultList);
+    }
+
+    @Override
+    public void updateResultsForWeek(List<ResultRequestDto> resultRequestDtoList, long weekId) {
+        List<Result> resultList = resultRequestDtoList.stream()
+                .map(result -> convertResultDtoToResult(result, weekId))
+                .collect(Collectors.toList());
+        resultRepository.saveAll(resultList);
+    }
+
+    @Override
+    public List<ResultResponseDto> getListResultResponseDtoForWeek(long weekId) {
+        List<Result> resultList = resultRepository.findAllByWeekId(weekId);
+        return resultList.stream().map(this::convertResultToResultResponseDto)
+                .collect(Collectors.toList());
+    }
+
+    private ResultResponseDto convertResultToResultResponseDto(Result result) {
+        return new ResultResponseDto(
+                result.getArea().getId(),
+                result.getCriterion().getId(),
+                result.getValue()
+        );
     }
 
     private ResultTableLastWeekDto convertResultByAreaIdForLastWeek(Result result) {

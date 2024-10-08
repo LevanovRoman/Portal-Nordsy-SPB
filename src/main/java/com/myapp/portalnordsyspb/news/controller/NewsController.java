@@ -3,6 +3,7 @@ package com.myapp.portalnordsyspb.news.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.myapp.portalnordsyspb.news.dto.request.NewsRequestDto;
+import com.myapp.portalnordsyspb.news.dto.response.NewsResponseDto;
 import com.myapp.portalnordsyspb.news.entity.Category;
 import com.myapp.portalnordsyspb.news.repository.CategoryRepository;
 import com.myapp.portalnordsyspb.news.service.NewsService;
@@ -32,6 +33,16 @@ public class NewsController {
         NewsRequestDto dto = convertToNewsRequestDto(newsRequestDto);
         System.out.println("NEWSCONTROLLER");
         return new ResponseEntity<>(newsService.addNews(dto, file), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<NewsResponseDto> getOneNews(@PathVariable long id){
+        return ResponseEntity.ok(newsService.getNewsById(id));
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<NewsResponseDto>> getAllNews(){
+        return ResponseEntity.ok(newsService.getAllNews());
     }
 
     private NewsRequestDto convertToNewsRequestDto(String newsDtoObj) throws JsonProcessingException {

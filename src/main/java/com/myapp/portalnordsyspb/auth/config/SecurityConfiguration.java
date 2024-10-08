@@ -2,6 +2,7 @@ package com.myapp.portalnordsyspb.auth.config;
 
 
 import com.myapp.portalnordsyspb.auth.services.AuthFilterService;
+import jakarta.servlet.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +13,10 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import java.io.IOException;
 
 @Configuration
 @RequiredArgsConstructor
@@ -47,8 +51,11 @@ public class SecurityConfiguration {
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
-                .addFilterBefore(authFilterService, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(authFilterService, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new EncodingFilterConfig(), ChannelProcessingFilter.class);
+
 
         return http.build();
     }
 }
+
