@@ -30,7 +30,7 @@ public class PhotoServiceImpl implements PhotoService {
         }
 
         // копируем файл или загружаем по указанному пути
-        Files.copy(file.getInputStream(), Paths.get(filePath), StandardCopyOption.REPLACE_EXISTING);
+        Files.copy(file.getInputStream(), Paths.get(filePath));
 
         return fileName;
     }

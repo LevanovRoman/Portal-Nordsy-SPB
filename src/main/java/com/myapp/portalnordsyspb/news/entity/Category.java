@@ -25,7 +25,7 @@ public class Category {
 
     private String name;
 
-    @ManyToMany(mappedBy = "categoryList", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "categoryList", fetch = FetchType.LAZY)
     @JsonBackReference
     private List<News> newsList = new ArrayList<>();
 

@@ -27,11 +27,11 @@ public class News {
     private String content;
 
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "news_category",
-            joinColumns = @JoinColumn(name = "news_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id"))
+            joinColumns = @JoinColumn(name = "news_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
     @JsonManagedReference
     private List<Category> categoryList = new ArrayList<>();
 

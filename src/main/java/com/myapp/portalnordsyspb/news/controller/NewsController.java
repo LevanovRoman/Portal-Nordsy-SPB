@@ -26,7 +26,7 @@ public class NewsController {
 
     private final CategoryRepository categoryRepository;
 
-    @PostMapping("add-news")
+    @PostMapping("/create")
     public ResponseEntity<NewsRequestDto> createNews(@RequestPart MultipartFile file,
                                                      @RequestPart String newsRequestDto)
             throws IOException {
@@ -45,18 +45,33 @@ public class NewsController {
         return ResponseEntity.ok(newsService.getAllNews());
     }
 
+    @PutMapping("/update/{newsId}")
+    public ResponseEntity<NewsRequestDto> updateNews(@PathVariable long newsId,
+                                                      @RequestPart MultipartFile file,
+                                                      @RequestPart String newsDtoObj
+                                                      ) throws IOException {
+        if (file.isEmpty()) file = null;
+        NewsRequestDto newsRequestDto = convertToNewsRequestDto(newsDtoObj);
+        return ResponseEntity.ok(newsService.updateNews(newsId, newsRequestDto, file));
+    }
+
+    @DeleteMapping("/delete/{newsId}")
+    public ResponseEntity<String> deleteNews(@PathVariable long newsId) throws IOException {
+        return ResponseEntity.ok(newsService.deleteNews(newsId));
+    }
+
     private NewsRequestDto convertToNewsRequestDto(String newsDtoObj) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.readValue(newsDtoObj, NewsRequestDto.class);
 
     }
 
-    @GetMapping("all-categories")
+    @GetMapping("/all-categories")
     public ResponseEntity<List<Category>> getAllCategories(){
         return ResponseEntity.ok(categoryRepository.findAll());
     }
 
-    @GetMapping("category/{id}")
+    @GetMapping("/category/{id}")
     public ResponseEntity<Optional<Category>> getCategory(@PathVariable long id){
         return ResponseEntity.ok(categoryRepository.findById(id));
     }

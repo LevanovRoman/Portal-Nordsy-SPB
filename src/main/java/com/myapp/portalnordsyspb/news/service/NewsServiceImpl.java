@@ -11,7 +11,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -35,6 +38,9 @@ public class NewsServiceImpl implements NewsService{
     @Override
     public NewsRequestDto addNews(NewsRequestDto newsRequestDto, MultipartFile file) throws IOException {
         // upload the file
+        if(Files.exists(Paths.get(path + File.separator + file.getOriginalFilename()))){
+            throw new RuntimeException("File already exists!");
+        }
         String uploadedPhotoName = photoService.uploadPhoto(path, file);
 
         // set the value of field 'photo' as filename
@@ -71,6 +77,55 @@ public class NewsServiceImpl implements NewsService{
                 savedNews.getContent(),
                 stringListCategoryId,
                 savedNews.getPhoto(),
+                photoUrl
+        );
+        return response;
+    }
+
+    @Override
+    public NewsRequestDto updateNews(Long newsId, NewsRequestDto newsRequestDto, MultipartFile file) throws IOException {
+        // 1.check if news object exists with given newsId
+        News nw = newsRepository.findById(newsId)
+                .orElseThrow(()-> new RuntimeException("Photo not found!"));
+
+        // 2.if file is null, do nothing
+        // if file is not null, then delete existing file associated with record
+        // and upload new file
+        String fileName = nw.getPhoto();
+        if (file != null){
+            Files.deleteIfExists(Paths.get(path + File.separator + fileName));
+            fileName = photoService.uploadPhoto(path, file);
+        }
+
+        // 3.set NewsRequestDto`s photo value
+        newsRequestDto.setPhoto(fileName);
+
+        // 4.map it to News object
+        News news = new News();
+        news.setId(nw.getId());
+        news.setTitle(newsRequestDto.getTitle());
+        news.setContent(newsRequestDto.getContent());
+        List<Category> categoryList = newsRequestDto.getCategoryIdList()
+                .stream().map(this::convertIdToCategory)
+                .toList();
+        news.setCategoryList(categoryList);
+        news.setPhoto(newsRequestDto.getPhoto());
+
+        // 5.save the news object -> return saved news object
+        News updatedNews = newsRepository.save(news);
+
+        // 6.generate photoUrl for it
+        String photoUrl = baseUrl + "/api/photo/" + fileName;
+
+        // 7. map to NewsRequestDto and return it
+        List<Long> stringListCategoryId = updatedNews.getCategoryList()
+                .stream().map(this::convertCategoryToId)
+                .toList();
+        NewsRequestDto response = new NewsRequestDto(
+                updatedNews.getTitle(),
+                updatedNews.getContent(),
+                stringListCategoryId,
+                updatedNews.getPhoto(),
                 photoUrl
         );
         return response;
@@ -124,7 +179,24 @@ public class NewsServiceImpl implements NewsService{
         return newsResponseDtoList;
     }
 
-//    private Category convertStringToCategory(String categoryString){
+    @Override
+    public String deleteNews(Long newsId) throws IOException {
+        // 1. check if news object exists in DB
+        News nw = newsRepository.findById(newsId)
+                .orElseThrow(()-> new RuntimeException("Photo not found!"));
+        Long id = nw.getId();
+
+        // 2. delete file associated with this object
+        Files.deleteIfExists(Paths.get(path + File.separator + nw.getPhoto()));
+
+        // 3. delete the news object
+        newsRepository.delete(nw);
+
+        return "News deleted with id = " + id;
+
+    }
+
+    //    private Category convertStringToCategory(String categoryString){
 //        System.out.println("Category " + categoryString + categoryRepository.findByName(categoryString));
 //        return categoryRepository.findByName(categoryString);
 //    }
