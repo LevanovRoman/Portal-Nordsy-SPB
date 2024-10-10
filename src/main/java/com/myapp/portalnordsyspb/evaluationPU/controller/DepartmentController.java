@@ -1,10 +1,7 @@
 package com.myapp.portalnordsyspb.evaluationPU.controller;
 
 import com.myapp.portalnordsyspb.evaluationPU.dto.requestDto.ResultRequestDto;
-import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.AreaAndCriterionDto;
-import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.DepartmentTableDto;
-import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.ResultResponseDto;
-import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.WeekDto;
+import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.*;
 import com.myapp.portalnordsyspb.evaluationPU.entity.Department;
 import com.myapp.portalnordsyspb.evaluationPU.service.DepartmentService;
 import com.myapp.portalnordsyspb.evaluationPU.service.ResultService;
@@ -40,16 +37,16 @@ public class DepartmentController {
     }
 
     @PostMapping("/create-week-result")
-    public ResponseEntity<?> createResultForWeek(@RequestBody List<ResultRequestDto> resultRequestDtoList){
+    public ResponseEntity<MessageDto> createResultForWeek(@RequestBody List<ResultRequestDto> resultRequestDtoList){
         resultService.addResultsForWeek(resultRequestDtoList);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(new MessageDto("Result for week created successfully"), HttpStatus.CREATED);
     }
 
     @PutMapping("/update-week-result/{weekId}")
-    public ResponseEntity<?> updateResultForWeek(@RequestBody List<ResultRequestDto> resultRequestDtoList,
-                                                 @PathVariable("weekId") long weekId){
+    public ResponseEntity<MessageDto> updateResultForWeek(@RequestBody List<ResultRequestDto> resultRequestDtoList,
+                                                          @PathVariable("weekId") long weekId){
         resultService.updateResultsForWeek(resultRequestDtoList, weekId);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(new MessageDto("Result for week updated successfully"), HttpStatus.OK);
     }
 
 

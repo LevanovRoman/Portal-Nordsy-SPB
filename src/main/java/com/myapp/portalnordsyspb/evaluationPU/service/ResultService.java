@@ -19,7 +19,7 @@ public interface ResultService {
 
     void updateResultsForWeek(List<ResultRequestDto> resultRequestDtoList, long weekId);
 
-    List<ResultResponseDto> getListResultResponseDtoForWeek(long weekId);
+    List<ResultResponseDto> getListResultResponseDtoForWeek(Long weekId);
 
 
 //    List<Result> getAllResults();

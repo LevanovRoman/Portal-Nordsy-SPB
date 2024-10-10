@@ -1,5 +1,7 @@
 package com.myapp.portalnordsyspb.news.service;
 
+import com.myapp.portalnordsyspb.exceptions.FileExistsException;
+import com.myapp.portalnordsyspb.exceptions.PhotoNotFoundException;
 import com.myapp.portalnordsyspb.news.dto.request.NewsRequestDto;
 import com.myapp.portalnordsyspb.news.dto.response.NewsResponseDto;
 import com.myapp.portalnordsyspb.news.entity.Category;
@@ -39,7 +41,7 @@ public class NewsServiceImpl implements NewsService{
     public NewsRequestDto addNews(NewsRequestDto newsRequestDto, MultipartFile file) throws IOException {
         // upload the file
         if(Files.exists(Paths.get(path + File.separator + file.getOriginalFilename()))){
-            throw new RuntimeException("File already exists!");
+            throw new FileExistsException("File already exists!");
         }
         String uploadedPhotoName = photoService.uploadPhoto(path, file);
 
@@ -86,7 +88,7 @@ public class NewsServiceImpl implements NewsService{
     public NewsRequestDto updateNews(Long newsId, NewsRequestDto newsRequestDto, MultipartFile file) throws IOException {
         // 1.check if news object exists with given newsId
         News nw = newsRepository.findById(newsId)
-                .orElseThrow(()-> new RuntimeException("Photo not found!"));
+                .orElseThrow(()-> new PhotoNotFoundException("Photo not found!"));
 
         // 2.if file is null, do nothing
         // if file is not null, then delete existing file associated with record
@@ -135,7 +137,7 @@ public class NewsServiceImpl implements NewsService{
     public NewsResponseDto getNewsById(Long newsId) {
         // check the data in DB and if exists, fetch the data of given ID
         News news = newsRepository.findById(newsId)
-                .orElseThrow(()-> new RuntimeException("Photo not found!"));
+                .orElseThrow(()-> new PhotoNotFoundException("Photo not found!"));
         // generate photoUrl
         String photoUrl = baseUrl + "/api/photo/" + news.getPhoto();
 
@@ -183,7 +185,7 @@ public class NewsServiceImpl implements NewsService{
     public String deleteNews(Long newsId) throws IOException {
         // 1. check if news object exists in DB
         News nw = newsRepository.findById(newsId)
-                .orElseThrow(()-> new RuntimeException("Photo not found!"));
+                .orElseThrow(()-> new PhotoNotFoundException("Photo not found!"));
         Long id = nw.getId();
 
         // 2. delete file associated with this object
