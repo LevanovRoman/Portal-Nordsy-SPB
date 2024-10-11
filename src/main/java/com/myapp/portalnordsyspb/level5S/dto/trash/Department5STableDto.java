@@ -1,6 +1,4 @@
-package com.myapp.portalnordsyspb.level5S.dto;
-
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+package com.myapp.portalnordsyspb.level5S.dto.trash;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package com.myapp.portalnordsyspb.level5S.service;
 
-import com.myapp.portalnordsyspb.level5S.dto.test.Result5SiteDto;
+import com.myapp.portalnordsyspb.level5S.dto.response.Result5SiteDto;
 
 public interface Result5SService {
 //    List<Result5STableDto> getListResultsByAreaIdForLastWeek(Long area_id);

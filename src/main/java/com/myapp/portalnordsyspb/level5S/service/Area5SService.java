@@ -1,6 +1,6 @@
 package com.myapp.portalnordsyspb.level5S.service;
 
-import com.myapp.portalnordsyspb.level5S.dto.test.Area5SiteDto;
+import com.myapp.portalnordsyspb.level5S.dto.response.Area5SiteDto;
 
 import java.util.List;
 

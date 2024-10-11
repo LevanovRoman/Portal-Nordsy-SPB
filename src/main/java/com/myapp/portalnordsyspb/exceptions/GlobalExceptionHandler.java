@@ -1,5 +1,6 @@
 package com.myapp.portalnordsyspb.exceptions;
 
+import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.MessageDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -24,58 +25,50 @@ public class GlobalExceptionHandler {
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(AreaNotFoundException.class)
-    public Map<String, String> areaNotFound(AreaNotFoundException ex){
-        Map<String, String> error = new HashMap<>();
-        error.put("error: ", ex.getMessage());
-        return error;
+    public MessageDto areaNotFound(AreaNotFoundException ex){
+        return new MessageDto(ex.getMessage());
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(EmailAlreadyExistException.class)
-    public Map<String, String> emailAlreadyExist(EmailAlreadyExistException ex){
-        Map<String, String> error = new HashMap<>();
-        error.put("error: ", ex.getMessage());
-        return error;
+    public MessageDto emailAlreadyExist(EmailAlreadyExistException ex){
+        return new MessageDto(ex.getMessage());
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(CustomUserNotFoundException.class)
-    public Map<String, String> usernameNotFound(CustomUserNotFoundException ex){
-        Map<String, String> error = new HashMap<>();
-        error.put("error: ", ex.getMessage());
-        return error;
+    public MessageDto usernameNotFound(CustomUserNotFoundException ex){
+        return new MessageDto(ex.getMessage());
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(RefreshTokenExpiredException.class)
-    public Map<String, String> refreshTokenExpired(RefreshTokenExpiredException ex){
-        Map<String, String> error = new HashMap<>();
-        error.put("error: ", ex.getMessage());
-        return error;
+    public MessageDto refreshTokenExpired(RefreshTokenExpiredException ex){
+        return new MessageDto(ex.getMessage());
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(RefreshTokenNotFoundException.class)
-    public Map<String, String> refreshTokenNotFound(RefreshTokenNotFoundException ex){
-        Map<String, String> error = new HashMap<>();
-        error.put("error: ", ex.getMessage());
-        return error;
+    public MessageDto refreshTokenNotFound(RefreshTokenNotFoundException ex){
+        return new MessageDto(ex.getMessage());
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(ChapterNotFoundException.class)
-    public Map<String, String> chapterNotFound(ChapterNotFoundException ex){
-        Map<String, String> error = new HashMap<>();
-        error.put("error: ", ex.getMessage());
-        return error;
+    public MessageDto chapterNotFound(ChapterNotFoundException ex){
+        return new MessageDto(ex.getMessage());
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(PostNotFoundException.class)
-    public Map<String, String> postNotFound(PostNotFoundException ex){
-        Map<String, String> error = new HashMap<>();
-        error.put("error: ", ex.getMessage());
-        return error;
+    public MessageDto postNotFound(PostNotFoundException ex){
+        return new MessageDto(ex.getMessage());
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(MonthNotFoundException.class)
+    public MessageDto monthNotFound(MonthNotFoundException ex){
+        return new MessageDto(ex.getMessage());
     }
 
 }

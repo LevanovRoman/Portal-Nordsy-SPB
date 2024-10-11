@@ -1,14 +1,11 @@
 package com.myapp.portalnordsyspb.level5S.service;
 
-import com.myapp.portalnordsyspb.level5S.dto.Department5STableDto;
 import com.myapp.portalnordsyspb.level5S.entity.Department5S;
 import com.myapp.portalnordsyspb.level5S.repository.Department5SRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor

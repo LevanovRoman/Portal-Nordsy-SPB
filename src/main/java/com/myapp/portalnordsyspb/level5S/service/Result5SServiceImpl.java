@@ -1,6 +1,6 @@
 package com.myapp.portalnordsyspb.level5S.service;
 
-import com.myapp.portalnordsyspb.level5S.dto.test.Result5SiteDto;
+import com.myapp.portalnordsyspb.level5S.dto.response.Result5SiteDto;
 import com.myapp.portalnordsyspb.level5S.repository.Result5SRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,16 +11,6 @@ public class Result5SServiceImpl implements Result5SService{
 
     private final Result5SRepository result5SRepository;
 
-//    @Override
-////    @Cacheable(value = "myCache", key = "#area_id")
-//    public List<Result5STableDto> getListResultsByAreaIdForLastWeek(Long area_id) {
-////        System.out.println(result5SRepository.findAllByAreaId(area_id).stream().toList());
-//        return result5SRepository.findAllByAreaId(area_id)
-//                .stream()
-//                .map(this::convertResult5SByAreaId)
-//                .collect(Collectors.toList());
-//    }
-
     @Override
     public Result5SiteDto getResult5SiteDtoByMonthIdAndAreaId(Long month_id, Long area_id) {
         return new Result5SiteDto(
@@ -29,12 +19,4 @@ public class Result5SServiceImpl implements Result5SService{
                 result5SRepository.findByAreaIdAndMonthIdAndCriterionId(area_id, month_id, 3L).getValue()
         );
     }
-
-//    private Result5STableDto convertResult5SByAreaId(Result5S result5S) {
-//        return new Result5STableDto(
-//                result5S.getMonth().getName(),
-//                result5S.getCriterion().getName(),
-//                result5S.getValue()
-//        );
-//    }
 }

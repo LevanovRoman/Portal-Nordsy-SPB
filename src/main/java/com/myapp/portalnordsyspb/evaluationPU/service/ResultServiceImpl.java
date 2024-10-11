@@ -18,6 +18,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,14 +33,15 @@ public class ResultServiceImpl implements ResultService{
 //    Logger log = LoggerFactory.getLogger(PortalNordsySpbApplication.class);
 
     @Override
-    @Cacheable(value = "ResultService::getListResultsByAreaIdForLastWeek")
+//    @Cacheable(value = "ResultService::getListResultsByAreaIdForLastWeek")
     public List<ResultTableLastWeekDto> getListResultsByAreaIdForLastWeek(Long areaId) {
 //        log.debug("Response {}", areaId);
         long lastWeekId = weekService.getTopByOrderByIdDesc().getId();
 //        log.debug("Request {}", areaId);
         return resultRepository.findAllByAreaIdAndWeekId(areaId, lastWeekId)
                 .stream()
-                .skip(1)
+                .filter(x -> x.getCriterion().getId() != 1)
+                .sorted((o1, o2)-> o1.getCriterion().getId().compareTo(o2.getCriterion().getId()))
                 .map(this::convertResultByAreaIdForLastWeek)
                 .collect(Collectors.toList());
     }
