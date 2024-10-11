@@ -30,6 +30,18 @@ public class GlobalExceptionHandler {
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(WeekNotFoundException.class)
+    public MessageDto weekNotFound(WeekNotFoundException ex){
+        return new MessageDto(ex.getMessage());
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(CriterionNotFoundException.class)
+    public MessageDto criterionNotFound(CriterionNotFoundException ex){
+        return new MessageDto(ex.getMessage());
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(EmailAlreadyExistException.class)
     public MessageDto emailAlreadyExist(EmailAlreadyExistException ex){
         return new MessageDto(ex.getMessage());
@@ -70,5 +82,18 @@ public class GlobalExceptionHandler {
     public MessageDto monthNotFound(MonthNotFoundException ex){
         return new MessageDto(ex.getMessage());
     }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(EmptyFileException.class)
+    public MessageDto emptyFileException(EmptyFileException ex){
+        return new MessageDto(ex.getMessage());
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(FileExistsException.class)
+    public MessageDto fileExistsException(FileExistsException ex){
+        return new MessageDto(ex.getMessage());
+    }
+
 
 }

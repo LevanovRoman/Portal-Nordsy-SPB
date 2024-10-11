@@ -49,6 +49,11 @@ public class DepartmentController {
         return new ResponseEntity<>(new MessageDto("Result for week updated successfully"), HttpStatus.OK);
     }
 
+    @DeleteMapping("/delete-week-result/{weekId}")
+    public ResponseEntity<MessageDto> deleteResultForWeek(@PathVariable("weekId") long weekId){
+        resultService.deleteResultForWeek(weekId);
+        return new ResponseEntity<>(new MessageDto("Result for week deleted successfully"), HttpStatus.OK);
+    }
 
     @GetMapping("/areas-and-criterions")
     public ResponseEntity<AreaAndCriterionDto> getListAreaDtoAndCriterionDto(){

@@ -19,6 +19,8 @@ public interface ResultService {
 
     void updateResultsForWeek(List<ResultRequestDto> resultRequestDtoList, long weekId);
 
+    void deleteResultForWeek(long weekId);
+
     List<ResultResponseDto> getListResultResponseDtoForWeek(Long weekId);
 
 

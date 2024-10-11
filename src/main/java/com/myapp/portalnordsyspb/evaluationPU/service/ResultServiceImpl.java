@@ -8,10 +8,12 @@ import com.myapp.portalnordsyspb.evaluationPU.entity.Area;
 import com.myapp.portalnordsyspb.evaluationPU.entity.Criterion;
 import com.myapp.portalnordsyspb.evaluationPU.entity.Result;
 import com.myapp.portalnordsyspb.evaluationPU.entity.Week;
+import com.myapp.portalnordsyspb.evaluationPU.repository.WeekRepository;
 import com.myapp.portalnordsyspb.exceptions.CriterionNotFoundException;
 import com.myapp.portalnordsyspb.evaluationPU.repository.AreaRepository;
 import com.myapp.portalnordsyspb.evaluationPU.repository.ResultRepository;
 import com.myapp.portalnordsyspb.exceptions.AreaNotFoundException;
+import com.myapp.portalnordsyspb.exceptions.WeekNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
@@ -30,6 +32,7 @@ public class ResultServiceImpl implements ResultService{
     private final WeekService weekService;
     private final CriterionService criterionService;
     private final AreaRepository areaRepository;
+    private final WeekRepository weekRepository;
 //    Logger log = LoggerFactory.getLogger(PortalNordsySpbApplication.class);
 
     @Override
@@ -79,6 +82,13 @@ public class ResultServiceImpl implements ResultService{
             result.setValue(resultDto.value());
             resultRepository.save(result);
         }
+    }
+
+    @Override
+    public void deleteResultForWeek(long weekId) {
+        Week week = weekRepository.findById(weekId)
+                .orElseThrow(()-> new WeekNotFoundException("Week with id = " + weekId + " not found"));
+        weekRepository.delete(week);
     }
 
     @Override
