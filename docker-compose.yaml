@@ -1,9 +1,11 @@
 services:
-  postgres:
-    image: postgres:13.3
-    environment:
-      POSTGRES_DB: "portal"
-      POSTGRES_USER: "portal"
-      POSTGRES_PASSWORD: "portalnew"
+  portal-server:
+    build:
+      dockerfile: Dockerfile
+      args:
+        JAR_FILE: /target/portal-nordsy-spb-0.0.1-SNAPSHOT.jar
+    env_file:
+      - .env
     ports:
-      - "5450:5432"
+      - 8080:8080
+    restart: always

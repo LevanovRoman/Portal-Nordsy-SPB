@@ -2,6 +2,7 @@ package com.myapp.portalnordsyspb.news.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.myapp.portalnordsyspb.exceptions.EmptyFileException;
 import com.myapp.portalnordsyspb.news.dto.request.NewsRequestDto;
 import com.myapp.portalnordsyspb.news.dto.response.NewsResponseDto;
 import com.myapp.portalnordsyspb.news.entity.Category;
@@ -30,6 +31,9 @@ public class NewsController {
     public ResponseEntity<NewsRequestDto> createNews(@RequestPart MultipartFile file,
                                                      @RequestPart String newsRequestDto)
             throws IOException {
+        if (file.isEmpty()){
+            throw new EmptyFileException("File is empty! Please send another file.");
+        }
         NewsRequestDto dto = convertToNewsRequestDto(newsRequestDto);
         return new ResponseEntity<>(newsService.addNews(dto, file), HttpStatus.CREATED);
     }
