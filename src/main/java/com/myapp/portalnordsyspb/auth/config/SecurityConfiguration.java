@@ -26,6 +26,7 @@ public class SecurityConfiguration {
 
     private final AuthFilterService authFilterService;
     private final AuthenticationProvider authenticationProvider;
+    private final EncodingFilterConfig encodingFilterConfig;
 
     private static final String[] AUTH_WHITELIST = {
             "/",
@@ -52,7 +53,7 @@ public class SecurityConfiguration {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(authFilterService, UsernamePasswordAuthenticationFilter.class)
-                .addFilterBefore(new EncodingFilterConfig(), ChannelProcessingFilter.class);
+                .addFilterBefore(encodingFilterConfig, ChannelProcessingFilter.class);
 
 
         return http.build();

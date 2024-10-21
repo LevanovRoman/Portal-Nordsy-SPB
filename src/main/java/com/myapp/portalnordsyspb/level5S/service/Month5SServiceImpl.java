@@ -1,12 +1,12 @@
 package com.myapp.portalnordsyspb.level5S.service;
 
-import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.MessageDto;
+import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.AreaAndCriterionDto;
 import com.myapp.portalnordsyspb.exceptions.AreaNotFoundException;
 import com.myapp.portalnordsyspb.exceptions.CriterionNotFoundException;
 import com.myapp.portalnordsyspb.exceptions.MonthNotFoundException;
-import com.myapp.portalnordsyspb.exceptions.PhotoNotFoundException;
 import com.myapp.portalnordsyspb.level5S.dto.request.Month5SRequestDto;
 import com.myapp.portalnordsyspb.level5S.dto.request.Result5SRequestDto;
+import com.myapp.portalnordsyspb.level5S.dto.response.Area5SAndCriterion5SDto;
 import com.myapp.portalnordsyspb.level5S.dto.response.Month5SiteDto;
 import com.myapp.portalnordsyspb.level5S.entity.Area5S;
 import com.myapp.portalnordsyspb.level5S.entity.Criterion5S;
@@ -16,14 +16,9 @@ import com.myapp.portalnordsyspb.level5S.repository.Area5SRepository;
 import com.myapp.portalnordsyspb.level5S.repository.Criterion5SRepository;
 import com.myapp.portalnordsyspb.level5S.repository.Month5SRepository;
 import com.myapp.portalnordsyspb.level5S.repository.Result5SRepository;
-import com.myapp.portalnordsyspb.news.entity.News;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,6 +31,7 @@ public class Month5SServiceImpl implements Month5SService{
     private final Criterion5SRepository criterion5SRepository;
     private final Area5SRepository area5SRepository;
     private final Result5SRepository result5SRepository;
+    private final Criterion5SService criterion5SService;
 
     @Override
 //    @Cacheable(value = "Month5SService::getListMonth5Site")
@@ -57,6 +53,8 @@ public class Month5SServiceImpl implements Month5SService{
         month5S.setResultList(result5SList);
         month5SRepository.save(month5S);
     }
+
+
 
     private Result5S convertResult5SRequestDtoToResult5S(Result5SRequestDto result5SRequestDto, Month5S month5S) {
         Result5S result5S = new Result5S();
@@ -86,6 +84,15 @@ public class Month5SServiceImpl implements Month5SService{
         Month5S month5S = month5SRepository.findById(monthId)
                 .orElseThrow(()->new MonthNotFoundException("Month not found"));
         month5SRepository.delete(month5S);
+    }
+
+    @Override
+    public Area5SAndCriterion5SDto getListArea5SDtoAndCriterion5SDto() {
+        return new Area5SAndCriterion5SDto(
+                area5SService.getListArea5SDto(),
+                criterion5SService.getListCriterion5SDto()
+        );
+
     }
 
     private Month5SiteDto convertMonth5SToDto(Month5S month5S) {

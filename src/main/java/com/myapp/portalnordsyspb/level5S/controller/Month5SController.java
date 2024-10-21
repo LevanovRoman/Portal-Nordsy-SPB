@@ -3,6 +3,7 @@ package com.myapp.portalnordsyspb.level5S.controller;
 import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.MessageDto;
 import com.myapp.portalnordsyspb.level5S.dto.request.Month5SRequestDto;
 import com.myapp.portalnordsyspb.level5S.dto.request.Result5SRequestDto;
+import com.myapp.portalnordsyspb.level5S.dto.response.Area5SAndCriterion5SDto;
 import com.myapp.portalnordsyspb.level5S.dto.response.Month5SiteDto;
 import com.myapp.portalnordsyspb.level5S.service.Month5SService;
 import lombok.RequiredArgsConstructor;
@@ -41,5 +42,10 @@ public class Month5SController {
     public ResponseEntity<MessageDto> deleteMonth5S(@PathVariable("monthId") long monthId){
         month5SService.deleteMonth(monthId);
         return new ResponseEntity<>(new MessageDto("Month deleted with id = " + monthId), HttpStatus.OK);
+    }
+
+    @GetMapping("/areas5s-and-criterions5s")
+    public ResponseEntity<Area5SAndCriterion5SDto> getListArea5SDtoAndCriterion5SDto(){
+        return ResponseEntity.ok(month5SService.getListArea5SDtoAndCriterion5SDto());
     }
 }

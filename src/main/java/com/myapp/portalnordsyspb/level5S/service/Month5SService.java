@@ -2,6 +2,7 @@ package com.myapp.portalnordsyspb.level5S.service;
 
 import com.myapp.portalnordsyspb.level5S.dto.request.Month5SRequestDto;
 import com.myapp.portalnordsyspb.level5S.dto.request.Result5SRequestDto;
+import com.myapp.portalnordsyspb.level5S.dto.response.Area5SAndCriterion5SDto;
 import com.myapp.portalnordsyspb.level5S.dto.response.Month5SiteDto;
 
 import java.util.List;
@@ -11,6 +12,8 @@ public interface Month5SService {
     void createMonth(Month5SRequestDto month5SRequestDto);
     void updateMonth(List<Result5SRequestDto> result5SRequestDtoList, long monthId);
     void deleteMonth(long monthId);
+
+    Area5SAndCriterion5SDto getListArea5SDtoAndCriterion5SDto();
 }
 
 
