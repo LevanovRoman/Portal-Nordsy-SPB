@@ -32,4 +32,13 @@ public class Area5S  implements Serializable {
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "area")
     private List<Result5S> resultList;
+
+//    @OneToOne(cascade = CascadeType.ALL)
+//    private Maxvalue5S maxvalue5S;
+
+    @JsonIgnore
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "maxvalue5s_id")
+    private Maxvalue5S maxvalue;
+
 }

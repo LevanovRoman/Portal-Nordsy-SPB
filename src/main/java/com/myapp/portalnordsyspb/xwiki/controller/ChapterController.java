@@ -24,8 +24,8 @@ public class ChapterController {
     }
 
     @PostMapping("create")
-    public ResponseEntity<ChapterRequestDto> createChapter(@RequestBody ChapterRequestDto chapterResponseDto) {
-        return new ResponseEntity<>(chapterService.createChapter(chapterResponseDto), HttpStatus.CREATED);
+    public ResponseEntity<ChapterRequestDto> createChapter(@RequestBody ChapterRequestDto chapterRequestDto) {
+        return new ResponseEntity<>(chapterService.createChapter(chapterRequestDto), HttpStatus.CREATED);
     }
 
     @PutMapping("update/{id}")

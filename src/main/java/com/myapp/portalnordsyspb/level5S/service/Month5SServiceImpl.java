@@ -1,13 +1,14 @@
 package com.myapp.portalnordsyspb.level5S.service;
 
-import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.AreaAndCriterionDto;
 import com.myapp.portalnordsyspb.exceptions.AreaNotFoundException;
 import com.myapp.portalnordsyspb.exceptions.CriterionNotFoundException;
 import com.myapp.portalnordsyspb.exceptions.MonthNotFoundException;
 import com.myapp.portalnordsyspb.level5S.dto.request.Month5SRequestDto;
 import com.myapp.portalnordsyspb.level5S.dto.request.Result5SRequestDto;
 import com.myapp.portalnordsyspb.level5S.dto.response.Area5SAndCriterion5SDto;
+import com.myapp.portalnordsyspb.level5S.dto.response.Month5SDto;
 import com.myapp.portalnordsyspb.level5S.dto.response.Month5SiteDto;
+import com.myapp.portalnordsyspb.level5S.dto.response.Result5SForMonthDto;
 import com.myapp.portalnordsyspb.level5S.entity.Area5S;
 import com.myapp.portalnordsyspb.level5S.entity.Criterion5S;
 import com.myapp.portalnordsyspb.level5S.entity.Month5S;
@@ -21,6 +22,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor
@@ -49,11 +51,39 @@ public class Month5SServiceImpl implements Month5SService{
                 .stream()
                 .map(x->convertResult5SRequestDtoToResult5S(x, month5S))
                 .toList();
-        month5S.setName(month5SRequestDto.name());
-        month5S.setResultList(result5SList);
+        List<Result5S> constResult5SList = area5SRepository.findAll().stream()
+                .map(x->convertArea5SToConstResult5S(x, month5S))
+                .toList();
+        List<Result5S> finalList = Stream.concat(result5SList.stream(), constResult5SList.stream()).toList();
+        month5S.setName(month5SRequestDto.monthAndYear());
+        month5S.setResultList(finalList);
         month5SRepository.save(month5S);
     }
 
+    @Override
+    public void updateMonth(Month5SRequestDto month5SRequestDto, long monthId) {
+        Month5S month5S = month5SRepository.findById(monthId)
+                .orElseThrow(()-> new MonthNotFoundException("Month not found"));
+        for (Result5SRequestDto resultDto : month5SRequestDto.results()){
+            Result5S result5S = result5SRepository.findByAreaIdAndMonthIdAndCriterionId(
+                    resultDto.areaId(), monthId, resultDto.criterionId());
+            result5S.setValue(resultDto.value());
+            result5SRepository.save(result5S);
+        }
+        month5S.setName(month5SRequestDto.monthAndYear());
+        month5SRepository.save(month5S);
+    }
+
+    private Result5S convertArea5SToConstResult5S(Area5S area5S, Month5S month5S) {
+        Result5S result5S = new Result5S();
+        Criterion5S criterion5S = criterion5SRepository.findById(3L)
+                .orElseThrow(() -> new CriterionNotFoundException("Критерий не найден!"));
+        result5S.setArea(area5S);
+        result5S.setMonth(month5S);
+        result5S.setCriterion(criterion5S);
+        result5S.setValue(area5S.getMaxvalue().getValue());
+        return result5S;
+    }
 
 
     private Result5S convertResult5SRequestDtoToResult5S(Result5SRequestDto result5SRequestDto, Month5S month5S) {
@@ -70,16 +100,6 @@ public class Month5SServiceImpl implements Month5SService{
     }
 
     @Override
-    public void updateMonth(List<Result5SRequestDto> result5SRequestDtoList, long monthId) {
-        for (Result5SRequestDto resultDto : result5SRequestDtoList){
-            Result5S result5S = result5SRepository.findByAreaIdAndMonthIdAndCriterionId(
-                resultDto.areaId(), monthId, resultDto.criterionId());
-            result5S.setValue(resultDto.value());
-            result5SRepository.save(result5S);
-        }
-    }
-
-    @Override
     public void deleteMonth(long monthId) {
         Month5S month5S = month5SRepository.findById(monthId)
                 .orElseThrow(()->new MonthNotFoundException("Month not found"));
@@ -93,6 +113,32 @@ public class Month5SServiceImpl implements Month5SService{
                 criterion5SService.getListCriterion5SDto()
         );
 
+    }
+
+    @Override
+    public List<Month5SDto> getAllMonth5sDto() {
+        return month5SRepository.findAll().stream().map(this::convertMonth5STomonth5sDto)
+                .toList();
+    }
+
+    @Override
+    public List<Result5SForMonthDto> getAllResult5SForMonthDto(long monthId) {
+        return result5SRepository.findAllByMonthIdAndCriterionIdLess3(monthId)
+                .stream()
+                .map(this::convertResult5SToResult5SForMonthDto)
+                .toList();
+    }
+
+    private Result5SForMonthDto convertResult5SToResult5SForMonthDto(Result5S result5S) {
+        return new Result5SForMonthDto(
+                result5S.getArea().getId(),
+                result5S.getCriterion().getId(),
+                result5S.getValue()
+        );
+    }
+
+    private Month5SDto convertMonth5STomonth5sDto(Month5S month5S) {
+        return new Month5SDto(month5S.getId(), month5S.getName());
     }
 
     private Month5SiteDto convertMonth5SToDto(Month5S month5S) {

@@ -4,7 +4,9 @@ import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.MessageDto;
 import com.myapp.portalnordsyspb.level5S.dto.request.Month5SRequestDto;
 import com.myapp.portalnordsyspb.level5S.dto.request.Result5SRequestDto;
 import com.myapp.portalnordsyspb.level5S.dto.response.Area5SAndCriterion5SDto;
+import com.myapp.portalnordsyspb.level5S.dto.response.Month5SDto;
 import com.myapp.portalnordsyspb.level5S.dto.response.Month5SiteDto;
+import com.myapp.portalnordsyspb.level5S.dto.response.Result5SForMonthDto;
 import com.myapp.portalnordsyspb.level5S.service.Month5SService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -32,9 +34,9 @@ public class Month5SController {
     }
 
     @PutMapping("/update-month5s/{monthId}")
-    public ResponseEntity<MessageDto> updateMonth5S(@RequestBody List<Result5SRequestDto> result5SRequestDtoList,
+    public ResponseEntity<MessageDto> updateMonth5S(@RequestBody Month5SRequestDto month5SRequestDto,
                                                           @PathVariable("monthId") long monthId){
-        month5SService.updateMonth(result5SRequestDtoList, monthId);
+        month5SService.updateMonth(month5SRequestDto, monthId);
         return new ResponseEntity<>(new MessageDto("Month updated successfully."), HttpStatus.OK);
     }
 
@@ -47,5 +49,15 @@ public class Month5SController {
     @GetMapping("/areas5s-and-criterions5s")
     public ResponseEntity<Area5SAndCriterion5SDto> getListArea5SDtoAndCriterion5SDto(){
         return ResponseEntity.ok(month5SService.getListArea5SDtoAndCriterion5SDto());
+    }
+
+    @GetMapping("/all-months")
+    public ResponseEntity<List<Month5SDto>> getAllMonth5SDto(){
+        return ResponseEntity.ok(month5SService.getAllMonth5sDto());
+    }
+
+    @GetMapping("/month-result/{monthId}")
+    public ResponseEntity<List<Result5SForMonthDto>>  getAllResult5SForMonthDto(@PathVariable("monthId") long monthId){
+        return ResponseEntity.ok(month5SService.getAllResult5SForMonthDto(monthId));
     }
 }
