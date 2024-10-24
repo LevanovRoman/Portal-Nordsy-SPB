@@ -4,9 +4,7 @@ import com.myapp.portalnordsyspb.exceptions.FileExistsException;
 import com.myapp.portalnordsyspb.exceptions.PhotoNotFoundException;
 import com.myapp.portalnordsyspb.news.dto.request.NewsRequestDto;
 import com.myapp.portalnordsyspb.news.dto.response.NewsResponseDto;
-import com.myapp.portalnordsyspb.news.entity.Category;
 import com.myapp.portalnordsyspb.news.entity.News;
-import com.myapp.portalnordsyspb.news.repository.CategoryRepository;
 import com.myapp.portalnordsyspb.news.repository.NewsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,7 +17,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -29,13 +26,14 @@ public class NewsServiceImpl implements NewsService{
 
     private final PhotoService photoService;
 
-    private final CategoryRepository categoryRepository;
-
     @Value("${project.photo}")
     private String path;
 
     @Value("${base.url}")
     private String baseUrl;
+//    private final String path ="/home/photos/";
+//    private final String baseUrl = "http://172.16.15.77:8080";
+
 
     @Override
     public NewsRequestDto addNews(NewsRequestDto newsRequestDto, MultipartFile file) throws IOException {
@@ -52,13 +50,7 @@ public class NewsServiceImpl implements NewsService{
         News news = new News();
         news.setTitle(newsRequestDto.getTitle());
         news.setContent(newsRequestDto.getContent());
-//        List<Category> categoryList = newsRequestDto.getCategoryListString()
-//                        .stream().map(this::convertStringToCategory)
-//                        .toList();
-        List<Category> categoryList = newsRequestDto.getCategoryIdList()
-                .stream().map(this::convertIdToCategory)
-                .toList();
-        news.setCategoryList(categoryList);
+        news.setHashtagList(newsRequestDto.getHashtags());
         news.setPhoto(newsRequestDto.getPhoto());
 
         // save the news object -> saved News object
@@ -66,18 +58,13 @@ public class NewsServiceImpl implements NewsService{
 
         // generate the photoUrl
         String photoUrl = baseUrl + "/api/photo/" + uploadedPhotoName;
+//        String photoUrl = "http://172.16.15.77:8080" + "/home/astra/photo/" + uploadedPhotoName;
 
        //  map News object to dto and return it
-//        List<String> stringListCategory = savedNews.getCategoryList()
-//                .stream().map(this::convertCategoryToString)
-//                .toList();
-        List<Long> stringListCategoryId = savedNews.getCategoryList()
-                .stream().map(this::convertCategoryToId)
-                .toList();
         NewsRequestDto response = new NewsRequestDto(
                 savedNews.getTitle(),
                 savedNews.getContent(),
-                stringListCategoryId,
+                savedNews.getHashtagList(),
                 savedNews.getPhoto(),
                 photoUrl
         );
@@ -107,10 +94,7 @@ public class NewsServiceImpl implements NewsService{
         news.setId(nw.getId());
         news.setTitle(newsRequestDto.getTitle());
         news.setContent(newsRequestDto.getContent());
-        List<Category> categoryList = newsRequestDto.getCategoryIdList()
-                .stream().map(this::convertIdToCategory)
-                .toList();
-        news.setCategoryList(categoryList);
+        news.setHashtagList(newsRequestDto.getHashtags());
         news.setPhoto(newsRequestDto.getPhoto());
 
         // 5.save the news object -> return saved news object
@@ -120,13 +104,10 @@ public class NewsServiceImpl implements NewsService{
         String photoUrl = baseUrl + "/api/photo/" + fileName;
 
         // 7. map to NewsRequestDto and return it
-        List<Long> stringListCategoryId = updatedNews.getCategoryList()
-                .stream().map(this::convertCategoryToId)
-                .toList();
         NewsRequestDto response = new NewsRequestDto(
                 updatedNews.getTitle(),
                 updatedNews.getContent(),
-                stringListCategoryId,
+                updatedNews.getHashtagList(),
                 updatedNews.getPhoto(),
                 photoUrl
         );
@@ -142,13 +123,10 @@ public class NewsServiceImpl implements NewsService{
         String photoUrl = baseUrl + "/api/photo/" + news.getPhoto();
 
         // map to NewsResponseDto object and return it
-        List<String> stringListCategoryName = news.getCategoryList()
-                .stream().map(this::convertCategoryToString)
-                .toList();
         NewsResponseDto response = new NewsResponseDto(
                 news.getTitle(),
                 news.getContent(),
-                stringListCategoryName,
+                news.getHashtagList(),
                 news.getPhoto(),
                 photoUrl
         );
@@ -166,13 +144,10 @@ public class NewsServiceImpl implements NewsService{
          and map to NewsResponseDto object */
         for (News news : newsList){
             String photoUrl = baseUrl + "/api/photo/" + news.getPhoto();
-            List<String> stringListCategoryName = news.getCategoryList()
-                    .stream().map(this::convertCategoryToString)
-                    .toList();
             NewsResponseDto newsResponseDto = new NewsResponseDto(
                     news.getTitle(),
                     news.getContent(),
-                    stringListCategoryName,
+                    news.getHashtagList(),
                     news.getPhoto(),
                     photoUrl
             );
@@ -196,20 +171,5 @@ public class NewsServiceImpl implements NewsService{
 
         return "News deleted with id = " + id;
 
-    }
-
-    //    private Category convertStringToCategory(String categoryString){
-//        System.out.println("Category " + categoryString + categoryRepository.findByName(categoryString));
-//        return categoryRepository.findByName(categoryString);
-//    }
-    private Category convertIdToCategory(Long categoryId){
-        return categoryRepository.findById(categoryId).get();
-    }
-
-    private String convertCategoryToString(Category category){
-        return category.getName();
-    }
-    private Long convertCategoryToId(Category category){
-        return category.getId();
     }
 }

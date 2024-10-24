@@ -6,7 +6,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 
 @Service
 public class PhotoServiceImpl implements PhotoService {
@@ -18,7 +17,6 @@ public class PhotoServiceImpl implements PhotoService {
 
         // размер возможно
         long fileSize = file.getSize();
-        System.out.println("FILESIZE: " + fileSize);
 
         // получаем путь к файлу
         String filePath = path + File.separator + fileName;

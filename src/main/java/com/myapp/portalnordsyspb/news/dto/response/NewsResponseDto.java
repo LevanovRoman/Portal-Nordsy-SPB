@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -15,10 +16,9 @@ public class NewsResponseDto {
 
     private String content;
 
-    private List<String> categoryListString;
+    private Set<String> hashtags;
 
     private String photo;
 
     private String photoUrl;
-
 }

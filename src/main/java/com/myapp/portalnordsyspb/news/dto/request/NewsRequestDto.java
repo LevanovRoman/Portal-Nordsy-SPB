@@ -1,11 +1,11 @@
 package com.myapp.portalnordsyspb.news.dto.request;
 
-import com.myapp.portalnordsyspb.news.entity.Category;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -19,7 +19,7 @@ public class NewsRequestDto {
 //    private List<Category> categoryList;
 //    private List<String> categoryListString;
 
-    private List<Long> categoryIdList;
+    private Set<String> hashtags;
 
     private String photo;
 

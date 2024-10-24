@@ -8,4 +8,15 @@ services:
       - .env
     ports:
       - 8080:8080
+    volumes:
+      - spring-data:/home/photos
     restart: always
+
+volumes:
+  spring-data:
+#    external: true
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: "/home/astra/photo"

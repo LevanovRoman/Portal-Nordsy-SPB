@@ -15,6 +15,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.csrf.CsrfFilter;
+import org.springframework.web.filter.CharacterEncodingFilter;
 
 import java.io.IOException;
 
@@ -26,10 +28,10 @@ public class SecurityConfiguration {
 
     private final AuthFilterService authFilterService;
     private final AuthenticationProvider authenticationProvider;
-    private final EncodingFilterConfig encodingFilterConfig;
+//    private final EncodingFilterConfig encodingFilterConfig;
 
     private static final String[] AUTH_WHITELIST = {
-            "/",
+            "/**",
             "/api/**",
             "/actuator/**",
             "/api/v1/auth/**",
@@ -41,6 +43,9 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        CharacterEncodingFilter filter = new CharacterEncodingFilter();
+        filter.setEncoding("UTF-8");
+        filter.setForceEncoding(true);
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
@@ -52,8 +57,9 @@ public class SecurityConfiguration {
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
-                .addFilterBefore(authFilterService, UsernamePasswordAuthenticationFilter.class)
-                .addFilterBefore(encodingFilterConfig, ChannelProcessingFilter.class);
+                .addFilterBefore(filter, CsrfFilter.class)
+                .addFilterBefore(authFilterService, UsernamePasswordAuthenticationFilter.class);
+//                .addFilterBefore(encodingFilterConfig, ChannelProcessingFilter.class);
 
 
         return http.build();

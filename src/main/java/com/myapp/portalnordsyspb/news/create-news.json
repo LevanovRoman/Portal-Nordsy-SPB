@@ -1,0 +1,7 @@
+{
+  "title": "Первая новость",
+  "content": "Какой-то контент",
+  "hashtags": ["завод", "чп", "корабль"],
+  "photo": "default.jpeg",
+  "photoUrl": "url"
+}
