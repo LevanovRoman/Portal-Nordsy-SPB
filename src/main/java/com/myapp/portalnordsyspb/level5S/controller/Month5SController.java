@@ -3,10 +3,8 @@ package com.myapp.portalnordsyspb.level5S.controller;
 import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.MessageDto;
 import com.myapp.portalnordsyspb.level5S.dto.request.Month5SRequestDto;
 import com.myapp.portalnordsyspb.level5S.dto.request.Result5SRequestDto;
-import com.myapp.portalnordsyspb.level5S.dto.response.Area5SAndCriterion5SDto;
-import com.myapp.portalnordsyspb.level5S.dto.response.Month5SDto;
-import com.myapp.portalnordsyspb.level5S.dto.response.Month5SiteDto;
-import com.myapp.portalnordsyspb.level5S.dto.response.Result5SForMonthDto;
+import com.myapp.portalnordsyspb.level5S.dto.response.*;
+import com.myapp.portalnordsyspb.level5S.service.Department5SService;
 import com.myapp.portalnordsyspb.level5S.service.Month5SService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,6 +19,7 @@ import java.util.List;
 public class Month5SController {
 
     private final Month5SService month5SService;
+    private final Department5SService department5SService;
 
     @GetMapping("/list")
     public ResponseEntity<List<Month5SiteDto>> getListMonth5SSite(){
@@ -59,5 +58,10 @@ public class Month5SController {
     @GetMapping("/month-result/{monthId}")
     public ResponseEntity<List<Result5SForMonthDto>>  getAllResult5SForMonthDto(@PathVariable("monthId") long monthId){
         return ResponseEntity.ok(month5SService.getAllResult5SForMonthDto(monthId));
+    }
+
+    @GetMapping("/average-level-for-department")
+    public ResponseEntity<List<Department5SDto>> getListLevelDoneForDepartment(){
+        return ResponseEntity.ok(department5SService.getListLevelDoneForDepartment());
     }
 }
