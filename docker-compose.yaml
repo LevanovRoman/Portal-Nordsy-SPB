@@ -1,0 +1,22 @@
+services:
+  portal-server:
+    build:
+      dockerfile: Dockerfile
+      args:
+        JAR_FILE: /target/portal-nordsy-spb-0.0.1-SNAPSHOT.jar
+    env_file:
+      - .env
+    ports:
+      - 8080:8080
+    volumes:
+      - spring-data:/home/photos
+    restart: always
+
+volumes:
+  spring-data:
+#    external: true
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: "/home/astra/photo"

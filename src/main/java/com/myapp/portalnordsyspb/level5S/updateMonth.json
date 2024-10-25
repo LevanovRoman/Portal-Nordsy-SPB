@@ -1,0 +1,396 @@
+{
+  "monthAndYear": "январь 2025",
+  "results":
+  [
+    {
+      "areaId": 1,
+      "criterionId": 1,
+      "value": 6
+    },
+    {
+      "areaId": 1,
+      "criterionId": 2,
+      "value": 9
+    },
+    {
+      "areaId": 10,
+      "criterionId": 1,
+      "value": 5
+    },
+    {
+      "areaId": 10,
+      "criterionId": 2,
+      "value": 3
+    },
+    {
+      "areaId": 2,
+      "criterionId": 1,
+      "value": 7
+    },
+    {
+      "areaId": 2,
+      "criterionId": 2,
+      "value": 3
+    },
+    {
+      "areaId": 11,
+      "criterionId": 1,
+      "value": 9
+    },
+    {
+      "areaId": 11,
+      "criterionId": 2,
+      "value": 6
+    },
+    {
+      "areaId": 3,
+      "criterionId": 1,
+      "value": 9
+    },
+    {
+      "areaId": 3,
+      "criterionId": 2,
+      "value": 5
+    },
+    {
+      "areaId": 12,
+      "criterionId": 1,
+      "value": 1
+    },
+    {
+      "areaId": 12,
+      "criterionId": 2,
+      "value": 3
+    },
+    {
+      "areaId": 13,
+      "criterionId": 1,
+      "value": 1
+    },
+    {
+      "areaId": 13,
+      "criterionId": 2,
+      "value": 3
+    },
+    {
+      "areaId": 4,
+      "criterionId": 1,
+      "value": 4
+    },
+    {
+      "areaId": 4,
+      "criterionId": 2,
+      "value": 5
+    },
+    {
+      "areaId": 14,
+      "criterionId": 1,
+      "value": 1
+    },
+    {
+      "areaId": 14,
+      "criterionId": 2,
+      "value": 3
+    },
+    {
+      "areaId": 5,
+      "criterionId": 1,
+      "value": 7
+    },
+    {
+      "areaId": 5,
+      "criterionId": 2,
+      "value": 6
+    },
+    {
+      "areaId": 15,
+      "criterionId": 1,
+      "value": 1
+    },
+    {
+      "areaId": 15,
+      "criterionId": 2,
+      "value": 6
+    },
+    {
+      "areaId": 6,
+      "criterionId": 1,
+      "value": 2
+    },
+    {
+      "areaId": 6,
+      "criterionId": 2,
+      "value": 8
+    },
+    {
+      "areaId": 16,
+      "criterionId": 1,
+      "value": 5
+    },
+    {
+      "areaId": 16,
+      "criterionId": 2,
+      "value": 9
+    },
+    {
+      "areaId": 7,
+      "criterionId": 1,
+      "value": 1
+    },
+    {
+      "areaId": 7,
+      "criterionId": 2,
+      "value": 4
+    },
+    {
+      "areaId": 17,
+      "criterionId": 1,
+      "value": 5
+    },
+    {
+      "areaId": 17,
+      "criterionId": 2,
+      "value": 6
+    },
+    {
+      "areaId": 8,
+      "criterionId": 1,
+      "value": 2
+    },
+    {
+      "areaId": 8,
+      "criterionId": 2,
+      "value": 8
+    },
+    {
+      "areaId": 18,
+      "criterionId": 1,
+      "value": 9
+    },
+    {
+      "areaId": 18,
+      "criterionId": 2,
+      "value": 2
+    },
+    {
+      "areaId": 9,
+      "criterionId": 1,
+      "value": 8
+    },
+    {
+      "areaId": 9,
+      "criterionId": 2,
+      "value": 4
+    },
+    {
+      "areaId": 19,
+      "criterionId": 1,
+      "value": 1
+    },
+    {
+      "areaId": 19,
+      "criterionId": 2,
+      "value": 8
+    },
+    {
+      "areaId": 20,
+      "criterionId": 1,
+      "value": 5
+    },
+    {
+      "areaId": 20,
+      "criterionId": 2,
+      "value": 3
+    },
+    {
+      "areaId": 21,
+      "criterionId": 1,
+      "value": 9
+    },
+    {
+      "areaId": 21,
+      "criterionId": 2,
+      "value": 6
+    },
+    {
+      "areaId": 22,
+      "criterionId": 1,
+      "value": 1
+    },
+    {
+      "areaId": 22,
+      "criterionId": 2,
+      "value": 3
+    },
+    {
+      "areaId": 23,
+      "criterionId": 1,
+      "value": 1
+    },
+    {
+      "areaId": 23,
+      "criterionId": 2,
+      "value": 3
+    },
+    {
+      "areaId": 24,
+      "criterionId": 1,
+      "value": 1
+    },
+    {
+      "areaId": 24,
+      "criterionId": 2,
+      "value": 3
+    },
+    {
+      "areaId": 25,
+      "criterionId": 1,
+      "value": 1
+    },
+    {
+      "areaId": 25,
+      "criterionId": 2,
+      "value": 6
+    },
+    {
+      "areaId": 26,
+      "criterionId": 1,
+      "value": 5
+    },
+    {
+      "areaId": 26,
+      "criterionId": 2,
+      "value": 9
+    },
+    {
+      "areaId": 27,
+      "criterionId": 1,
+      "value": 5
+    },
+    {
+      "areaId": 27,
+      "criterionId": 2,
+      "value": 6
+    },
+    {
+      "areaId": 28,
+      "criterionId": 1,
+      "value": 9
+    },
+    {
+      "areaId": 28,
+      "criterionId": 2,
+      "value": 2
+    },
+    {
+      "areaId": 29,
+      "criterionId": 1,
+      "value": 1
+    },
+    {
+      "areaId": 29,
+      "criterionId": 2,
+      "value": 8
+    },
+    {
+      "areaId": 30,
+      "criterionId": 1,
+      "value": 5
+    },
+    {
+      "areaId": 30,
+      "criterionId": 2,
+      "value": 3
+    },
+    {
+      "areaId": 31,
+      "criterionId": 1,
+      "value": 9
+    },
+    {
+      "areaId": 31,
+      "criterionId": 2,
+      "value": 6
+    },
+    {
+      "areaId": 32,
+      "criterionId": 1,
+      "value": 1
+    },
+    {
+      "areaId": 32,
+      "criterionId": 2,
+      "value": 3
+    },
+    {
+      "areaId": 33,
+      "criterionId": 1,
+      "value": 1
+    },
+    {
+      "areaId": 33,
+      "criterionId": 2,
+      "value": 3
+    },
+    {
+      "areaId": 34,
+      "criterionId": 1,
+      "value": 1
+    },
+    {
+      "areaId": 34,
+      "criterionId": 2,
+      "value": 3
+    },
+    {
+      "areaId": 35,
+      "criterionId": 1,
+      "value": 1
+    },
+    {
+      "areaId": 35,
+      "criterionId": 2,
+      "value": 6
+    },
+    {
+      "areaId": 36,
+      "criterionId": 1,
+      "value": 5
+    },
+    {
+      "areaId": 36,
+      "criterionId": 2,
+      "value": 9
+    },
+    {
+      "areaId": 37,
+      "criterionId": 1,
+      "value": 5
+    },
+    {
+      "areaId": 37,
+      "criterionId": 2,
+      "value": 6
+    },
+    {
+      "areaId": 38,
+      "criterionId": 1,
+      "value": 9
+    },
+    {
+      "areaId": 38,
+      "criterionId": 2,
+      "value": 2
+    },
+    {
+      "areaId": 39,
+      "criterionId": 1,
+      "value": 1
+    },
+    {
+      "areaId": 39,
+      "criterionId": 2,
+      "value": 8
+    }
+  ]
+}

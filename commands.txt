@@ -1,0 +1,30 @@
+nohup java -jar *.jar – spring.profiles.active=production > /dev/null 2>&1 &
+java -jar *.jar – spring.profiles.active=productionold
+
+java -jar target/app.jar – spring.profiles.active=productionold
+
+mvn spring-boot:run -Dspring-boot.run.arguments=--spring.profiles.active=test,--server.port=8085
+mvn spring-boot:run -Dspring-boot.run.profiles=test -Dspring-boot.run.arguments=--server.port=8085
+mvn spring-boot:run -Dspring-boot.run.arguments=--logging.config=file:./logback-spring.xml,--server.port=8085, myApp.fooArg=123
+
+mvn spring-boot:run -Dspring-boot.run.arguments="--spring.profiles.active=production"
+
+mvn spring-boot:run -Dspring-boot.run.profiles=development
+mvn spring-boot:run -Dspring-boot.run.profiles=production
+
+------------------------------
+     install maven in ubuntu
+
+wget https://dlcdn.apache.org/maven/maven-3/3.9.9/binaries/apache-maven-3.9.9-bin.tar.gz
+tar -xvzf apache-maven-3.9.9-bin.tar.gz
+mv apache-maven-3.9.9 /opt/
+
+M2_HOME='/opt/apache-maven-3.9.9'
+PATH="$M2_HOME/bin:$PATH"
+export PATH
+
+source .profile
+mvn -version
+------------------------------
+
+nohup mvn spring-boot:run > /dev/null 2>&1 &
