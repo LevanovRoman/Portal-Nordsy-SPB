@@ -9,6 +9,8 @@ import com.myapp.portalnordsyspb.evaluationPU.service.DepartmentService;
 import com.myapp.portalnordsyspb.evaluationPU.service.ResultService;
 import com.myapp.portalnordsyspb.evaluationPU.service.WeekService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.tags.Tags;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/department")
+@Tag(name = "Table PU")
 @RequiredArgsConstructor
 public class DepartmentController {
 
@@ -28,6 +31,7 @@ public class DepartmentController {
     private final WeekService weekService;
 
     @Operation(summary = "Просмотр всех цехов")
+    @Tag(name = "All Departments")
     @GetMapping
     public ResponseEntity<List<Department>> getAllDepartments(){
         return ResponseEntity.ok(departmentService.getAllDepartments());
