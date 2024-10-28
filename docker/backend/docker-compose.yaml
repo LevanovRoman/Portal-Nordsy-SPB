@@ -1,10 +1,9 @@
 services:
   portal-server:
     build:
-      image: levanovroman/portal-nordsy-github-actions
-#      dockerfile: Dockerfile
-#      args:
-#        JAR_FILE: /target/portal-nordsy-spb-0.0.1-SNAPSHOT.jar
+      dockerfile: Dockerfile
+      args:
+        JAR_FILE: /target/portal-nordsy-spb-0.0.1-SNAPSHOT.jar
     env_file:
       - .env
     ports:

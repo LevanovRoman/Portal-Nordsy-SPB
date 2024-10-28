@@ -20,7 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/department")
-@Tag(name = "Table PU")
+@Tag(name = "Table PU", description = "Description for table PU")
 @RequiredArgsConstructor
 public class DepartmentController {
 
@@ -30,7 +30,8 @@ public class DepartmentController {
 
     private final WeekService weekService;
 
-    @Operation(summary = "Просмотр всех цехов")
+    @Operation(summary = "Просмотр всех цехов",
+    description = "Get all departments by specifying its id. The response is list of objects with id and number.")
     @Tag(name = "All Departments")
     @GetMapping
     public ResponseEntity<List<Department>> getAllDepartments(){
@@ -47,7 +48,7 @@ public class DepartmentController {
         resultService.createResultsForWeek(weekRequestDto);
         return new ResponseEntity<>(new MessageDto("Result for week created successfully"), HttpStatus.CREATED);
     }
-
+//    Get a Tutorial object by specifying its id. The response is Tutorial object with id, title, description and published status.
     @PutMapping("/update-week-result/{weekId}")
     public ResponseEntity<MessageDto> updateResultForWeek(@RequestBody WeekRequestDto weekRequestDto,
                                                           @PathVariable("weekId") long weekId){
