@@ -3,7 +3,7 @@ FROM eclipse-temurin:21.0.2_13-jdk-jammy AS build
 ARG JAR_FILE
 WORKDIR /build
 
-ADD /target/portal-nordsy-github-actions.jar application.jar
+ADD $JAR_FILE application.jar
 RUN java -Djarmode=layertools -jar application.jar extract --destination extracted
 
 FROM eclipse-temurin:21.0.2_13-jdk-jammy
