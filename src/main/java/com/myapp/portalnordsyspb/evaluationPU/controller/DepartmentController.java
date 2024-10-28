@@ -1,5 +1,6 @@
 package com.myapp.portalnordsyspb.evaluationPU.controller;
 
+import com.myapp.portalnordsyspb.evaluationPU.dto.requestDto.DepartmentRequestDto;
 import com.myapp.portalnordsyspb.evaluationPU.dto.requestDto.ResultRequestDto;
 import com.myapp.portalnordsyspb.evaluationPU.dto.requestDto.WeekRequestDto;
 import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.*;
@@ -69,6 +70,12 @@ public class DepartmentController {
     @GetMapping("/week-result/{weekId}")
     public ResponseEntity<List<ResultResponseDto>> getListResultResponseDtoForWeek(@PathVariable("weekId") long weekId){
         return ResponseEntity.ok(resultService.getListResultResponseDtoForWeek(weekId));
+    }
+
+    @PostMapping("/create-department")
+    public ResponseEntity<MessageDto> createDepartment(@RequestBody DepartmentRequestDto departmentRequestDto){
+        departmentService.createDepartment(departmentRequestDto);
+        return ResponseEntity.ok(new MessageDto("Department created successfully"));
     }
 
 }

@@ -1,5 +1,6 @@
 package com.myapp.portalnordsyspb.evaluationPU.service;
 
+import com.myapp.portalnordsyspb.evaluationPU.dto.requestDto.DepartmentRequestDto;
 import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.AreaAndCriterionDto;
 import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.DepartmentTableDto;
 import com.myapp.portalnordsyspb.evaluationPU.entity.Department;
@@ -15,6 +16,8 @@ public interface DepartmentService {
     List<DepartmentTableDto> getListDepartmentTable();
 
     AreaAndCriterionDto getListAreaDtoAndCriterionDto();
+
+    void createDepartment(DepartmentRequestDto departmentRequestDto);
 
 //    void createTotalWeekSet(TotalWeekSetDto totalWeekSetDto);
 
