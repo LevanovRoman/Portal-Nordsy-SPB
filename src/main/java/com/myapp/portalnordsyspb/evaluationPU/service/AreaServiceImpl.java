@@ -1,9 +1,13 @@
 package com.myapp.portalnordsyspb.evaluationPU.service;
 
+import com.myapp.portalnordsyspb.evaluationPU.dto.requestDto.AreaRequestDto;
 import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.AreaDto;
 import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.AreaTableDto;
 import com.myapp.portalnordsyspb.evaluationPU.entity.Area;
 import com.myapp.portalnordsyspb.evaluationPU.repository.AreaRepository;
+import com.myapp.portalnordsyspb.evaluationPU.repository.DepartmentRepository;
+import com.myapp.portalnordsyspb.exceptions.AreaNotFoundException;
+import com.myapp.portalnordsyspb.exceptions.DepartmentNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +20,7 @@ import java.util.stream.Collectors;
 public class AreaServiceImpl implements AreaService{
 
     private final AreaRepository areaRepository;
-
+    private final DepartmentRepository departmentRepository;
     private final ResultService resultService;
 
     @Override
@@ -27,16 +31,43 @@ public class AreaServiceImpl implements AreaService{
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public Optional<Area> getAreaById(Long area_id) {
-        return areaRepository.findById(area_id);
-    }
+//    @Override
+//    public Optional<Area> getAreaById(Long area_id) {
+//        return areaRepository.findById(area_id);
+//    }
 
     @Override
     public List<AreaDto> getAreaDto() {
         return areaRepository.findAll()
                 .stream().map(this::convertAreaToAreaDto)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void createArea(AreaRequestDto areaRequestDto) {
+        Area areaNew = new Area();
+        saveArea(areaNew, areaRequestDto);
+    }
+
+    @Override
+    public void updateArea(AreaRequestDto areaRequestDto, long areaId) {
+        Area areaUpdate = areaRepository.findById(areaId)
+                .orElseThrow(()-> new AreaNotFoundException("Area not found."));
+        saveArea(areaUpdate, areaRequestDto);
+    }
+
+    @Override
+    public void deleteArea(long areaId) {
+        Area areaDelete = areaRepository.findById(areaId)
+                .orElseThrow(()-> new AreaNotFoundException("Area not found."));
+        areaRepository.delete(areaDelete);
+    }
+
+    private void saveArea(Area area, AreaRequestDto areaRequestDto){
+        area.setName(areaRequestDto.name());
+        area.setDepartment(departmentRepository.findById(areaRequestDto.departmentId())
+                .orElseThrow(()-> new DepartmentNotFoundException("Department not found.")));
+        areaRepository.save(area);
     }
 
     private AreaDto convertAreaToAreaDto(Area area) {

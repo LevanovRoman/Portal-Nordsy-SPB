@@ -1,5 +1,6 @@
 package com.myapp.portalnordsyspb.evaluationPU.service;
 
+import com.myapp.portalnordsyspb.evaluationPU.dto.requestDto.AreaRequestDto;
 import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.AreaDto;
 import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.AreaTableDto;
 import com.myapp.portalnordsyspb.evaluationPU.entity.Area;
@@ -11,17 +12,13 @@ public interface AreaService {
 
     List<AreaTableDto> getListAreaTableDtoByDepartmentId(Long departmentId);
 
-    Optional<Area> getAreaById(Long area_id);
+//    Optional<Area> getAreaById(Long area_id);
 
     List<AreaDto> getAreaDto();
 
-//    AreaDto getAreaDtoById(Long id);
+    void createArea(AreaRequestDto areaRequestDto);
 
-//    List<AreaDto> getListAreasByDepartmentId(Long departmentId);
+    void updateArea(AreaRequestDto areaRequestDto, long areaId);
 
-//    List<AreaWeekDto> getListAreasByDepartmentIdAndWeek(Long id, int weekNumber);
-
-
-
-//    List<Area> createAreaWeekSet(List<AreaRequestDto> areaRequestDtoList);
+    void deleteArea(long areaId);
 }
