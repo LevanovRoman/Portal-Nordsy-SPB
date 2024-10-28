@@ -11,6 +11,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class NewsResponseDto {
+    private long id;
 
     private String title;
 

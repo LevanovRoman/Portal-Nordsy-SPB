@@ -26,12 +26,12 @@ public class NewsServiceImpl implements NewsService{
 
     private final PhotoService photoService;
 
-    @Value("${project.photo}")
-    private String path;
+//    @Value("${project.photo}")
+//    private String path;
 
-    @Value("${base.url}")
-    private String baseUrl;
-//    private final String path ="/home/photos/";
+//    @Value("${base.url}")
+    private final String baseUrl = "http://172.16.15.77:8080";
+    private final String path ="/home/photos/";
 //    private final String baseUrl = "http://172.16.15.77:8080";
 
 
@@ -124,6 +124,7 @@ public class NewsServiceImpl implements NewsService{
 
         // map to NewsResponseDto object and return it
         NewsResponseDto response = new NewsResponseDto(
+                news.getId(),
                 news.getTitle(),
                 news.getContent(),
                 news.getHashtagList(),
@@ -145,6 +146,7 @@ public class NewsServiceImpl implements NewsService{
         for (News news : newsList){
             String photoUrl = baseUrl + "/api/photo/" + news.getPhoto();
             NewsResponseDto newsResponseDto = new NewsResponseDto(
+                    news.getId(),
                     news.getTitle(),
                     news.getContent(),
                     news.getHashtagList(),
