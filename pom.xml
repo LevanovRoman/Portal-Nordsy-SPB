@@ -133,6 +133,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>portal-nordsy-github-actions</finalName>
     </build>
 
 </project>
