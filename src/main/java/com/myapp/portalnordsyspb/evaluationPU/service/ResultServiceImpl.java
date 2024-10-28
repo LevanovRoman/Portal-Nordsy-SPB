@@ -19,6 +19,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -138,11 +139,18 @@ public class ResultServiceImpl implements ResultService{
     }
 
     private ResultTableFourWeeksDto convertResultTotalFourWeeksDto(Long areaId, Week week) {
+        Optional<Result> result = Optional.ofNullable(resultRepository
+                .findByAreaIdAndWeekIdAndCriterionId(areaId, week.getId(), 1L));
+        if (result.isEmpty()) {
+            result = Optional.of(new Result(null, 0,
+                    criterionService.getCriterionById(1L).get(),
+                    week,
+                    areaRepository.findById(areaId).orElseThrow(() -> new AreaNotFoundException("Area not found."))));
+            resultRepository.save(result.get());
+        }
         return new ResultTableFourWeeksDto(
                 week.getWeekName(),
-                resultRepository
-                        .findByAreaIdAndWeekIdAndCriterionId(areaId, week.getId(), 1L)
-                        .getValue()
+                 result.get().getValue()
         );
     }
 }
