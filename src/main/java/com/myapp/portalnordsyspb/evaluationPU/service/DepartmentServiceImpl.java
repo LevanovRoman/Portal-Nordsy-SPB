@@ -5,6 +5,7 @@ import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.AreaAndCriterionDt
 import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.DepartmentTableDto;
 import com.myapp.portalnordsyspb.evaluationPU.entity.Department;
 import com.myapp.portalnordsyspb.evaluationPU.repository.DepartmentRepository;
+import com.myapp.portalnordsyspb.exceptions.DepartmentNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -46,6 +47,21 @@ public class DepartmentServiceImpl implements DepartmentService{
         Department department = new Department();
         department.setNumber(departmentRequestDto.number());
         departmentRepository.save(department);
+    }
+
+    @Override
+    public void updateDepartment(DepartmentRequestDto departmentRequestDto, long departmentId) {
+        Department department = departmentRepository.findById(departmentId)
+                .orElseThrow(()->new DepartmentNotFoundException("Department not found"));
+        department.setNumber(departmentRequestDto.number());
+        departmentRepository.save(department);
+    }
+
+    @Override
+    public void deleteDepartment(long departmentId) {
+        Department department = departmentRepository.findById(departmentId)
+                .orElseThrow(()->new DepartmentNotFoundException("Department not found"));
+        departmentRepository.delete(department);
     }
 
     private DepartmentTableDto convertDepartmentTableToDto(Department department) {

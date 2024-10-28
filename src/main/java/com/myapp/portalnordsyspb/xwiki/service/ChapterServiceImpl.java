@@ -39,9 +39,7 @@ public class ChapterServiceImpl implements ChapterService{
     public ChapterRequestDto createChapter(ChapterRequestDto chapterRequestDto) {
         Chapter chapter = new Chapter();
         chapter.setName(chapterRequestDto.name());
-
         Chapter newChapter = chapterRepository.save(chapter);
-
         return new ChapterRequestDto(
                 newChapter.getName()
         );

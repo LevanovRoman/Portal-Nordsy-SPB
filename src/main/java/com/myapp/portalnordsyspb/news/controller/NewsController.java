@@ -1,12 +1,12 @@
 package com.myapp.portalnordsyspb.news.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.MessageDto;
 import com.myapp.portalnordsyspb.exceptions.EmptyFileException;
 import com.myapp.portalnordsyspb.news.dto.request.NewsRequestDto;
 import com.myapp.portalnordsyspb.news.dto.response.NewsResponseDto;
 import com.myapp.portalnordsyspb.news.service.NewsService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @RestController
 @RequestMapping("api/news/")
+@Tag(name = "News", description = "Description for news")
 @RequiredArgsConstructor
 public class NewsController {
 

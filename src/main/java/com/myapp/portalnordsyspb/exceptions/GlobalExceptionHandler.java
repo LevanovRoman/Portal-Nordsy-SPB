@@ -95,5 +95,9 @@ public class GlobalExceptionHandler {
         return new MessageDto(ex.getMessage());
     }
 
-
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(DepartmentNotFoundException.class)
+    public MessageDto departmentNotFoundException(DepartmentNotFoundException ex){
+        return new MessageDto(ex.getMessage());
+    }
 }

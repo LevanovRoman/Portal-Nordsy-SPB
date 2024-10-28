@@ -9,6 +9,7 @@ import com.myapp.portalnordsyspb.auth.utils.AuthResponse;
 import com.myapp.portalnordsyspb.auth.utils.LoginRequest;
 import com.myapp.portalnordsyspb.auth.utils.RefreshTokenRequest;
 import com.myapp.portalnordsyspb.auth.utils.RegisterRequest;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/auth/")
+@Tag(name = "Authentification", description = "Description for authentification")
 public class AuthController {
 
     private final AuthService authService;

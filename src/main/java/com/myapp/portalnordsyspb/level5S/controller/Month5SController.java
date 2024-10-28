@@ -6,6 +6,7 @@ import com.myapp.portalnordsyspb.level5S.dto.request.Result5SRequestDto;
 import com.myapp.portalnordsyspb.level5S.dto.response.*;
 import com.myapp.portalnordsyspb.level5S.service.Department5SService;
 import com.myapp.portalnordsyspb.level5S.service.Month5SService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/month5S")
+@Tag(name = "Table 5C", description = "Description for table 5C")
 @RequiredArgsConstructor
 public class Month5SController {
 

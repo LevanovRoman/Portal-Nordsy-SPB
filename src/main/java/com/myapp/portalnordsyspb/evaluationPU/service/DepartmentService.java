@@ -19,6 +19,10 @@ public interface DepartmentService {
 
     void createDepartment(DepartmentRequestDto departmentRequestDto);
 
+    void updateDepartment(DepartmentRequestDto departmentRequestDto, long departmentId);
+
+    void deleteDepartment(long departmentId);
+
 //    void createTotalWeekSet(TotalWeekSetDto totalWeekSetDto);
 
 //    void createDepartmentSet(DepartmentRequestDto departmentRequestDto);

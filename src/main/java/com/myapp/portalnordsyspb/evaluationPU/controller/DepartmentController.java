@@ -1,7 +1,6 @@
 package com.myapp.portalnordsyspb.evaluationPU.controller;
 
 import com.myapp.portalnordsyspb.evaluationPU.dto.requestDto.DepartmentRequestDto;
-import com.myapp.portalnordsyspb.evaluationPU.dto.requestDto.ResultRequestDto;
 import com.myapp.portalnordsyspb.evaluationPU.dto.requestDto.WeekRequestDto;
 import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.*;
 import com.myapp.portalnordsyspb.evaluationPU.entity.Department;
@@ -10,7 +9,6 @@ import com.myapp.portalnordsyspb.evaluationPU.service.ResultService;
 import com.myapp.portalnordsyspb.evaluationPU.service.WeekService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import io.swagger.v3.oas.annotations.tags.Tags;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,8 +29,7 @@ public class DepartmentController {
     private final WeekService weekService;
 
     @Operation(summary = "Просмотр всех цехов",
-    description = "Get all departments by specifying its id. The response is list of objects with id and number.")
-    @Tag(name = "All Departments")
+    description = "Getting all departments. The response is list of objects with id and number.")
     @GetMapping
     public ResponseEntity<List<Department>> getAllDepartments(){
         return ResponseEntity.ok(departmentService.getAllDepartments());
@@ -48,7 +45,7 @@ public class DepartmentController {
         resultService.createResultsForWeek(weekRequestDto);
         return new ResponseEntity<>(new MessageDto("Result for week created successfully"), HttpStatus.CREATED);
     }
-//    Get a Tutorial object by specifying its id. The response is Tutorial object with id, title, description and published status.
+
     @PutMapping("/update-week-result/{weekId}")
     public ResponseEntity<MessageDto> updateResultForWeek(@RequestBody WeekRequestDto weekRequestDto,
                                                           @PathVariable("weekId") long weekId){
@@ -68,19 +65,43 @@ public class DepartmentController {
     }
 
     @GetMapping("/all-weeks")
+    @Operation(summary = "Просмотр всех недель",
+            description = "Getting all weeks. The response is list of objects with id and week`s name.")
     public ResponseEntity<List<WeekDto>> getListWeekDto(){
         return ResponseEntity.ok(weekService.getListWeekDto());
     }
 
     @GetMapping("/week-result/{weekId}")
+    @Operation(summary = "Просмотр результатов за конкретную неделю",
+            description = "Getting results for a week by specifying its id. The response is list of objects with areaId," +
+                    " criterionId and value.")
     public ResponseEntity<List<ResultResponseDto>> getListResultResponseDtoForWeek(@PathVariable("weekId") long weekId){
         return ResponseEntity.ok(resultService.getListResultResponseDtoForWeek(weekId));
     }
 
     @PostMapping("/create-department")
+    @Operation(summary = "Создание нового цеха",
+            description = "Creating new  department. The response is a string about success.")
     public ResponseEntity<MessageDto> createDepartment(@RequestBody DepartmentRequestDto departmentRequestDto){
         departmentService.createDepartment(departmentRequestDto);
         return ResponseEntity.ok(new MessageDto("Department created successfully"));
+    }
+
+    @PutMapping("/update-department/{departmentId}")
+    @Operation(summary = "Редактирование цеха",
+            description = "Updating department by specifying its id. The response is a string about success.")
+    public ResponseEntity<MessageDto> updateDepartment(@RequestBody DepartmentRequestDto departmentRequestDto,
+                                                       @PathVariable("departmentId") long departmentId){
+        departmentService.updateDepartment(departmentRequestDto, departmentId);
+        return ResponseEntity.ok(new MessageDto("Department updated successfully"));
+    }
+
+    @DeleteMapping("/delete-department/{departmentId}")
+    @Operation(summary = "Удаление цеха",
+            description = "Deleting department by specifying its id. The response is a string about success.")
+    public ResponseEntity<MessageDto> deleteDepartment(@PathVariable("departmentId") long departmentId){
+        departmentService.deleteDepartment(departmentId);
+        return ResponseEntity.ok(new MessageDto("Department deleted successfully"));
     }
 
 }

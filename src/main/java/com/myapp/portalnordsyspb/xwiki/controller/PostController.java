@@ -3,6 +3,7 @@ package com.myapp.portalnordsyspb.xwiki.controller;
 import com.myapp.portalnordsyspb.xwiki.dto.responseDto.ResponseDto;
 import com.myapp.portalnordsyspb.xwiki.dto.requestDto.PostRequestDto;
 import com.myapp.portalnordsyspb.xwiki.service.PostService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/xwiki/post")
+@Tag(name = "Post for WIKI", description = "Description for post")
 @RequiredArgsConstructor
 public class PostController {
 
