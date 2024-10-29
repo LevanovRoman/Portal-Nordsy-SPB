@@ -1,6 +1,7 @@
 package com.myapp.portalnordsyspb.level5S.service;
 
-import com.myapp.portalnordsyspb.exceptions.MonthNotFoundException;
+import com.myapp.portalnordsyspb.exceptions.DepartmentNotFoundException;
+import com.myapp.portalnordsyspb.level5S.dto.request.Department5SRequestDto;
 import com.myapp.portalnordsyspb.level5S.dto.response.Department5SDto;
 import com.myapp.portalnordsyspb.level5S.dto.response.Month5SAverageDto;
 import com.myapp.portalnordsyspb.level5S.entity.Area5S;
@@ -45,6 +46,28 @@ public class Department5SServiceImpl implements Department5SService {
             department5SDtoList.add(new Department5SDto(department.getId(), "Цех " + department.getNumber(), result));
         }
         return new Month5SAverageDto(monthName, department5SDtoList);
+    }
+
+    @Override
+    public void createDepartment5S(Department5SRequestDto department5SRequestDto) {
+        Department5S department5S = new Department5S();
+        department5S.setNumber(department5SRequestDto.number());
+        department5SRepository.save(department5S);
+    }
+
+    @Override
+    public void updateDepartment5S(Department5SRequestDto department5SRequestDto, long departmentId) {
+        Department5S department5S = department5SRepository.findById(departmentId)
+                .orElseThrow(()->new DepartmentNotFoundException("Department not found"));
+        department5S.setNumber(department5SRequestDto.number());
+        department5SRepository.save(department5S);
+    }
+
+    @Override
+    public void deleteDepartment5S(long departmentId) {
+        Department5S department5S = department5SRepository.findById(departmentId)
+                .orElseThrow(()->new DepartmentNotFoundException("Department not found"));
+        department5SRepository.delete(department5S);
     }
 
     private int convertArea5SToLevelDone(Area5S area5S, long monthId) {

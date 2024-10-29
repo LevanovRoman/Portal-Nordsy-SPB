@@ -47,10 +47,16 @@ public class NewsController {
         return ResponseEntity.ok(newsService.getAllNews());
     }
 
+    @GetMapping("/last-five")
+    public ResponseEntity<List<NewsResponseDto>> getLastFiveNews() {
+        return ResponseEntity.ok(newsService.getLastFiveNews());
+    }
+
     @PutMapping("update/{newsId}")
     public ResponseEntity<NewsRequestDto> updateNews(@PathVariable("newsId") long newsId,
                                                      @RequestPart MultipartFile file,
                                                      @RequestPart String newsRequestDtoObj) throws IOException {
+        System.out.println("FILE: " + file);
         if (file.isEmpty()) file = null;
         NewsRequestDto newsRequestDto = convertToNewsRequestDto(newsRequestDtoObj);
         return ResponseEntity.ok(newsService.updateNews(newsId, newsRequestDto, file));

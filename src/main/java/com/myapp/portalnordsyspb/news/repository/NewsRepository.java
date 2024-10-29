@@ -12,4 +12,6 @@ public interface NewsRepository extends JpaRepository<News, Long> {
 
     @Query(value = "select news.photo from news", nativeQuery = true)
     List<String> findAllPhoto();
+
+    List<News> findTop5ByOrderByIdDesc();
 }

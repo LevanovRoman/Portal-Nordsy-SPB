@@ -15,9 +15,11 @@ import com.myapp.portalnordsyspb.evaluationPU.repository.AreaRepository;
 import com.myapp.portalnordsyspb.evaluationPU.repository.ResultRepository;
 import com.myapp.portalnordsyspb.exceptions.AreaNotFoundException;
 import com.myapp.portalnordsyspb.exceptions.WeekNotFoundException;
+import com.myapp.portalnordsyspb.news.dto.response.NewsResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

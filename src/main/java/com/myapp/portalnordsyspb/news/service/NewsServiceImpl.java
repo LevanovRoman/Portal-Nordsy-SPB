@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -140,6 +141,34 @@ public class NewsServiceImpl implements NewsService{
         // fetch all data from DB
         List<News> newsList = newsRepository.findAll();
 
+//        List<NewsResponseDto> newsResponseDtoList = new ArrayList<>();
+//
+//        /* iterate through the list, generate photoUrl for each news object,
+//         and map to NewsResponseDto object */
+//        for (News news : newsList){
+//            String photoUrl = baseUrl + "/api/photo/" + news.getPhoto();
+//            NewsResponseDto newsResponseDto = new NewsResponseDto(
+//                    news.getId(),
+//                    news.getTitle(),
+//                    news.getContent(),
+//                    news.getHashtagList(),
+//                    news.getPhoto(),
+//                    photoUrl
+//            );
+//            newsResponseDtoList.add(newsResponseDto);
+//        }
+//        return newsResponseDtoList;
+        return fetchNews(newsList);
+    }
+
+    @Override
+    public List<NewsResponseDto> getLastFiveNews() {
+        // fetch last five news from DB
+        List<News> newsList = newsRepository.findTop5ByOrderByIdDesc();
+        return fetchNews(newsList);
+    }
+
+    private List<NewsResponseDto> fetchNews(List<News> newsList){
         List<NewsResponseDto> newsResponseDtoList = new ArrayList<>();
 
         /* iterate through the list, generate photoUrl for each news object,
@@ -156,7 +185,7 @@ public class NewsServiceImpl implements NewsService{
             );
             newsResponseDtoList.add(newsResponseDto);
         }
-        return newsResponseDtoList;
+        return newsResponseDtoList.stream().sorted(Comparator.comparing(NewsResponseDto::getId)).toList();
     }
 
     @Override
@@ -180,4 +209,5 @@ public class NewsServiceImpl implements NewsService{
     public PhotoNamesResponseDto getAllPhotoNames(){
         return new PhotoNamesResponseDto(newsRepository.findAllPhoto());
     }
+
 }
