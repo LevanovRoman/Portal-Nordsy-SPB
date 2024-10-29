@@ -4,6 +4,7 @@ import com.myapp.portalnordsyspb.exceptions.FileExistsException;
 import com.myapp.portalnordsyspb.exceptions.PhotoNotFoundException;
 import com.myapp.portalnordsyspb.news.dto.request.NewsRequestDto;
 import com.myapp.portalnordsyspb.news.dto.response.NewsResponseDto;
+import com.myapp.portalnordsyspb.news.dto.response.PhotoNamesResponseDto;
 import com.myapp.portalnordsyspb.news.entity.News;
 import com.myapp.portalnordsyspb.news.repository.NewsRepository;
 import lombok.RequiredArgsConstructor;
@@ -173,5 +174,12 @@ public class NewsServiceImpl implements NewsService{
 
         return "News deleted with id = " + id;
 
+    }
+
+    @Override
+    public PhotoNamesResponseDto getPhotoNames() {
+        List<String> namesList = new ArrayList<>();
+        newsRepository.findAll().forEach(x -> namesList.add(x.getPhoto()));
+        return new PhotoNamesResponseDto(namesList);
     }
 }

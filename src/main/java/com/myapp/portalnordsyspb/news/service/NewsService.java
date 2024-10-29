@@ -2,6 +2,7 @@ package com.myapp.portalnordsyspb.news.service;
 
 import com.myapp.portalnordsyspb.news.dto.request.NewsRequestDto;
 import com.myapp.portalnordsyspb.news.dto.response.NewsResponseDto;
+import com.myapp.portalnordsyspb.news.dto.response.PhotoNamesResponseDto;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -18,4 +19,6 @@ public interface NewsService {
     List<NewsResponseDto> getAllNews();
 
     String deleteNews(Long newsId) throws IOException;
+
+    PhotoNamesResponseDto getPhotoNames();
 }

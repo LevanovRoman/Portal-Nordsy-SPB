@@ -5,6 +5,7 @@ import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.MessageDto;
 import com.myapp.portalnordsyspb.exceptions.EmptyFileException;
 import com.myapp.portalnordsyspb.news.dto.request.NewsRequestDto;
 import com.myapp.portalnordsyspb.news.dto.response.NewsResponseDto;
+import com.myapp.portalnordsyspb.news.dto.response.PhotoNamesResponseDto;
 import com.myapp.portalnordsyspb.news.service.NewsService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -58,6 +59,11 @@ public class NewsController {
     @DeleteMapping("delete/{newsId}")
     public ResponseEntity<MessageDto> deleteNews(@PathVariable("newsId") long newsId) throws IOException {
         return ResponseEntity.ok(new MessageDto(newsService.deleteNews(newsId)));
+    }
+
+    @GetMapping("/photo-names")
+    public ResponseEntity<PhotoNamesResponseDto> getPhotoNames(){
+        return ResponseEntity.ok(newsService.getPhotoNames());
     }
 
     private NewsRequestDto convertToNewsRequestDto(String newsDtoObj) throws IOException {
