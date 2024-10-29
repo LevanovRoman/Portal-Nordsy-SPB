@@ -185,7 +185,9 @@ public class NewsServiceImpl implements NewsService{
             );
             newsResponseDtoList.add(newsResponseDto);
         }
-        return newsResponseDtoList.stream().sorted(Comparator.comparing(NewsResponseDto::getId)).toList();
+        return newsResponseDtoList
+                .stream()
+                .sorted(Comparator.comparing(NewsResponseDto::getId)).toList().reversed();
     }
 
     @Override
