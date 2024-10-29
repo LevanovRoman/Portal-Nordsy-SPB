@@ -177,9 +177,7 @@ public class NewsServiceImpl implements NewsService{
     }
 
     @Override
-    public PhotoNamesResponseDto getPhotoNames() {
-        List<String> namesList = new ArrayList<>();
-        newsRepository.findAll().forEach(x -> namesList.add(x.getPhoto()));
-        return new PhotoNamesResponseDto(namesList);
+    public PhotoNamesResponseDto getAllPhotoNames(){
+        return new PhotoNamesResponseDto(newsRepository.findAllPhoto());
     }
 }

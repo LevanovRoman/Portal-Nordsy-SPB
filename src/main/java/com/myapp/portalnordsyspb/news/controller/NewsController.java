@@ -63,7 +63,7 @@ public class NewsController {
 
     @GetMapping("/photo-names")
     public ResponseEntity<PhotoNamesResponseDto> getPhotoNames(){
-        return ResponseEntity.ok(newsService.getPhotoNames());
+        return ResponseEntity.ok(newsService.getAllPhotoNames());
     }
 
     private NewsRequestDto convertToNewsRequestDto(String newsDtoObj) throws IOException {

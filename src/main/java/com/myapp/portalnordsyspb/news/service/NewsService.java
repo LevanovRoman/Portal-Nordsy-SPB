@@ -20,5 +20,5 @@ public interface NewsService {
 
     String deleteNews(Long newsId) throws IOException;
 
-    PhotoNamesResponseDto getPhotoNames();
+    PhotoNamesResponseDto getAllPhotoNames();
 }
