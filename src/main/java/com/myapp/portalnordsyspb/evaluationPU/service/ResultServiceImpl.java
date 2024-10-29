@@ -129,8 +129,7 @@ public class ResultServiceImpl implements ResultService{
         Result result = new Result();
         Area area = areaRepository.findById(resultRequestDto.areaId())
                 .orElseThrow(() -> new AreaNotFoundException("Цех не найден!"));
-        Criterion criterion = criterionService.getCriterionById(resultRequestDto.criterionId())
-                .orElseThrow(() -> new CriterionNotFoundException("Критерий не найден!"));
+        Criterion criterion = criterionService.getCriterionById(resultRequestDto.criterionId());
         result.setArea(area);
         result.setCriterion(criterion);
         result.setWeek(week);
@@ -143,7 +142,7 @@ public class ResultServiceImpl implements ResultService{
                 .findByAreaIdAndWeekIdAndCriterionId(areaId, week.getId(), 1L));
         if (result.isEmpty()) {
             result = Optional.of(new Result(null, 0,
-                    criterionService.getCriterionById(1L).get(),
+                    criterionService.getCriterionById(1L),
                     week,
                     areaRepository.findById(areaId).orElseThrow(() -> new AreaNotFoundException("Area not found."))));
             resultRepository.save(result.get());

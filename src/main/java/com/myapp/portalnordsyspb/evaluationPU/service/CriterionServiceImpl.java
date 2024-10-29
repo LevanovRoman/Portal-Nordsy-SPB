@@ -3,6 +3,7 @@ package com.myapp.portalnordsyspb.evaluationPU.service;
 import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.CriterionDto;
 import com.myapp.portalnordsyspb.evaluationPU.entity.Criterion;
 import com.myapp.portalnordsyspb.evaluationPU.repository.CriterionRepository;
+import com.myapp.portalnordsyspb.exceptions.CriterionNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +18,10 @@ public class CriterionServiceImpl implements CriterionService{
     private final CriterionRepository criterionRepository;
 
     @Override
-    public Optional<Criterion> getCriterionById(long criterion_id) {
-        return criterionRepository.findById(criterion_id);
+    public Criterion getCriterionById(long criterion_id) {
+        return criterionRepository
+                .findById(criterion_id)
+                .orElseThrow(()-> new CriterionNotFoundException("Criterion not found."));
     }
 
     @Override

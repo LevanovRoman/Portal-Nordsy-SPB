@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface CriterionService {
 
-    Optional<Criterion> getCriterionById(long criterion_id);
+    Criterion getCriterionById(long criterion_id);
 
     List<CriterionDto> getCriterionDto();
 }
