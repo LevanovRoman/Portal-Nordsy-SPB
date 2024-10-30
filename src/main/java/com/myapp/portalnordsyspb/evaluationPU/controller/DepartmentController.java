@@ -30,8 +30,8 @@ public class DepartmentController {
 
     @Operation(summary = "Просмотр всех цехов",
     description = "Getting all departments. The response is list of objects with id and number.")
-    @GetMapping
-    public ResponseEntity<List<Department>> getAllDepartments(){
+    @GetMapping("all-departments")
+    public ResponseEntity<List<DepartmentResponseDto>> getAllDepartments(){
         return ResponseEntity.ok(departmentService.getAllDepartments());
     }
 

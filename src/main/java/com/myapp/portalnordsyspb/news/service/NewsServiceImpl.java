@@ -1,6 +1,7 @@
 package com.myapp.portalnordsyspb.news.service;
 
 import com.myapp.portalnordsyspb.exceptions.FileExistsException;
+import com.myapp.portalnordsyspb.exceptions.NewsNotFoundException;
 import com.myapp.portalnordsyspb.exceptions.PhotoNotFoundException;
 import com.myapp.portalnordsyspb.news.dto.request.NewsRequestDto;
 import com.myapp.portalnordsyspb.news.dto.response.NewsResponseDto;
@@ -8,7 +9,6 @@ import com.myapp.portalnordsyspb.news.dto.response.PhotoNamesResponseDto;
 import com.myapp.portalnordsyspb.news.entity.News;
 import com.myapp.portalnordsyspb.news.repository.NewsRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -34,8 +34,6 @@ public class NewsServiceImpl implements NewsService{
 //    @Value("${base.url}")
     private final String baseUrl = "http://172.16.15.77:8080";
     private final String path ="/home/photos/";
-//    private final String baseUrl = "http://172.16.15.77:8080";
-
 
     @Override
     public NewsRequestDto addNews(NewsRequestDto newsRequestDto, MultipartFile file) throws IOException {
@@ -77,7 +75,7 @@ public class NewsServiceImpl implements NewsService{
     public NewsRequestDto updateNews(Long newsId, NewsRequestDto newsRequestDto, MultipartFile file) throws IOException {
         // 1.check if news object exists with given newsId
         News nw = newsRepository.findById(newsId)
-                .orElseThrow(()-> new PhotoNotFoundException("Photo not found!"));
+                .orElseThrow(()-> new NewsNotFoundException("News not found!"));
 
         // 2.if file is null, do nothing
         // if file is not null, then delete existing file associated with record

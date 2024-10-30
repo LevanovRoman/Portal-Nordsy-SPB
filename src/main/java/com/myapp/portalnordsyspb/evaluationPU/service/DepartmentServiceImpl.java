@@ -2,12 +2,12 @@ package com.myapp.portalnordsyspb.evaluationPU.service;
 
 import com.myapp.portalnordsyspb.evaluationPU.dto.requestDto.DepartmentRequestDto;
 import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.AreaAndCriterionDto;
+import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.DepartmentResponseDto;
 import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.DepartmentTableDto;
 import com.myapp.portalnordsyspb.evaluationPU.entity.Department;
 import com.myapp.portalnordsyspb.evaluationPU.repository.DepartmentRepository;
 import com.myapp.portalnordsyspb.exceptions.DepartmentNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,8 +22,13 @@ public class DepartmentServiceImpl implements DepartmentService{
     private final CriterionService criterionService;
 
     @Override
-    public List<Department> getAllDepartments() {
-        return departmentRepository.findAll();
+    public List<DepartmentResponseDto> getAllDepartments() {
+        List<Department> departmentList = departmentRepository.findAll();
+        return departmentList.stream().map(this::convertDepartmentToDepartmentResponseDto).toList();
+    }
+
+    private DepartmentResponseDto convertDepartmentToDepartmentResponseDto(Department department) {
+        return new DepartmentResponseDto(department.getId(), department.getNumber());
     }
 
     @Override

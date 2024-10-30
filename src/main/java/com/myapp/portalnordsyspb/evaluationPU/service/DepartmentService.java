@@ -2,6 +2,7 @@ package com.myapp.portalnordsyspb.evaluationPU.service;
 
 import com.myapp.portalnordsyspb.evaluationPU.dto.requestDto.DepartmentRequestDto;
 import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.AreaAndCriterionDto;
+import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.DepartmentResponseDto;
 import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.DepartmentTableDto;
 import com.myapp.portalnordsyspb.evaluationPU.entity.Department;
 
@@ -9,7 +10,7 @@ import java.util.List;
 
 public interface DepartmentService {
 
-    List<Department> getAllDepartments();
+    List<DepartmentResponseDto> getAllDepartments();
 
 //    List<DepartmentDto> getListDepartments();
 

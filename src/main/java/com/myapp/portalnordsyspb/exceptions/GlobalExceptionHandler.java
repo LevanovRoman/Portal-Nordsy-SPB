@@ -100,4 +100,17 @@ public class GlobalExceptionHandler {
     public MessageDto departmentNotFoundException(DepartmentNotFoundException ex){
         return new MessageDto(ex.getMessage());
     }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(NewsNotFoundException.class)
+    public MessageDto newsNotFoundException(NewsNotFoundException ex){
+        return new MessageDto(ex.getMessage());
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(MaxvalueNotFoundException.class)
+    public MessageDto maxvalueNotFoundException(MaxvalueNotFoundException ex){
+        return new MessageDto(ex.getMessage());
+    }
+
 }

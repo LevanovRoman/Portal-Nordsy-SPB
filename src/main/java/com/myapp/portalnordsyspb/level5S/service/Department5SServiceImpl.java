@@ -3,6 +3,7 @@ package com.myapp.portalnordsyspb.level5S.service;
 import com.myapp.portalnordsyspb.exceptions.DepartmentNotFoundException;
 import com.myapp.portalnordsyspb.level5S.dto.request.Department5SRequestDto;
 import com.myapp.portalnordsyspb.level5S.dto.response.Department5SDto;
+import com.myapp.portalnordsyspb.level5S.dto.response.Department5SResponseDto;
 import com.myapp.portalnordsyspb.level5S.dto.response.Month5SAverageDto;
 import com.myapp.portalnordsyspb.level5S.entity.Area5S;
 import com.myapp.portalnordsyspb.level5S.entity.Department5S;
@@ -68,6 +69,16 @@ public class Department5SServiceImpl implements Department5SService {
         Department5S department5S = department5SRepository.findById(departmentId)
                 .orElseThrow(()->new DepartmentNotFoundException("Department not found"));
         department5SRepository.delete(department5S);
+    }
+
+    @Override
+    public List<Department5SResponseDto> getAllDepartment5S() {
+        List<Department5S> department5SList = department5SRepository.findAll();
+        return department5SList.stream().map(this::convertDepartment5SToDepartment5SResponse).toList();
+    }
+
+    private Department5SResponseDto convertDepartment5SToDepartment5SResponse(Department5S department5S) {
+        return new Department5SResponseDto(department5S.getId(), department5S.getNumber());
     }
 
     private int convertArea5SToLevelDone(Area5S area5S, long monthId) {
