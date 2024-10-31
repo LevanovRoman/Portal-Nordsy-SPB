@@ -21,10 +21,10 @@ public class DocumentServiceImpl implements DocumentService{
         String filePath = path + File.separator + fileName;
 
         // create file object
-        File f = new File(path);
-        if(!f.exists()) {
-            f.mkdir();
-        }
+//        File f = new File(path);
+//        if(!f.exists()) {
+//            f.mkdir();
+//        }
 
         // copy the file or upload file to the path
         Files.copy(file.getInputStream(), Paths.get(filePath), StandardCopyOption.REPLACE_EXISTING);
@@ -38,8 +38,4 @@ public class DocumentServiceImpl implements DocumentService{
         return new FileInputStream(filePath);
     }
 
-    @Override
-    public String uploadPhoto(String path, MultipartFile file) {
-        return "";
-    }
 }

@@ -13,5 +13,4 @@ public interface DocumentService {
 
     InputStream getResourceDocument(String path, String name) throws FileNotFoundException;
 
-    String uploadPhoto(String path, MultipartFile file);
 }
