@@ -56,30 +56,5 @@ public class FileController {
                 .contentLength(file.length()) //
                 .body(resource);
     }
-
-//    @RequestMapping("/{fileName}")
-//    public ResponseEntity<InputStreamResource> serveFileHandler(@PathVariable String fileName) throws IOException {
-//
-//        MediaType mediaType = MediaTypeUtils.getMediaTypeForFileName(this.servletContext, fileName);
-//
-//        File file = new File(path + "/" + fileName);
-//        InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
-//
-//        return ResponseEntity.ok()
-//                // Content-Disposition
-//                .header(HttpHeaders.CONTENT_DISPOSITION, "inline;filename=" + file.getName())
-//                // Content-Type
-//                .contentType(mediaType)
-//                // Content-Length
-//                .contentLength(file.length()) //
-//                .body(resource);
-//    }
-//    @GetMapping(value = "/{fileName}")
-//    public void serveFileHandler(@PathVariable String fileName, HttpServletResponse response) throws IOException {
-//        InputStream resourceFile = photoService.getResourcePhoto(path, fileName);
-//        response.setContentType(MediaType.IMAGE_JPEG_VALUE);
-//        StreamUtils.copy(resourceFile, response.getOutputStream());
-//    }
-
 }
 

@@ -57,7 +57,7 @@ public class NewsServiceImpl implements NewsService{
         News savedNews = newsRepository.save(news);
 
         // generate the photoUrl
-        String photoUrl = baseUrl + "/api/photo/" + uploadedPhotoName;
+        String photoUrl = baseUrl + "/api/file/" + uploadedPhotoName;
 //        String photoUrl = "http://172.16.15.77:8080" + "/home/astra/photo/" + uploadedPhotoName;
 
        //  map News object to dto and return it
@@ -101,7 +101,7 @@ public class NewsServiceImpl implements NewsService{
         News updatedNews = newsRepository.save(news);
 
         // 6.generate photoUrl for it
-        String photoUrl = baseUrl + "/api/photo/" + fileName;
+        String photoUrl = baseUrl + "/api/file/" + fileName;
 
         // 7. map to NewsRequestDto and return it
         NewsRequestDto response = new NewsRequestDto(
@@ -120,7 +120,7 @@ public class NewsServiceImpl implements NewsService{
         News news = newsRepository.findById(newsId)
                 .orElseThrow(()-> new PhotoNotFoundException("Photo not found!"));
         // generate photoUrl
-        String photoUrl = baseUrl + "/api/photo/" + news.getPhoto();
+        String photoUrl = baseUrl + "/api/file/" + news.getPhoto();
 
         // map to NewsResponseDto object and return it
         NewsResponseDto response = new NewsResponseDto(
@@ -172,7 +172,7 @@ public class NewsServiceImpl implements NewsService{
         /* iterate through the list, generate photoUrl for each news object,
          and map to NewsResponseDto object */
         for (News news : newsList){
-            String photoUrl = baseUrl + "/api/photo/" + news.getPhoto();
+            String photoUrl = baseUrl + "/api/file/" + news.getPhoto();
             NewsResponseDto newsResponseDto = new NewsResponseDto(
                     news.getId(),
                     news.getTitle(),
