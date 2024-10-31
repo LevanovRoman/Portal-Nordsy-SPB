@@ -1,5 +1,6 @@
 package com.myapp.portalnordsyspb.library.controller;
 
+import com.myapp.portalnordsyspb.library.dto.TestDto;
 import com.myapp.portalnordsyspb.library.service.DocumentService;
 import jakarta.servlet.ServletContext;
 import lombok.RequiredArgsConstructor;
@@ -143,6 +144,11 @@ public class DocumentController {
     public ResponseEntity<String> uploadFilePDFHandler(@RequestParam("file") MultipartFile file) throws IOException {
         String uploadedFileName = documentService.uploadDocument(file);
         return ResponseEntity.ok("Файл загружен : " + uploadedFileName);
+    }
+
+    @GetMapping("get-url/{fileName}")
+    public ResponseEntity<TestDto> getUrl(@PathVariable String fileName){
+        return ResponseEntity.ok(new TestDto("http://172.16.15.77" + "/home/astra/photo/" + fileName));
     }
 
 
