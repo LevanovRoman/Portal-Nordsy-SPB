@@ -20,6 +20,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 @RestController
 @RequestMapping("api/file/")
@@ -45,11 +47,12 @@ public class FileController {
         MediaType mediaType = MediaTypeUtils.getMediaTypeForFileName(this.servletContext, fileName);
 
         File file = new File(path + "/" + fileName);
+        String encodedFilename = URLEncoder.encode(file.getName(), StandardCharsets.UTF_8);
         InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
 
         return ResponseEntity.ok()
                 // Content-Disposition
-                .header(HttpHeaders.CONTENT_DISPOSITION, "inline;filename=" + file.getName())
+                .header(HttpHeaders.CONTENT_DISPOSITION, "inline;filename=" + encodedFilename)
                 // Content-Type
                 .contentType(mediaType)
                 // Content-Length
