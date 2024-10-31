@@ -86,7 +86,7 @@ public class DocumentController {
 //    private static final String DIRECTORY = "C:/test";
     private static final String DIRECTORY = "/home/photos/";
 //    private static final String DIRECTORY = "/home/astra/documents";
-    private static final String DEFAULT_FILE_NAME = "test2.pdf";
+    private static final String DEFAULT_FILE_NAME = "test22.pdf";
 
     private final String baseUrl = "http://172.16.15.77:8080";
     private final String path ="/home/photos/";
