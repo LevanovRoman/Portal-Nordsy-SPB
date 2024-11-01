@@ -30,9 +30,9 @@ public class FileController {
 
     private final FileService fileService;
 
-    @Value("project.filePathDocker")
-    private String path;
-//    private final String path ="/home/photos/";
+//    @Value("project.filePathDocker")
+//    private String path;
+    private final String path ="/home/photos/";
 
     @PostMapping("/upload")
     public ResponseEntity<MessageDto> uploadFileHandler(@RequestParam("file") MultipartFile file) throws IOException {
