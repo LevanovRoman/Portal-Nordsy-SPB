@@ -56,7 +56,6 @@ public class NewsController {
     public ResponseEntity<NewsRequestDto> updateNews(@PathVariable("newsId") long newsId,
                                                      @RequestPart MultipartFile file,
                                                      @RequestPart String newsRequestDtoObj) throws IOException {
-        System.out.println("FILE: " + file);
         if (file.isEmpty()) file = null;
         NewsRequestDto newsRequestDto = convertToNewsRequestDto(newsRequestDtoObj);
         return ResponseEntity.ok(newsService.updateNews(newsId, newsRequestDto, file));

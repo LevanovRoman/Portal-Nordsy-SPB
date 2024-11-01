@@ -78,7 +78,6 @@ public class NewsServiceImpl implements NewsService{
         // 1.check if news object exists with given newsId
         News nw = newsRepository.findById(newsId)
                 .orElseThrow(()-> new NewsNotFoundException("News not found!"));
-
         // 2.if file is null, do nothing
         // if file is not null, then delete existing file associated with record
         // and upload new file
@@ -87,10 +86,8 @@ public class NewsServiceImpl implements NewsService{
             Files.deleteIfExists(Paths.get(path + File.separator + fileName));
             fileName = fileService.uploadFile(path, file);
         }
-
         // 3.set NewsRequestDto`s photo value
         newsRequestDto.setPhoto(fileName);
-
         // 4.map it to News object
         News news = new News();
         news.setId(nw.getId());
@@ -176,15 +173,11 @@ public class NewsServiceImpl implements NewsService{
         // 1. check if news object exists in DB
         News nw = newsRepository.findById(newsId)
                 .orElseThrow(()-> new PhotoNotFoundException("Photo not found!"));
-        Long id = nw.getId();
-
         // 2. delete file associated with this object
         Files.deleteIfExists(Paths.get(path + File.separator + nw.getPhoto()));
-
         // 3. delete the news object
         newsRepository.delete(nw);
-
-        return "News deleted with id = " + id;
+        return "News deleted with id = " + nw.getId();
 
     }
 
