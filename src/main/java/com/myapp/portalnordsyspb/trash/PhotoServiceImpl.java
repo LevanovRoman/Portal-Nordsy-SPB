@@ -1,4 +1,4 @@
-package com.myapp.portalnordsyspb.news.service;
+package com.myapp.portalnordsyspb.trash;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

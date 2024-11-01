@@ -1,6 +1,5 @@
-package com.myapp.portalnordsyspb.news.controller;
+package com.myapp.portalnordsyspb.trash;
 
-import com.myapp.portalnordsyspb.news.service.PhotoService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;

@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DocumentRequestDto{
+public class BookRequestDto {
     private String title;
-    private String section;
+    private long sectionId;
     private String fileName;
     private String fileUrl;
 }

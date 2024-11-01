@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/month5S")
+@RequestMapping("/api/table-5s")
 @Tag(name = "Table 5C", description = "Description for table 5C")
 @RequiredArgsConstructor
 public class Month5SController {

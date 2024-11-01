@@ -3,6 +3,7 @@ package com.myapp.portalnordsyspb.news.service;
 import com.myapp.portalnordsyspb.exceptions.FileExistsException;
 import com.myapp.portalnordsyspb.exceptions.NewsNotFoundException;
 import com.myapp.portalnordsyspb.exceptions.PhotoNotFoundException;
+import com.myapp.portalnordsyspb.file.service.FileService;
 import com.myapp.portalnordsyspb.news.dto.request.NewsRequestDto;
 import com.myapp.portalnordsyspb.news.dto.response.NewsResponseDto;
 import com.myapp.portalnordsyspb.news.dto.response.PhotoNamesResponseDto;
@@ -26,7 +27,8 @@ public class NewsServiceImpl implements NewsService{
 
     private final NewsRepository newsRepository;
 
-    private final PhotoService photoService;
+    private final FileService fileService;
+//    private final PhotoService photoService;
 
 //    @Value("${project.photo}")
 //    private String path;
@@ -41,7 +43,7 @@ public class NewsServiceImpl implements NewsService{
         if(Files.exists(Paths.get(path + File.separator + file.getOriginalFilename()))){
             throw new FileExistsException("File already exists!");
         }
-        String uploadedPhotoName = photoService.uploadPhoto(path, file);
+        String uploadedPhotoName = fileService.uploadFile(path, file);
 
         // set the value of field 'photo' as filename
         newsRequestDto.setPhoto(uploadedPhotoName);
@@ -83,7 +85,7 @@ public class NewsServiceImpl implements NewsService{
         String fileName = nw.getPhoto();
         if (file != null){
             Files.deleteIfExists(Paths.get(path + File.separator + fileName));
-            fileName = photoService.uploadPhoto(path, file);
+            fileName = fileService.uploadFile(path, file);
         }
 
         // 3.set NewsRequestDto`s photo value
@@ -136,26 +138,7 @@ public class NewsServiceImpl implements NewsService{
 
     @Override
     public List<NewsResponseDto> getAllNews() {
-        // fetch all data from DB
         List<News> newsList = newsRepository.findAll();
-
-//        List<NewsResponseDto> newsResponseDtoList = new ArrayList<>();
-//
-//        /* iterate through the list, generate photoUrl for each news object,
-//         and map to NewsResponseDto object */
-//        for (News news : newsList){
-//            String photoUrl = baseUrl + "/api/photo/" + news.getPhoto();
-//            NewsResponseDto newsResponseDto = new NewsResponseDto(
-//                    news.getId(),
-//                    news.getTitle(),
-//                    news.getContent(),
-//                    news.getHashtagList(),
-//                    news.getPhoto(),
-//                    photoUrl
-//            );
-//            newsResponseDtoList.add(newsResponseDto);
-//        }
-//        return newsResponseDtoList;
         return fetchNews(newsList);
     }
 

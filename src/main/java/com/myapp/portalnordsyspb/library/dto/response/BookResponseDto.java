@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DocumentResponseDto{
+public class BookResponseDto {
     private long id;
     private String title;
-    private String section;
+    private long sectionId;
     private String fileName;
     private String fileUrl;
 }

@@ -113,4 +113,16 @@ public class GlobalExceptionHandler {
         return new MessageDto(ex.getMessage());
     }
 
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(SectionNotFoundException.class)
+    public MessageDto sectionNotFoundException(SectionNotFoundException ex){
+        return new MessageDto(ex.getMessage());
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(BookNotFoundException.class)
+    public MessageDto bookNotFoundException(BookNotFoundException ex){
+        return new MessageDto(ex.getMessage());
+    }
+
 }

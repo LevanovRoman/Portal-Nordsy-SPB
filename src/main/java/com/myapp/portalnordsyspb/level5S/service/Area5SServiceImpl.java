@@ -14,6 +14,7 @@ import com.myapp.portalnordsyspb.level5S.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,8 +34,9 @@ public class Area5SServiceImpl implements Area5SService{
     public List<Area5SiteDto> getAllArea5SDto(Long month_id) {
         return area5SRepository.findAll()
                 .stream()
+                .sorted(Comparator.comparing(Area5S::getId))
                 .map(area -> convertArea5SToDto(area, month_id))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
