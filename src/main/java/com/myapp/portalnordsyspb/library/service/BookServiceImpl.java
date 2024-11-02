@@ -36,7 +36,7 @@ public class BookServiceImpl implements BookService {
     private final String baseUrl = "http://172.16.15.77:8080";
     private final NewsServiceImpl newsServiceImpl;
     //    private final String path ="/home/photos/";
-    @Value("${project.filePathDocker}")
+    @Value("${project.filePathDocker.Photo}")
     private String path;
 
     @Override

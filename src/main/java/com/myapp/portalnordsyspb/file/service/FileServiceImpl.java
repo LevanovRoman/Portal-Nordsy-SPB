@@ -23,9 +23,9 @@ public class FileServiceImpl implements FileService{
         return fileName;
     }
 
-    @Override
-    public InputStream getResourceFile(String path, String fileName) throws FileNotFoundException {
-        String filePath = path + File.separator + fileName;
-        return new FileInputStream(filePath);
-    }
+//    @Override
+//    public InputStream getResourceFile(String path, String fileName) throws FileNotFoundException {
+//        String filePath = path + File.separator + fileName;
+//        return new FileInputStream(filePath);
+//    }
 }

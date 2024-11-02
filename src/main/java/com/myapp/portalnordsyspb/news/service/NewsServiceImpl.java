@@ -10,6 +10,7 @@ import com.myapp.portalnordsyspb.news.dto.response.PhotoNamesResponseDto;
 import com.myapp.portalnordsyspb.news.entity.News;
 import com.myapp.portalnordsyspb.news.repository.NewsRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,14 +29,16 @@ public class NewsServiceImpl implements NewsService{
     private final NewsRepository newsRepository;
 
     private final FileService fileService;
-//    private final PhotoService photoService;
 
 //    @Value("${project.photo}")
 //    private String path;
 
 //    @Value("${base.url}")
     private final String baseUrl = "http://172.16.15.77:8080";
-    private final String path ="/home/photos/";
+
+    @Value("${project.filePathDocker.Photo}")
+    private String path;
+//    private final String path ="/home/photos/";
 
     @Override
     public NewsRequestDto addNews(NewsRequestDto newsRequestDto, MultipartFile file) throws IOException {
@@ -59,7 +62,7 @@ public class NewsServiceImpl implements NewsService{
         News savedNews = newsRepository.save(news);
 
         // generate the photoUrl
-        String photoUrl = baseUrl + "/api/file/" + uploadedPhotoName;
+        String photoUrl = baseUrl + "/api/file/photo/" + uploadedPhotoName;
 //        String photoUrl = "http://172.16.15.77:8080" + "/home/astra/photo/" + uploadedPhotoName;
 
        //  map News object to dto and return it
@@ -100,7 +103,7 @@ public class NewsServiceImpl implements NewsService{
         News updatedNews = newsRepository.save(news);
 
         // 6.generate photoUrl for it
-        String photoUrl = baseUrl + "/api/file/" + fileName;
+        String photoUrl = baseUrl + "/api/file/photo/" + fileName;
 
         // 7. map to NewsRequestDto and return it
         NewsRequestDto response = new NewsRequestDto(
@@ -119,7 +122,7 @@ public class NewsServiceImpl implements NewsService{
         News news = newsRepository.findById(newsId)
                 .orElseThrow(()-> new PhotoNotFoundException("Photo not found!"));
         // generate photoUrl
-        String photoUrl = baseUrl + "/api/file/" + news.getPhoto();
+        String photoUrl = baseUrl + "/api/file/photo/" + news.getPhoto();
 
         // map to NewsResponseDto object and return it
         NewsResponseDto response = new NewsResponseDto(
@@ -152,7 +155,7 @@ public class NewsServiceImpl implements NewsService{
         /* iterate through the list, generate photoUrl for each news object,
          and map to NewsResponseDto object */
         for (News news : newsList){
-            String photoUrl = baseUrl + "/api/file/" + news.getPhoto();
+            String photoUrl = baseUrl + "/api/file/photo/" + news.getPhoto();
             NewsResponseDto newsResponseDto = new NewsResponseDto(
                     news.getId(),
                     news.getTitle(),

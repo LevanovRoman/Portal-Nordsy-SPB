@@ -27,7 +27,7 @@ public class SectionServiceImpl implements SectionService{
     @Value("${project.hostAddress}")
     private String baseUrl;
 
-    @Value("${project.filePathDocker}")
+    @Value("${project.filePathDocker.Photo}")
     private String path;
 
     private final FileService fileService;

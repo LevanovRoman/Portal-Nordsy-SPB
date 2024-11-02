@@ -11,14 +11,27 @@ services:
     ports:
       - 8080:8080
     volumes:
-      - spring-data:/home/photos
+      - spring-photo:/home/photos
+      - spring-book:/home/books
+      - spring-document:/home/documents
     restart: always
 
 volumes:
-  spring-data:
-#    external: true
+  spring-photo:
     driver: local
     driver_opts:
       o: bind
       type: none
       device: "/home/astra/photo"
+  spring-book:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: "/home/astra/book"
+  spring-document:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: "/home/astra/document"
