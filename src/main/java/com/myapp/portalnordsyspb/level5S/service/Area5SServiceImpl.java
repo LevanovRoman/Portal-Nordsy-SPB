@@ -1,7 +1,5 @@
 package com.myapp.portalnordsyspb.level5S.service;
 
-import com.myapp.portalnordsyspb.evaluationPU.dto.requestDto.AreaRequestDto;
-import com.myapp.portalnordsyspb.evaluationPU.entity.Area;
 import com.myapp.portalnordsyspb.exceptions.AreaNotFoundException;
 import com.myapp.portalnordsyspb.exceptions.DepartmentNotFoundException;
 import com.myapp.portalnordsyspb.exceptions.MaxvalueNotFoundException;

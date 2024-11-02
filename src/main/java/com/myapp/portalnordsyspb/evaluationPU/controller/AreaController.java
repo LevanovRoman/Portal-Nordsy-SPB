@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/area")
-@Tag(name = "Area PU", description = "Description for area PU")
+@Tag(name = "Area & Department PU", description = "Description for area PU")
 @RequiredArgsConstructor
 public class AreaController {
 

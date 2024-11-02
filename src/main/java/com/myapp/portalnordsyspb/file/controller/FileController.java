@@ -3,6 +3,7 @@ package com.myapp.portalnordsyspb.file.controller;
 import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.MessageDto;
 import com.myapp.portalnordsyspb.file.service.FileService;
 import com.myapp.portalnordsyspb.library.controller.MediaTypeUtils;
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.ServletContext;
 import lombok.RequiredArgsConstructor;
@@ -16,12 +17,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
 @RestController
+@Hidden
 @RequestMapping("api/file/")
 @Tag(name = "File upload & download", description = "Description for file")
 @RequiredArgsConstructor
