@@ -27,7 +27,7 @@ public class SectionServiceImpl implements SectionService{
     @Value("${project.hostAddress}")
     private String baseUrl;
 
-    @Value("${project.filePathDocker.Photo}")
+    @Value("${project.filePathDocker.Library}")
     private String path;
 
     private final FileService fileService;
@@ -86,7 +86,7 @@ public class SectionServiceImpl implements SectionService{
         // save the section object -> savedSection object
         Section savedSection = sectionRepository.save(section);
         // generate the fileUrl
-        String fileUrl = baseUrl + "/api/file/" + sectionRequestDto.getLabel();
+        String fileUrl = baseUrl + "/api/file/library/" + sectionRequestDto.getLabel();
         //  map Section object to dto and return it
         SectionRequestDto response = SectionRequestDto
                 .builder()
@@ -103,7 +103,7 @@ public class SectionServiceImpl implements SectionService{
         Section section = sectionRepository.findById(sectionId)
                 .orElseThrow(()->new SectionNotFoundException("Section not found."));
         // generate the fileUrl
-        String fileUrl = baseUrl + "/api/file/" + section.getLabel();
+        String fileUrl = baseUrl + "/api/file/library/" + section.getLabel();
         // map to DocumentResponseDto object and return it
         SectionResponseDto response = SectionResponseDto
                 .builder()
@@ -121,7 +121,7 @@ public class SectionServiceImpl implements SectionService{
         List<SectionResponseDto> sectionResponseDtoList = new ArrayList<>();
         // iterate through the list, generate labelUrl for each Section object and map to SectionResponseDto object
         for (Section section : sectionList){
-            String labelUrl = baseUrl + "/api/file/" + section.getLabel();
+            String labelUrl = baseUrl + "/api/file/library/" + section.getLabel();
             SectionResponseDto sectionResponseDto = new SectionResponseDto(
                     section.getId(),
                     section.getName(),

@@ -34,9 +34,8 @@ public class BookServiceImpl implements BookService {
 
 
     private final String baseUrl = "http://172.16.15.77:8080";
-    private final NewsServiceImpl newsServiceImpl;
     //    private final String path ="/home/photos/";
-    @Value("${project.filePathDocker.Photo}")
+    @Value("${project.filePathDocker.Library}")
     private String path;
 
     @Override
@@ -57,7 +56,7 @@ public class BookServiceImpl implements BookService {
         // save the document object -> savedDocument object
         Book savedBook = bookRepository.save(book);
         // generate the fileUrl
-        String fileUrl = baseUrl + "/api/file/" + uploadedFileName;
+        String fileUrl = baseUrl + "/api/file/library/" + uploadedFileName;
         //  map Document object to dto and return it
         BookRequestDto response = BookRequestDto
                 .builder()
@@ -93,7 +92,7 @@ public class BookServiceImpl implements BookService {
         List<BookResponseDto> bookResponseDtoList = new ArrayList<>();
         // iterate through the list, generate fileUrl for each Book object and map to BookResponseDto object
         for (Book book : bookList){
-            String fileUrl = baseUrl + "/api/file/" + book.getFileName();
+            String fileUrl = baseUrl + "/api/file/library/" + book.getFileName();
             BookResponseDto bookResponseDto = new BookResponseDto(
                     book.getTitle(),
                     fileUrl

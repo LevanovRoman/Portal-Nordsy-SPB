@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -32,6 +33,12 @@ public class FileController {
 
     @Value("${project.filePathDocker.Photo}")
     private String pathPhoto;
+
+    @Value("${project.filePathDocker.Library}")
+    private String pathLibrary;
+
+    @Value("${project.filePathDocker.Document}")
+    private String pathDocument;
 //    private final String path ="/home/photos/";
 
 //    @PostMapping("/upload")
@@ -40,22 +47,38 @@ public class FileController {
 //        return ResponseEntity.ok(new MessageDto("File uploaded : " + uploadedFileName));
 //    }
 
+//    @RequestMapping("/photo/{fileName}")
+//    public ResponseEntity<InputStreamResource> serveFileHandlerPhoto(@PathVariable String fileName) throws IOException {
+//        MediaType mediaType = MediaTypeUtils.getMediaTypeForFileName(this.servletContext, fileName);
+//        File file = new File(pathPhoto + "/" + fileName);
+//        String encodedFilename = URLEncoder.encode(file.getName(), StandardCharsets.UTF_8);
+//        InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
+//        return ResponseEntity.ok()
+//                .header(HttpHeaders.CONTENT_DISPOSITION, "inline;filename=" + encodedFilename)
+//                .contentType(mediaType)
+//                .contentLength(file.length()) //
+//                .body(resource);
+//    }
+
     @RequestMapping("/photo/{fileName}")
-    public ResponseEntity<InputStreamResource> serveFileHandler(@PathVariable String fileName) throws IOException {
+    public ResponseEntity<InputStreamResource> serveFileHandlerPhoto(@PathVariable String fileName) throws IOException {
+        return getFileByPathAndName(pathPhoto, fileName);
+    }
 
+    @RequestMapping("/library/{fileName}")
+    public ResponseEntity<InputStreamResource> serveFileHandlerLibrary(@PathVariable String fileName) throws IOException {
+        return getFileByPathAndName(pathLibrary, fileName);
+    }
+
+    private ResponseEntity<InputStreamResource> getFileByPathAndName(String path, String fileName) throws IOException {
         MediaType mediaType = MediaTypeUtils.getMediaTypeForFileName(this.servletContext, fileName);
-
-        File file = new File(pathPhoto + "/" + fileName);
+        File file = new File(path + "/" + fileName);
         String encodedFilename = URLEncoder.encode(file.getName(), StandardCharsets.UTF_8);
         InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
-
         return ResponseEntity.ok()
-                // Content-Disposition
                 .header(HttpHeaders.CONTENT_DISPOSITION, "inline;filename=" + encodedFilename)
-                // Content-Type
                 .contentType(mediaType)
-                // Content-Length
-                .contentLength(file.length()) //
+                .contentLength(file.length())
                 .body(resource);
     }
 }
