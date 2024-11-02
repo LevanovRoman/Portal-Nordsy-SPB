@@ -1,6 +1,7 @@
 package com.myapp.portalnordsyspb.level5S.dto.request;
 
 public record Department5SRequestDto(
-        int number
+        int number,
+        Area5SRequestDto area
 ) {
 }

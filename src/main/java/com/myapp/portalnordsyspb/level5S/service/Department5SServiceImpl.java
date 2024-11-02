@@ -1,6 +1,7 @@
 package com.myapp.portalnordsyspb.level5S.service;
 
 import com.myapp.portalnordsyspb.exceptions.DepartmentNotFoundException;
+import com.myapp.portalnordsyspb.level5S.dto.request.Area5SRequestDto;
 import com.myapp.portalnordsyspb.level5S.dto.request.Department5SRequestDto;
 import com.myapp.portalnordsyspb.level5S.dto.response.Department5SDto;
 import com.myapp.portalnordsyspb.level5S.dto.response.Department5SResponseDto;
@@ -27,6 +28,7 @@ public class Department5SServiceImpl implements Department5SService {
     private final Area5SRepository area5SRepository;
     private final Month5SRepository month5SRepository;
     private final Result5SRepository result5SRepository;
+    private final Area5SService area5SService;
 
 
     @Override
@@ -53,7 +55,13 @@ public class Department5SServiceImpl implements Department5SService {
     public void createDepartment5S(Department5SRequestDto department5SRequestDto) {
         Department5S department5S = new Department5S();
         department5S.setNumber(department5SRequestDto.number());
-        department5SRepository.save(department5S);
+        Department5S department5SCreated = department5SRepository.save(department5S);
+        Area5SRequestDto area5SRequestDto = new Area5SRequestDto(
+                department5SRequestDto.area().name(),
+                department5SCreated.getId(),
+                department5SRequestDto.area().maxvalueId()
+        );
+        area5SService.createArea5S(area5SRequestDto);
     }
 
     @Override

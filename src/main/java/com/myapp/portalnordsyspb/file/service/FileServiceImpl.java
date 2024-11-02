@@ -22,10 +22,4 @@ public class FileServiceImpl implements FileService{
         Files.copy(file.getInputStream(), Paths.get(filePath));
         return fileName;
     }
-
-//    @Override
-//    public InputStream getResourceFile(String path, String fileName) throws FileNotFoundException {
-//        String filePath = path + File.separator + fileName;
-//        return new FileInputStream(filePath);
-//    }
 }

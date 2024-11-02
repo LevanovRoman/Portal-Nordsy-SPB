@@ -29,8 +29,6 @@ public class FileController {
 
     private final ServletContext servletContext;
 
-    private final FileService fileService;
-
     @Value("${project.filePathDocker.Photo}")
     private String pathPhoto;
 
@@ -39,26 +37,6 @@ public class FileController {
 
     @Value("${project.filePathDocker.Document}")
     private String pathDocument;
-//    private final String path ="/home/photos/";
-
-//    @PostMapping("/upload")
-//    public ResponseEntity<MessageDto> uploadFileHandler(@RequestParam("file") MultipartFile file) throws IOException {
-//        String uploadedFileName = fileService.uploadFile(pathPhoto, file);
-//        return ResponseEntity.ok(new MessageDto("File uploaded : " + uploadedFileName));
-//    }
-
-//    @RequestMapping("/photo/{fileName}")
-//    public ResponseEntity<InputStreamResource> serveFileHandlerPhoto(@PathVariable String fileName) throws IOException {
-//        MediaType mediaType = MediaTypeUtils.getMediaTypeForFileName(this.servletContext, fileName);
-//        File file = new File(pathPhoto + "/" + fileName);
-//        String encodedFilename = URLEncoder.encode(file.getName(), StandardCharsets.UTF_8);
-//        InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
-//        return ResponseEntity.ok()
-//                .header(HttpHeaders.CONTENT_DISPOSITION, "inline;filename=" + encodedFilename)
-//                .contentType(mediaType)
-//                .contentLength(file.length()) //
-//                .body(resource);
-//    }
 
     @RequestMapping("/photo/{fileName}")
     public ResponseEntity<InputStreamResource> serveFileHandlerPhoto(@PathVariable String fileName) throws IOException {
