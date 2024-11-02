@@ -20,7 +20,7 @@ import java.util.List;
 
 @RestController
 @Tag(name = "Library", description = "Description for library")
-@RequestMapping("/library/book")
+@RequestMapping("/api/library/book")
 @RequiredArgsConstructor
 public class BookController {
 
