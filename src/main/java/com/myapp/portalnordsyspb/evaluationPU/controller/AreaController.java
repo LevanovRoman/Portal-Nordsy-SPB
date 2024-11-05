@@ -1,6 +1,7 @@
 package com.myapp.portalnordsyspb.evaluationPU.controller;
 
 import com.myapp.portalnordsyspb.evaluationPU.dto.requestDto.AreaRequestDto;
+import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.AreaDto;
 import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.MessageDto;
 import com.myapp.portalnordsyspb.evaluationPU.service.AreaService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -8,6 +9,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/area")
@@ -40,5 +43,12 @@ public class AreaController {
     public ResponseEntity<MessageDto> deleteArea(@PathVariable("areaId") long areaId){
         areaService.deleteArea(areaId);
         return ResponseEntity.ok(new MessageDto("Area deleted successfully"));
+    }
+
+    @GetMapping("/all-areas")
+    @Operation(summary = "Получение всех участков",
+            description = "Getting all areas. The response is list of objects with id and area`s name.")
+    public ResponseEntity<List<AreaDto>> getAllAreas(){
+        return ResponseEntity.ok(areaService.getAreaDto());
     }
 }

@@ -2,6 +2,7 @@ package com.myapp.portalnordsyspb.level5S.controller;
 
 import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.MessageDto;
 import com.myapp.portalnordsyspb.level5S.dto.request.Area5SRequestDto;
+import com.myapp.portalnordsyspb.level5S.dto.response.Area5SDto;
 import com.myapp.portalnordsyspb.level5S.dto.response.Maxvalue5SResponseDto;
 import com.myapp.portalnordsyspb.level5S.service.Area5SService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -51,5 +52,13 @@ public class Area5SController {
     public ResponseEntity<List<Maxvalue5SResponseDto>> getAllMaxvalue(){
         return ResponseEntity.ok(area5SService.getAllMaxvalue());
     }
+
+    @GetMapping("/all-areas5s")
+    @Operation(summary = "Получение всех участков",
+            description = "Getting all areas. The response is list of objects with id and area`s name.")
+    public ResponseEntity<List<Area5SDto>> getAllArea5SDto(){
+        return ResponseEntity.ok(area5SService.getListArea5SDto());
+    }
+
 
 }

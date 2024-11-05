@@ -63,7 +63,7 @@ public class MonthController {
     }
 
     @GetMapping("/all-weeks")
-    @Operation(summary = "Просмотр всех недель",
+    @Operation(summary = "Получение всех недель",
             description = "Getting all weeks. The response is list of objects with id and week`s name.")
     public ResponseEntity<List<WeekDto>> getListWeekDto(){
         return ResponseEntity.ok(weekService.getListWeekDto());
