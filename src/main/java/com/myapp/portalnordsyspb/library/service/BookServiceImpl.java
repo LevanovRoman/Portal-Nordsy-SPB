@@ -1,6 +1,5 @@
 package com.myapp.portalnordsyspb.library.service;
 
-import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.MessageDto;
 import com.myapp.portalnordsyspb.exceptions.BookNotFoundException;
 import com.myapp.portalnordsyspb.exceptions.FileExistsException;
 import com.myapp.portalnordsyspb.exceptions.SectionNotFoundException;
@@ -8,10 +7,8 @@ import com.myapp.portalnordsyspb.file.service.FileService;
 import com.myapp.portalnordsyspb.library.dto.request.BookRequestDto;
 import com.myapp.portalnordsyspb.library.dto.response.BookResponseDto;
 import com.myapp.portalnordsyspb.library.entity.Book;
-import com.myapp.portalnordsyspb.library.entity.Section;
 import com.myapp.portalnordsyspb.library.repository.BookRepository;
 import com.myapp.portalnordsyspb.library.repository.SectionRepository;
-import com.myapp.portalnordsyspb.news.service.NewsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -33,7 +30,9 @@ public class BookServiceImpl implements BookService {
     private final SectionRepository sectionRepository;
 
 
-    private final String baseUrl = "http://172.16.15.77:8080";
+    @Value("${project.hostAddress}")
+    private String baseUrl;
+//    private final String baseUrl = "http://172.16.15.77:8080";
     //    private final String path ="/home/photos/";
     @Value("${project.filePathDocker.Library}")
     private String path;
@@ -47,21 +46,21 @@ public class BookServiceImpl implements BookService {
         String uploadedFileName = fileService.uploadFile(path, file);
         // set the value of field 'fileName' as file name
         bookRequestDto.setFileName(uploadedFileName);
-        // map dto to Document object
+        // map dto to Book object
         Book book = new Book();
         book.setTitle(bookRequestDto.getTitle());
         book.setSection(sectionRepository.findById(bookRequestDto.getSectionId())
                 .orElseThrow(()->new SectionNotFoundException("Section not found")));
         book.setFileName(bookRequestDto.getFileName());
-        // save the document object -> savedDocument object
+        // save the book object -> savedBook object
         Book savedBook = bookRepository.save(book);
         // generate the fileUrl
         String fileUrl = baseUrl + "/api/file/library/" + uploadedFileName;
-        //  map Document object to dto and return it
+        //  map Book object to dto and return it
         BookRequestDto response = BookRequestDto
                 .builder()
                 .title(savedBook.getTitle())
-                .sectionId(savedBook.getId())
+                .sectionId(savedBook.getSection().getId())
                 .fileName(savedBook.getFileName())
                 .fileUrl(fileUrl)
                 .build();

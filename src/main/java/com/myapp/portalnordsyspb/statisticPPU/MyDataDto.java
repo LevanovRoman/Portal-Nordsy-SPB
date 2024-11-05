@@ -1,4 +1,4 @@
-package com.myapp.portalnordsyspb.statisticsPPU;
+package com.myapp.portalnordsyspb.statisticPPU;
 
 public record MyDataDto(
         String Zaregistrirovano,

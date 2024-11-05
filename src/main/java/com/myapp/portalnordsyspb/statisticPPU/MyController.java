@@ -1,4 +1,4 @@
-package com.myapp.portalnordsyspb.statisticsPPU;
+package com.myapp.portalnordsyspb.statisticPPU;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

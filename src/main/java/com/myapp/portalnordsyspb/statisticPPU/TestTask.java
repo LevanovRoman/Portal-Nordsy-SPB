@@ -1,4 +1,4 @@
-package com.myapp.portalnordsyspb.statisticsPPU;
+package com.myapp.portalnordsyspb.statisticPPU;
 
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;

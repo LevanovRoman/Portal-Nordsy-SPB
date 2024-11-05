@@ -26,13 +26,6 @@ public class MonthController {
 
     private final WeekService weekService;
 
-    @Operation(summary = "Просмотр всех цехов",
-            description = "Getting all departments. The response is list of objects with id and number.")
-    @GetMapping("/all-departments")
-    public ResponseEntity<List<DepartmentResponseDto>> getAllDepartments(){
-        return ResponseEntity.ok(departmentService.getAllDepartments());
-    }
-
     @GetMapping("/all-results")
     public ResponseEntity<List<DepartmentTableDto>> getListDepartmentTable(){
         return ResponseEntity.ok(departmentService.getListDepartmentTable());

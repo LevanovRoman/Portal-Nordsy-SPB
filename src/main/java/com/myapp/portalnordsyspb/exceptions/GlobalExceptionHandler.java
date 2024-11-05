@@ -125,4 +125,10 @@ public class GlobalExceptionHandler {
         return new MessageDto(ex.getMessage());
     }
 
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(DocumentNotFoundException.class)
+    public MessageDto documentNotFoundException(DocumentNotFoundException ex){
+        return new MessageDto(ex.getMessage());
+    }
+
 }

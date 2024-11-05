@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/department")
 @Tag(name = "Area & Department PU", description = "Description for table PU")
@@ -16,6 +18,13 @@ import org.springframework.web.bind.annotation.*;
 public class DepartmentController {
 
     private final DepartmentService departmentService;
+
+    @Operation(summary = "Просмотр всех цехов",
+            description = "Getting all departments. The response is list of objects with id and number.")
+    @GetMapping("/all-departments")
+    public ResponseEntity<List<DepartmentResponseDto>> getAllDepartments(){
+        return ResponseEntity.ok(departmentService.getAllDepartments());
+    }
 
     @PostMapping("/create-department")
     @Operation(summary = "Создание нового цеха",

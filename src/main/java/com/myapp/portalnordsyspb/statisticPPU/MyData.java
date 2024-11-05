@@ -1,4 +1,4 @@
-package com.myapp.portalnordsyspb.statisticsPPU;
+package com.myapp.portalnordsyspb.statisticPPU;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

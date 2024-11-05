@@ -1,4 +1,4 @@
-package com.myapp.portalnordsyspb.statisticsPPU;
+package com.myapp.portalnordsyspb.statisticPPU;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

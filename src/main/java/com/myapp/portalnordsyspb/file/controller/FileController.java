@@ -1,8 +1,5 @@
 package com.myapp.portalnordsyspb.file.controller;
 
-import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.MessageDto;
-import com.myapp.portalnordsyspb.file.service.FileService;
-import com.myapp.portalnordsyspb.library.controller.MediaTypeUtils;
 import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.ServletContext;
@@ -13,7 +10,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.FileInputStream;
