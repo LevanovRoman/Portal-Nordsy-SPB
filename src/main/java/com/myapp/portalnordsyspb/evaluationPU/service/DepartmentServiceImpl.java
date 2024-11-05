@@ -1,5 +1,6 @@
 package com.myapp.portalnordsyspb.evaluationPU.service;
 
+import com.myapp.portalnordsyspb.evaluationPU.dto.requestDto.AreaRequestDto;
 import com.myapp.portalnordsyspb.evaluationPU.dto.requestDto.DepartmentRequestDto;
 import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.AreaAndCriterionDto;
 import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.DepartmentResponseDto;
@@ -51,7 +52,12 @@ public class DepartmentServiceImpl implements DepartmentService{
     public void createDepartment(DepartmentRequestDto departmentRequestDto) {
         Department department = new Department();
         department.setNumber(departmentRequestDto.number());
-        departmentRepository.save(department);
+        Department departmentCreated = departmentRepository.save(department);
+        AreaRequestDto areaRequestDto = new AreaRequestDto(
+                departmentRequestDto.area().name(),
+                departmentCreated.getId()
+        );
+        areaService.createArea(areaRequestDto);
     }
 
     @Override
