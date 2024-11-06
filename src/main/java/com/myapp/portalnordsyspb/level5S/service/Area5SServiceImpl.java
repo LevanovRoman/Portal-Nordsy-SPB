@@ -40,7 +40,9 @@ public class Area5SServiceImpl implements Area5SService{
     @Override
     public List<Area5SDto> getListArea5SDto() {
         return area5SRepository.findAll()
-                .stream().map(this::convertArea5SToArea5SDto)
+                .stream()
+                .sorted(Comparator.comparing(Area5S::getDepartmentId).thenComparing(Area5S::getId))
+                .map(this::convertArea5SToArea5SDto)
                 .collect(Collectors.toList());
     }
 

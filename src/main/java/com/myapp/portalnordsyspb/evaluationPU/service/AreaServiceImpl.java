@@ -10,9 +10,11 @@ import com.myapp.portalnordsyspb.evaluationPU.entity.Week;
 import com.myapp.portalnordsyspb.evaluationPU.repository.*;
 import com.myapp.portalnordsyspb.exceptions.AreaNotFoundException;
 import com.myapp.portalnordsyspb.exceptions.DepartmentNotFoundException;
+import com.myapp.portalnordsyspb.level5S.entity.Area5S;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,7 +40,9 @@ public class AreaServiceImpl implements AreaService{
     @Override
     public List<AreaDto> getAreaDto() {
         return areaRepository.findAll()
-                .stream().map(this::convertAreaToAreaDto)
+                .stream()
+                .sorted(Comparator.comparing(Area::getDepartmentId).thenComparing(Area::getId))
+                .map(this::convertAreaToAreaDto)
                 .collect(Collectors.toList());
     }
 

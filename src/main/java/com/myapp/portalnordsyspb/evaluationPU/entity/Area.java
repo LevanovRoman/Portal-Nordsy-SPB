@@ -1,6 +1,7 @@
 package com.myapp.portalnordsyspb.evaluationPU.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.myapp.portalnordsyspb.level5S.entity.Area5S;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,4 +32,8 @@ public class Area implements Serializable {
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "area")
     private List<Result> resultList;
+
+    public static long  getDepartmentId(Area o) {
+        return o.getDepartment().getId();
+    }
 }
