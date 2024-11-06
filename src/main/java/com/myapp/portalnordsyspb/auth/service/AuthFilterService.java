@@ -1,4 +1,4 @@
-package com.myapp.portalnordsyspb.auth.services;
+package com.myapp.portalnordsyspb.auth.service;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

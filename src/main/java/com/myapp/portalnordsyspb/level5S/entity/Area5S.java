@@ -41,4 +41,7 @@ public class Area5S  implements Serializable {
     @JoinColumn(name = "maxvalue5s_id")
     private Maxvalue5S maxvalue;
 
+    public static long  getDepartmentId(Area5S o) {
+        return o.getDepartment().getId();
+    }
 }

@@ -32,7 +32,7 @@ public class Area5SServiceImpl implements Area5SService{
     public List<Area5SiteDto> getAllArea5SDto(Long month_id) {
         return area5SRepository.findAll()
                 .stream()
-                .sorted(Comparator.comparing(Area5S::getId))
+                .sorted(Comparator.comparing(Area5S::getDepartmentId).thenComparing(Area5S::getId))
                 .map(area -> convertArea5SToDto(area, month_id))
                 .toList();
     }

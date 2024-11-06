@@ -1,10 +1,10 @@
-package com.myapp.portalnordsyspb.controllers;
+package com.myapp.portalnordsyspb.auth.controller;
 
-import com.myapp.portalnordsyspb.auth.entities.RefreshToken;
-import com.myapp.portalnordsyspb.auth.entities.User;
-import com.myapp.portalnordsyspb.auth.services.AuthService;
-import com.myapp.portalnordsyspb.auth.services.JwtService;
-import com.myapp.portalnordsyspb.auth.services.RefreshTokenService;
+import com.myapp.portalnordsyspb.auth.entity.RefreshToken;
+import com.myapp.portalnordsyspb.auth.entity.User;
+import com.myapp.portalnordsyspb.auth.service.AuthService;
+import com.myapp.portalnordsyspb.auth.service.JwtService;
+import com.myapp.portalnordsyspb.auth.service.RefreshTokenService;
 import com.myapp.portalnordsyspb.auth.utils.AuthResponse;
 import com.myapp.portalnordsyspb.auth.utils.LoginRequest;
 import com.myapp.portalnordsyspb.auth.utils.RefreshTokenRequest;

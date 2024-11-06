@@ -1,6 +1,6 @@
-package com.myapp.portalnordsyspb.auth.repositories;
+package com.myapp.portalnordsyspb.auth.repository;
 
-import com.myapp.portalnordsyspb.auth.entities.RefreshToken;
+import com.myapp.portalnordsyspb.auth.entity.RefreshToken;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

@@ -29,12 +29,4 @@ public class News {
     public Set<String> hashtagList;
 
     private String photo;
-
-//    @ManyToMany(fetch = FetchType.LAZY)
-//    @JoinTable(
-//            name = "news_category",
-//            joinColumns = @JoinColumn(name = "news_id"),
-//            inverseJoinColumns = @JoinColumn(name = "category_id"))
-//    @JsonManagedReference
-//    private List<Category> categoryList = new ArrayList<>();
 }

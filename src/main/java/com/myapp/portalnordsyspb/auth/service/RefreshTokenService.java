@@ -1,9 +1,9 @@
-package com.myapp.portalnordsyspb.auth.services;
+package com.myapp.portalnordsyspb.auth.service;
 
-import com.myapp.portalnordsyspb.auth.entities.RefreshToken;
-import com.myapp.portalnordsyspb.auth.entities.User;
-import com.myapp.portalnordsyspb.auth.repositories.RefreshTokenRepository;
-import com.myapp.portalnordsyspb.auth.repositories.UserRepository;
+import com.myapp.portalnordsyspb.auth.entity.RefreshToken;
+import com.myapp.portalnordsyspb.auth.entity.User;
+import com.myapp.portalnordsyspb.auth.repository.RefreshTokenRepository;
+import com.myapp.portalnordsyspb.auth.repository.UserRepository;
 import com.myapp.portalnordsyspb.exceptions.RefreshTokenExpiredException;
 import com.myapp.portalnordsyspb.exceptions.RefreshTokenNotFoundException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

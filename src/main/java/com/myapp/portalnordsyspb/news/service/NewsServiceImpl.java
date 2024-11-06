@@ -34,7 +34,10 @@ public class NewsServiceImpl implements NewsService{
 //    private String path;
 
 //    @Value("${base.url}")
-    private final String baseUrl = "http://172.16.15.77:8080";
+//    private final String baseUrl = "http://172.16.15.77:8080";
+
+    @Value("${project.hostAddress}")
+    private String baseUrl;
 
     @Value("${project.filePathDocker.Photo}")
     private String path;

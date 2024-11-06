@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-//@EnableCaching
 @RequiredArgsConstructor
 public class PostServiceImpl implements PostService{
 
@@ -35,7 +34,6 @@ public class PostServiceImpl implements PostService{
     }
 
     @Override
-//    @Cacheable(value = "post", key = "#id")
     public Post getPostById(Long id) {
         return postRepository.findById(id)
                 .orElseThrow(()->new PostNotFoundException("Пост с id = " + id + " не найден"));

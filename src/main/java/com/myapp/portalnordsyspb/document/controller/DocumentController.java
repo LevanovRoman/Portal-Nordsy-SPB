@@ -45,9 +45,9 @@ public class DocumentController {
     }
 
     @Operation(summary = "Удаление документа по id.")
-    @DeleteMapping("delete/{categoryId}")
-    public ResponseEntity<MessageDto> deleteSection(@PathVariable("categoryId") long categoryId) throws IOException {
-        return ResponseEntity.ok(new MessageDto(documentService.deleteDocument(categoryId)));
+    @DeleteMapping("delete/{documentId}")
+    public ResponseEntity<MessageDto> deleteSection(@PathVariable("documentId") long documentId) throws IOException {
+        return ResponseEntity.ok(new MessageDto(documentService.deleteDocument(documentId)));
     }
 
     private DocumentRequestDto convertDocumentDataToDocumentRequestDto(String documentData)

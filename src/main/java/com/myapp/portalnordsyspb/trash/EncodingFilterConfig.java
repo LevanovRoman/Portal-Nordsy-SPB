@@ -1,7 +1,6 @@
-package com.myapp.portalnordsyspb.auth.config;
+package com.myapp.portalnordsyspb.trash;
 
 import jakarta.servlet.*;
-import org.springframework.context.annotation.Configuration;
 
 import java.io.IOException;
 

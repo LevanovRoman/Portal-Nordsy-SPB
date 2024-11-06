@@ -1,4 +1,4 @@
-package com.myapp.portalnordsyspb.auth.entities;
+package com.myapp.portalnordsyspb.auth.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;

@@ -1,8 +1,8 @@
-package com.myapp.portalnordsyspb.auth.services;
+package com.myapp.portalnordsyspb.auth.service;
 
-import com.myapp.portalnordsyspb.auth.entities.User;
-import com.myapp.portalnordsyspb.auth.entities.UserRole;
-import com.myapp.portalnordsyspb.auth.repositories.UserRepository;
+import com.myapp.portalnordsyspb.auth.entity.User;
+import com.myapp.portalnordsyspb.auth.entity.UserRole;
+import com.myapp.portalnordsyspb.auth.repository.UserRepository;
 import com.myapp.portalnordsyspb.auth.utils.AuthResponse;
 import com.myapp.portalnordsyspb.auth.utils.LoginRequest;
 import com.myapp.portalnordsyspb.auth.utils.RegisterRequest;

@@ -1,4 +1,4 @@
-package com.myapp.portalnordsyspb.auth.services;
+package com.myapp.portalnordsyspb.auth.service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
