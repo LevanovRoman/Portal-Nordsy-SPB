@@ -29,7 +29,7 @@ public class DatabaseDumpService {
 //        String command = String.format(
 //                "pg_dump -h %s -p %s -U %s -F c -b -v -f %s %s",
 //                dbHost, dbPort, dbUser, dumpFileName, dbName);
-        String command = "pg_dump -h 172.16.15.77 -p 5432 -U portal -d portal -F p -b -v -f /home/backups/test.sql";
+        String command = "pg_dump -h 172.16.15.77 -p 5432 -U portal -d portal -F p -b -v -f /home/astra/backups/test.sql";
 
 //        String[] command = {
 //                "pg_dump", // полный путь к pg_dump

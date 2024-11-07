@@ -14,7 +14,7 @@ services:
       - spring-photo:/home/photos
       - spring-book:/home/books
       - spring-document:/home/documents
-      - spring-backups:/home/backups
+      - spring-backups:/application/home/backups
       - spring-log:/home/logs
     restart: always
 
