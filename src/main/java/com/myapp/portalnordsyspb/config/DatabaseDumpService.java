@@ -16,7 +16,7 @@ public class DatabaseDumpService {
     private final String dbName = "portal";
     private final String dbUser = "portal";
     private final String dbPassword = "portalnew";
-    private final String backupDir = "/home/astra/backups";
+    private final String backupDir = "/home/astra/backups/";
 
     private static final Logger logger = LoggerFactory.getLogger(DatabaseDumpService.class);
 
