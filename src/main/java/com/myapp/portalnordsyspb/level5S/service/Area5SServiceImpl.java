@@ -51,7 +51,12 @@ public class Area5SServiceImpl implements Area5SService{
         Area5S area5SNew = new Area5S();
         List<Month5S> monthsLast12 = month5SRepository.findTop12ByOrderByIdDesc();
         List<Criterion5S> criterion5SAll = criterion5SRepository.findAll();
-        saveArea5S(area5SNew, area5SRequestDto);
+        area5SNew.setName(area5SRequestDto.name());
+        area5SNew.setDepartment(department5SRepository.findById(area5SRequestDto.departmentId())
+                .orElseThrow(()-> new DepartmentNotFoundException("Department not found.")));
+        area5SNew.setMaxvalue(maxvalue5SRepository.findById(area5SRequestDto.maxvalueId())
+                .orElseThrow(()-> new MaxvalueNotFoundException("Max value not found")));
+        area5SRepository.save(area5SNew);
         for (Month5S month5S : monthsLast12){
             for (Criterion5S criterion5S : criterion5SAll){
                 Result5S result5S;
@@ -81,7 +86,10 @@ public class Area5SServiceImpl implements Area5SService{
     public void updateArea5S(Area5SRequestDto area5SRequestDto, long areaId) {
         Area5S area5SUpdate = area5SRepository.findById(areaId)
                 .orElseThrow(()-> new AreaNotFoundException("Area not found."));
-        saveArea5S(area5SUpdate, area5SRequestDto);
+        area5SUpdate.setName(area5SRequestDto.name());
+        area5SUpdate.setMaxvalue(maxvalue5SRepository.findById(area5SRequestDto.maxvalueId())
+                .orElseThrow(()-> new MaxvalueNotFoundException("Max value not found")));
+        area5SRepository.save(area5SUpdate);
     }
 
     @Override
@@ -103,14 +111,14 @@ public class Area5SServiceImpl implements Area5SService{
         );
     }
 
-    private void saveArea5S(Area5S area5s, Area5SRequestDto area5SRequestDto){
-        area5s.setName(area5SRequestDto.name());
-        area5s.setDepartment(department5SRepository.findById(area5SRequestDto.departmentId())
-                .orElseThrow(()-> new DepartmentNotFoundException("Department not found.")));
-        area5s.setMaxvalue(maxvalue5SRepository.findById(area5SRequestDto.maxvalueId())
-                .orElseThrow(()-> new MaxvalueNotFoundException("Max value not found")));
-        area5SRepository.save(area5s);
-    }
+//    private void saveArea5S(Area5S area5s, Area5SRequestDto area5SRequestDto){
+//        area5s.setName(area5SRequestDto.name());
+//        area5s.setDepartment(department5SRepository.findById(area5SRequestDto.departmentId())
+//                .orElseThrow(()-> new DepartmentNotFoundException("Department not found.")));
+//        area5s.setMaxvalue(maxvalue5SRepository.findById(area5SRequestDto.maxvalueId())
+//                .orElseThrow(()-> new MaxvalueNotFoundException("Max value not found")));
+//        area5SRepository.save(area5s);
+//    }
 
     private Area5SDto convertArea5SToArea5SDto(Area5S area5S) {
         return new Area5SDto(area5S.getId(), area5S.getName(), area5S.getDepartment().getNumber());

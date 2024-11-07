@@ -57,14 +57,18 @@ public class AreaServiceImpl implements AreaService{
                 resultRepository.save(result);
             }
         }
-        saveArea(areaNew, areaRequestDto);
+        areaNew.setName(areaRequestDto.name());
+        areaNew.setDepartment(departmentRepository.findById(areaRequestDto.departmentId())
+                .orElseThrow(()-> new DepartmentNotFoundException("Department not found.")));
+        areaRepository.save(areaNew);
     }
 
     @Override
     public void updateArea(AreaRequestDto areaRequestDto, long areaId) {
         Area areaUpdate = areaRepository.findById(areaId)
                 .orElseThrow(()-> new AreaNotFoundException("Area not found."));
-        saveArea(areaUpdate, areaRequestDto);
+        areaUpdate.setName(areaRequestDto.name());
+        areaRepository.save(areaUpdate);
     }
 
     @Override
@@ -74,12 +78,12 @@ public class AreaServiceImpl implements AreaService{
         areaRepository.delete(areaDelete);
     }
 
-    private void saveArea(Area area, AreaRequestDto areaRequestDto){
-        area.setName(areaRequestDto.name());
-        area.setDepartment(departmentRepository.findById(areaRequestDto.departmentId())
-                .orElseThrow(()-> new DepartmentNotFoundException("Department not found.")));
-        areaRepository.save(area);
-    }
+//    private void saveArea(Area area, AreaRequestDto areaRequestDto){
+//        area.setName(areaRequestDto.name());
+//        area.setDepartment(departmentRepository.findById(areaRequestDto.departmentId())
+//                .orElseThrow(()-> new DepartmentNotFoundException("Department not found.")));
+//        areaRepository.save(area);
+//    }
 
     private AreaDto convertAreaToAreaDto(Area area) {
         return new AreaDto(
