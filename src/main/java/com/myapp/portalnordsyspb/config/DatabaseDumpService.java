@@ -40,7 +40,7 @@ public class DatabaseDumpService {
                 "-F", "p",
                 "-b",
                 "-v",
-                "-f", "/backup/backup_20241107.sql"
+                "-f", "/home/backups/backup_20241107.sql"
         };
 
         // Устанавливаем пароль в переменную окружения
