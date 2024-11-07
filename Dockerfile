@@ -6,7 +6,7 @@ WORKDIR /build
 RUN apt-get update && \
     apt-get install -y postgresql-client && \
     rm -rf /var/lib/apt/lists/*
-RUN mkdir -p /home/backups && chown -R user:user /backups
+
 ADD /target/portal-nordsy-github-actions.jar application.jar
 RUN java -Djarmode=layertools -jar application.jar extract --destination extracted
 
