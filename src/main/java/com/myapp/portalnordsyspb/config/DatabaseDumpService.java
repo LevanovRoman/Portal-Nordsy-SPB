@@ -29,7 +29,19 @@ public class DatabaseDumpService {
 //        String command = String.format(
 //                "pg_dump -h %s -p %s -U %s -F c -b -v -f %s %s",
 //                dbHost, dbPort, dbUser, dumpFileName, dbName);
-        String command = "pg_dump -h localhost -p 5432 -U portal -d portal -F p -b -v -f " + dumpFileName;
+//        String command = "pg_dump -h localhost -p 5432 -U portal -d portal -F p -b -v -f " + dumpFileName;
+
+        String[] command = {
+                "/usr/bin/pg_dump", // полный путь к pg_dump
+                "-h", "localhost",
+                "-p", "5432",
+                "-U", "portal",
+                "-d", "portal",
+                "-F", "p",
+                "-b",
+                "-v",
+                "-f" + dumpFileName
+        };
 
         // Устанавливаем пароль в переменную окружения
         ProcessBuilder processBuilder = new ProcessBuilder(command);
