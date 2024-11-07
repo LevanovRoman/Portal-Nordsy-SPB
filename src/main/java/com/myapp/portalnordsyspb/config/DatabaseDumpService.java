@@ -29,23 +29,23 @@ public class DatabaseDumpService {
 //        String command = String.format(
 //                "pg_dump -h %s -p %s -U %s -F c -b -v -f %s %s",
 //                dbHost, dbPort, dbUser, dumpFileName, dbName);
-//        String command = "pg_dump -h localhost -p 5432 -U portal -d portal -F p -b -v -f " + dumpFileName;
+        String command = "pg_dump -h 172.16.15.77 -p 5432 -U portal -d portal -F p -b -v -f /home/backups/test.sql";
 
-        String[] command = {
-                "pg_dump", // полный путь к pg_dump
-                "-h", "172.16.15.77",
-                "-p", "5432",
-                "-U", "portal",
-                "-d", "portal",
-                "-F", "p",
-                "-b",
-                "-v",
-                "-f", "/home/backups/backup_20241107.sql"
-        };
+//        String[] command = {
+//                "pg_dump", // полный путь к pg_dump
+//                "-h", "172.16.15.77",
+//                "-p", "5432",
+//                "-U", "portal",
+//                "-d", "portal",
+//                "-F", "p",
+//                "-b",
+//                "-v",
+//                "-f", "/home/backups/backup_20241107.sql"
+//        };
 
         // Устанавливаем пароль в переменную окружения
         ProcessBuilder processBuilder = new ProcessBuilder(command);
-        processBuilder.environment().put("PGPASSWORD", dbPassword);
+        processBuilder.environment().put("PGPASSWORD", "portalnew");
 
         try {
             Process process = processBuilder.start();
