@@ -3,6 +3,10 @@ FROM eclipse-temurin:21.0.2_13-jdk-jammy AS build
 ARG JAR_FILE
 WORKDIR /build
 
+RUN apt-get update && \
+    apt-get install -y postgresql-client && \
+    rm -rf /var/lib/apt/lists/* \
+
 ADD /target/portal-nordsy-github-actions.jar application.jar
 RUN java -Djarmode=layertools -jar application.jar extract --destination extracted
 

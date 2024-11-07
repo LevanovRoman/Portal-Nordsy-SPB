@@ -32,7 +32,7 @@ public class DatabaseDumpService {
 //        String command = "pg_dump -h localhost -p 5432 -U portal -d portal -F p -b -v -f " + dumpFileName;
 
         String[] command = {
-                "/usr/bin/pg_dump", // полный путь к pg_dump
+                "pg_dump", // полный путь к pg_dump
                 "-h", "localhost",
                 "-p", "5432",
                 "-U", "portal",
