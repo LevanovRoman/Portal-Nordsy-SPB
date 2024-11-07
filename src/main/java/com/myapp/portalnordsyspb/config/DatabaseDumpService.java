@@ -32,7 +32,7 @@ public class DatabaseDumpService {
         String command = "pg_dump -h localhost -p 5432 -U portal -d portal -F p -b -v -f " + dumpFileName;
 
         // Устанавливаем пароль в переменную окружения
-        ProcessBuilder processBuilder = new ProcessBuilder("bash", "-c", command);
+        ProcessBuilder processBuilder = new ProcessBuilder(command);
         processBuilder.environment().put("PGPASSWORD", dbPassword);
 
         try {
