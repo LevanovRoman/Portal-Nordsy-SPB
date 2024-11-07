@@ -33,14 +33,14 @@ public class DatabaseDumpService {
 
         String[] command = {
                 "pg_dump", // полный путь к pg_dump
-                "-h", "localhost",
+                "-h", "172.16.15.77",
                 "-p", "5432",
                 "-U", "portal",
                 "-d", "portal",
                 "-F", "p",
                 "-b",
                 "-v",
-                "-f" + dumpFileName
+                "-f", "/backup/backup_20241107.sql"
         };
 
         // Устанавливаем пароль в переменную окружения
