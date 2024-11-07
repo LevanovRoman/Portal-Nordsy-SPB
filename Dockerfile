@@ -3,10 +3,6 @@ FROM eclipse-temurin:21.0.2_13-jdk-jammy AS build
 ARG JAR_FILE
 WORKDIR /build
 
-RUN apt-get update && \
-    apt-get install -y postgresql-client && \
-    rm -rf /var/lib/apt/lists/*
-
 ADD /target/portal-nordsy-github-actions.jar application.jar
 RUN java -Djarmode=layertools -jar application.jar extract --destination extracted
 
@@ -16,6 +12,10 @@ RUN addgroup spring-boot-group && adduser --ingroup spring-boot-group spring-boo
 USER spring-boot:spring-boot-group
 VOLUME /tmp
 WORKDIR /application
+
+RUN apt-get update && \
+    apt-get install -y postgresql-client && \
+    rm -rf /var/lib/apt/lists/*
 
 COPY --from=build /build/extracted/dependencies .
 COPY --from=build /build/extracted/spring-boot-loader .
