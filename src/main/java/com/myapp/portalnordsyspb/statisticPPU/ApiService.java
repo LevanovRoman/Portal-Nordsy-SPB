@@ -34,7 +34,7 @@ public class ApiService {
     }
 
 //    @Scheduled(cron = "0 51 11 * * *", zone = "Europe/Moscow")
-    @Scheduled(cron = "0 */5 * * * * ") // Например, каждые пять минут
+//    @Scheduled(cron = "0 */5 * * * * ") // Например, каждые пять минут
     public void getDataFrom1S(){
 //        String url = "http://dev1c/Design1CDO3/hs/online-ppu/getOnline_ppu";
         try {
@@ -56,7 +56,7 @@ public class ApiService {
         }
     }
 
-    @Scheduled(cron = "0 */5 * * * * ") // Например, каждые пять минут
+//    @Scheduled(cron = "0 */5 * * * * ") // Например, каждые пять минут
     public void fetchDataFromExternalApi() {
 //        String url = "http://api.external-service.com/data";
         try {
