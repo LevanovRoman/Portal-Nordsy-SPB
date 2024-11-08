@@ -32,8 +32,8 @@ public class DatabaseDumpService {
 
     private static final Logger logger = LoggerFactory.getLogger(DatabaseDumpService.class);
 
-    @Scheduled(cron = "0 */5 * * * * ") // Например, каждые пять минут
-//    @Scheduled(cron = "0 0 0 * * *", zone = "Europe/Moscow")
+//    @Scheduled(cron = "0 */5 * * * * ") // Например, каждые пять минут
+    @Scheduled(cron = "0 0 0 * * *", zone = "Europe/Moscow")
     public void createDatabaseDump() {
         String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String dumpFileName = backupDir + "backup_" + timestamp + ".sql";
