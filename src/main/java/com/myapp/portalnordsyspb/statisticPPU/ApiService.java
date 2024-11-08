@@ -8,6 +8,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
@@ -47,11 +48,23 @@ public class ApiService {
                     new ParameterizedTypeReference<List<MyDataDto>>() {
                     });
             List<MyDataDto> result = response.getBody();
-            System.out.println("result: " + result);
+            System.out.println("RESULT: " + result);
             assert result != null;
             System.out.println(result.getFirst().Zaregistrirovano());
         } catch (Exception e){
             System.err.println("Error with 1C");
+        }
+    }
+
+    @Scheduled(cron = "0 */5 * * * * ") // Например, каждые пять минут
+    public void fetchDataFromExternalApi() {
+//        String url = "http://api.external-service.com/data";
+        try {
+            String answer = restTemplate.getForObject(url, String.class);
+            System.out.println("ANSWER: " + answer);
+        } catch (RestClientException e) {
+            // Обработка ошибок подключения
+            System.err.println("Error with connect to external service: " + e.getMessage());
         }
     }
 }
