@@ -20,33 +20,27 @@ public class DatabaseDumpService {
 
     private static final Logger logger = LoggerFactory.getLogger(DatabaseDumpService.class);
 
-//    @Scheduled(cron = "0 */5 * * * * ") // Например, каждый час
-    @Scheduled(cron = "0 0 0 * * *", zone = "Europe/Moscow")
+    @Scheduled(cron = "0 */5 * * * * ") // Например, каждые пять минут
+//    @Scheduled(cron = "0 0 0 * * *", zone = "Europe/Moscow")
     public void createDatabaseDump() {
         String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String dumpFileName = backupDir + "backup_" + timestamp + ".sql";
 
-        // Создаем команду для дампа
-//        String command = String.format(
-//                "pg_dump -h %s -p %s -U %s -F c -b -v -f %s %s",
-//                dbHost, dbPort, dbUser, dumpFileName, dbName);
-//        String command = "pg_dump -h 172.16.15.77 -p 5432 -U portal -d portal -F p -b -v -f /home/astra/backups/test.sql";
-
         String[] command = {
                 "pg_dump", // полный путь к pg_dump
-                "-h", "172.16.15.77",
-                "-p", "5432",
-                "-U", "portal",
-                "-d", "portal",
+                "-h", dbHost,
+                "-p", dbPort,
+                "-U", dbUser,
+                "-d", dbName,
                 "-F", "p",
                 "-b",
                 "-v",
-                "-f", "/home/backups/backup_20241107.sql"
+                "-f", dumpFileName
         };
 
         // Устанавливаем пароль в переменную окружения
         ProcessBuilder processBuilder = new ProcessBuilder(command);
-        processBuilder.environment().put("PGPASSWORD", "portalnew");
+        processBuilder.environment().put("PGPASSWORD", dbPassword);
 
         try {
             Process process = processBuilder.start();
