@@ -38,7 +38,7 @@ public class ApiService {
 //        String url = "http://dev1c/Design1CDO3/hs/online-ppu/getOnline_ppu";
         try {
 
-            System.out.println("Начало запроса к 1С");
+            System.out.println("Start request to 1C");
             HttpHeaders headers = new HttpHeaders();
             headers.setBasicAuth("erpagent", "123");
 
@@ -51,7 +51,7 @@ public class ApiService {
             assert result != null;
             System.out.println(result.getFirst().Zaregistrirovano());
         } catch (Exception e){
-            System.err.println("Ошибка при запросе к 1С.");
+            System.err.println("Error with 1C");
         }
     }
 }

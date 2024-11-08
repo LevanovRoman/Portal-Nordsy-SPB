@@ -10,6 +10,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import java.io.PrintStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @EnableScheduling
@@ -25,6 +26,11 @@ public class PortalNordsySpbApplication {
     public Dotenv dotenv() {
         // Загружаем .env файл из корневой директории
         return Dotenv.configure().filename(".env").load();
+    }
+
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
     }
 
     @PostConstruct
