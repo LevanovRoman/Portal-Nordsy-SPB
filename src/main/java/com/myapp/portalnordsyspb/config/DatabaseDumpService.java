@@ -1,5 +1,6 @@
 package com.myapp.portalnordsyspb.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import java.io.IOException;
@@ -11,12 +12,23 @@ import org.slf4j.LoggerFactory;
 @Service
 public class DatabaseDumpService {
 
-    private final String dbHost = "172.16.15.77";
-    private final String dbPort = "5432";
-    private final String dbName = "portal";
-    private final String dbUser = "portal";
-    private final String dbPassword = "portalnew";
-    private final String backupDir = "/home/backups/";
+    @Value("${project.db.host}")
+    private String dbHost;
+
+    @Value("${project.db.port}")
+    private String dbPort;
+
+    @Value("${project.db.name}")
+    private String dbName;
+
+    @Value("${project.db.user}")
+    private String dbUser;
+
+    @Value("${project.db.password}")
+    private String dbPassword;
+
+    @Value("${project.db.backupDir}")
+    private String backupDir;
 
     private static final Logger logger = LoggerFactory.getLogger(DatabaseDumpService.class);
 
