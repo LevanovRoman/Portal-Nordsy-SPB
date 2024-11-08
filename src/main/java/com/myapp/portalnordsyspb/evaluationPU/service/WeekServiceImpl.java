@@ -15,24 +15,6 @@ public class WeekServiceImpl implements WeekService{
 
     private final WeekRepository weekRepository;
 
-//    @Override
-//    public Week createWeek() {
-//        Week weekNew = new Week();
-//        Week weekLast = getLastWeek();
-//        weekNew.setNumber(weekLast.getNumber()+1);
-//        return weekRepository.save(weekNew);
-//    }
-
-//    @Override
-//    public Week getLastWeek() {
-//        return weekRepository.findTopByOrderByIdDesc();
-//    }
-
-//    @Override
-//    public Optional<Week> getWeekById(long week_id) {
-//        return weekRepository.findById(week_id);
-//    }
-
     @Override
     public Week getTopByOrderByIdDesc() {
         return weekRepository.findTopByOrderByIdDesc();

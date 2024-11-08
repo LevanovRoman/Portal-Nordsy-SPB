@@ -32,8 +32,7 @@ public class BookServiceImpl implements BookService {
 
     @Value("${project.hostAddress}")
     private String baseUrl;
-//    private final String baseUrl = "http://172.16.15.77:8080";
-    //    private final String path ="/home/photos/";
+
     @Value("${project.filePathDocker.Library}")
     private String path;
 

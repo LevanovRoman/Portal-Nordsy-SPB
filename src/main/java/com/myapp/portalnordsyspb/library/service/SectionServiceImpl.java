@@ -1,6 +1,5 @@
 package com.myapp.portalnordsyspb.library.service;
 
-import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.MessageDto;
 import com.myapp.portalnordsyspb.exceptions.FileExistsException;
 import com.myapp.portalnordsyspb.exceptions.SectionNotFoundException;
 import com.myapp.portalnordsyspb.file.service.FileService;
@@ -42,22 +41,6 @@ public class SectionServiceImpl implements SectionService{
         String uploadedFileName = fileService.uploadFile(path, file);
         // set the value of field 'label' as file name
         sectionRequestDto.setLabel(uploadedFileName);
-        // map dto to Section object
-//        Section section = new Section();
-//        section.setName(sectionRequestDto.getName());
-//        section.setLabel(sectionRequestDto.getLabel());
-//        // save the section object -> savedSection object
-//        Section savedSection = sectionRepository.save(section);
-//        // generate the fileUrl
-//        String fileUrl = baseUrl + "/api/file/" + uploadedFileName;
-//        //  map Section object to dto and return it
-//        SectionRequestDto response = SectionRequestDto
-//                .builder()
-//                .name(savedSection.getName())
-//                .label(savedSection.getLabel())
-//                .labelUrl(fileUrl)
-//                .build();
-//        return response;
         return saveSection(sectionRequestDto);
     }
 

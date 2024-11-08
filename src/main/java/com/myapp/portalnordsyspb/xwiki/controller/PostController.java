@@ -1,11 +1,10 @@
 package com.myapp.portalnordsyspb.xwiki.controller;
 
-import com.myapp.portalnordsyspb.xwiki.dto.responseDto.ResponseDto;
+import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.MessageDto;
 import com.myapp.portalnordsyspb.xwiki.dto.requestDto.PostRequestDto;
 import com.myapp.portalnordsyspb.xwiki.service.PostService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,18 +18,18 @@ public class PostController {
 
     @PostMapping("create")
     public ResponseEntity<PostRequestDto> createPost(@RequestBody PostRequestDto postRequestDto){
-        return new ResponseEntity<>(postService.createPost(postRequestDto), HttpStatus.CREATED);
+        return ResponseEntity.ok(postService.createPost(postRequestDto));
     }
 
     @PutMapping("update/{id}")
     public ResponseEntity<PostRequestDto> updatePost(@RequestBody PostRequestDto postRequestDto,
                                                      @PathVariable("id") long postId){
-        return new ResponseEntity<>(postService.updatePost(postRequestDto, postId), HttpStatus.OK);
+        return ResponseEntity.ok(postService.updatePost(postRequestDto, postId));
     }
 
     @DeleteMapping("delete/{id}")
-    public ResponseEntity<ResponseDto> deletePost(@PathVariable("id") long id){
+    public ResponseEntity<MessageDto> deletePost(@PathVariable("id") long id){
         postService.deletePost(id);
-        return new ResponseEntity<>(new ResponseDto("Post deleted"), HttpStatus.OK);
+        return ResponseEntity.ok(new MessageDto("Post deleted"));
     }
 }

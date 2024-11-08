@@ -10,16 +10,13 @@ import com.myapp.portalnordsyspb.evaluationPU.entity.Criterion;
 import com.myapp.portalnordsyspb.evaluationPU.entity.Result;
 import com.myapp.portalnordsyspb.evaluationPU.entity.Week;
 import com.myapp.portalnordsyspb.evaluationPU.repository.WeekRepository;
-import com.myapp.portalnordsyspb.exceptions.CriterionNotFoundException;
 import com.myapp.portalnordsyspb.evaluationPU.repository.AreaRepository;
 import com.myapp.portalnordsyspb.evaluationPU.repository.ResultRepository;
 import com.myapp.portalnordsyspb.exceptions.AreaNotFoundException;
 import com.myapp.portalnordsyspb.exceptions.WeekNotFoundException;
-import com.myapp.portalnordsyspb.news.dto.response.NewsResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -53,17 +50,6 @@ public class ResultServiceImpl implements ResultService{
                 .collect(Collectors.toList()).reversed();
     }
 
-//    @Override
-//    @Transactional
-//    public void addResultsForWeek(List<ResultRequestDto> resultRequestDtoList) {
-//        Week weekLast = weekService.createWeek();
-//        long weekId = weekLast.getId();
-//        List<Result> resultList = resultRequestDtoList.stream()
-//                .map(result -> convertResultDtoToResult(result, weekId))
-//                .collect(Collectors.toList());
-//        resultRepository.saveAll(resultList);
-//    }
-
     @Override
     public void createResultsForWeek(WeekRequestDto weekRequestDto) {
         Week week = new Week();
@@ -74,16 +60,6 @@ public class ResultServiceImpl implements ResultService{
         resultRepository.saveAll(resultList);
         weekRepository.save(week);
     }
-
-//    @Override
-//    public void updateResultsForWeek(List<ResultRequestDto> resultRequestDtoList, long weekId) {
-//        for (ResultRequestDto resultDto : resultRequestDtoList){
-//            Result result = resultRepository.findByAreaIdAndWeekIdAndCriterionId(
-//                    resultDto.areaId(), weekId, resultDto.criterionId());
-//            result.setValue(resultDto.value());
-//            resultRepository.save(result);
-//        }
-//    }
 
     @Override
     public void updateResultsForWeek(WeekRequestDto weekRequestDto, long weekId) {

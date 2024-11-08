@@ -30,18 +30,11 @@ public class NewsServiceImpl implements NewsService{
 
     private final FileService fileService;
 
-//    @Value("${project.photo}")
-//    private String path;
-
-//    @Value("${base.url}")
-//    private final String baseUrl = "http://172.16.15.77:8080";
-
     @Value("${project.hostAddress}")
     private String baseUrl;
 
     @Value("${project.filePathDocker.Photo}")
     private String path;
-//    private final String path ="/home/photos/";
 
     @Override
     public NewsRequestDto addNews(NewsRequestDto newsRequestDto, MultipartFile file) throws IOException {

@@ -22,10 +22,6 @@ public class Maxvalue5S {
 
     private int value;
 
-//    @OneToOne
-//    @PrimaryKeyJoinColumn
-//    private Area5S area5S;
-
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "maxvalue")
     private List<Area5S> area5SList;

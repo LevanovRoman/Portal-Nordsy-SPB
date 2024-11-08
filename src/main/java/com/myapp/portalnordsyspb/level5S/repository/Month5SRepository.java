@@ -9,9 +9,6 @@ import java.util.List;
 
 public interface Month5SRepository extends JpaRepository<Month5S, Long> {
 
-//    @Query(value = "SELECT id FROM month5s WHERE id = (select MAX(id) FROM month5s)", nativeQuery = true)
-//    long findMonthIdForLastMonth();
-
     @Query(value = "SELECT * FROM month5s WHERE id = (select MAX(id) FROM month5s)", nativeQuery = true)
     Month5S findMonthForLastMonth();
 

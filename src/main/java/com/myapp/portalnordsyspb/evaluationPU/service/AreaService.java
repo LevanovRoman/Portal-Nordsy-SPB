@@ -12,8 +12,6 @@ public interface AreaService {
 
     List<AreaTableDto> getListAreaTableDtoByDepartmentId(Long departmentId);
 
-//    Optional<Area> getAreaById(Long area_id);
-
     List<AreaDto> getAreaDto();
 
     void createArea(AreaRequestDto areaRequestDto);

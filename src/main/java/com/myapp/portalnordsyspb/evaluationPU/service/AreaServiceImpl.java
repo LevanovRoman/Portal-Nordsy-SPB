@@ -10,7 +10,6 @@ import com.myapp.portalnordsyspb.evaluationPU.entity.Week;
 import com.myapp.portalnordsyspb.evaluationPU.repository.*;
 import com.myapp.portalnordsyspb.exceptions.AreaNotFoundException;
 import com.myapp.portalnordsyspb.exceptions.DepartmentNotFoundException;
-import com.myapp.portalnordsyspb.level5S.entity.Area5S;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -77,13 +76,6 @@ public class AreaServiceImpl implements AreaService{
                 .orElseThrow(()-> new AreaNotFoundException("Area not found."));
         areaRepository.delete(areaDelete);
     }
-
-//    private void saveArea(Area area, AreaRequestDto areaRequestDto){
-//        area.setName(areaRequestDto.name());
-//        area.setDepartment(departmentRepository.findById(areaRequestDto.departmentId())
-//                .orElseThrow(()-> new DepartmentNotFoundException("Department not found.")));
-//        areaRepository.save(area);
-//    }
 
     private AreaDto convertAreaToAreaDto(Area area) {
         return new AreaDto(

@@ -111,15 +111,6 @@ public class Area5SServiceImpl implements Area5SService{
         );
     }
 
-//    private void saveArea5S(Area5S area5s, Area5SRequestDto area5SRequestDto){
-//        area5s.setName(area5SRequestDto.name());
-//        area5s.setDepartment(department5SRepository.findById(area5SRequestDto.departmentId())
-//                .orElseThrow(()-> new DepartmentNotFoundException("Department not found.")));
-//        area5s.setMaxvalue(maxvalue5SRepository.findById(area5SRequestDto.maxvalueId())
-//                .orElseThrow(()-> new MaxvalueNotFoundException("Max value not found")));
-//        area5SRepository.save(area5s);
-//    }
-
     private Area5SDto convertArea5SToArea5SDto(Area5S area5S) {
         return new Area5SDto(area5S.getId(), area5S.getName(), area5S.getDepartment().getNumber());
     }

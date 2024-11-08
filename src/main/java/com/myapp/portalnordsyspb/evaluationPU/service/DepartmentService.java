@@ -12,8 +12,6 @@ public interface DepartmentService {
 
     List<DepartmentResponseDto> getAllDepartments();
 
-//    List<DepartmentDto> getListDepartments();
-
     List<DepartmentTableDto> getListDepartmentTable();
 
     AreaAndCriterionDto getListAreaDtoAndCriterionDto();
@@ -23,12 +21,4 @@ public interface DepartmentService {
     void updateDepartment(DepartmentRequestDto departmentRequestDto, long departmentId);
 
     void deleteDepartment(long departmentId);
-
-//    void createTotalWeekSet(TotalWeekSetDto totalWeekSetDto);
-
-//    void createDepartmentSet(DepartmentRequestDto departmentRequestDto);
-
-//    List<DepartmentWeekDto> getListDepartmentsByWeek(int weekNumber);
-
-//    void addTotalWeekSet(int weekNumber, TotalWeekSetDto totalWeekSetDto);
 }
