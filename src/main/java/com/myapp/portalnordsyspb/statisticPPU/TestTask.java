@@ -15,12 +15,12 @@ public class TestTask {
 //        System.out.println("Выполнение задачи: " + System.currentTimeMillis());
 //    }
 
-    @Scheduled(cron = "0 05 11 * * *")
+    @Scheduled(cron = "0 05 11 * * *", zone = "Europe/Moscow")
     public void performTask() {
         System.out.println("Выполнение задачи: " + System.currentTimeMillis());
     }
 
-    @Scheduled(cron = "0 10 11 * * *")
+    @Scheduled(cron = "0 10 11 * * *", zone = "Europe/Moscow")
     public void performTask2() {
         System.out.println("Выполнение задачи: 11-10");
     }

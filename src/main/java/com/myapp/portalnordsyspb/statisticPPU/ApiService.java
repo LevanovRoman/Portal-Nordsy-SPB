@@ -32,17 +32,26 @@ public class ApiService {
 //        return restTemplate.exchange(url, HttpMethod.GET, entity, MyDataDto.class).getBody();
     }
 
-    @Scheduled(cron = "0 51 11 * * *")
+//    @Scheduled(cron = "0 51 11 * * *", zone = "Europe/Moscow")
+    @Scheduled(cron = "0 */5 * * * * ") // Например, каждые пять минут
     public void getDataFrom1S(){
 //        String url = "http://dev1c/Design1CDO3/hs/online-ppu/getOnline_ppu";
-        HttpHeaders headers = new HttpHeaders();
-        headers.setBasicAuth("erpagent", "123");
+        try {
 
-        HttpEntity<String> entity = new HttpEntity<>(headers);
-        ResponseEntity<List<MyDataDto>> response = restTemplate.exchange(url, HttpMethod.GET, entity,
-                new ParameterizedTypeReference<List<MyDataDto>>() {});
-        List<MyDataDto> result = response.getBody();
-        assert result != null;
-        System.out.println(result.getFirst().Zaregistrirovano());
+            System.out.println("Начало запроса к 1С");
+            HttpHeaders headers = new HttpHeaders();
+            headers.setBasicAuth("erpagent", "123");
+
+            HttpEntity<String> entity = new HttpEntity<>(headers);
+            ResponseEntity<List<MyDataDto>> response = restTemplate.exchange(url, HttpMethod.GET, entity,
+                    new ParameterizedTypeReference<List<MyDataDto>>() {
+                    });
+            List<MyDataDto> result = response.getBody();
+            System.out.println("result: " + result);
+            assert result != null;
+            System.out.println(result.getFirst().Zaregistrirovano());
+        } catch (Exception e){
+            System.err.println("Ошибка при запросе к 1С.");
+        }
     }
 }
