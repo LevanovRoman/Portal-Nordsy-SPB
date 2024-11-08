@@ -1,5 +1,6 @@
 package com.myapp.portalnordsyspb.config;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Service
+@RequiredArgsConstructor
 public class DatabaseDumpService {
 
     @Value("${project.db.host}")
@@ -30,10 +32,12 @@ public class DatabaseDumpService {
     @Value("${project.db.backupDir}")
     private String backupDir;
 
+    private final FileCleanupService fileCleanupService;
+
     private static final Logger logger = LoggerFactory.getLogger(DatabaseDumpService.class);
 
-//    @Scheduled(cron = "0 */5 * * * * ") // Например, каждые пять минут
-    @Scheduled(cron = "0 0 0 * * *", zone = "Europe/Moscow")
+    @Scheduled(cron = "0 */5 * * * * ") // Например, каждые пять минут
+//    @Scheduled(cron = "0 0 0 * * *", zone = "Europe/Moscow")
     public void createDatabaseDump() {
         String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String dumpFileName = backupDir + "backup_" + timestamp + ".sql";
@@ -59,6 +63,8 @@ public class DatabaseDumpService {
             int exitCode = process.waitFor();
             if (exitCode == 0) {
                 System.out.println("Дамп базы данных успешно создан: " + dumpFileName);
+                System.out.println("Запуск удаления самого старого файла.");
+                fileCleanupService.deleteOldestFile();
             } else {
                 System.err.println("Ошибка при создании дампа базы данных.");
             }
