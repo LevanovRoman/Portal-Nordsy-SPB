@@ -73,6 +73,7 @@ public class DocumentServiceImpl implements DocumentService{
             String fileUrl = baseUrl + "/api/file/document/" + document.getFileName();
             DocumentResponseDto documentResponseDto = DocumentResponseDto
                     .builder()
+                    .id(document.getId())
                     .title(document.getTitle())
                     .fileUrl(fileUrl)
                     .build();

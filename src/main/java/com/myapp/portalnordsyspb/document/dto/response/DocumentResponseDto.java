@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DocumentResponseDto {
+    private long id;
     private String title;
     private String fileUrl;
 
