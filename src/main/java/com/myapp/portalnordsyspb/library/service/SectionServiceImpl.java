@@ -41,7 +41,8 @@ public class SectionServiceImpl implements SectionService{
         String uploadedFileName = fileService.uploadFile(path, file);
         // set the value of field 'label' as file name
         sectionRequestDto.setLabel(uploadedFileName);
-        return saveSection(sectionRequestDto);
+        Section section = new Section();
+        return saveSection(section, sectionRequestDto);
     }
 
     @Override
@@ -58,12 +59,11 @@ public class SectionServiceImpl implements SectionService{
         }
         // 3.set NewsRequestDto`s photo value
         sectionRequestDto.setLabel(fileName);
-        return saveSection(sectionRequestDto);
+        return saveSection(section, sectionRequestDto);
 
     }
 
-    private SectionRequestDto saveSection(SectionRequestDto sectionRequestDto){
-        Section section = new Section();
+    private SectionRequestDto saveSection(Section section, SectionRequestDto sectionRequestDto){
         section.setName(sectionRequestDto.getName());
         section.setLabel(sectionRequestDto.getLabel());
         // save the section object -> savedSection object
