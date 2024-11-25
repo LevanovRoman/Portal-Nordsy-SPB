@@ -92,6 +92,7 @@ public class BookServiceImpl implements BookService {
         for (Book book : bookList){
             String fileUrl = baseUrl + "/api/file/library/" + book.getFileName();
             BookResponseDto bookResponseDto = new BookResponseDto(
+                    book.getId(),
                     book.getTitle(),
                     fileUrl
             );
