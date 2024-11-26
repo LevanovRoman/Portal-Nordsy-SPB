@@ -4,9 +4,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Comparator;
 
@@ -15,8 +12,6 @@ public class FileCleanupService {
 
     @Value("${project.db.backupDir}")
     private String directoryPath;
-
-//    private final String directoryPath = "/path/to/your/directory";
 
     public void deleteOldestFile() {
         File directory = new File(directoryPath);
