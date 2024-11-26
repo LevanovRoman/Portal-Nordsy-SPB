@@ -45,6 +45,11 @@ public class FileController {
         return getFileByPathAndName(pathLibrary, fileName);
     }
 
+    @RequestMapping("/document/{fileName}")
+    public ResponseEntity<InputStreamResource> serveFileHandlerDocument(@PathVariable String fileName) throws IOException {
+        return getFileByPathAndName(pathDocument, fileName);
+    }
+
     private ResponseEntity<InputStreamResource> getFileByPathAndName(String path, String fileName) throws IOException {
         MediaType mediaType = MediaTypeUtils.getMediaTypeForFileName(this.servletContext, fileName);
         File file = new File(path + "/" + fileName);

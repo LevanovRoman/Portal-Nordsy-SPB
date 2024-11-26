@@ -16,8 +16,6 @@ public class CategoryServiceImpl implements CategoryService{
 
     @Override
     public List<CategoryResponseDto> getAllCategories() {
-        System.out.println("getAllCategories");
-        System.out.println(categoryRepository.findAll());
         return categoryRepository
                 .findAll()
                 .stream().map(this::convertCategoryToCategoryResponseDto).toList();
