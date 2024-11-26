@@ -2,6 +2,7 @@ package com.myapp.portalnordsyspb.auth.controller;
 
 import com.myapp.portalnordsyspb.auth.dto.UserResponseDto;
 import com.myapp.portalnordsyspb.auth.entity.User;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -12,7 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api/user")
+@RequestMapping("api/auth/user")
+@Tag(name = "Authentication", description = "Description for authentication")
 public class UserController {
 
     @GetMapping
