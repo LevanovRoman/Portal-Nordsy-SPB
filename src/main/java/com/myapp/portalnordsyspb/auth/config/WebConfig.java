@@ -27,6 +27,10 @@ public class WebConfig {
         config.addAllowedOrigin("http://localhost:5174");
         config.addAllowedOrigin("http://localhost:5173");
         config.addAllowedOrigin("http://production_system-test.nordsy.spb.ru");
+        config.addAllowedOrigin("http://production-system.nordsy.spb.ru");
+        config.addAllowedOrigin("http://www.production-system.nordsy.spb.ru");
+        config.addAllowedOrigin("https://production-system.nordsy.spb.ru");
+        config.addAllowedOrigin("https://www.production-system.nordsy.spb.ru");
         config.setAllowedHeaders(Arrays.asList(
                 HttpHeaders.AUTHORIZATION,
                 HttpHeaders.CONTENT_TYPE,
