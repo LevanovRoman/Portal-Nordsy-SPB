@@ -1,13 +1,13 @@
 package com.myapp.portalnordsyspb.trainingStatistics.controller;
 
+import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.MessageDto;
+import com.myapp.portalnordsyspb.trainingStatistics.dto.request.PeriodRequestDto;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.response.PeriodResponseDto;
 import com.myapp.portalnordsyspb.trainingStatistics.service.PeriodService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,5 +22,24 @@ public class PeriodController {
     @GetMapping("/all")
     public ResponseEntity<List<PeriodResponseDto>> getAllPeriodResponseDto(){
         return ResponseEntity.ok(periodService.getAllPeriodResponseDto());
+    }
+
+    @PostMapping("/create-period")
+    public ResponseEntity<MessageDto> createPeriod(@RequestBody PeriodRequestDto periodRequestDto){
+        periodService.createPeriod(periodRequestDto);
+        return ResponseEntity.ok(new MessageDto("Period created successfully."));
+    }
+
+    @PutMapping("/update-period/{periodId}")
+    public ResponseEntity<MessageDto> updatePeriod(@RequestBody PeriodRequestDto periodRequestDto,
+                                                   @PathVariable("periodId") long periodId){
+        periodService.updatePeriod(periodRequestDto, periodId);
+        return ResponseEntity.ok(new MessageDto("Period updated successfully."));
+    }
+
+    @DeleteMapping("/delete-period/{periodId}")
+    public ResponseEntity<MessageDto> deletePeriod(@PathVariable("periodId") long periodId){
+        periodService.deletePeriod(periodId);
+        return ResponseEntity.ok(new MessageDto("Period deleted successfully."));
     }
 }

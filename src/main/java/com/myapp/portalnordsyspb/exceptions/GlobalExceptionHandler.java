@@ -131,4 +131,10 @@ public class GlobalExceptionHandler {
         return new MessageDto(ex.getMessage());
     }
 
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(ObjectNotFoundException.class)
+    public MessageDto objectNotFoundException(ObjectNotFoundException ex){
+        return new MessageDto(ex.getMessage());
+    }
+
 }

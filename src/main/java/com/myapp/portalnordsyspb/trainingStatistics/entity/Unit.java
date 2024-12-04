@@ -1,18 +1,13 @@
 package com.myapp.portalnordsyspb.trainingStatistics.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.myapp.portalnordsyspb.evaluationPU.entity.Area;
-import com.myapp.portalnordsyspb.evaluationPU.entity.Criterion;
-import com.myapp.portalnordsyspb.evaluationPU.entity.Week;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Unit {

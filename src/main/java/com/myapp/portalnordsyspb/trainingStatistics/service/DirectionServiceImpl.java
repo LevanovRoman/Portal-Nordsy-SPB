@@ -1,5 +1,6 @@
 package com.myapp.portalnordsyspb.trainingStatistics.service;
 
+import com.myapp.portalnordsyspb.exceptions.ObjectNotFoundException;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.response.DirectionResponseDto;
 import com.myapp.portalnordsyspb.trainingStatistics.entity.Direction;
 import com.myapp.portalnordsyspb.trainingStatistics.repository.DirectionRepository;
@@ -25,6 +26,12 @@ public class DirectionServiceImpl implements DirectionService{
                 .sorted(Comparator.comparing(Direction::getId))
                 .map(direction -> convertDirectionToDirectionResponseDto(direction, period_id))
                 .toList();
+    }
+
+    @Override
+    public Direction getDirectionById(long directionId) {
+        return directionRepository.findById(directionId)
+                .orElseThrow(() -> new ObjectNotFoundException("Direction not found."));
     }
 
     private DirectionResponseDto convertDirectionToDirectionResponseDto(Direction direction, Long periodId) {
