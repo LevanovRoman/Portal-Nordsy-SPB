@@ -33,4 +33,7 @@ public class Unit {
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "weekday_id")
     private Weekday weekday;
+
+    public Unit(int i, Direction direction, Period periodById, Weekday weekdayNotFound) {
+    }
 }

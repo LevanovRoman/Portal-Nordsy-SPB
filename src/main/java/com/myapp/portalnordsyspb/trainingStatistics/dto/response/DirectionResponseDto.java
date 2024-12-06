@@ -7,6 +7,6 @@ public record DirectionResponseDto(
         String remark,
         float hours,
         List<InstructorResponseDto> instructors,
-        UnitResponseDto units
+        List<UnitResponseDto> units
 ) {
 }

@@ -40,7 +40,7 @@ public class DirectionServiceImpl implements DirectionService{
                 direction.getRemark(),
                 direction.getHours(),
                 instructorService.getAllByDirectionId(direction.getId()),
-                unitService.getUnitResponseDtoByPeriodIdAndDirectionId(periodId, direction.getId())
+                unitService.getUnitResponseDtoByPeriodIdAndDirectionId(periodId, direction)
         );
     }
 }

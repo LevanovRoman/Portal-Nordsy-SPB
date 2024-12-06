@@ -1,8 +1,13 @@
 package com.myapp.portalnordsyspb.trainingStatistics.service;
 
+import com.myapp.portalnordsyspb.exceptions.ObjectNotFoundException;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.response.UnitResponseDto;
+import com.myapp.portalnordsyspb.trainingStatistics.entity.Direction;
 import com.myapp.portalnordsyspb.trainingStatistics.entity.Unit;
+import com.myapp.portalnordsyspb.trainingStatistics.entity.Weekday;
+import com.myapp.portalnordsyspb.trainingStatistics.repository.PeriodRepository;
 import com.myapp.portalnordsyspb.trainingStatistics.repository.UnitRepository;
+import com.myapp.portalnordsyspb.trainingStatistics.repository.WeekdayRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,18 +20,31 @@ import java.util.Optional;
 public class UnitServiceImpl implements UnitService{
 
     private final UnitRepository unitRepository;
+    private final PeriodRepository periodRepository;
+    private final WeekdayRepository weekdayRepository;
 
     @Override
-    public UnitResponseDto getUnitResponseDtoByPeriodIdAndDirectionId(Long period_id, Long direction_id) {
-        List<Integer> results = new ArrayList<>();
+    public List<UnitResponseDto> getUnitResponseDtoByPeriodIdAndDirectionId(Long period_id, Direction direction) {
+        List<UnitResponseDto> unitResponseDtoList = new ArrayList<>();
+
         for (long i = 1; i <=5 ; i++) {
-            Optional<Unit> unit = unitRepository.findByDirectionIdAndPeriodIdAndWeekdayId(direction_id, period_id, i);
-            if (unit.isEmpty()){
-                results.add(0);
-            } else {
-                results.add(unit.get().getValue());
-            }
+            Weekday weekday = weekdayRepository.findById(i)
+                    .orElseThrow(() -> new ObjectNotFoundException("Weekday not found"));
+            Unit unit = unitRepository.findByDirectionIdAndPeriodIdAndWeekdayId(direction.getId(), period_id, i)
+                    .orElse(getNewUnit(period_id, direction, weekday));
+            unitResponseDtoList.add(new UnitResponseDto(i, weekday.getName(), unit.getId(), unit.getValue()));
         }
-        return new UnitResponseDto(results);
+        return unitResponseDtoList;
+    }
+
+    private Unit getNewUnit(long period_id, Direction direction, Weekday weekday) {
+        Unit unitNew = new Unit();
+        unitNew.setDirection(direction);
+        unitNew.setPeriod(periodRepository.findById(period_id)
+                .orElseThrow(() -> new ObjectNotFoundException("Period not found.")));
+        unitNew.setWeekday(weekday);
+        unitNew.setValue(0);
+        unitRepository.save(unitNew);
+        return unitNew;
     }
 }
