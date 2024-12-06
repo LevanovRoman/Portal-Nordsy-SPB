@@ -37,7 +37,6 @@ public class DirectionServiceImpl implements DirectionService{
     private DirectionResponseDto convertDirectionToDirectionResponseDto(Direction direction, Long periodId) {
         return new DirectionResponseDto(
                 direction.getName(),
-                direction.getSize(),
                 direction.getRemark(),
                 direction.getHours(),
                 instructorService.getAllByDirectionId(direction.getId()),

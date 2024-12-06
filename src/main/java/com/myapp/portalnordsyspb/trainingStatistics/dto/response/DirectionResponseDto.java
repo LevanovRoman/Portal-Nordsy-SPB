@@ -4,7 +4,6 @@ import java.util.List;
 
 public record DirectionResponseDto(
         String name,
-        int size,
         String remark,
         float hours,
         List<InstructorResponseDto> instructors,

@@ -24,8 +24,6 @@ public class Direction {
 
     private String name;
 
-    private int size;
-
     private String remark;
 
     @JsonIgnore

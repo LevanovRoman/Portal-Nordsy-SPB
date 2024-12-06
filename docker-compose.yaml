@@ -1,5 +1,6 @@
 services:
   portal-server:
+    container_name: portal_ppu
     image: levanovroman/portal-nordsy-github-actions:latest
     pull_policy: always
     #    build:

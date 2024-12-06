@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/training")
+@RequestMapping("/api/training/period")
 @Tag(name = "Training Statistics", description = "Description for Training Statistics")
 @RequiredArgsConstructor
 public class PeriodController {
