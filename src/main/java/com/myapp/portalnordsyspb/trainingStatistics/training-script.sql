@@ -33,3 +33,5 @@ INSERT INTO unit(value, direction_id, period_id, weekday_id) VALUES
                                 (40, 1, 5, 1), (40, 1, 5, 2), (40, 1, 5, 3), (40, 1, 5, 4), (40, 1, 5, 5),
                                 (40, 1, 6, 1), (40, 1, 6, 2), (40, 1, 6, 3), (40, 1, 6, 4), (40, 1, 6, 5),
                                 (40, 1, 7, 1), (40, 1, 7, 2), (40, 1, 7, 3), (40, 1, 7, 4), (40, 1, 7, 5);
+
+TRUNCATE TABLE unit RESTART IDENTITY CASCADE

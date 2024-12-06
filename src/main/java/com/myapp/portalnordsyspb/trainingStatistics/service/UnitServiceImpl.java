@@ -27,12 +27,21 @@ public class UnitServiceImpl implements UnitService{
     public List<UnitResponseDto> getUnitResponseDtoByPeriodIdAndDirectionId(Long period_id, Direction direction) {
         List<UnitResponseDto> unitResponseDtoList = new ArrayList<>();
 
+//        for (long i = 1; i <=5 ; i++) {
+//            Weekday weekday = weekdayRepository.findById(i)
+//                    .orElseThrow(() -> new ObjectNotFoundException("Weekday not found"));
+//            Unit unit = unitRepository.findByDirectionIdAndPeriodIdAndWeekdayId(direction.getId(), period_id, i)
+//                    .orElse(getNewUnit(period_id, direction, weekday));
+//            unitResponseDtoList.add(new UnitResponseDto(i, weekday.getName(), unit.getId(), unit.getValue()));
+//        }
         for (long i = 1; i <=5 ; i++) {
             Weekday weekday = weekdayRepository.findById(i)
                     .orElseThrow(() -> new ObjectNotFoundException("Weekday not found"));
-            Unit unit = unitRepository.findByDirectionIdAndPeriodIdAndWeekdayId(direction.getId(), period_id, i)
-                    .orElse(getNewUnit(period_id, direction, weekday));
-            unitResponseDtoList.add(new UnitResponseDto(i, weekday.getName(), unit.getId(), unit.getValue()));
+            Optional<Unit> unit = unitRepository.findByDirectionIdAndPeriodIdAndWeekdayId(direction.getId(), period_id, i);
+            if (unit.isEmpty()){
+                unit = Optional.of(getNewUnit(period_id, direction, weekday));
+            }
+            unitResponseDtoList.add(new UnitResponseDto(i, weekday.getName(), unit.get().getId(), unit.get().getValue()));
         }
         return unitResponseDtoList;
     }
@@ -44,7 +53,6 @@ public class UnitServiceImpl implements UnitService{
                 .orElseThrow(() -> new ObjectNotFoundException("Period not found.")));
         unitNew.setWeekday(weekday);
         unitNew.setValue(0);
-        unitRepository.save(unitNew);
-        return unitNew;
+        return unitRepository.save(unitNew);
     }
 }
