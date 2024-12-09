@@ -6,6 +6,7 @@ public record UnitResponseDto(
         long weekdayId,
         String weekdayName,
         long unitId,
+        boolean completed,
         int value
 ) {
 }

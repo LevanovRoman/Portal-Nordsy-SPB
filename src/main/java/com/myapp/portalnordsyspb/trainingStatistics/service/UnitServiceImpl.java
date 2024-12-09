@@ -33,7 +33,8 @@ public class UnitServiceImpl implements UnitService{
             if (unit.isEmpty()){
                 unit = Optional.of(getNewUnit(period_id, direction, weekday));
             }
-            unitResponseDtoList.add(new UnitResponseDto(i, weekday.getName(), unit.get().getId(), unit.get().getValue()));
+            unitResponseDtoList.add(new UnitResponseDto(i, weekday.getName(), unit.get().getId(),
+                    unit.get().isCompleted(), unit.get().getValue()));
         }
         return unitResponseDtoList;
     }

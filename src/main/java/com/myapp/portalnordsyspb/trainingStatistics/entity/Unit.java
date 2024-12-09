@@ -41,6 +41,6 @@ public class Unit {
     private boolean completed;
 
 
-//    public Unit(int i, Direction direction, Period periodById, Weekday weekdayNotFound) {
-//    }
+    public Unit(int i, Direction direction, Period periodById, Weekday weekdayNotFound) {
+    }
 }
