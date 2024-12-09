@@ -35,3 +35,6 @@ INSERT INTO unit(value, direction_id, period_id, weekday_id) VALUES
                                 (40, 1, 7, 1), (40, 1, 7, 2), (40, 1, 7, 3), (40, 1, 7, 4), (40, 1, 7, 5);
 
 TRUNCATE TABLE unit RESTART IDENTITY CASCADE
+
+INSERT INTO unit_details(date, full_name, position, tab_number, unit_id)
+   VALUES ('21.11.2024', 'Иванов И.И.', 'Руководитель', '10101', 1);

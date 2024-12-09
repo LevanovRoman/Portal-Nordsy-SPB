@@ -22,7 +22,11 @@ public class UnitDetails {
     @JoinColumn(name = "unit_id", referencedColumnName = "id")
     private Unit unit;
 
-    @OneToMany
-    @JoinColumn(name = "unit_details_id")
-    List<Person> personList;
+    private String tabNumber;
+
+    private String fullName;
+
+    private String position;
+
+    private String date;
 }
