@@ -26,14 +26,6 @@ public class UnitServiceImpl implements UnitService{
     @Override
     public List<UnitResponseDto> getUnitResponseDtoByPeriodIdAndDirectionId(Long period_id, Direction direction) {
         List<UnitResponseDto> unitResponseDtoList = new ArrayList<>();
-
-//        for (long i = 1; i <=5 ; i++) {
-//            Weekday weekday = weekdayRepository.findById(i)
-//                    .orElseThrow(() -> new ObjectNotFoundException("Weekday not found"));
-//            Unit unit = unitRepository.findByDirectionIdAndPeriodIdAndWeekdayId(direction.getId(), period_id, i)
-//                    .orElse(getNewUnit(period_id, direction, weekday));
-//            unitResponseDtoList.add(new UnitResponseDto(i, weekday.getName(), unit.getId(), unit.getValue()));
-//        }
         for (long i = 1; i <=5 ; i++) {
             Weekday weekday = weekdayRepository.findById(i)
                     .orElseThrow(() -> new ObjectNotFoundException("Weekday not found"));

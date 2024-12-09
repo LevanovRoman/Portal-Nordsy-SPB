@@ -34,6 +34,13 @@ public class Unit {
     @JoinColumn(name = "weekday_id")
     private Weekday weekday;
 
-    public Unit(int i, Direction direction, Period periodById, Weekday weekdayNotFound) {
-    }
+    @OneToOne(mappedBy = "unit", cascade = CascadeType.ALL)
+    private UnitDetails unitDetails;
+
+    @Column(columnDefinition = "boolean default false")
+    private boolean completed;
+
+
+//    public Unit(int i, Direction direction, Period periodById, Weekday weekdayNotFound) {
+//    }
 }
