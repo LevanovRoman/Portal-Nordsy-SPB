@@ -62,14 +62,14 @@ public class DatabaseDumpService {
             Process process = processBuilder.start();
             int exitCode = process.waitFor();
             if (exitCode == 0) {
-                System.out.println("Дамп базы данных успешно создан: " + dumpFileName);
-                System.out.println("Запуск удаления самого старого файла.");
+                logger.info("The database dump was successfully created: {}", dumpFileName);
+                logger.info("Starting the deletion of the oldest file.");
                 fileCleanupService.deleteOldestFile();
             } else {
-                System.err.println("Ошибка при создании дампа базы данных.");
+                logger.error("Error when creating a database dump");
             }
         } catch (IOException | InterruptedException e) {
-            logger.error("Ошибка при выполнении операции: ", e);
+            logger.error("Error when creating a database dump: ", e);
         }
     }
 }

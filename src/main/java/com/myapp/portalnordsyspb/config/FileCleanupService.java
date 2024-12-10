@@ -1,5 +1,7 @@
 package com.myapp.portalnordsyspb.config;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,8 @@ public class FileCleanupService {
 
     @Value("${project.db.backupDir}")
     private String directoryPath;
+
+    private static final Logger logger = LoggerFactory.getLogger(DatabaseDumpService.class);
 
     public void deleteOldestFile() {
         File directory = new File(directoryPath);
@@ -29,15 +33,15 @@ public class FileCleanupService {
 
                 // Удаляем найденный файл
                 if (oldestFile.delete()) {
-                    System.out.println("Самый старый файл удален: " + oldestFile.getName());
+                    logger.info("The oldest file has been deleted: {}", oldestFile.getName());
                 } else {
-                    System.out.println("Не удалось удалить файл.");
+                    logger.info("The file could not be deleted.");
                 }
             } else {
-                System.out.println("В директории нет файлов.");
+                logger.info("There are no files in the directory.");
             }
         } else {
-            System.out.println("Директория не найдена или это не папка.");
+            logger.info("The directory was not found or it is not a folder.");
         }
     }
 }
