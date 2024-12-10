@@ -22,11 +22,10 @@ public class UnitDetails {
     @JoinColumn(name = "unit_id", referencedColumnName = "id")
     private Unit unit;
 
-    private String tabNumber;
-
-    private String fullName;
-
-    private String position;
-
     private String date;
+
+    @ElementCollection
+    @CollectionTable(name = "details_persons", joinColumns = @JoinColumn(name = "unit_details_id"))
+    @Column(name = "persons")
+    private List<String> persons;
 }

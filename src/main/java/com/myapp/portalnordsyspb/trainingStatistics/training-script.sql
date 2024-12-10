@@ -14,6 +14,17 @@ INSERT INTO period (interval, month, number) VALUES ('01.07 - 05.07', 'Июль'
                                                     ('05.08 - 09.08', 'Август', 32),
                                                     ('12.08 - 16.08', 'Август', 33);
 
+INSERT INTO period (interval, month, number) VALUES ('01.07 - 05.07', 'Июль', 34),
+                                                    ('08.07 - 12.07', 'Июль', 35),
+                                                    ('15.07 - 19.07', 'Июль', 36),
+                                                    ('22.07 - 26.07', 'Июль', 37),
+                                                    ('29.07 - 02.08', 'Июль', 38),
+                                                    ('05.08 - 09.08', 'Август', 39),
+                                                    ('05.08 - 09.08', 'Август', 40),
+                                                    ('05.08 - 09.08', 'Август', 41),
+                                                    ('05.08 - 09.08', 'Август', 42),
+                                                    ('12.08 - 16.08', 'Август', 43);
+
 INSERT INTO direction (name, hours, remark) VALUES ('Основы ПС', 2.0, ''),
                                                          ('СВМ', 1.0, ''),
                                                          ('Зона красных ярлыков', 1.0, ''),
@@ -36,5 +47,9 @@ INSERT INTO unit(value, direction_id, period_id, weekday_id) VALUES
 
 TRUNCATE TABLE unit RESTART IDENTITY CASCADE
 
-INSERT INTO unit_details(date, full_name, position, tab_number, unit_id)
-   VALUES ('21.11.2024', 'Иванов И.И.', 'Руководитель', '10101', 1);
+INSERT INTO unit_details(date, unit_id)
+   VALUES ('21.11.2024', 1);
+
+INSERT INTO details_persons(unit_details_id, persons) VALUES (1, '10101,Николаев И.И,Руководитель'),
+                                                             (1, '10102,Петров И.И,Руководитель'),
+                                                             (1, '10103,Сидоров И.И,Руководитель');
