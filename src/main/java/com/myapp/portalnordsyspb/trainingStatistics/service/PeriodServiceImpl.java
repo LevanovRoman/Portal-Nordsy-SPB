@@ -81,6 +81,7 @@ public class PeriodServiceImpl implements PeriodService{
 
     private PeriodResponseDto convertPeriodToPeriodResponseDto(Period period) {
         return new PeriodResponseDto(
+                period.getId(),
                 period.getInterval(),
                 period.getMonth(),
                 period.getNumber(),

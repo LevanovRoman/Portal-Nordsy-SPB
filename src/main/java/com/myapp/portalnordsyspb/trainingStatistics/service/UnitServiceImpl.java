@@ -39,6 +39,12 @@ public class UnitServiceImpl implements UnitService{
         return unitResponseDtoList;
     }
 
+    @Override
+    public Unit getUnitById(long unitId) {
+        return unitRepository.findById(unitId)
+                .orElseThrow(() -> new ObjectNotFoundException("Unit not found."));
+    }
+
     private Unit getNewUnit(long period_id, Direction direction, Weekday weekday) {
         Unit unitNew = new Unit();
         unitNew.setDirection(direction);

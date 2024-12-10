@@ -4,11 +4,14 @@ import com.myapp.portalnordsyspb.exceptions.ObjectNotFoundException;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.request.UnitDetailsRequestDto;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.response.PersonResponseDto;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.response.UnitDetailsResponseDto;
+import com.myapp.portalnordsyspb.trainingStatistics.entity.Person;
 import com.myapp.portalnordsyspb.trainingStatistics.entity.UnitDetails;
+import com.myapp.portalnordsyspb.trainingStatistics.repository.PersonRepository;
 import com.myapp.portalnordsyspb.trainingStatistics.repository.UnitDetailsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -16,6 +19,8 @@ import java.util.List;
 public class UnitDetailsServiceImpl implements UnitDetailsService{
 
     private final UnitDetailsRepository unitDetailsRepository;
+    private final PersonRepository personRepository;
+    private final UnitService unitService;
 
     @Override
     public UnitDetailsResponseDto getUnitDetailsByUnitId(long unitId) {
@@ -38,8 +43,21 @@ public class UnitDetailsServiceImpl implements UnitDetailsService{
     }
 
     @Override
-    public void createUnitDetails(UnitDetailsRequestDto unitDetailsRequestDto) {
-
+    public void createUnitDetails(UnitDetailsRequestDto unitDetailsRequestDto, long unitId) {
+        UnitDetails unitDetails = new UnitDetails();
+        List<String> tabNumberList = unitDetailsRequestDto.tabNumberList();
+        List<String> personList = new ArrayList<>();
+        for (String tabNumber : tabNumberList){
+            Person person = personRepository.findByTabNumber(tabNumber)
+                    .orElseThrow(() -> new ObjectNotFoundException("Person not found."));
+            String[] details = {person.getTabNumber(), person.getFullName(), person.getAppointName()};
+            String personString = String.join(",", details);
+            personList.add(personString);
+        }
+        unitDetails.setDate(unitDetailsRequestDto.date());
+        unitDetails.setUnit(unitService.getUnitById(unitId));
+        unitDetails.setPersons(personList);
+        unitDetailsRepository.save(unitDetails);
     }
 
     @Override

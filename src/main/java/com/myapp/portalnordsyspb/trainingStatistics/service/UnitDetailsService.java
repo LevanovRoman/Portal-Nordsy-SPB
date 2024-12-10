@@ -7,7 +7,7 @@ public interface UnitDetailsService {
 
     UnitDetailsResponseDto getUnitDetailsByUnitId(long unitId);
 
-    void createUnitDetails(UnitDetailsRequestDto unitDetailsRequestDto);
+    void createUnitDetails(UnitDetailsRequestDto unitDetailsRequestDto, long unitId);
 
     void updateUnitDetails(UnitDetailsRequestDto unitDetailsRequestDto, long unitDetailsId);
 

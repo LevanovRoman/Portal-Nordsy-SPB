@@ -7,6 +7,6 @@ public record UnitDetailsResponseDto(
     String date,
     int unitValue,
     String directionName,
-    List<PersonResponseDto> personResponseDtoList
+    List<PersonResponseDto> persons
 ) {
 }
