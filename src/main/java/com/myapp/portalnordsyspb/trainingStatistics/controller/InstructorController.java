@@ -24,20 +24,20 @@ public class InstructorController {
         return ResponseEntity.ok(instructorService.getAllInstructor());
     }
 
-    @PostMapping("/create-instructor")
+    @PostMapping("/create")
     public ResponseEntity<MessageDto> createInstructor(@RequestBody InstructorRequestDto instructorRequestDto){
         instructorService.createInstructor(instructorRequestDto);
         return ResponseEntity.ok(new MessageDto("Instructor created successfully."));
     }
 
-    @PutMapping("/update-instructor/{instructorId}")
+    @PutMapping("/update/{instructorId}")
     public ResponseEntity<MessageDto> updateInstructor(@RequestBody InstructorRequestDto instructorRequestDto,
                                                    @PathVariable("instructorId") long instructorId){
         instructorService.updateInstructor(instructorRequestDto, instructorId);
         return ResponseEntity.ok(new MessageDto("Instructor updated successfully."));
     }
 
-    @DeleteMapping("/delete-instructor/{instructorId}")
+    @DeleteMapping("/delete/{instructorId}")
     public ResponseEntity<MessageDto> deleteInstructor(@PathVariable("instructorId") long instructorId){
         instructorService.deleteInstructor(instructorId);
         return ResponseEntity.ok(new MessageDto("Instructor deleted successfully."));

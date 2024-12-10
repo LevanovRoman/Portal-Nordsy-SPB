@@ -5,6 +5,7 @@ import com.myapp.portalnordsyspb.trainingStatistics.dto.request.UnitDetailsReque
 import com.myapp.portalnordsyspb.trainingStatistics.dto.response.PersonResponseDto;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.response.UnitDetailsResponseDto;
 import com.myapp.portalnordsyspb.trainingStatistics.entity.Person;
+import com.myapp.portalnordsyspb.trainingStatistics.entity.Unit;
 import com.myapp.portalnordsyspb.trainingStatistics.entity.UnitDetails;
 import com.myapp.portalnordsyspb.trainingStatistics.repository.PersonRepository;
 import com.myapp.portalnordsyspb.trainingStatistics.repository.UnitDetailsRepository;
@@ -45,7 +46,35 @@ public class UnitDetailsServiceImpl implements UnitDetailsService{
     @Override
     public void createUnitDetails(UnitDetailsRequestDto unitDetailsRequestDto, long unitId) {
         UnitDetails unitDetails = new UnitDetails();
-        List<String> tabNumberList = unitDetailsRequestDto.tabNumberList();
+        Unit unit = unitService.getUnitById(unitId);
+        saveUnitDetails(unitDetails, unitDetailsRequestDto, unit);
+    }
+
+    @Override
+    public void updateUnitDetails(UnitDetailsRequestDto unitDetailsRequestDto, long unitDetailsId) {
+        UnitDetails unitDetails = getUnitDetailsByUnitDetailsId(unitDetailsId);
+        Unit unit = unitService.getUnitById(unitDetails.getUnit().getId());
+        saveUnitDetails(unitDetails, unitDetailsRequestDto, unit);
+    }
+
+    @Override
+    public void deleteUnitDetails(long unitDetailsId) {
+        unitDetailsRepository.delete(getUnitDetailsByUnitDetailsId(unitDetailsId));
+    }
+
+    private void saveUnitDetails(UnitDetails unitDetails, UnitDetailsRequestDto unitDetailsRequestDto, Unit unit){
+        unitDetails.setDate(unitDetailsRequestDto.date());
+        unitDetails.setUnit(unit);
+        unitDetails.setPersons(getPersonsList(unitDetailsRequestDto.tabNumberList()));
+        unitDetailsRepository.save(unitDetails);
+    }
+
+    private UnitDetails getUnitDetailsByUnitDetailsId(long unitDetailsId){
+        return unitDetailsRepository.findById(unitDetailsId)
+                .orElseThrow(() -> new ObjectNotFoundException("UnitDetails not found."));
+    }
+
+    private List<String> getPersonsList(List<String> tabNumberList){
         List<String> personList = new ArrayList<>();
         for (String tabNumber : tabNumberList){
             Person person = personRepository.findByTabNumber(tabNumber)
@@ -54,19 +83,6 @@ public class UnitDetailsServiceImpl implements UnitDetailsService{
             String personString = String.join(",", details);
             personList.add(personString);
         }
-        unitDetails.setDate(unitDetailsRequestDto.date());
-        unitDetails.setUnit(unitService.getUnitById(unitId));
-        unitDetails.setPersons(personList);
-        unitDetailsRepository.save(unitDetails);
-    }
-
-    @Override
-    public void updateUnitDetails(UnitDetailsRequestDto unitDetailsRequestDto, long unitDetailsId) {
-
-    }
-
-    @Override
-    public void deleteUnitDetails(long unitDetailsId) {
-
+        return personList;
     }
 }
