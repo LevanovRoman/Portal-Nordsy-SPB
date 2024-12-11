@@ -25,20 +25,20 @@ public class PeriodController {
         return ResponseEntity.ok(periodService.getAllPeriodResponseDto());
     }
 
-    @PostMapping("/create-period")
+    @PostMapping("/create")
     public ResponseEntity<MessageDto> createPeriod(@RequestBody PeriodCreateRequestDto periodCreateRequestDto){
         periodService.createPeriod(periodCreateRequestDto);
         return ResponseEntity.ok(new MessageDto("Period created successfully."));
     }
 
-    @PutMapping("/update-period/{periodId}")
+    @PutMapping("/update/{periodId}")
     public ResponseEntity<MessageDto> updatePeriod(@RequestBody PeriodRequestDto periodRequestDto,
                                                    @PathVariable("periodId") long periodId){
         periodService.updatePeriod(periodRequestDto, periodId);
         return ResponseEntity.ok(new MessageDto("Period updated successfully."));
     }
 
-    @DeleteMapping("/delete-period/{periodId}")
+    @DeleteMapping("/delete/{periodId}")
     public ResponseEntity<MessageDto> deletePeriod(@PathVariable("periodId") long periodId){
         periodService.deletePeriod(periodId);
         return ResponseEntity.ok(new MessageDto("Period deleted successfully."));
