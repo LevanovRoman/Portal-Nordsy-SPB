@@ -1,5 +1,6 @@
 package com.myapp.portalnordsyspb.trainingStatistics.service;
 
+import com.myapp.portalnordsyspb.trainingStatistics.dto.request.PeriodCreateRequestDto;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.request.PeriodRequestDto;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.response.PeriodResponseDto;
 import com.myapp.portalnordsyspb.trainingStatistics.entity.Period;
@@ -12,7 +13,8 @@ public interface PeriodService {
 
     Period getPeriodById(long periodId);
 
-    void createPeriod(PeriodRequestDto periodRequestDto);
+//    void createPeriod(PeriodRequestDto periodRequestDto);
+    void createPeriod(PeriodCreateRequestDto periodCreateRequestDto);
 
     void updatePeriod(PeriodRequestDto periodRequestDto, long periodId);
 

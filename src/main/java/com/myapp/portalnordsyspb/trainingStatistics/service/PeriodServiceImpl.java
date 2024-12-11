@@ -1,6 +1,7 @@
 package com.myapp.portalnordsyspb.trainingStatistics.service;
 
 import com.myapp.portalnordsyspb.exceptions.ObjectNotFoundException;
+import com.myapp.portalnordsyspb.trainingStatistics.dto.request.PeriodCreateRequestDto;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.request.PeriodRequestDto;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.request.UnitRequestDto;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.response.PeriodResponseDto;
@@ -37,10 +38,18 @@ public class PeriodServiceImpl implements PeriodService{
                 .orElseThrow(() -> new ObjectNotFoundException("Period not found."));
     }
 
+//    @Override
+//    public void createPeriod(PeriodRequestDto periodRequestDto) {
+//        Period periodNew = new Period();
+//        savePeriod(periodRequestDto, periodNew);
+//    }
     @Override
-    public void createPeriod(PeriodRequestDto periodRequestDto) {
+    public void createPeriod(PeriodCreateRequestDto periodCreateRequestDto) {
         Period periodNew = new Period();
-        savePeriod(periodRequestDto, periodNew);
+        periodNew.setInterval(periodCreateRequestDto.interval());
+        periodNew.setMonth(periodCreateRequestDto.month());
+        periodNew.setNumber(periodCreateRequestDto.number());
+        periodRepository.save(periodNew);
     }
 
     @Override

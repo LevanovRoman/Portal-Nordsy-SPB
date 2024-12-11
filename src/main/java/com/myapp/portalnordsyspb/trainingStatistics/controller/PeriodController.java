@@ -1,6 +1,7 @@
 package com.myapp.portalnordsyspb.trainingStatistics.controller;
 
 import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.MessageDto;
+import com.myapp.portalnordsyspb.trainingStatistics.dto.request.PeriodCreateRequestDto;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.request.PeriodRequestDto;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.response.PeriodResponseDto;
 import com.myapp.portalnordsyspb.trainingStatistics.service.PeriodService;
@@ -25,8 +26,8 @@ public class PeriodController {
     }
 
     @PostMapping("/create-period")
-    public ResponseEntity<MessageDto> createPeriod(@RequestBody PeriodRequestDto periodRequestDto){
-        periodService.createPeriod(periodRequestDto);
+    public ResponseEntity<MessageDto> createPeriod(@RequestBody PeriodCreateRequestDto periodCreateRequestDto){
+        periodService.createPeriod(periodCreateRequestDto);
         return ResponseEntity.ok(new MessageDto("Period created successfully."));
     }
 
