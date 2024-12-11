@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
-@EnableScheduling
+//@EnableScheduling
 public class PortalNordsySpbApplication {
 
     private static final Logger logger = LoggerFactory.getLogger(PortalNordsySpbApplication.class);

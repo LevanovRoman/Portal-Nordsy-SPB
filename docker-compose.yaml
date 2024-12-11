@@ -3,14 +3,14 @@ services:
     container_name: portal_ppu
     image: levanovroman/portal-nordsy-github-actions:latest
     pull_policy: always
-    #    build:
-    #      dockerfile: Dockerfile
-    #      args:
-    #        JAR_FILE: /target/portal-nordsy-spb-0.0.1-SNAPSHOT.jar
+#    build:
+#      dockerfile: Dockerfile
+#      args:
+#            JAR_FILE: /target/portal-nordsy-spb-0.0.1-SNAPSHOT.jar
     env_file:
       - .env
     ports:
-      - 8080:8080
+      - 8080:8080porta
     volumes:
       - spring-photo:/home/photos
       - spring-book:/home/books
