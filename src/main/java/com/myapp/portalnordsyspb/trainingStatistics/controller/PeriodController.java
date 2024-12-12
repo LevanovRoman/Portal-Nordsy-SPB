@@ -26,8 +26,8 @@ public class PeriodController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<MessageDto> createPeriod(@RequestBody PeriodCreateRequestDto periodCreateRequestDto){
-        periodService.createPeriod(periodCreateRequestDto);
+    public ResponseEntity<MessageDto> createPeriod(@RequestBody PeriodRequestDto periodRequestDto){
+        periodService.createPeriod(periodRequestDto);
         return ResponseEntity.ok(new MessageDto("Period created successfully."));
     }
 
