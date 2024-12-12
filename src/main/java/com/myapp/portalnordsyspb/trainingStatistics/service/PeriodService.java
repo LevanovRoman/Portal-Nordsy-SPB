@@ -13,8 +13,7 @@ public interface PeriodService {
 
     Period getPeriodById(long periodId);
 
-//    void createPeriod(PeriodRequestDto periodRequestDto);
-    void createPeriod(PeriodCreateRequestDto periodCreateRequestDto);
+    void createPeriod(PeriodRequestDto periodRequestDto);
 
     void updatePeriod(PeriodRequestDto periodRequestDto, long periodId);
 

@@ -19,4 +19,6 @@ public class Person {
     private String fullName;
 
     private String appointName;
+
+    private String department;
 }

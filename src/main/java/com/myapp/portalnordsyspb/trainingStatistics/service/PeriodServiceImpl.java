@@ -38,19 +38,19 @@ public class PeriodServiceImpl implements PeriodService{
                 .orElseThrow(() -> new ObjectNotFoundException("Period not found."));
     }
 
+    @Override
+    public void createPeriod(PeriodRequestDto periodRequestDto) {
+        Period periodNew = new Period();
+        savePeriod(periodRequestDto, periodNew);
+    }
 //    @Override
 //    public void createPeriod(PeriodRequestDto periodRequestDto) {
 //        Period periodNew = new Period();
-//        savePeriod(periodRequestDto, periodNew);
+//        periodNew.setInterval(periodRequestDto.interval());
+//        periodNew.setMonth(periodRequestDto.month());
+//        periodNew.setNumber(periodRequestDto.number());
+//        periodRepository.save(periodNew);
 //    }
-    @Override
-    public void createPeriod(PeriodCreateRequestDto periodCreateRequestDto) {
-        Period periodNew = new Period();
-        periodNew.setInterval(periodCreateRequestDto.interval());
-        periodNew.setMonth(periodCreateRequestDto.month());
-        periodNew.setNumber(periodCreateRequestDto.number());
-        periodRepository.save(periodNew);
-    }
 
     @Override
     public void updatePeriod(PeriodRequestDto periodRequestDto, long periodId) {
@@ -65,16 +65,23 @@ public class PeriodServiceImpl implements PeriodService{
     }
 
     private void savePeriod(PeriodRequestDto periodRequestDto, Period period){
-        List<Unit> unitList = periodRequestDto.unitRequestDtoList()
-                .stream()
-                .map(unit -> convertUnitRequestDtoToUnit(unit, period))
-                .toList();
         period.setInterval(periodRequestDto.interval());
         period.setMonth(periodRequestDto.month());
         period.setNumber(periodRequestDto.number());
-        period.setUnitList(unitList);
         periodRepository.save(period);
     }
+
+//    private void savePeriod(PeriodRequestDto periodRequestDto, Period period){
+//        List<Unit> unitList = periodRequestDto.unitRequestDtoList()
+//                .stream()
+//                .map(unit -> convertUnitRequestDtoToUnit(unit, period))
+//                .toList();
+//        period.setInterval(periodRequestDto.interval());
+//        period.setMonth(periodRequestDto.month());
+//        period.setNumber(periodRequestDto.number());
+//        period.setUnitList(unitList);
+//        periodRepository.save(period);
+//    }
 
     private Unit convertUnitRequestDtoToUnit(UnitRequestDto unitRequestDto, Period period) {
         Direction direction = directionService.getDirectionById(unitRequestDto.directionId());
