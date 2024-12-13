@@ -1,6 +1,6 @@
-INSERT INTO weekday (name) VALUES ('День 1'), ('День 2'),
-                                   ('День 3'), ('День 4'),
-                                  ('День 5');
+INSERT INTO weekday (name) VALUES ('Понедельник'), ('Вторник'),
+                                   ('Среда'), ('Четверг'),
+                                  ('Пятница');
 
 INSERT INTO instructor (fio) VALUES ('Гордеев М.С.'), ('Колесник Я.В.'),
                                   ('Нагуманова А.Ф.'), ('Варданян И.И.'),
@@ -45,7 +45,7 @@ INSERT INTO unit(value, direction_id, period_id, weekday_id) VALUES
                                 (40, 1, 6, 1), (40, 1, 6, 2), (40, 1, 6, 3), (40, 1, 6, 4), (40, 1, 6, 5),
                                 (40, 1, 7, 1), (40, 1, 7, 2), (40, 1, 7, 3), (40, 1, 7, 4), (40, 1, 7, 5);
 
-TRUNCATE TABLE unit RESTART IDENTITY CASCADE
+TRUNCATE TABLE unit RESTART IDENTITY CASCADE;
 
 INSERT INTO unit_details(date, unit_id)
    VALUES ('21.11.2024', 1);
@@ -53,3 +53,5 @@ INSERT INTO unit_details(date, unit_id)
 INSERT INTO details_persons(unit_details_id, persons) VALUES (1, '10101,Николаев И.И,Руководитель'),
                                                              (1, '10102,Петров И.И,Руководитель'),
                                                              (1, '10103,Сидоров И.И,Руководитель');
+
+SELECT unit_id FROM unit_details ud JOIN details_persons dp on ud.id = dp.unit_details_id WHERE dp.persons LIKE '10103%';

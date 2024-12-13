@@ -3,7 +3,7 @@ package com.myapp.portalnordsyspb.trainingStatistics.service;
 import com.myapp.portalnordsyspb.exceptions.ObjectNotFoundException;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.request.PeriodCreateRequestDto;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.request.PeriodRequestDto;
-import com.myapp.portalnordsyspb.trainingStatistics.dto.request.UnitRequestDto;
+//import com.myapp.portalnordsyspb.trainingStatistics.dto.request.UnitRequestDto;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.response.PeriodResponseDto;
 import com.myapp.portalnordsyspb.trainingStatistics.entity.Direction;
 import com.myapp.portalnordsyspb.trainingStatistics.entity.Period;
@@ -83,17 +83,17 @@ public class PeriodServiceImpl implements PeriodService{
 //        periodRepository.save(period);
 //    }
 
-    private Unit convertUnitRequestDtoToUnit(UnitRequestDto unitRequestDto, Period period) {
-        Direction direction = directionService.getDirectionById(unitRequestDto.directionId());
-        Weekday weekday = weekdayRepository.findById(unitRequestDto.weekdayId())
-                .orElseThrow(() -> new ObjectNotFoundException("Weekday not found."));
-        return Unit.builder()
-                .value(unitRequestDto.value())
-                .direction(direction)
-                .period(period)
-                .weekday(weekday)
-                .build();
-    }
+//    private Unit convertUnitRequestDtoToUnit(UnitRequestDto unitRequestDto, Period period) {
+//        Direction direction = directionService.getDirectionById(unitRequestDto.directionId());
+//        Weekday weekday = weekdayRepository.findById(unitRequestDto.weekdayId())
+//                .orElseThrow(() -> new ObjectNotFoundException("Weekday not found."));
+//        return Unit.builder()
+//                .value(unitRequestDto.value())
+//                .direction(direction)
+//                .period(period)
+//                .weekday(weekday)
+//                .build();
+//    }
 
     private PeriodResponseDto convertPeriodToPeriodResponseDto(Period period) {
         return new PeriodResponseDto(

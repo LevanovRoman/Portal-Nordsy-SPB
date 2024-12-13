@@ -5,7 +5,7 @@ import java.util.List;
 public record UnitDetailsResponseDto(
     int weekNumber,
     String date,
-    int unitValue,
+    List<Integer> values,
     String directionName,
     List<PersonResponseDto> persons
 ) {

@@ -23,23 +23,23 @@ public class UnitDetailsController {
         return ResponseEntity.ok(unitDetailsService.getUnitDetailsByUnitId(unitId));
     }
 
-    @PostMapping("/create/{unitId}")
-    public ResponseEntity<MessageDto> createUnitDetails(@RequestBody UnitDetailsRequestDto unitDetailsRequestDto,
-                                                        @PathVariable long unitId){
-        unitDetailsService.createUnitDetails(unitDetailsRequestDto, unitId);
-        return ResponseEntity.ok(new MessageDto("UnitDetails created successfully."));
-    }
-
-    @PutMapping("/update/{unitDetailsId}")
-    public ResponseEntity<MessageDto> updateUnitDetails(@RequestBody UnitDetailsRequestDto unitDetailsRequestDto,
-                                                        @PathVariable long unitDetailsId){
-        unitDetailsService.updateUnitDetails(unitDetailsRequestDto, unitDetailsId);
-        return ResponseEntity.ok(new MessageDto("UnitDetails updated successfully."));
-    }
-
-    @DeleteMapping("/delete/{unitDetailsId}")
-    public ResponseEntity<MessageDto> deleteUnitDetails(@PathVariable long unitDetailsId){
-        unitDetailsService.deleteUnitDetails(unitDetailsId);
-        return ResponseEntity.ok(new MessageDto("UnitDetails deleted successfully."));
-    }
+//    @PostMapping("/create/{unitId}")
+//    public ResponseEntity<MessageDto> createUnitDetails(@RequestBody UnitDetailsRequestDto unitDetailsRequestDto,
+//                                                        @PathVariable long unitId){
+//        unitDetailsService.createUnitDetails(unitDetailsRequestDto, unitId);
+//        return ResponseEntity.ok(new MessageDto("UnitDetails created successfully."));
+//    }
+//
+//    @PutMapping("/update/{unitDetailsId}")
+//    public ResponseEntity<MessageDto> updateUnitDetails(@RequestBody UnitDetailsRequestDto unitDetailsRequestDto,
+//                                                        @PathVariable long unitDetailsId){
+//        unitDetailsService.updateUnitDetails(unitDetailsRequestDto, unitDetailsId);
+//        return ResponseEntity.ok(new MessageDto("UnitDetails updated successfully."));
+//    }
+//
+//    @DeleteMapping("/delete/{unitDetailsId}")
+//    public ResponseEntity<MessageDto> deleteUnitDetails(@PathVariable long unitDetailsId){
+//        unitDetailsService.deleteUnitDetails(unitDetailsId);
+//        return ResponseEntity.ok(new MessageDto("UnitDetails deleted successfully."));
+//    }
 }
