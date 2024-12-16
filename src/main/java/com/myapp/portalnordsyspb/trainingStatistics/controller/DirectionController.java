@@ -2,6 +2,7 @@ package com.myapp.portalnordsyspb.trainingStatistics.controller;
 
 import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.MessageDto;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.request.DirectionRequestDto;
+import com.myapp.portalnordsyspb.trainingStatistics.dto.request.DirectionRequestDtoUpdate;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.request.InstructorRequestDto;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.response.DirectionOnlyResponseDto;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.response.InstructorResponseDto;
@@ -34,7 +35,7 @@ public class DirectionController {
 
     @PutMapping("/update/{directionId}")
     public ResponseEntity<MessageDto> updateDirection(@RequestBody DirectionRequestDto directionRequestDto,
-                                                       @PathVariable("directionId") long directionId){
+                                                      @PathVariable("directionId") long directionId){
         directionService.updateDirection(directionRequestDto, directionId);
         return ResponseEntity.ok(new MessageDto("Direction updated successfully."));
     }

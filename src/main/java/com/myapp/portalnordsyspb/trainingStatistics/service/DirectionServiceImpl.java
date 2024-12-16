@@ -2,25 +2,26 @@ package com.myapp.portalnordsyspb.trainingStatistics.service;
 
 import com.myapp.portalnordsyspb.exceptions.ObjectNotFoundException;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.request.DirectionRequestDto;
+import com.myapp.portalnordsyspb.trainingStatistics.dto.request.DirectionRequestDtoUpdate;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.response.DirectionOnlyResponseDto;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.response.DirectionResponseDto;
 import com.myapp.portalnordsyspb.trainingStatistics.entity.Direction;
 import com.myapp.portalnordsyspb.trainingStatistics.entity.Instructor;
 import com.myapp.portalnordsyspb.trainingStatistics.repository.DirectionRepository;
+import com.myapp.portalnordsyspb.trainingStatistics.repository.InstructorRepository;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
 public class DirectionServiceImpl implements DirectionService{
 
     private final DirectionRepository directionRepository;
+    private final InstructorRepository instructorRepository;
     private final InstructorService instructorService;
     private final UnitService unitService;
     private final EntityManager entityManager;
@@ -59,10 +60,26 @@ public class DirectionServiceImpl implements DirectionService{
         saveDirection(directionRequestDto, directionNew);
     }
 
+//    @Override
+//    public void updateDirection(DirectionRequestDto directionRequestDto, long directionId) {
+//        Direction directionUpdated = getDirectionById(directionId);
+//        saveDirection(directionRequestDto, directionUpdated);
+//    }
+
     @Override
     public void updateDirection(DirectionRequestDto directionRequestDto, long directionId) {
         Direction directionUpdated = getDirectionById(directionId);
-//        deleteFromJoinTable(directionId);
+//        directionUpdated.setName(directionRequestDto.name());
+//        directionUpdated.setRemark(directionRequestDto.remark());
+//        directionUpdated.setHours(directionRequestDto.hours());
+//
+//        Set<Instructor> instructors = new HashSet<>(instructorRepository.
+//                findAllById(directionRequestDto.instructorIdSet()));
+//        directionUpdated.getInstructors().clear();
+//        for (Instructor instructor : instructors){
+//            directionUpdated.addInstructor(instructor);
+//        }
+//        directionRepository.save(directionUpdated);
         saveDirection(directionRequestDto, directionUpdated);
     }
 
@@ -71,7 +88,48 @@ public class DirectionServiceImpl implements DirectionService{
         directionRepository.delete(getDirectionById(directionId));
     }
 
-//    @Transactional
+//    private void saveDirection(DirectionRequestDto directionRequestDto, Direction direction){
+//        direction.setName(directionRequestDto.name());
+//        direction.setRemark(directionRequestDto.remark());
+//        direction.setHours(directionRequestDto.hours());
+//        if (! directionRequestDto.instructorIdList().isEmpty()){
+//            List<Instructor> instructorList = directionRequestDto.instructorIdList()
+//                    .stream()
+//                    .map(this::convertIdToInstructor)
+//                    .toList();
+//            direction.setInstructors(new HashSet<>(instructorList));
+//        }
+//        directionRepository.save(direction);
+//    }
+    private void saveDirection(DirectionRequestDto directionRequestDto, Direction direction){
+        direction.setName(directionRequestDto.name());
+        direction.setRemark(directionRequestDto.remark());
+        direction.setHours(directionRequestDto.hours());
+        Set<Instructor> instructors = new HashSet<>(instructorRepository.
+                findAllById(directionRequestDto.instructorIdSet()));
+        direction.getInstructors().clear();
+        for (Instructor instructor : instructors){
+            direction.addInstructor(instructor);
+        }
+        directionRepository.save(direction);
+    }
+
+    private Instructor convertIdToInstructor(Long id) {
+        return instructorService.getInstructorById(id);
+    }
+
+    private DirectionResponseDto convertDirectionToDirectionResponseDto(Direction direction, Long periodId) {
+        return new DirectionResponseDto(
+                direction.getId(),
+                direction.getName(),
+                direction.getRemark(),
+                direction.getHours(),
+                instructorService.getAllByDirectionId(direction.getId()),
+                unitService.getUnitResponseDtoByPeriodIdAndDirectionId(periodId, direction)
+        );
+    }
+
+    //    @Transactional
 //    public void deleteFromJoinTable(Long entity1Id, Long entity2Id) {
 //        entityManager.createNativeQuery("DELETE FROM entity1_entity2 WHERE entity1_id = :entity1Id AND entity2_id = :entity2Id")
 //                .setParameter("entity1Id", entity1Id)
@@ -94,34 +152,5 @@ public class DirectionServiceImpl implements DirectionService{
         // Удаляем связь
 //        entity1.getInstructors().remove(entity2);
 //        entity1Repository.save(entity1);
-    }
-
-    private void saveDirection(DirectionRequestDto directionRequestDto, Direction direction){
-        direction.setName(directionRequestDto.name());
-        direction.setRemark(directionRequestDto.remark());
-        direction.setHours(directionRequestDto.hours());
-        if (! directionRequestDto.instructorIdList().isEmpty()){
-            List<Instructor> instructorList = directionRequestDto.instructorIdList()
-                    .stream()
-                    .map(this::convertIdToInstructor)
-                    .toList();
-            direction.setInstructors(new ArrayList<>(instructorList));
-        }
-        directionRepository.save(direction);
-    }
-
-    private Instructor convertIdToInstructor(Long id) {
-        return instructorService.getInstructorById(id);
-    }
-
-    private DirectionResponseDto convertDirectionToDirectionResponseDto(Direction direction, Long periodId) {
-        return new DirectionResponseDto(
-                direction.getId(),
-                direction.getName(),
-                direction.getRemark(),
-                direction.getHours(),
-                instructorService.getAllByDirectionId(direction.getId()),
-                unitService.getUnitResponseDtoByPeriodIdAndDirectionId(periodId, direction)
-        );
     }
 }

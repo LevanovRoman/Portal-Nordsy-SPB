@@ -1,6 +1,7 @@
 package com.myapp.portalnordsyspb.trainingStatistics.service;
 
 import com.myapp.portalnordsyspb.trainingStatistics.dto.request.DirectionRequestDto;
+import com.myapp.portalnordsyspb.trainingStatistics.dto.request.DirectionRequestDtoUpdate;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.response.DirectionOnlyResponseDto;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.response.DirectionResponseDto;
 import com.myapp.portalnordsyspb.trainingStatistics.entity.Direction;
