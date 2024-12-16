@@ -49,7 +49,8 @@ public class InstructorServiceImpl implements InstructorService{
         instructorRepository.save(instructor);
     }
 
-    private Instructor getInstructorById(long instructorId){
+    @Override
+    public Instructor getInstructorById(long instructorId){
         return instructorRepository.findById(instructorId)
                 .orElseThrow(() -> new ObjectNotFoundException("Instructor not found."));
     }

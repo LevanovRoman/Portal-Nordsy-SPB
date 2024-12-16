@@ -1,7 +1,6 @@
 package com.myapp.portalnordsyspb.trainingStatistics.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.myapp.portalnordsyspb.evaluationPU.entity.Area;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,7 +26,7 @@ public class Direction {
     private String remark;
 
     @JsonIgnore
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany
     @JoinTable(
             name = "direction_instructor",
             joinColumns = @JoinColumn(name = "direction_id"),
@@ -40,4 +39,14 @@ public class Direction {
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "direction")
     private List<Unit> unitList;
+
+    @PreRemove
+    private void removeEntitiesFromJoinTable() {
+        instructors.clear();
+    }
+
+    @PreUpdate
+    private void updateEntitiesFromJoinTable() {
+        instructors.clear();
+    }
 }

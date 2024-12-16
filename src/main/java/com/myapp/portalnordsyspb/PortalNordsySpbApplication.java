@@ -11,9 +11,11 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import java.io.PrintStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
+@EnableTransactionManagement
 //@EnableScheduling
 public class PortalNordsySpbApplication {
 

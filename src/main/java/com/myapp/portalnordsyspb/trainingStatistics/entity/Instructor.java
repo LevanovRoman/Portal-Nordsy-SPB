@@ -24,6 +24,11 @@ public class Instructor {
     private String fio;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "instructors", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "instructors")
     private List<Direction> directions = new ArrayList<>();
+
+    @PreRemove
+    private void removeEntitiesFromJoinTable() {
+        directions.clear();
+    }
 }
