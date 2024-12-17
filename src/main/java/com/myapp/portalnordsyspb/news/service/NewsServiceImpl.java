@@ -128,7 +128,7 @@ public class NewsServiceImpl implements NewsService{
                 news.getHashtagList(),
                 news.getPhoto(),
                 photoUrl,
-                news.getCreatedAt()
+                news.getCreatedAt().atStartOfDay()
         );
         return response;
     }
@@ -160,7 +160,7 @@ public class NewsServiceImpl implements NewsService{
                     news.getHashtagList(),
                     news.getPhoto(),
                     photoUrl,
-                    news.getCreatedAt()
+                    news.getCreatedAt().atStartOfDay()
             );
             newsResponseDtoList.add(newsResponseDto);
         }
