@@ -64,3 +64,6 @@ INSERT INTO details_persons(unit_details_id, persons) VALUES (1, '10101,Нико
                                                              (1, '10103,Сидоров И.И,Руководитель');
 
 SELECT unit_id FROM unit_details ud JOIN details_persons dp on ud.id = dp.unit_details_id WHERE dp.persons LIKE '10103%';
+
+SELECT * FROM unit JOIN public.unit_details ud on unit.id = ud.unit_id JOIN public.details_persons dp on ud.id = dp.unit_details_id
+         WHERE direction_id=1 AND period_id=1 AND weekday_id=1 AND dp.persons LIKE '10103%';

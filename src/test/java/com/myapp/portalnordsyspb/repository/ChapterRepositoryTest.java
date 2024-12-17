@@ -1,5 +1,7 @@
 package com.myapp.portalnordsyspb.repository;
 
+import com.myapp.portalnordsyspb.trainingStatistics.entity.Unit;
+import com.myapp.portalnordsyspb.trainingStatistics.repository.UnitRepository;
 import com.myapp.portalnordsyspb.xwiki.entity.Chapter;
 import com.myapp.portalnordsyspb.xwiki.repository.ChapterRepository;
 import org.assertj.core.api.Assertions;
@@ -12,12 +14,17 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.Assert.assertTrue;
+
 @DataJpaTest
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
 public class ChapterRepositoryTest {
 
     @Autowired
     private ChapterRepository chapterRepository;
+
+//    @Autowired
+//    private UnitRepository unitRepository;
 
     @Test
     public void chapterRepository_SaveAll_ReturnsSavedChapter(){
@@ -80,4 +87,10 @@ public class ChapterRepositoryTest {
 
         Assertions.assertThat(chapterReturn).isEmpty();
     }
+
+//    @Test
+//    void testFindFilterByTubNumber() {
+//        Optional<Unit> result = unitRepository.findFilterByTubNumber(1L, 1L, 1L, "10103");
+//        org.junit.jupiter.api.Assertions.assertTrue(result.isPresent());
+//    }
 }

@@ -1,7 +1,7 @@
 package com.myapp.portalnordsyspb.trainingStatistics.controller;
 
 import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.MessageDto;
-import com.myapp.portalnordsyspb.trainingStatistics.dto.request.PeriodCreateRequestDto;
+import com.myapp.portalnordsyspb.trainingStatistics.dto.request.FilterDto;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.request.PeriodRequestDto;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.response.PeriodResponseDto;
 import com.myapp.portalnordsyspb.trainingStatistics.service.PeriodService;
@@ -21,8 +21,11 @@ public class PeriodController {
     private final PeriodService periodService;
 
     @GetMapping("/all")
-    public ResponseEntity<List<PeriodResponseDto>> getAllPeriodResponseDto(){
-        return ResponseEntity.ok(periodService.getAllPeriodResponseDto());
+    public ResponseEntity<List<PeriodResponseDto>> getAllPeriodResponseDto(@RequestParam(required = false) String tabNumber,
+                                                                           @RequestParam(required = false) Integer unitValue){
+        System.out.println("tabNumber  " + tabNumber);
+        System.out.println("unitValue  " + unitValue);
+        return ResponseEntity.ok(periodService.getAllPeriodResponseDto(new FilterDto(tabNumber, unitValue)));
     }
 
     @PostMapping("/create")
@@ -43,4 +46,10 @@ public class PeriodController {
         periodService.deletePeriod(periodId);
         return ResponseEntity.ok(new MessageDto("Period deleted successfully."));
     }
+
+//    @PostMapping("/filter")
+//    public ResponseEntity<List<PeriodResponseDto>> getAllPeriodWithFilter(
+//            @RequestBody PeriodRequestFilterDto periodRequestFilterDto){
+//        return ResponseEntity.ok(periodService.getAllPeriodWithFilter(periodRequestFilterDto));
+//    }
 }

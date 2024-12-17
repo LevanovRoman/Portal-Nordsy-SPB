@@ -2,7 +2,7 @@ package com.myapp.portalnordsyspb.trainingStatistics.service;
 
 import com.myapp.portalnordsyspb.exceptions.ObjectNotFoundException;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.request.DirectionRequestDto;
-import com.myapp.portalnordsyspb.trainingStatistics.dto.request.DirectionRequestDtoUpdate;
+import com.myapp.portalnordsyspb.trainingStatistics.dto.request.FilterDto;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.response.DirectionOnlyResponseDto;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.response.DirectionResponseDto;
 import com.myapp.portalnordsyspb.trainingStatistics.entity.Direction;
@@ -28,11 +28,11 @@ public class DirectionServiceImpl implements DirectionService{
 
 
     @Override
-    public List<DirectionResponseDto> getAllDirectionResponseDto(Long period_id) {
+    public List<DirectionResponseDto> getAllDirectionResponseDto(Long period_id, FilterDto filterDto) {
         return directionRepository.findAll()
                 .stream()
                 .sorted(Comparator.comparing(Direction::getId))
-                .map(direction -> convertDirectionToDirectionResponseDto(direction, period_id))
+                .map(direction -> convertDirectionToDirectionResponseDto(direction, period_id, filterDto))
                 .toList();
     }
 
@@ -88,7 +88,7 @@ public class DirectionServiceImpl implements DirectionService{
         directionRepository.delete(getDirectionById(directionId));
     }
 
-//    private void saveDirection(DirectionRequestDto directionRequestDto, Direction direction){
+    //    private void saveDirection(DirectionRequestDto directionRequestDto, Direction direction){
 //        direction.setName(directionRequestDto.name());
 //        direction.setRemark(directionRequestDto.remark());
 //        direction.setHours(directionRequestDto.hours());
@@ -118,14 +118,15 @@ public class DirectionServiceImpl implements DirectionService{
         return instructorService.getInstructorById(id);
     }
 
-    private DirectionResponseDto convertDirectionToDirectionResponseDto(Direction direction, Long periodId) {
+    private DirectionResponseDto convertDirectionToDirectionResponseDto(Direction direction, Long periodId,
+                                                                        FilterDto filterDto) {
         return new DirectionResponseDto(
                 direction.getId(),
                 direction.getName(),
                 direction.getRemark(),
                 direction.getHours(),
                 instructorService.getAllByDirectionId(direction.getId()),
-                unitService.getUnitResponseDtoByPeriodIdAndDirectionId(periodId, direction)
+                unitService.getUnitResponseDtoByPeriodIdAndDirectionId(periodId, direction, filterDto)
         );
     }
 

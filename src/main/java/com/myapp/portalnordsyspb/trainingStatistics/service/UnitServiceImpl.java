@@ -1,7 +1,7 @@
 package com.myapp.portalnordsyspb.trainingStatistics.service;
 
 import com.myapp.portalnordsyspb.exceptions.ObjectNotFoundException;
-import com.myapp.portalnordsyspb.trainingStatistics.dto.request.UnitDetailsRequestDto;
+import com.myapp.portalnordsyspb.trainingStatistics.dto.request.FilterDto;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.request.UnitRequestDto;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.response.UnitResponseDto;
 import com.myapp.portalnordsyspb.trainingStatistics.entity.*;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+//@Service
 @RequiredArgsConstructor
 public class UnitServiceImpl implements UnitService{
 
@@ -24,7 +24,8 @@ public class UnitServiceImpl implements UnitService{
     private final PersonRepository personRepository;
 
     @Override
-    public List<UnitResponseDto> getUnitResponseDtoByPeriodIdAndDirectionId(Long period_id, Direction direction) {
+    public List<UnitResponseDto> getUnitResponseDtoByPeriodIdAndDirectionId(Long period_id, Direction direction,
+                                                                            FilterDto filterDto) {
         List<UnitResponseDto> unitResponseDtoList = new ArrayList<>();
         for (long i = 1; i <=5 ; i++) {
             Weekday weekday = weekdayRepository.findById(i)

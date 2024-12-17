@@ -1,14 +1,10 @@
 package com.myapp.portalnordsyspb.trainingStatistics.service;
 
 import com.myapp.portalnordsyspb.exceptions.ObjectNotFoundException;
-import com.myapp.portalnordsyspb.trainingStatistics.dto.request.PeriodCreateRequestDto;
+import com.myapp.portalnordsyspb.trainingStatistics.dto.request.FilterDto;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.request.PeriodRequestDto;
-//import com.myapp.portalnordsyspb.trainingStatistics.dto.request.UnitRequestDto;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.response.PeriodResponseDto;
-import com.myapp.portalnordsyspb.trainingStatistics.entity.Direction;
 import com.myapp.portalnordsyspb.trainingStatistics.entity.Period;
-import com.myapp.portalnordsyspb.trainingStatistics.entity.Unit;
-import com.myapp.portalnordsyspb.trainingStatistics.entity.Weekday;
 import com.myapp.portalnordsyspb.trainingStatistics.repository.PeriodRepository;
 import com.myapp.portalnordsyspb.trainingStatistics.repository.WeekdayRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,10 +21,10 @@ public class PeriodServiceImpl implements PeriodService{
     private final WeekdayRepository weekdayRepository;
 
     @Override
-    public List<PeriodResponseDto> getAllPeriodResponseDto() {
+    public List<PeriodResponseDto> getAllPeriodResponseDto(FilterDto filterDto) {
         return periodRepository.findAll()
                 .stream()
-                .map(this::convertPeriodToPeriodResponseDto)
+                .map(period -> convertPeriodToPeriodResponseDto(period, filterDto))
                 .toList();
     }
 
@@ -95,13 +91,13 @@ public class PeriodServiceImpl implements PeriodService{
 //                .build();
 //    }
 
-    private PeriodResponseDto convertPeriodToPeriodResponseDto(Period period) {
+    private PeriodResponseDto convertPeriodToPeriodResponseDto(Period period, FilterDto filterDto) {
         return new PeriodResponseDto(
                 period.getId(),
                 period.getInterval(),
                 period.getMonth(),
                 period.getNumber(),
-                directionService.getAllDirectionResponseDto(period.getId())
+                directionService.getAllDirectionResponseDto(period.getId(), filterDto)
         );
     }
 }
