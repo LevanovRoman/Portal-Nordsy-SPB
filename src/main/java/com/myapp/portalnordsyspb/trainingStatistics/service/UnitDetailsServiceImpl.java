@@ -32,6 +32,7 @@ public class UnitDetailsServiceImpl implements UnitDetailsService{
                 .toList();
         return new UnitDetailsResponseDto(
                 unitDetails.getUnit().getPeriod().getNumber(),
+                unitDetails.getUnit().isCompleted(),
                 unitDetails.getDate(),
                 unitDetails.getUnit().getValues(),
                 unitDetails.getUnit().getDirection().getName(),

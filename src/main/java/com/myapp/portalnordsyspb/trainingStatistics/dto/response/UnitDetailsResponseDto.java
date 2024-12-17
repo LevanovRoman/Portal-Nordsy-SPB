@@ -4,6 +4,7 @@ import java.util.List;
 
 public record UnitDetailsResponseDto(
     int weekNumber,
+    boolean completed,
     String date,
     List<Integer> values,
     String directionName,
