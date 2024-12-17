@@ -94,11 +94,13 @@ public class UnitServiceAlternative implements UnitService{
     @Override
     public void deleteUnit(long unitId) {
         Unit unitDeleted = getUnitById(unitId);
-        Optional<UnitDetails> unitDetails = unitDetailsRepository.findByUnitId(unitId);
+//        Optional<UnitDetails> unitDetails = unitDetailsRepository.findByUnitId(unitId);
+        Optional<UnitDetails> unitDetails = Optional.ofNullable(unitDeleted.getUnitDetails());
         unitDetails.ifPresent(unitDetailsRepository::delete);
         List<Integer> values = new ArrayList<>();
         values.add(0);
         unitDeleted.setValues(values);
+        unitRepository.delete(unitDeleted);
     }
 
     private UnitResponseDto checkEmptyUnit(Weekday weekday, Optional<Unit> unitOptional) {
