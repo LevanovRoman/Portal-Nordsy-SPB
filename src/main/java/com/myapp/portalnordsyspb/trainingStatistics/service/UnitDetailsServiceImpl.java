@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -21,22 +22,49 @@ public class UnitDetailsServiceImpl implements UnitDetailsService{
 
     private final UnitDetailsRepository unitDetailsRepository;
 //    private final PersonRepository personRepository;
-//    private final UnitService unitService;
+    private final UnitService unitService;
 
+//    @Override
+//    public UnitDetailsResponseDto getUnitDetailsByUnitId(long unitId) {
+//        UnitDetails unitDetails = unitDetailsRepository.findByUnitId(unitId)
+//                .orElseThrow(() -> new ObjectNotFoundException("Unit_Details not found."));
+//        List<PersonResponseDto> persons = unitDetails.getPersons()
+//                .stream().map(this::convertStringToPersonResponseDto)
+//                .toList();
+//        return new UnitDetailsResponseDto(
+//                unitDetails.getUnit().getPeriod().getNumber(),
+//                unitDetails.getUnit().isCompleted(),
+//                unitDetails.getDate(),
+//                unitDetails.getUnit().getValues(),
+//                unitDetails.getUnit().getDirection().getName(),
+//                persons);
+//    }
     @Override
     public UnitDetailsResponseDto getUnitDetailsByUnitId(long unitId) {
-        UnitDetails unitDetails = unitDetailsRepository.findByUnitId(unitId)
-                .orElseThrow(() -> new ObjectNotFoundException("Unit_Details not found."));
-        List<PersonResponseDto> persons = unitDetails.getPersons()
-                .stream().map(this::convertStringToPersonResponseDto)
-                .toList();
-        return new UnitDetailsResponseDto(
-                unitDetails.getUnit().getPeriod().getNumber(),
-                unitDetails.getUnit().isCompleted(),
-                unitDetails.getDate(),
-                unitDetails.getUnit().getValues(),
-                unitDetails.getUnit().getDirection().getName(),
-                persons);
+        Optional<UnitDetails> unitDetails = unitDetailsRepository.findByUnitId(unitId);
+        if (unitDetails.isEmpty()){
+            Unit unit = unitService.getUnitById(unitId);
+            return new UnitDetailsResponseDto(
+                    unit.getPeriod().getNumber(),
+                    false,
+                    "",
+                    unit.getValues(),
+                    unit.getDirection().getName(),
+                    new ArrayList<>());
+        } else {
+            UnitDetails unitDetailsExist = unitDetails.get();
+            List<PersonResponseDto> persons = unitDetailsExist.getPersons()
+                    .stream().map(this::convertStringToPersonResponseDto)
+                    .toList();
+            return new UnitDetailsResponseDto(
+                    unitDetailsExist.getUnit().getPeriod().getNumber(),
+                    unitDetailsExist.getUnit().isCompleted(),
+                    unitDetailsExist.getDate(),
+                    unitDetailsExist.getUnit().getValues(),
+                    unitDetailsExist.getUnit().getDirection().getName(),
+                    persons);
+        }
+
     }
 
     private PersonResponseDto convertStringToPersonResponseDto(String personString) {
