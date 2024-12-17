@@ -100,7 +100,7 @@ public class UnitServiceAlternative implements UnitService{
         List<Integer> values = new ArrayList<>();
         values.add(0);
         unitDeleted.setValues(values);
-        unitRepository.delete(unitDeleted);
+        unitRepository.save(unitDeleted);
     }
 
     private UnitResponseDto checkEmptyUnit(Weekday weekday, Optional<Unit> unitOptional) {
