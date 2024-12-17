@@ -8,6 +8,7 @@ public record UnitDetailsResponseDto(
     String date,
     List<Integer> values,
     String directionName,
-    List<PersonResponseDto> persons
+    List<PersonResponseDto> persons,
+    List<String> tubNumbersList
 ) {
 }

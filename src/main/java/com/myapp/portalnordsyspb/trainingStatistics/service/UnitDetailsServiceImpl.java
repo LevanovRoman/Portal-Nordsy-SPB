@@ -50,19 +50,22 @@ public class UnitDetailsServiceImpl implements UnitDetailsService{
                     "",
                     unit.getValues(),
                     unit.getDirection().getName(),
+                    new ArrayList<>(),
                     new ArrayList<>());
         } else {
             UnitDetails unitDetailsExist = unitDetails.get();
             List<PersonResponseDto> persons = unitDetailsExist.getPersons()
                     .stream().map(this::convertStringToPersonResponseDto)
                     .toList();
+            List<String> tubNumbersList = persons.stream().map(PersonResponseDto::tabNumber).toList();
             return new UnitDetailsResponseDto(
                     unitDetailsExist.getUnit().getPeriod().getNumber(),
                     unitDetailsExist.getUnit().isCompleted(),
                     unitDetailsExist.getDate(),
                     unitDetailsExist.getUnit().getValues(),
                     unitDetailsExist.getUnit().getDirection().getName(),
-                    persons);
+                    persons,
+                    tubNumbersList);
         }
 
     }

@@ -1,6 +1,8 @@
 services:
   portal-server:
     container_name: portal_ppu
+    environment:
+      - TZ=${TZ}
     image: levanovroman/portal-nordsy-github-actions:latest
     pull_policy: always
 #    build:
@@ -10,7 +12,7 @@ services:
     env_file:
       - .env
     ports:
-      - 8080:8080porta
+      - 8080:8080
     volumes:
       - spring-photo:/home/photos
       - spring-book:/home/books
