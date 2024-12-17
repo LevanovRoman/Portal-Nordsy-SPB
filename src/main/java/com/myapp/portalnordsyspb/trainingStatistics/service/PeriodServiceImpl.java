@@ -4,12 +4,14 @@ import com.myapp.portalnordsyspb.exceptions.ObjectNotFoundException;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.request.FilterDto;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.request.PeriodRequestDto;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.response.PeriodResponseDto;
+import com.myapp.portalnordsyspb.trainingStatistics.entity.Direction;
 import com.myapp.portalnordsyspb.trainingStatistics.entity.Period;
 import com.myapp.portalnordsyspb.trainingStatistics.repository.PeriodRepository;
 import com.myapp.portalnordsyspb.trainingStatistics.repository.WeekdayRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -24,6 +26,7 @@ public class PeriodServiceImpl implements PeriodService{
     public List<PeriodResponseDto> getAllPeriodResponseDto(FilterDto filterDto) {
         return periodRepository.findAll()
                 .stream()
+                .sorted(Comparator.comparing(Period::getId))
                 .map(period -> convertPeriodToPeriodResponseDto(period, filterDto))
                 .toList();
     }

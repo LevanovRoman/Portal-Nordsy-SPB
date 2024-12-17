@@ -26,20 +26,20 @@ public class DirectionController {
 
     @GetMapping("/all")
     public ResponseEntity<List<DirectionOnlyResponseDto>> getAllDirections(){
-        Optional<Unit> result = unitRepository.findFilterByTubNumber(1L, 1L, 1L, "10103");
-        System.out.println(result.isPresent());
-        System.out.println(result.get().getDirection().getName());
-        System.out.println(result.get().getValues().toString());
-
-        Optional<Unit> result2 = unitRepository.findFilterByUnitValue(1L, 1L, 1L, 40);
-        System.out.println("UnitValue  " + result2.isPresent());
-        System.out.println("UnitValue  " + result2.orElseThrow(()->new ObjectNotFoundException("NOT")).getDirection().getName());
-        System.out.println("UnitValue  " + result2.orElseThrow(()->new ObjectNotFoundException("NOTVAL")).getValues().toString());
-
-        Optional<Unit> result3 = unitRepository.findFilterByTabNumberAndUnitValue(1L, 1L, 1L, 40, "10103");
-        System.out.println("UnitValue33  " + result3.isPresent());
-        System.out.println("UnitValue33  " + result3.orElseThrow(()->new ObjectNotFoundException("NOT33")).getDirection().getName());
-        System.out.println("UnitValue33  " + result3.orElseThrow(()->new ObjectNotFoundException("NOTVAL33")).getValues().toString());
+//        Optional<Unit> result = unitRepository.findFilterByTubNumber(1L, 1L, 1L, "10103");
+//        System.out.println(result.isPresent());
+//        System.out.println(result.get().getDirection().getName());
+//        System.out.println(result.get().getValues().toString());
+//
+//        Optional<Unit> result2 = unitRepository.findFilterByUnitValue(1L, 1L, 1L, 40);
+//        System.out.println("UnitValue  " + result2.isPresent());
+//        System.out.println("UnitValue  " + result2.orElseThrow(()->new ObjectNotFoundException("NOT")).getDirection().getName());
+//        System.out.println("UnitValue  " + result2.orElseThrow(()->new ObjectNotFoundException("NOTVAL")).getValues().toString());
+//
+//        Optional<Unit> result3 = unitRepository.findFilterByTabNumberAndUnitValue(1L, 1L, 1L, 40, "10103");
+//        System.out.println("UnitValue33  " + result3.isPresent());
+//        System.out.println("UnitValue33  " + result3.orElseThrow(()->new ObjectNotFoundException("NOT33")).getDirection().getName());
+//        System.out.println("UnitValue33  " + result3.orElseThrow(()->new ObjectNotFoundException("NOTVAL33")).getValues().toString());
 
         return ResponseEntity.ok(directionService.getAllDirections());
     }

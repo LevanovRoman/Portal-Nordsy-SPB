@@ -23,8 +23,8 @@ public class PeriodController {
     @GetMapping("/all")
     public ResponseEntity<List<PeriodResponseDto>> getAllPeriodResponseDto(@RequestParam(required = false) String tabNumber,
                                                                            @RequestParam(required = false) Integer unitValue){
-        System.out.println("tabNumber  " + tabNumber);
-        System.out.println("unitValue  " + unitValue);
+//        System.out.println("tabNumber  " + tabNumber);
+//        System.out.println("unitValue  " + unitValue);
         return ResponseEntity.ok(periodService.getAllPeriodResponseDto(new FilterDto(tabNumber, unitValue)));
     }
 
