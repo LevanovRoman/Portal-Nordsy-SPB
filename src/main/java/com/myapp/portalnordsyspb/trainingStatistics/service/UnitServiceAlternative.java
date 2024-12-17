@@ -100,7 +100,10 @@ public class UnitServiceAlternative implements UnitService{
 //        List<Integer> values = new ArrayList<>();
         unitDeleted.setValues(new ArrayList<>());
         unitDeleted.setCompleted(false);
-        unitDeleted.setUnitDetails(new UnitDetails());
+        UnitDetails unitDetails = unitDeleted.getUnitDetails();
+        unitDetails.setDate("");
+        unitDetails.setPersons(new ArrayList<>());
+        unitDetailsRepository.save(unitDetails);
         unitRepository.save(unitDeleted);
     }
 
