@@ -4,9 +4,7 @@ import com.myapp.portalnordsyspb.exceptions.ObjectNotFoundException;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.request.FilterDto;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.request.UnitRequestDto;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.response.UnitResponseDto;
-import com.myapp.portalnordsyspb.trainingStatistics.entity.Direction;
-import com.myapp.portalnordsyspb.trainingStatistics.entity.Unit;
-import com.myapp.portalnordsyspb.trainingStatistics.entity.Weekday;
+import com.myapp.portalnordsyspb.trainingStatistics.entity.*;
 import com.myapp.portalnordsyspb.trainingStatistics.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -72,17 +70,35 @@ public class UnitServiceAlternative implements UnitService{
 
     @Override
     public Unit getUnitById(long unitId) {
-        return null;
+        return unitRepository.findById(unitId)
+                .orElseThrow(() -> new ObjectNotFoundException("Unit not found."));
     }
 
     @Override
     public void updateUnit(UnitRequestDto unitRequestDto, long unitId) {
-
+        Unit unit = getUnitById(unitId);
+        unit.setValues(unitRequestDto.values());
+        if (unitRequestDto.completed()){
+            unit.setCompleted(true);
+            Optional<UnitDetails> unitDetails = unitDetailsRepository.findByUnitId(unitId);
+            if (unitDetails.isEmpty()){
+                UnitDetails unitDetailsNew = new UnitDetails();
+                saveUnitDetails(unitDetailsNew, unitRequestDto, unit);
+            } else {
+                saveUnitDetails(unitDetails.get(), unitRequestDto, unit);
+            }
+        }
+        unitRepository.save(unit);
     }
 
     @Override
     public void deleteUnit(long unitId) {
-
+        Unit unitDeleted = getUnitById(unitId);
+        Optional<UnitDetails> unitDetails = unitDetailsRepository.findByUnitId(unitId);
+        unitDetails.ifPresent(unitDetailsRepository::delete);
+        List<Integer> values = new ArrayList<>();
+        values.add(0);
+        unitDeleted.setValues(values);
     }
 
     private UnitResponseDto checkEmptyUnit(Weekday weekday, Optional<Unit> unitOptional) {
@@ -107,20 +123,6 @@ public class UnitServiceAlternative implements UnitService{
                 unit.get().isCompleted(), unit.get().getValues());
     }
 
-//    @Override
-//    public Unit getUnitById(long unitId) {
-//        return null;
-//    }
-//
-//    @Override
-//    public void updateUnit(UnitRequestDto unitRequestDto, long unitId) {
-//
-//    }
-//
-//    @Override
-//    public void deleteUnit(long unitId) {
-//
-//    }
     private Unit getNewUnit(long period_id, Direction direction, Weekday weekday) {
         Unit unitNew = new Unit();
         unitNew.setDirection(direction);
@@ -133,4 +135,22 @@ public class UnitServiceAlternative implements UnitService{
         return unitRepository.save(unitNew);
     }
 
+    private void saveUnitDetails(UnitDetails unitDetails, UnitRequestDto unitRequestDto, Unit unit){
+        unitDetails.setDate(unitRequestDto.date());
+        unitDetails.setUnit(unit);
+        unitDetails.setPersons(getPersonsList(unitRequestDto.tabNumberList()));
+        unitDetailsRepository.save(unitDetails);
+    }
+
+    private List<String> getPersonsList(List<String> tabNumberList){
+        List<String> personList = new ArrayList<>();
+        for (String tabNumber : tabNumberList){
+            Person person = personRepository.findByTabNumber(tabNumber)
+                    .orElseThrow(() -> new ObjectNotFoundException("Person not found with number: " + tabNumber));
+            String[] details = {person.getTabNumber(), person.getFullName(), person.getAppointName()};
+            String personString = String.join(",", details);
+            personList.add(personString);
+        }
+        return personList;
+    }
 }
