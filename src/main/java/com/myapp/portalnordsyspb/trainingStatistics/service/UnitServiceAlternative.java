@@ -94,16 +94,14 @@ public class UnitServiceAlternative implements UnitService{
     @Override
     public void deleteUnit(long unitId) {
         Unit unitDeleted = getUnitById(unitId);
-//        Optional<UnitDetails> unitDetails = unitDetailsRepository.findByUnitId(unitId);
-//        Optional<UnitDetails> unitDetails = Optional.ofNullable(unitDeleted.getUnitDetails());
-//        unitDetails.ifPresent(unitDetailsRepository::delete);
-//        List<Integer> values = new ArrayList<>();
         unitDeleted.setValues(new ArrayList<>());
         unitDeleted.setCompleted(false);
         UnitDetails unitDetails = unitDeleted.getUnitDetails();
-        unitDetails.setDate("");
-        unitDetails.setPersons(new ArrayList<>());
-        unitDetailsRepository.save(unitDetails);
+        if (unitDetails != null) {
+            unitDetails.setDate("");
+            unitDetails.setPersons(new ArrayList<>());
+            unitDetailsRepository.save(unitDetails);
+        }
         unitRepository.save(unitDeleted);
     }
 
