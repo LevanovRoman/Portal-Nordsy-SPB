@@ -1,5 +1,6 @@
 package com.myapp.portalnordsyspb.visitCounter.controller;
 
+import com.myapp.portalnordsyspb.visitCounter.entity.VisitHistory;
 import com.myapp.portalnordsyspb.visitCounter.service.VisitCounterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,8 +8,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("api/temp")
+@RequestMapping("api/counter")
 @RequiredArgsConstructor
 public class VisitCounterController {
 
@@ -25,6 +28,29 @@ public class VisitCounterController {
     public int getCurrentVisitCount() {
         return visitCounterService.getCurrentVisitCount();
     }
+
+    // Получение посещений за последнюю неделю
+    @GetMapping("/history/last-week")
+    public Integer getVisitsForLastWeek() {
+        return visitCounterService.getVisitsForLastWeek();
+    }
+
+    // Получение посещений за последний месяц
+    @GetMapping("/history/last-month")
+    public Integer getVisitsForLastMonth() {
+        return visitCounterService.getVisitsForLastMonth();
+    }
+
+    @GetMapping("/history/daily/last-week")
+    public List<VisitHistory> getDailyVisitsForLastWeek() {
+        return visitCounterService.getDailyVisitsForLastWeek();
+    }
+
+    @GetMapping("/history/daily/last-month")
+    public List<VisitHistory> getDailyVisitsForLastMonth() {
+        return visitCounterService.getDailyVisitsForLastMonth();
+    }
+
 
 }
 
