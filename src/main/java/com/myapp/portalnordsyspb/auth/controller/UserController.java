@@ -2,7 +2,9 @@ package com.myapp.portalnordsyspb.auth.controller;
 
 import com.myapp.portalnordsyspb.auth.dto.UserResponseDto;
 import com.myapp.portalnordsyspb.auth.entity.User;
+import com.myapp.portalnordsyspb.visitCounter.service.VisitCounterService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -15,14 +17,25 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("api/auth/user")
 @Tag(name = "Authentication", description = "Description for authentication")
+@RequiredArgsConstructor
 public class UserController {
+
+    private final VisitCounterService visitCounterService;
 
     @GetMapping
     public ResponseEntity<UserResponseDto> getUserInfo(@AuthenticationPrincipal User user){
+        visitCounterService.incrementVisitCount();
         if (user != null){
-            return ResponseEntity.ok(new UserResponseDto(user.getName(), user.getEmail(), true));
+            return ResponseEntity.ok(new UserResponseDto(user.getName(),
+                    user.getEmail(),
+                    true,
+                    visitCounterService.getCurrentVisitCount()));
         } else {
-            return ResponseEntity.ok(new UserResponseDto("", "", false));
+            return ResponseEntity.ok(new UserResponseDto("",
+                    "",
+                    false,
+                    visitCounterService.getCurrentVisitCount()
+            ));
         }
     }
 

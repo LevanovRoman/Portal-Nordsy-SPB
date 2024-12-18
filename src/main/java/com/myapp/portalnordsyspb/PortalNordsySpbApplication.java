@@ -16,7 +16,7 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @EnableTransactionManagement
-//@EnableScheduling
+@EnableScheduling
 public class PortalNordsySpbApplication {
 
     private static final Logger logger = LoggerFactory.getLogger(PortalNordsySpbApplication.class);
