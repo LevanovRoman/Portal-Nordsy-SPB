@@ -24,5 +24,5 @@ public class NewsResponseDto {
 
     private String photoUrl;
 
-//    private LocalDateTime createdAt;
+    private LocalDateTime createdAt;
 }

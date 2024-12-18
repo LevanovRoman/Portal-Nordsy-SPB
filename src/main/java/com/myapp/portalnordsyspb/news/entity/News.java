@@ -31,11 +31,11 @@ public class News {
 
     private String photo;
 
-//    @Column(updatable = false)
-//    private LocalDate createdAt;
-//
-//    @PrePersist
-//    protected void onCreate() {
-//        createdAt = LocalDate.now();
-//    }
+    @Column(updatable = false)
+    private LocalDate createdAt;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDate.now();
+    }
 }
