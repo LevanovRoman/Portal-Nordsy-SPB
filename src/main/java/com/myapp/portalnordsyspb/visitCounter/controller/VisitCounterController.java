@@ -4,9 +4,11 @@ import com.myapp.portalnordsyspb.visitCounter.service.VisitCounterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("api/temp")
 @RequiredArgsConstructor
 public class VisitCounterController {
 
@@ -24,10 +26,5 @@ public class VisitCounterController {
         return visitCounterService.getCurrentVisitCount();
     }
 
-    // Получение количества посещений за предыдущий день
-    @GetMapping("/visit/previous")
-    public int getPreviousDayCount() {
-        return visitCounterService.getPreviousDayCount();
-    }
 }
 

@@ -24,4 +24,7 @@ public class VisitHistory {
     private LocalDate date;
 
     private int visitCount;
+
+    public VisitHistory(LocalDate localDate, int count) {
+    }
 }
