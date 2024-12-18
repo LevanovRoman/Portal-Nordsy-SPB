@@ -26,7 +26,7 @@ public class InstructorServiceImpl implements InstructorService{
 
     @Override
     public List<InstructorResponseDto> getAllInstructor() {
-        return List.of();
+        return instructorRepository.findAll().stream().map(this::convertInstructorToInstructorResponseDto).toList();
     }
 
     @Override
