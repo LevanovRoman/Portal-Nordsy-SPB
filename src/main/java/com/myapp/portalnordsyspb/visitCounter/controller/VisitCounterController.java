@@ -2,6 +2,7 @@ package com.myapp.portalnordsyspb.visitCounter.controller;
 
 import com.myapp.portalnordsyspb.visitCounter.entity.VisitHistory;
 import com.myapp.portalnordsyspb.visitCounter.service.VisitCounterService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/counter")
+@Tag(name = "Visit Counter", description = "Description for counter")
 @RequiredArgsConstructor
 public class VisitCounterController {
 
@@ -50,7 +52,6 @@ public class VisitCounterController {
     public List<VisitHistory> getDailyVisitsForLastMonth() {
         return visitCounterService.getDailyVisitsForLastMonth();
     }
-
 
 }
 
