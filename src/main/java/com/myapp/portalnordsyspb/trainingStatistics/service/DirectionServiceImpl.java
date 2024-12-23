@@ -45,20 +45,26 @@ public class DirectionServiceImpl implements DirectionService{
                 .toList();
     }
 
-    @Override
-    public DirectionUpdateResponseDto getDirection(long directionId) {
-        Direction direction = getDirectionById(directionId);
-        return new DirectionUpdateResponseDto(
+//    @Override
+//    public DirectionUpdateResponseDto getDirection(long directionId) {
+//        Direction direction = getDirectionById(directionId);
+//        return new DirectionUpdateResponseDto(
+//                direction.getId(),
+//                direction.getName(),
+//                direction.getRemark(),
+//                direction.getHours(),
+//                instructorService.getAllByDirectionId(direction.getId())
+//        );
+//    }
+
+    private DirectionOnlyResponseDto convertDirectionToDirectionOnlyResponseDto(Direction direction) {
+        return new DirectionOnlyResponseDto(
                 direction.getId(),
                 direction.getName(),
                 direction.getRemark(),
                 direction.getHours(),
                 instructorService.getAllByDirectionId(direction.getId())
         );
-    }
-
-    private DirectionOnlyResponseDto convertDirectionToDirectionOnlyResponseDto(Direction direction) {
-        return new DirectionOnlyResponseDto(direction.getId(), direction.getName());
     }
 
     @Override

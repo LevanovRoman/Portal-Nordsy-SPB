@@ -14,7 +14,7 @@ public interface DirectionService {
     List<DirectionResponseDto> getAllDirectionResponseDto(Long period_id, FilterDto filterDto);
     Direction getDirectionById(long directionId);
     List<DirectionOnlyResponseDto> getAllDirections();
-    DirectionUpdateResponseDto getDirection(long directionId);
+//    DirectionUpdateResponseDto getDirection(long directionId);
 
     void createDirection(DirectionRequestDto directionRequestDto);
     void updateDirection(DirectionRequestDto directionRequestDto, long directionId);

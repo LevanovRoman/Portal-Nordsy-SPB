@@ -21,4 +21,12 @@ public class Inspection {
     private Long id;
 
     private int department;
+
+    private String date;
+
+    private int markDirectors;
+
+    private int markGeneral;
 }
+
+// white. green. red. yellow
