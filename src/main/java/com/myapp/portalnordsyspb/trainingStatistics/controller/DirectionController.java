@@ -4,6 +4,7 @@ import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.MessageDto;
 import com.myapp.portalnordsyspb.exceptions.ObjectNotFoundException;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.request.DirectionRequestDto;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.response.DirectionOnlyResponseDto;
+import com.myapp.portalnordsyspb.trainingStatistics.dto.response.DirectionUpdateResponseDto;
 import com.myapp.portalnordsyspb.trainingStatistics.entity.Unit;
 import com.myapp.portalnordsyspb.trainingStatistics.repository.UnitRepository;
 import com.myapp.portalnordsyspb.trainingStatistics.service.DirectionService;
@@ -42,6 +43,11 @@ public class DirectionController {
 //        System.out.println("UnitValue33  " + result3.orElseThrow(()->new ObjectNotFoundException("NOTVAL33")).getValues().toString());
 
         return ResponseEntity.ok(directionService.getAllDirections());
+    }
+
+    @GetMapping("/{directionId}")
+    public ResponseEntity<DirectionUpdateResponseDto> getDirection(@PathVariable("directionId") long directionId){
+        return ResponseEntity.ok(directionService.getDirection(directionId));
     }
 
     @PostMapping("/create")

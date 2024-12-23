@@ -5,6 +5,7 @@ import com.myapp.portalnordsyspb.trainingStatistics.dto.request.DirectionRequest
 import com.myapp.portalnordsyspb.trainingStatistics.dto.request.FilterDto;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.response.DirectionOnlyResponseDto;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.response.DirectionResponseDto;
+import com.myapp.portalnordsyspb.trainingStatistics.dto.response.DirectionUpdateResponseDto;
 import com.myapp.portalnordsyspb.trainingStatistics.entity.Direction;
 import com.myapp.portalnordsyspb.trainingStatistics.entity.Instructor;
 import com.myapp.portalnordsyspb.trainingStatistics.repository.DirectionRepository;
@@ -24,7 +25,7 @@ public class DirectionServiceImpl implements DirectionService{
     private final InstructorRepository instructorRepository;
     private final InstructorService instructorService;
     private final UnitService unitService;
-    private final EntityManager entityManager;
+//    private final EntityManager entityManager;
 
 
     @Override
@@ -42,6 +43,18 @@ public class DirectionServiceImpl implements DirectionService{
                 .stream()
                 .map(this::convertDirectionToDirectionOnlyResponseDto)
                 .toList();
+    }
+
+    @Override
+    public DirectionUpdateResponseDto getDirection(long directionId) {
+        Direction direction = getDirectionById(directionId);
+        return new DirectionUpdateResponseDto(
+                direction.getId(),
+                direction.getName(),
+                direction.getRemark(),
+                direction.getHours(),
+                instructorService.getAllByDirectionId(direction.getId())
+        );
     }
 
     private DirectionOnlyResponseDto convertDirectionToDirectionOnlyResponseDto(Direction direction) {
