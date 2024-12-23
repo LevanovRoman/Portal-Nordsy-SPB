@@ -124,12 +124,19 @@ public class DirectionServiceImpl implements DirectionService{
         direction.setName(directionRequestDto.name());
         direction.setRemark(directionRequestDto.remark());
         direction.setHours(directionRequestDto.hours());
-        Set<Instructor> instructors = new HashSet<>(instructorRepository.
-                findAllById(directionRequestDto.instructorIdSet()));
-        direction.getInstructors().clear();
-        for (Instructor instructor : instructors){
-            direction.addInstructor(instructor);
+        Set<Long> ids = directionRequestDto.instructorIdSet(); // Получение идентификаторов
+        if (ids == null || ids.isEmpty()) {
+            throw new IllegalArgumentException("Список идентификаторов не может быть пустым или null");
         }
+        System.out.println("direction.getInstructors()" + direction.getInstructors());
+        System.out.println("Переданные идентификаторы: {}" +  ids);
+        Set<Instructor> instructors = new HashSet<>(instructorRepository.
+                findAllById(ids));
+        direction.setInstructors(instructors);
+//        direction.getInstructors().clear();
+//        for (Instructor instructor : instructors){
+//            direction.addInstructor(instructor);
+//        }
         directionRepository.save(direction);
     }
 
