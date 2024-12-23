@@ -44,6 +44,7 @@ public class DirectionController {
     @PutMapping("/update/{directionId}")
     public ResponseEntity<MessageDto> updateDirection(@RequestBody DirectionRequestDto directionRequestDto,
                                                       @PathVariable("directionId") long directionId){
+        System.out.println("UPDATE");
         directionService.updateDirection(directionRequestDto, directionId);
         return ResponseEntity.ok(new MessageDto("Direction updated successfully."));
     }

@@ -87,6 +87,7 @@ public class DirectionServiceImpl implements DirectionService{
 
     @Override
     public void updateDirection(DirectionRequestDto directionRequestDto, long directionId) {
+        System.out.println("SERVICE" + directionId);
         Direction directionUpdated = getDirectionById(directionId);
 //        directionUpdated.setName(directionRequestDto.name());
 //        directionUpdated.setRemark(directionRequestDto.remark());
