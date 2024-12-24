@@ -1,10 +1,23 @@
-INSERT INTO inspection (date, department, general_score, total_score) VALUES
-                                                   ('28.06', 20, 'white', 'white'),
-                                                   ('Обход не проводился', 35, 'red', 'red'),
-                                                   ('12.09', 36, 'green', 'yellow'),
-                                                   ('03.10', 40, 'red', 'red'),
-                                                   ('17.10', 41, 'yellow', 'yellow'),
-                                                   ('10.10', 47, 'green', 'green');
+INSERT INTO workshop (number) VALUES (16),(20),(35),(36),(40),(41),(47);
+
+INSERT INTO inspection (date, general_score, total_score, workshop_id) VALUES
+                                                   ('28.06', 'white', 'white', 1),
+                                                   ('Обход не проводился', 'red', 'red', 1),
+                                                   ('12.09', 'green', 'yellow', 1),
+                                                   ('03.10', 'red', 'red', 2),
+                                                   ('17.10', 'yellow', 'yellow', 2),
+                                                   ('17.10', 'yellow', 'yellow', 3),
+                                                   ('17.10', 'yellow', 'yellow', 3),
+                                                   ('17.10', 'yellow', 'yellow', 4),
+                                                   ('17.10', 'yellow', 'yellow', 4),
+                                                   ('17.10', 'yellow', 'yellow', 5),
+                                                   ('17.10', 'yellow', 'yellow', 5),
+                                                   ('17.10', 'yellow', 'yellow', 6),
+                                                   ('17.10', 'yellow', 'yellow', 6),
+                                                   ('17.10', 'yellow', 'yellow', 7),
+                                                   ('17.10', 'yellow', 'yellow', 7),
+                                                   ('17.10', 'yellow', 'yellow', 7),
+                                                   ('10.10', 'green', 'green', 3);
 
 TRUNCATE TABLE inspection RESTART IDENTITY CASCADE;
 TRUNCATE TABLE visit_history RESTART IDENTITY CASCADE;

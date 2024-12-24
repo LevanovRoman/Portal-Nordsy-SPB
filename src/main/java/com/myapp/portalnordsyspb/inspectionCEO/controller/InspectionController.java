@@ -17,29 +17,29 @@ import java.util.List;
 @RequiredArgsConstructor
 public class InspectionController {
 
-    private final InspectionService inspectionService;
+//    private final InspectionService inspectionService;
 
-    @GetMapping("/all")
-    public ResponseEntity<List<InspectionResponseDto>> getAllInspections(){
-        return ResponseEntity.ok(inspectionService.getAllInspections());
-    }
-
-    @PostMapping("/create")
-    public ResponseEntity<MessageDto> createInspection(@RequestBody InspectionRequestDto inspectionRequestDto){
-        inspectionService.createInspection(inspectionRequestDto);
-        return ResponseEntity.ok(new MessageDto("Inspection created successfully."));
-    }
-
-    @PutMapping("/update/{inspectionId}")
-    public ResponseEntity<MessageDto> updateInspection(@RequestBody InspectionRequestDto inspectionRequestDto,
-                                                       @PathVariable long inspectionId){
-        inspectionService.updateInspection(inspectionRequestDto, inspectionId);
-        return ResponseEntity.ok(new MessageDto("Inspection updated successfully."));
-    }
-
-    @DeleteMapping("/delete/{inspectionId}")
-    public ResponseEntity<MessageDto> deleteInspection(@PathVariable long inspectionId){
-        inspectionService.deleteInspection(inspectionId);
-        return ResponseEntity.ok(new MessageDto("Inspection deleted successfully."));
-    }
+//    @GetMapping("/all")
+//    public ResponseEntity<List<InspectionResponseDto>> getAllInspections(){
+//        return ResponseEntity.ok(inspectionService.getAllInspections());
+//    }
+//
+//    @PostMapping("/create")
+//    public ResponseEntity<MessageDto> createInspection(@RequestBody InspectionRequestDto inspectionRequestDto){
+//        inspectionService.createInspection(inspectionRequestDto);
+//        return ResponseEntity.ok(new MessageDto("Inspection created successfully."));
+//    }
+//
+//    @PutMapping("/update/{inspectionId}")
+//    public ResponseEntity<MessageDto> updateInspection(@RequestBody InspectionRequestDto inspectionRequestDto,
+//                                                       @PathVariable long inspectionId){
+//        inspectionService.updateInspection(inspectionRequestDto, inspectionId);
+//        return ResponseEntity.ok(new MessageDto("Inspection updated successfully."));
+//    }
+//
+//    @DeleteMapping("/delete/{inspectionId}")
+//    public ResponseEntity<MessageDto> deleteInspection(@PathVariable long inspectionId){
+//        inspectionService.deleteInspection(inspectionId);
+//        return ResponseEntity.ok(new MessageDto("Inspection deleted successfully."));
+//    }
 }

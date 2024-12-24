@@ -8,13 +8,15 @@ import java.util.List;
 
 public interface InspectionService {
 
-    List<InspectionResponseDto> getAllInspections();
+    List<InspectionResponseDto> getInspectionsByWorkshopId(Long id);
 
-    Inspection getInspectionById(long inspectionId);
-
-    void createInspection(InspectionRequestDto inspectionRequestDto);
-
-    void updateInspection(InspectionRequestDto inspectionRequestDto, long inspectionId);
-
-    void deleteInspection(long inspectionId);
+//    List<InspectionResponseDto> getAllInspections();
+//
+//    Inspection getInspectionById(long inspectionId);
+//
+//    void createInspection(InspectionRequestDto inspectionRequestDto);
+//
+//    void updateInspection(InspectionRequestDto inspectionRequestDto, long inspectionId);
+//
+//    void deleteInspection(long inspectionId);
 }

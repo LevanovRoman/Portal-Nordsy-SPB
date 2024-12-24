@@ -7,28 +7,23 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Inspection {
+@Table(name = "workshop")
+public class Workshop {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private int number;
+
     @JsonIgnore
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name = "workshop_id")
-    private Workshop workshop;
-
-    private String date;
-
-    @Enumerated(EnumType.STRING)
-    private ScoreColor totalScore;
-
-    @Enumerated(EnumType.STRING)
-    private ScoreColor generalScore;
-
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "workshop")
+    private List<Inspection> inspectionList;
 }
