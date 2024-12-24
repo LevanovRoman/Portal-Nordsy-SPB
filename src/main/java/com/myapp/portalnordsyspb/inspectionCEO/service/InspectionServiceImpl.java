@@ -3,7 +3,6 @@ package com.myapp.portalnordsyspb.inspectionCEO.service;
 import com.myapp.portalnordsyspb.inspectionCEO.dto.response.InspectionResponseDto;
 import com.myapp.portalnordsyspb.inspectionCEO.entity.Inspection;
 import com.myapp.portalnordsyspb.inspectionCEO.repository.InspectionRepository;
-import com.myapp.portalnordsyspb.trainingStatistics.entity.Direction;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
