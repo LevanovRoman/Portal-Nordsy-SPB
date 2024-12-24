@@ -46,13 +46,13 @@ public class InspectionServiceImpl implements InspectionService{
 //                .toList();
 //    }
 //
-//    @Override
-//    public Inspection getInspectionById(long inspectionId) {
-//        return inspectionRepository
-//                .findById(inspectionId)
-//                .orElseThrow(() -> new ObjectNotFoundException("Inspection not found."));
-//    }
-//
+    @Override
+    public Inspection getInspectionById(long inspectionId) {
+        return inspectionRepository
+                .findById(inspectionId)
+                .orElseThrow(() -> new ObjectNotFoundException("Inspection not found."));
+    }
+
     @Override
     public void createInspection(InspectionRequestDto inspectionRequestDto) {
         Inspection inspection = new Inspection();
@@ -71,11 +71,11 @@ public class InspectionServiceImpl implements InspectionService{
 //        saveInspection(inspectionRequestDto, inspectionUpdate);
 //    }
 //
-//    @Override
-//    public void deleteInspection(long inspectionId) {
-//        Inspection inspectionDelete = getInspectionById(inspectionId);
-//        inspectionRepository.delete(inspectionDelete);
-//    }
+    @Override
+    public void deleteInspection(long inspectionId) {
+        Inspection inspectionDelete = getInspectionById(inspectionId);
+        inspectionRepository.delete(inspectionDelete);
+    }
 //
 //    private void saveInspection(InspectionRequestDto inspectionRequestDto, Inspection inspection){
 //        inspection.setDepartment(inspectionRequestDto.department());

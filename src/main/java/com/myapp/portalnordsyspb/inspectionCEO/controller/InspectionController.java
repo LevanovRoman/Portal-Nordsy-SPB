@@ -44,9 +44,9 @@ public class InspectionController {
 //        return ResponseEntity.ok(new MessageDto("Inspection updated successfully."));
 //    }
 //
-//    @DeleteMapping("/delete/{inspectionId}")
-//    public ResponseEntity<MessageDto> deleteInspection(@PathVariable long inspectionId){
-//        inspectionService.deleteInspection(inspectionId);
-//        return ResponseEntity.ok(new MessageDto("Inspection deleted successfully."));
-//    }
+    @DeleteMapping("/delete/{inspectionId}")
+    public ResponseEntity<MessageDto> deleteInspection(@PathVariable long inspectionId){
+        inspectionService.deleteInspection(inspectionId);
+        return ResponseEntity.ok(new MessageDto("Inspection deleted successfully."));
+    }
 }
