@@ -24,6 +24,7 @@ public class WorkshopServiceImpl implements WorkshopService{
 
     private WorkshopResponseDto convertWorkshopToWorkshopResponseDto(Workshop workshop) {
         return new WorkshopResponseDto(
+                workshop.getId(),
                 workshop.getNumber(),
                 inspectionService.getInspectionsByWorkshopId(workshop.getId())
         );

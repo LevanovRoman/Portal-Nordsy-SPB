@@ -1,8 +1,12 @@
 package com.myapp.portalnordsyspb.inspectionCEO.service;
 
+import com.myapp.portalnordsyspb.exceptions.ObjectNotFoundException;
+import com.myapp.portalnordsyspb.inspectionCEO.dto.request.InspectionRequestDto;
 import com.myapp.portalnordsyspb.inspectionCEO.dto.response.InspectionResponseDto;
 import com.myapp.portalnordsyspb.inspectionCEO.entity.Inspection;
+import com.myapp.portalnordsyspb.inspectionCEO.entity.Workshop;
 import com.myapp.portalnordsyspb.inspectionCEO.repository.InspectionRepository;
+import com.myapp.portalnordsyspb.inspectionCEO.repository.WorkshopRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +18,7 @@ import java.util.List;
 public class InspectionServiceImpl implements InspectionService{
 
     private final InspectionRepository inspectionRepository;
+    private final WorkshopRepository workshopRepository;
 
     @Override
     public List<InspectionResponseDto> getInspectionsByWorkshopId(Long workshopId) {
@@ -48,11 +53,17 @@ public class InspectionServiceImpl implements InspectionService{
 //                .orElseThrow(() -> new ObjectNotFoundException("Inspection not found."));
 //    }
 //
-//    @Override
-//    public void createInspection(InspectionRequestDto inspectionRequestDto) {
-//        Inspection inspectionNew = new Inspection();
-//        saveInspection(inspectionRequestDto, inspectionNew);
-//    }
+    @Override
+    public void createInspection(InspectionRequestDto inspectionRequestDto) {
+        Inspection inspection = new Inspection();
+        Workshop workshop = workshopRepository.findById(inspectionRequestDto.workshopId())
+                        .orElseThrow(() -> new ObjectNotFoundException("Workshop not found."));
+        inspection.setWorkshop(workshop);
+        inspection.setDate(inspectionRequestDto.date());
+        inspection.setTotalScore(inspectionRequestDto.totalScore());
+        inspection.setGeneralScore(inspectionRequestDto.generalScore());
+        inspectionRepository.save(inspection);
+    }
 //
 //    @Override
 //    public void updateInspection(InspectionRequestDto inspectionRequestDto, long inspectionId) {

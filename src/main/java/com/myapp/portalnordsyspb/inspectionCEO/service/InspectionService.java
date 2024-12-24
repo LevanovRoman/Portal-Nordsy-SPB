@@ -14,8 +14,8 @@ public interface InspectionService {
 //
 //    Inspection getInspectionById(long inspectionId);
 //
-//    void createInspection(InspectionRequestDto inspectionRequestDto);
-//
+    void createInspection(InspectionRequestDto inspectionRequestDto);
+
 //    void updateInspection(InspectionRequestDto inspectionRequestDto, long inspectionId);
 //
 //    void deleteInspection(long inspectionId);
