@@ -49,10 +49,10 @@ public class Direction {
         instructors.clear();
     }
 
-    public void addInstructor(Instructor instructor) {
-        instructors.add(instructor);
-        instructor.getDirections().add(this);
-    }
+//    public void addInstructor(Instructor instructor) {
+//        instructors.add(instructor);
+//        instructor.getDirections().add(this);
+//    }
 
 //    public void removeInstructor(Instructor instructor) {
 //        instructors.remove(instructor);

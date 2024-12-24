@@ -5,6 +5,7 @@ import com.myapp.portalnordsyspb.visitCounter.repository.VisitHistoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -31,7 +32,9 @@ public class VisitCounterServiceImpl implements VisitCounterService{
 
     // Сохранение данных о посещениях за день в базу данных
     @Override
+    @Transactional
     @Scheduled(cron = "0 0 0 * * *") // Каждый день в полночь
+//    @Scheduled(cron = "0 */5 * * * *") // 5 min
     public void saveVisitHistory() {
         int count = visitCount.getAndSet(0); // Сбрасываем текущий счетчик
         VisitHistory visitHistory = new VisitHistory(LocalDate.now().minusDays(1), count);

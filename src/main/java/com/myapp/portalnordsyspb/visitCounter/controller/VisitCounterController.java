@@ -20,7 +20,7 @@ public class VisitCounterController {
     private final VisitCounterService visitCounterService;
 
     // Увеличение счетчика при каждом посещении
-    @PostMapping("/visit")
+    @GetMapping("/visit")
     public void registerVisit() {
         visitCounterService.incrementVisitCount();
     }

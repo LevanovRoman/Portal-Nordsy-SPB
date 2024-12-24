@@ -28,14 +28,11 @@ public class UserController {
         if (user != null){
             return ResponseEntity.ok(new UserResponseDto(user.getName(),
                     user.getEmail(),
-                    true,
-                    visitCounterService.getCurrentVisitCount()));
+                    true));
         } else {
             return ResponseEntity.ok(new UserResponseDto("",
                     "",
-                    false,
-                    visitCounterService.getCurrentVisitCount()
-            ));
+                    false));
         }
     }
 

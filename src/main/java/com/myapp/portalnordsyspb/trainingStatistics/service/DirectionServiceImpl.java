@@ -87,7 +87,7 @@ public class DirectionServiceImpl implements DirectionService{
 
     @Override
     public void updateDirection(DirectionRequestDto directionRequestDto, long directionId) {
-        System.out.println("SERVICE" + directionId);
+//        System.out.println("SERVICE" + directionId);
         Direction directionUpdated = getDirectionById(directionId);
 //        directionUpdated.setName(directionRequestDto.name());
 //        directionUpdated.setRemark(directionRequestDto.remark());
@@ -129,8 +129,8 @@ public class DirectionServiceImpl implements DirectionService{
         if (ids == null || ids.isEmpty()) {
             throw new IllegalArgumentException("Список идентификаторов не может быть пустым или null");
         }
-        System.out.println("direction.getInstructors()" + direction.getInstructors());
-        System.out.println("Переданные идентификаторы: {}" +  ids);
+//        System.out.println("direction.getInstructors()" + direction.getInstructors());
+//        System.out.println("Переданные идентификаторы: {}" +  ids);
         Set<Instructor> instructors = new HashSet<>(instructorRepository.
                 findAllById(ids));
         direction.setInstructors(instructors);

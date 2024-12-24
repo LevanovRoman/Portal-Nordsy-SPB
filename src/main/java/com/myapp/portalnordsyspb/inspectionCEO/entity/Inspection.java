@@ -1,9 +1,6 @@
 package com.myapp.portalnordsyspb.inspectionCEO.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,9 +21,10 @@ public class Inspection {
 
     private String date;
 
-    private int markDirectors;
+    @Enumerated(EnumType.STRING)
+    private ScoreColor totalScore;
 
-    private int markGeneral;
+    @Enumerated(EnumType.STRING)
+    private ScoreColor generalScore;
+
 }
-
-// white. green. red. yellow

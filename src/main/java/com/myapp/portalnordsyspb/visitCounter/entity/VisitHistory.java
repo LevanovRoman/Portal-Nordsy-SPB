@@ -1,8 +1,6 @@
 package com.myapp.portalnordsyspb.visitCounter.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,16 +13,19 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "visit_history")
 public class VisitHistory {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private LocalDate date;
 
     private int visitCount;
 
-    public VisitHistory(LocalDate localDate, int count) {
+    public VisitHistory(LocalDate date, int visitCount) {
+        this.date = date;
+        this.visitCount = visitCount;
     }
 }
