@@ -3,9 +3,11 @@ package com.myapp.portalnordsyspb.inspectionCEO.service;
 import com.myapp.portalnordsyspb.inspectionCEO.dto.response.InspectionResponseDto;
 import com.myapp.portalnordsyspb.inspectionCEO.entity.Inspection;
 import com.myapp.portalnordsyspb.inspectionCEO.repository.InspectionRepository;
+import com.myapp.portalnordsyspb.trainingStatistics.entity.Direction;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -17,7 +19,9 @@ public class InspectionServiceImpl implements InspectionService{
     @Override
     public List<InspectionResponseDto> getInspectionsByWorkshopId(Long workshopId) {
         return inspectionRepository.findTop2ByWorkshopIdOrderByWorkshopId(workshopId)
-                .stream().map(this::convertInspectionToInspectionResponseDto).toList();
+                .stream()
+                .sorted(Comparator.comparing(Inspection::getId))
+                .map(this::convertInspectionToInspectionResponseDto).toList();
     }
 
     private InspectionResponseDto convertInspectionToInspectionResponseDto(Inspection inspection) {
