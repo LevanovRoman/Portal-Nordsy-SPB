@@ -16,7 +16,7 @@ public class InspectionServiceImpl implements InspectionService{
 
     @Override
     public List<InspectionResponseDto> getInspectionsByWorkshopId(Long workshopId) {
-        return inspectionRepository.findTop2ByWorkshopIdOrderByWorkshopIdDesc(workshopId)
+        return inspectionRepository.findTop2ByWorkshopIdOrderByWorkshopId(workshopId)
                 .stream().map(this::convertInspectionToInspectionResponseDto).toList();
     }
 
