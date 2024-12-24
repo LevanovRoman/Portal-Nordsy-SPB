@@ -56,7 +56,7 @@ public class InspectionServiceImpl implements InspectionService{
     @Override
     public void createInspection(InspectionRequestDto inspectionRequestDto) {
         Inspection inspection = new Inspection();
-        Workshop workshop = workshopRepository.findById(inspectionRequestDto.workshopId())
+        Workshop workshop = workshopRepository.findById(inspectionRequestDto.id())
                         .orElseThrow(() -> new ObjectNotFoundException("Workshop not found."));
         inspection.setWorkshop(workshop);
         inspection.setDate(inspectionRequestDto.date());
