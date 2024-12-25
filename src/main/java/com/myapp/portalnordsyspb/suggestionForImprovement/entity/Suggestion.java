@@ -20,17 +20,19 @@ public class Suggestion {
 
     private String title;
 
-    int numberRegistration;
+    @Column(nullable = true)
+    private String numberAndDateRegistration;
 
-    String dateRegistration;
+    private String department;
 
-    int department;
+    private String author;
 
-    String author;
+    private String registered;
 
-    boolean registered;
+    private String agreed;
 
-    boolean agreed;
+    private String implemented;
 
-    boolean implemented;
+    @Column(nullable = true)
+    private String dateImplementation;
 }

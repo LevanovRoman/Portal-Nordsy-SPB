@@ -3,6 +3,7 @@ package com.myapp.portalnordsyspb.trainingStatistics.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -22,7 +23,7 @@ public class UnitDetails {
     @JoinColumn(name = "unit_id", referencedColumnName = "id")
     private Unit unit;
 
-    private String date;
+    private LocalDate date;
 
     @ElementCollection
     @CollectionTable(name = "details_persons", joinColumns = @JoinColumn(name = "unit_details_id"))

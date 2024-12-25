@@ -12,6 +12,7 @@ import com.myapp.portalnordsyspb.trainingStatistics.repository.UnitDetailsReposi
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -47,7 +48,7 @@ public class UnitDetailsServiceImpl implements UnitDetailsService{
             return new UnitDetailsResponseDto(
                     unit.getPeriod().getNumber(),
                     false,
-                    "",
+                    LocalDate.now(),
                     unit.getValues(),
                     unit.getDirection().getName(),
                     new ArrayList<>(),

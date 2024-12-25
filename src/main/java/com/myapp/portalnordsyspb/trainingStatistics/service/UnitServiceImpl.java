@@ -9,6 +9,7 @@ import com.myapp.portalnordsyspb.trainingStatistics.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -98,7 +99,7 @@ public class UnitServiceImpl implements UnitService{
         unitDeleted.setCompleted(false);
         UnitDetails unitDetails = unitDeleted.getUnitDetails();
         if (unitDetails != null) {
-            unitDetails.setDate("");
+            unitDetails.setDate(LocalDate.now());
             unitDetails.setPersons(new ArrayList<>());
             unitDetailsRepository.save(unitDetails);
         }
