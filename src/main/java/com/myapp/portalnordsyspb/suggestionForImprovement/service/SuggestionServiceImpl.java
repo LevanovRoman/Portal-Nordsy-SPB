@@ -1,6 +1,7 @@
 package com.myapp.portalnordsyspb.suggestionForImprovement.service;
 
 import com.myapp.portalnordsyspb.exceptions.ObjectNotFoundException;
+import com.myapp.portalnordsyspb.suggestionForImprovement.dto.response.StatisticsResponseDto;
 import com.myapp.portalnordsyspb.suggestionForImprovement.dto.response.SuggestionAllResponseDto;
 import com.myapp.portalnordsyspb.suggestionForImprovement.entity.Suggestion;
 import com.myapp.portalnordsyspb.suggestionForImprovement.repository.SuggestionRepository;
@@ -19,6 +20,21 @@ public class SuggestionServiceImpl implements SuggestionService{
     public List<SuggestionAllResponseDto> getAllSuggestion() {
         return suggestionRepository.findAll()
                 .stream().map(this::convertSuggestionToSuggestionAllResponseDto).toList();
+    }
+
+    @Override
+    public StatisticsResponseDto getStatistics() {
+        return new StatisticsResponseDto(
+                suggestionRepository.findRegisteredValueForStatistics(),
+                suggestionRepository.findAgreedValueForStatistics(),
+                suggestionRepository.findImplementedValueForStatistics(),
+                111,
+                suggestionRepository.findCategoryValue("Бытовые улучшения"),
+                suggestionRepository.findCategoryValue("Эргономика"),
+                suggestionRepository.findCategoryValue("Информационные / IT-процессы"),
+                suggestionRepository.findCategoryValue("Охрана труда"),
+                suggestionRepository.findCategoryValue("Производственные процессы и технология")
+        );
     }
 
     private SuggestionAllResponseDto convertSuggestionToSuggestionAllResponseDto(Suggestion suggestion) {

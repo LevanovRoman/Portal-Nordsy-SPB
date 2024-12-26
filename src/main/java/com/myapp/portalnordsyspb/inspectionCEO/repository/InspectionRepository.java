@@ -9,5 +9,5 @@ import java.util.List;
 public interface InspectionRepository extends JpaRepository<Inspection, Long> {
 
 //    List<Inspection> findTop2ByOrderByWorkshopIdDesc(Long workshop_id);
-    List<Inspection> findTop2ByWorkshopIdOrderByWorkshopId(Long workshopId);
+    List<Inspection> findTop2ByWorkshopIdOrderByIdDesc(Long workshopId);
 }

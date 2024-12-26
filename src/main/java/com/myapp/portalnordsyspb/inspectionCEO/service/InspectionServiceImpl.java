@@ -22,7 +22,7 @@ public class InspectionServiceImpl implements InspectionService{
 
     @Override
     public List<InspectionResponseDto> getInspectionsByWorkshopId(Long workshopId) {
-        return inspectionRepository.findTop2ByWorkshopIdOrderByWorkshopId(workshopId)
+        return inspectionRepository.findTop2ByWorkshopIdOrderByIdDesc(workshopId)
                 .stream()
                 .sorted(Comparator.comparing(Inspection::getId))
                 .map(this::convertInspectionToInspectionResponseDto).toList();

@@ -71,6 +71,11 @@ public class UnitDetailsServiceImpl implements UnitDetailsService{
 
     }
 
+    @Override
+    public int getQuantityPersonsPerMonth(int monthNumber) {
+        return unitDetailsRepository.countPersonsForMonth(monthNumber);
+    }
+
     private PersonResponseDto convertStringToPersonResponseDto(String personString) {
         String[] result = personString.split(",");
         return new PersonResponseDto(result[0], result[1], result[2]);

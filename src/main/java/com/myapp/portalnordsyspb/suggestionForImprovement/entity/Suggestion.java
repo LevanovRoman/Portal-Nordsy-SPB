@@ -35,4 +35,6 @@ public class Suggestion {
 
     @Column(nullable = true)
     private String dateImplementation;
+
+    private String category;
 }

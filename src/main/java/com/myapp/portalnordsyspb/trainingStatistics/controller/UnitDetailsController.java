@@ -23,6 +23,11 @@ public class UnitDetailsController {
         return ResponseEntity.ok(unitDetailsService.getUnitDetailsByUnitId(unitId));
     }
 
+    @GetMapping("/month/{monthNumber}")
+    public ResponseEntity<Integer> getQuantityPersonsPerMonth(@PathVariable("monthNumber") int monthNumber){
+        return ResponseEntity.ok(unitDetailsService.getQuantityPersonsPerMonth(monthNumber));
+    }
+
 //    @PostMapping("/create/{unitId}")
 //    public ResponseEntity<MessageDto> createUnitDetails(@RequestBody UnitDetailsRequestDto unitDetailsRequestDto,
 //                                                        @PathVariable long unitId){

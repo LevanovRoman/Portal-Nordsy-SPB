@@ -1,5 +1,6 @@
 package com.myapp.portalnordsyspb.suggestionForImprovement.controller;
 
+import com.myapp.portalnordsyspb.suggestionForImprovement.dto.response.StatisticsResponseDto;
 import com.myapp.portalnordsyspb.suggestionForImprovement.dto.response.SuggestionAllResponseDto;
 import com.myapp.portalnordsyspb.suggestionForImprovement.service.SuggestionService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -22,5 +23,10 @@ public class SuggestionController {
     @GetMapping("/all")
     public ResponseEntity<List<SuggestionAllResponseDto>> getAllSuggestions(){
         return ResponseEntity.ok(suggestionService.getAllSuggestion());
+    }
+
+    @GetMapping("/statistics")
+    public ResponseEntity<StatisticsResponseDto> getStatistics(){
+        return ResponseEntity.ok(suggestionService.getStatistics());
     }
 }
