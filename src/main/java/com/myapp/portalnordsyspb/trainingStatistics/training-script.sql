@@ -49,6 +49,8 @@ TRUNCATE TABLE unit RESTART IDENTITY CASCADE;
 TRUNCATE TABLE unit_details RESTART IDENTITY CASCADE;
 TRUNCATE TABLE unit_values RESTART IDENTITY CASCADE;
 TRUNCATE TABLE details_persons RESTART IDENTITY CASCADE;
+TRUNCATE TABLE weekday RESTART IDENTITY CASCADE;
+TRUNCATE TABLE period RESTART IDENTITY CASCADE;
 
 TRUNCATE TABLE direction RESTART IDENTITY CASCADE;
 TRUNCATE TABLE direction_instructor RESTART IDENTITY CASCADE;
@@ -72,4 +74,5 @@ SELECT unit_id FROM unit_details ud JOIN details_persons dp on ud.id = dp.unit_d
 SELECT * FROM unit JOIN public.unit_details ud on unit.id = ud.unit_id JOIN public.details_persons dp on ud.id = dp.unit_details_id
          WHERE direction_id=1 AND period_id=1 AND weekday_id=1 AND dp.persons LIKE '10103%';
 
-SELECT COUNT(*) FROM details_persons dp JOIN unit_details ud ON dp.unit_details_id = ud.id WHERE EXTRACT(MONTH FROM ud.date) =12;
+SELECT COUNT(*) FROM details_persons dp JOIN unit_details ud ON dp.unit_details_id = ud.id
+                WHERE EXTRACT(MONTH FROM ud.date) =12 AND EXTRACT(YEAR FROM ud.date) =2025;

@@ -2,6 +2,7 @@ package com.myapp.portalnordsyspb.trainingStatistics.controller;
 
 import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.MessageDto;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.request.UnitDetailsRequestDto;
+import com.myapp.portalnordsyspb.trainingStatistics.dto.response.DiagramResponseDto;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.response.UnitDetailsResponseDto;
 import com.myapp.portalnordsyspb.trainingStatistics.service.UnitDetailsService;
 import com.myapp.portalnordsyspb.trainingStatistics.service.UnitDetailsServiceImpl;
@@ -9,6 +10,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/training/unit-details")
@@ -23,9 +26,9 @@ public class UnitDetailsController {
         return ResponseEntity.ok(unitDetailsService.getUnitDetailsByUnitId(unitId));
     }
 
-    @GetMapping("/month/{monthNumber}")
-    public ResponseEntity<Integer> getQuantityPersonsPerMonth(@PathVariable("monthNumber") int monthNumber){
-        return ResponseEntity.ok(unitDetailsService.getQuantityPersonsPerMonth(monthNumber));
+    @GetMapping("/diagram/{year}")
+    public ResponseEntity<List<DiagramResponseDto>> getDataForDiagram(@PathVariable("year") int year){
+        return ResponseEntity.ok(unitDetailsService.getDataForDiagram(year));
     }
 
 //    @PostMapping("/create/{unitId}")

@@ -2,6 +2,7 @@ package com.myapp.portalnordsyspb.trainingStatistics.service;
 
 import com.myapp.portalnordsyspb.exceptions.ObjectNotFoundException;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.request.UnitDetailsRequestDto;
+import com.myapp.portalnordsyspb.trainingStatistics.dto.response.DiagramResponseDto;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.response.PersonResponseDto;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.response.UnitDetailsResponseDto;
 import com.myapp.portalnordsyspb.trainingStatistics.entity.Person;
@@ -10,6 +11,7 @@ import com.myapp.portalnordsyspb.trainingStatistics.entity.UnitDetails;
 import com.myapp.portalnordsyspb.trainingStatistics.repository.PersonRepository;
 import com.myapp.portalnordsyspb.trainingStatistics.repository.UnitDetailsRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -24,6 +26,9 @@ public class UnitDetailsServiceImpl implements UnitDetailsService{
     private final UnitDetailsRepository unitDetailsRepository;
 //    private final PersonRepository personRepository;
     private final UnitService unitService;
+
+//    @Value("${YEAR_FOR_DIAGRAM_TRAINING}")
+//    private int year;
 
 //    @Override
 //    public UnitDetailsResponseDto getUnitDetailsByUnitId(long unitId) {
@@ -72,8 +77,24 @@ public class UnitDetailsServiceImpl implements UnitDetailsService{
     }
 
     @Override
-    public int getQuantityPersonsPerMonth(int monthNumber) {
-        return unitDetailsRepository.countPersonsForMonth(monthNumber);
+    public List<DiagramResponseDto> getDataForDiagram(int year) {
+        List<DiagramResponseDto> resultList = new ArrayList<>();
+        int counter = 0;
+        for (int i = 1; i <=12 ; i++) {
+            int quantity = getQuantityPersonsPerMonth(i, year);
+            counter += quantity;
+            resultList.add(new DiagramResponseDto(
+                    i,
+                    i,
+                    quantity,
+                    counter
+            ));
+        }
+        return resultList;
+    }
+
+    private int getQuantityPersonsPerMonth(int monthNumber, int year) {
+        return unitDetailsRepository.countPersonsForMonth(monthNumber, year);
     }
 
     private PersonResponseDto convertStringToPersonResponseDto(String personString) {

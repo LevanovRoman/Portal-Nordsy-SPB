@@ -12,6 +12,7 @@ public interface UnitDetailsRepository extends JpaRepository<UnitDetails, Long> 
     Optional<UnitDetails> findByUnitId(long unit_id);
 
     @Query(value = "SELECT COUNT(*) FROM details_persons dp JOIN unit_details ud ON dp.unit_details_id = ud.id" +
-            " WHERE EXTRACT(MONTH FROM ud.date) =:month;\n", nativeQuery = true)
-    int countPersonsForMonth(@Param("month") int month);
+            " WHERE EXTRACT(MONTH FROM ud.date) =:month AND EXTRACT(YEAR FROM ud.date) =:year", nativeQuery = true)
+    int countPersonsForMonth(@Param("month") int month,
+                             @Param("year") int year);
 }
