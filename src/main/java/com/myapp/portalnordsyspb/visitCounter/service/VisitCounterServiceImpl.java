@@ -3,6 +3,8 @@ package com.myapp.portalnordsyspb.visitCounter.service;
 import com.myapp.portalnordsyspb.visitCounter.entity.VisitHistory;
 import com.myapp.portalnordsyspb.visitCounter.repository.VisitHistoryRepository;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,10 +20,13 @@ public class VisitCounterServiceImpl implements VisitCounterService{
     private final AtomicInteger visitCount = new AtomicInteger(0);
     private final VisitHistoryRepository visitHistoryRepository;
 
+    private static final Logger logger = LoggerFactory.getLogger(VisitCounterServiceImpl.class);
+
     // Метод для увеличения счетчика
     @Override
     public void incrementVisitCount() {
-        visitCount.incrementAndGet();
+        int currentCount = visitCount.incrementAndGet();
+        logger.info("Visit count incremented: {}", currentCount);
     }
 
     // Получение текущего значения
@@ -32,11 +37,11 @@ public class VisitCounterServiceImpl implements VisitCounterService{
 
     // Сохранение данных о посещениях за день в базу данных
     @Override
-    @Transactional
-    @Scheduled(cron = "0 0 0 * * *") // Каждый день в полночь
+    @Scheduled(cron = "0 45 8 * * *") // Каждый день в полночь
 //    @Scheduled(cron = "0 */15 * * * *") // 5 min
     public void saveVisitHistory() {
         int count = visitCount.getAndSet(0); // Сбрасываем текущий счетчик
+        logger.info("Saving visit history: {}, resetting count", count);
         VisitHistory visitHistory = new VisitHistory(LocalDate.now().minusDays(1), count);
         visitHistoryRepository.save(visitHistory);
     }
