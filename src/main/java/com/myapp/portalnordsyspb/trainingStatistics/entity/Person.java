@@ -21,4 +21,6 @@ public class Person {
     private String appointName;
 
     private String department;
+
+    private String departmentTrim;
 }
