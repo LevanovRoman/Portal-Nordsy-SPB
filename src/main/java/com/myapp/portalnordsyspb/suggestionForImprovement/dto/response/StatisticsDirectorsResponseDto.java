@@ -1,7 +1,7 @@
 package com.myapp.portalnordsyspb.suggestionForImprovement.dto.response;
 
-public record StatisticsManagerResponseDto(
-        String manager,
+public record StatisticsDirectorsResponseDto(
+        String position,
         int registered,
         int implemented,
         int inclusion

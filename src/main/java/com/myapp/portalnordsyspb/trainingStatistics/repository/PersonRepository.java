@@ -7,4 +7,6 @@ import java.util.Optional;
 
 public interface PersonRepository extends JpaRepository<Person, Long> {
     Optional<Person> findByTabNumber(String tab_number);
+
+    int countPersonByDepartmentTrim(String department);
 }

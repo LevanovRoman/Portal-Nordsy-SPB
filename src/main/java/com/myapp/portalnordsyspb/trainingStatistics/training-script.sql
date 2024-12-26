@@ -77,12 +77,6 @@ SELECT * FROM unit JOIN public.unit_details ud on unit.id = ud.unit_id JOIN publ
 SELECT COUNT(*) FROM details_persons dp JOIN unit_details ud ON dp.unit_details_id = ud.id
                 WHERE EXTRACT(MONTH FROM ud.date) =12 AND EXTRACT(YEAR FROM ud.date) =2025;
 
-INSERT INTO suggestion_director (position, implemented, inclusion,  registered, total) VALUES
-            ('Заместитель генерального директора по управлению персоналом и административным вопросам', 10, 10, 10, 10),
-            ('Заместитель генерального директора по экономике и финансам', 10, 10, 10, 10),
-            ('Главный инженер', 10, 10, 10, 10),
-            ('Директор по производству', 10, 10, 10, 10),
-            ('Директор по материально-техническому обеспечению и логистике', 10, 10, 10, 10),
-            ('Директор по качеству и развитию производственной системы', 10, 10, 10, 10),
-            ('Заместитель генерального директора по правовому обеспечению', 10, 10, 10, 10);
+
+
 

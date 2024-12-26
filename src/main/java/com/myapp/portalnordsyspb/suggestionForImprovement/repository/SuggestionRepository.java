@@ -19,4 +19,11 @@ public interface SuggestionRepository extends JpaRepository<Suggestion, Long> {
 
     @Query(value = "SELECT COUNT(*) FROM suggestion WHERE implemented ILIKE '1'", nativeQuery = true)
     int findImplementedValueForStatistics();
+
+    @Query(value = "SELECT COUNT(*) FROM suggestion WHERE suggestion.number_and_date_registration IS NOT NULL\n" +
+            " AND suggestion.number_and_date_registration <> '' AND department LIKE :department", nativeQuery = true)
+    int findRegisteredValuePerDepartment(@Param("department") String department);
+
+    @Query(value = "SELECT COUNT(*) FROM suggestion WHERE implemented ILIKE '1' AND department LIKE :department", nativeQuery = true)
+    int findImplementedValuePerDepartment(@Param("department") String department);
 }

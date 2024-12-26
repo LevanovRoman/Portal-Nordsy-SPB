@@ -1,10 +1,10 @@
 package com.myapp.portalnordsyspb.suggestionForImprovement.service;
 
-import com.myapp.portalnordsyspb.exceptions.ObjectNotFoundException;
 import com.myapp.portalnordsyspb.suggestionForImprovement.dto.response.StatisticsResponseDto;
 import com.myapp.portalnordsyspb.suggestionForImprovement.dto.response.SuggestionAllResponseDto;
 import com.myapp.portalnordsyspb.suggestionForImprovement.entity.Suggestion;
 import com.myapp.portalnordsyspb.suggestionForImprovement.repository.SuggestionRepository;
+import com.myapp.portalnordsyspb.trainingStatistics.repository.PersonRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +15,7 @@ import java.util.List;
 public class SuggestionServiceImpl implements SuggestionService{
 
     private final SuggestionRepository suggestionRepository;
+    private final PersonRepository personRepository;
 
     @Override
     public List<SuggestionAllResponseDto> getAllSuggestion() {
@@ -24,11 +25,13 @@ public class SuggestionServiceImpl implements SuggestionService{
 
     @Override
     public StatisticsResponseDto getStatistics() {
+        int totalQuantityPersons = (int) personRepository.count();
+        int registered = suggestionRepository.findRegisteredValueForStatistics();
         return new StatisticsResponseDto(
-                suggestionRepository.findRegisteredValueForStatistics(),
+                registered,
                 suggestionRepository.findAgreedValueForStatistics(),
                 suggestionRepository.findImplementedValueForStatistics(),
-                111,
+                registered / totalQuantityPersons * 100,
                 suggestionRepository.findCategoryValue("Бытовые улучшения"),
                 suggestionRepository.findCategoryValue("Эргономика"),
                 suggestionRepository.findCategoryValue("Информационные / IT-процессы"),

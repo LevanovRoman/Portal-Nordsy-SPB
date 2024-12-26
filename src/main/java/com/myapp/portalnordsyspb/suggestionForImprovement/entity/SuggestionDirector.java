@@ -27,15 +27,11 @@ public class SuggestionDirector {
     @Column(name = "departments")
     private List<String> departmentList;
 
-//    @Column(columnDefinition = "INT DEFAULT 0")
-    private int registered = 0;
-
-//    @Column(columnDefinition = "INT DEFAULT 0")
-    private int implemented = 0;
-
-//    @Column(columnDefinition = "INT DEFAULT 0")
-    private int total = 0;
-
-//    @Column(columnDefinition = "INT DEFAULT 0")
-    private int inclusion = 0;
+//    private int registered = 0;
+//
+//    private int implemented = 0;
+//
+//    private int total = 0;
+//
+//    private int inclusion = 0;
 }

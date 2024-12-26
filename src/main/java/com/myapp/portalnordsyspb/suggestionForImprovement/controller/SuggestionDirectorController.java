@@ -1,5 +1,6 @@
 package com.myapp.portalnordsyspb.suggestionForImprovement.controller;
 
+import com.myapp.portalnordsyspb.suggestionForImprovement.dto.response.StatisticsDirectorsResponseDto;
 import com.myapp.portalnordsyspb.suggestionForImprovement.dto.response.SuggestionAllResponseDto;
 import com.myapp.portalnordsyspb.suggestionForImprovement.dto.response.SuggestionDirectorResponseDto;
 import com.myapp.portalnordsyspb.suggestionForImprovement.service.SuggestionDirectorService;
@@ -21,7 +22,7 @@ public class SuggestionDirectorController {
     private final SuggestionDirectorService suggestionDirectorService;
 
     @GetMapping("/directors/all")
-    public ResponseEntity<List<SuggestionDirectorResponseDto>> getAllSuggestionDirectors(){
-        return ResponseEntity.ok(suggestionDirectorService.getAllSuggestionDirectors());
+    public ResponseEntity<List<StatisticsDirectorsResponseDto>> getAllDirectors(){
+        return ResponseEntity.ok(suggestionDirectorService.getAllDirectors());
     }
 }
