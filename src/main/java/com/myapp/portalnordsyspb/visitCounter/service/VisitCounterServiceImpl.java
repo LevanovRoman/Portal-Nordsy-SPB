@@ -37,7 +37,7 @@ public class VisitCounterServiceImpl implements VisitCounterService{
 
     // Сохранение данных о посещениях за день в базу данных
     @Override
-    @Scheduled(cron = "0 55 9 * * *") // Каждый день в полночь
+    @Scheduled(cron = "0 30 10 * * *") // Каждый день в полночь
 //    @Scheduled(cron = "0 */15 * * * *") // 5 min
     public void saveVisitHistory() {
         logger.info("Visit count before saving: {}", visitCount);
