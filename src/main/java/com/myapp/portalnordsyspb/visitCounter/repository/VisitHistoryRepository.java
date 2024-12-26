@@ -26,4 +26,5 @@ public interface VisitHistoryRepository extends JpaRepository<VisitHistory, Long
     @Query("SELECT v FROM VisitHistory v WHERE v.date BETWEEN :startDate AND :endDate ORDER BY v.date")
     List<VisitHistory> findDailyVisitsBetweenDates(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 
+    VisitHistory findTopByOrderByIdDesc();
 }

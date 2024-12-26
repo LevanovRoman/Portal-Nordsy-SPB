@@ -1,9 +1,11 @@
 package com.myapp.portalnordsyspb.visitCounter.controller;
 
+import com.myapp.portalnordsyspb.visitCounter.dto.VisitCounterResponseDto;
 import com.myapp.portalnordsyspb.visitCounter.entity.VisitHistory;
 import com.myapp.portalnordsyspb.visitCounter.service.VisitCounterService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +20,11 @@ import java.util.List;
 public class VisitCounterController {
 
     private final VisitCounterService visitCounterService;
+
+    @GetMapping("/statistics")
+    public ResponseEntity<VisitCounterResponseDto> getVisitStatistics(){
+        return ResponseEntity.ok(visitCounterService.getVisitStatistics());
+    }
 
     // Увеличение счетчика при каждом посещении
     @GetMapping("/visit")

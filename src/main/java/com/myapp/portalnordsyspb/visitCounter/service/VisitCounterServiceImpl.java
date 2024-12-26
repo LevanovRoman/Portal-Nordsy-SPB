@@ -1,5 +1,6 @@
 package com.myapp.portalnordsyspb.visitCounter.service;
 
+import com.myapp.portalnordsyspb.visitCounter.dto.VisitCounterResponseDto;
 import com.myapp.portalnordsyspb.visitCounter.entity.VisitHistory;
 import com.myapp.portalnordsyspb.visitCounter.repository.VisitHistoryRepository;
 import lombok.RequiredArgsConstructor;
@@ -7,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -35,9 +35,19 @@ public class VisitCounterServiceImpl implements VisitCounterService{
         return visitCount.get();
     }
 
+    @Override
+    public VisitCounterResponseDto getVisitStatistics() {
+        return new VisitCounterResponseDto(
+                visitCount.get(),
+                visitHistoryRepository.findTopByOrderByIdDesc().getVisitCount(),
+                getVisitsForLastWeek(),
+                getVisitsForLastMonth()
+        );
+    }
+
     // Сохранение данных о посещениях за день в базу данных
     @Override
-    @Scheduled(cron = "0 30 10 * * *") // Каждый день в полночь
+    @Scheduled(cron = "0 0 8 * * *") // Каждый день в полночь
 //    @Scheduled(cron = "0 */15 * * * *") // 5 min
     public void saveVisitHistory() {
         logger.info("Visit count before saving: {}", visitCount);
