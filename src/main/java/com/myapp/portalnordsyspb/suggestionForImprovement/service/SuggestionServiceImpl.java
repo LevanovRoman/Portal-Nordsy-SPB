@@ -31,7 +31,7 @@ public class SuggestionServiceImpl implements SuggestionService{
                 registered,
                 suggestionRepository.findAgreedValueForStatistics(),
                 suggestionRepository.findImplementedValueForStatistics(),
-                registered / totalQuantityPersons * 100,
+                (int) ((float) registered / (float) totalQuantityPersons * 100),
                 suggestionRepository.findCategoryValue("Бытовые улучшения"),
                 suggestionRepository.findCategoryValue("Эргономика"),
                 suggestionRepository.findCategoryValue("Информационные / IT-процессы"),

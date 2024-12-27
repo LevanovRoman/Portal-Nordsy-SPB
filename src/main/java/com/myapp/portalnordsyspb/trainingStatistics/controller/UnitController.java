@@ -1,7 +1,6 @@
 package com.myapp.portalnordsyspb.trainingStatistics.controller;
 
 import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.MessageDto;
-import com.myapp.portalnordsyspb.trainingStatistics.dto.request.PeriodRequestDto;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.request.UnitRequestDto;
 import com.myapp.portalnordsyspb.trainingStatistics.service.UnitService;
 import io.swagger.v3.oas.annotations.tags.Tag;

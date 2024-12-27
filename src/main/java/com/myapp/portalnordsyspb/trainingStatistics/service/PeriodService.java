@@ -9,7 +9,6 @@ import java.util.List;
 
 public interface PeriodService {
 
-//    List<PeriodResponseDto> getAllPeriodResponseDto();
     List<PeriodResponseDto> getAllPeriodResponseDto(FilterDto filterDto);
 
     Period getPeriodById(long periodId);
@@ -19,6 +18,4 @@ public interface PeriodService {
     void updatePeriod(PeriodRequestDto periodRequestDto, long periodId);
 
     void deletePeriod(long periodId);
-
-//    List<PeriodResponseDto> getAllPeriodWithFilter(PeriodRequestFilterDto periodRequestFilterDto);
 }

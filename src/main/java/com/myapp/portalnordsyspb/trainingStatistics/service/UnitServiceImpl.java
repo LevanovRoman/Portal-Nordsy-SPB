@@ -109,8 +109,6 @@ public class UnitServiceImpl implements UnitService{
     private UnitResponseDto checkEmptyUnit(Weekday weekday, Optional<Unit> unitOptional) {
         UnitResponseDto unitResponseDto;
         if (unitOptional.isEmpty()){
-//            List<Integer> values = new ArrayList<>();
-//            values.add(0);
             unitResponseDto = new UnitResponseDto(weekday.getName(), 0,
                     false, new ArrayList<>());
         } else unitResponseDto = new UnitResponseDto(weekday.getName(), unitOptional.get().getId(),
@@ -134,8 +132,6 @@ public class UnitServiceImpl implements UnitService{
         unitNew.setPeriod(periodRepository.findById(period_id)
                 .orElseThrow(() -> new ObjectNotFoundException("Period not found.")));
         unitNew.setWeekday(weekday);
-//        List<Integer> values = new ArrayList<>();
-//        values.add(0);
         unitNew.setValues(new ArrayList<>());
         return unitRepository.save(unitNew);
     }

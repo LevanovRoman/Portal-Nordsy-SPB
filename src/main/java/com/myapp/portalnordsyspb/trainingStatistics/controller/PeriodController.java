@@ -23,8 +23,6 @@ public class PeriodController {
     @GetMapping("/all")
     public ResponseEntity<List<PeriodResponseDto>> getAllPeriodResponseDto(@RequestParam(required = false) String tabNumber,
                                                                            @RequestParam(required = false) Integer unitValue){
-//        System.out.println("tabNumber  " + tabNumber);
-//        System.out.println("unitValue  " + unitValue);
         return ResponseEntity.ok(periodService.getAllPeriodResponseDto(new FilterDto(tabNumber, unitValue)));
     }
 
@@ -46,10 +44,4 @@ public class PeriodController {
         periodService.deletePeriod(periodId);
         return ResponseEntity.ok(new MessageDto("Period deleted successfully."));
     }
-
-//    @PostMapping("/filter")
-//    public ResponseEntity<List<PeriodResponseDto>> getAllPeriodWithFilter(
-//            @RequestBody PeriodRequestFilterDto periodRequestFilterDto){
-//        return ResponseEntity.ok(periodService.getAllPeriodWithFilter(periodRequestFilterDto));
-//    }
 }

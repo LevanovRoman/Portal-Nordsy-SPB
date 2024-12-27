@@ -1,7 +1,6 @@
 package com.myapp.portalnordsyspb.trainingStatistics.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.myapp.portalnordsyspb.evaluationPU.entity.Result;
 import jakarta.persistence.*;
 import lombok.*;
 

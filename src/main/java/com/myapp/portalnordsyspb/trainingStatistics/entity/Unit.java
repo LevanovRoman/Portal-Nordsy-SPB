@@ -18,8 +18,6 @@ public class Unit {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @Column(nullable = false, columnDefinition = "INT DEFAULT 0")
-//    private int value;
     @ElementCollection
     @CollectionTable(name = "unit_values", joinColumns = @JoinColumn(name = "unit_id"))
     @Column(name = "values")

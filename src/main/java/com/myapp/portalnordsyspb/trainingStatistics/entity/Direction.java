@@ -1,14 +1,12 @@
 package com.myapp.portalnordsyspb.trainingStatistics.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.myapp.portalnordsyspb.Temporary.Course;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -35,7 +33,6 @@ public class Direction {
             joinColumns = @JoinColumn(name = "direction_id"),
             inverseJoinColumns = @JoinColumn(name = "instructor_id")
     )
-//    private List<Instructor> instructors = new ArrayList<>();
     private Set<Instructor> instructors = new HashSet<>();
 
     private float hours;
@@ -49,13 +46,4 @@ public class Direction {
         instructors.clear();
     }
 
-//    public void addInstructor(Instructor instructor) {
-//        instructors.add(instructor);
-//        instructor.getDirections().add(this);
-//    }
-
-//    public void removeInstructor(Instructor instructor) {
-//        instructors.remove(instructor);
-//        instructor.getDirections().remove(this);
-//    }
 }

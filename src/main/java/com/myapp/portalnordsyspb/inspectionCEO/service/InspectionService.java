@@ -10,13 +10,9 @@ public interface InspectionService {
 
     List<InspectionResponseDto> getInspectionsByWorkshopId(Long id);
 
-//    List<InspectionResponseDto> getAllInspections();
-//
     Inspection getInspectionById(long inspectionId);
 
     void createInspection(InspectionRequestDto inspectionRequestDto);
 
-//    void updateInspection(InspectionRequestDto inspectionRequestDto, long inspectionId);
-//
     void deleteInspection(long inspectionId);
 }

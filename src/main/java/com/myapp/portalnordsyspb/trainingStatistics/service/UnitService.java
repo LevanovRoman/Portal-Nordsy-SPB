@@ -10,13 +10,8 @@ import java.util.List;
 
 public interface UnitService {
 
-//    List<UnitResponseDto> getUnitResponseDtoByPeriodIdAndDirectionId(Long period_id, Direction direction);
     List<UnitResponseDto> getUnitResponseDtoByPeriodIdAndDirectionId(Long period_id, Direction direction, FilterDto filterDto);
     Unit getUnitById(long unitId);
-
-//    void createUnit(UnitRequestDto unitRequestDto, long unitId);
     void updateUnit(UnitRequestDto unitRequestDto, long unitId);
     void deleteUnit(long unitId);
-
-//    List<UnitResponseDto> getUnitResponseDtoByPeriodIdAndDirectionIdFilter(Long periodId, Direction direction, PeriodRequestFilterDto periodRequestFilterDto);
 }

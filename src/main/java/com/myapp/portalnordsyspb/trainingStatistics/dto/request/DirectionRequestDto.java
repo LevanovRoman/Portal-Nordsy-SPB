@@ -1,6 +1,5 @@
 package com.myapp.portalnordsyspb.trainingStatistics.dto.request;
 
-import java.util.List;
 import java.util.Set;
 
 public record DirectionRequestDto(

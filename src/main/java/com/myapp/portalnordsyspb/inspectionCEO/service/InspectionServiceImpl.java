@@ -37,15 +37,6 @@ public class InspectionServiceImpl implements InspectionService{
         );
     }
 
-
-//    @Override
-//    public List<InspectionResponseDto> getAllInspections() {
-//        return inspectionRepository.findAll()
-//                .stream()
-//                .map(this::convertInspectionToInspectionResponseDto)
-//                .toList();
-//    }
-//
     @Override
     public Inspection getInspectionById(long inspectionId) {
         return inspectionRepository
@@ -64,34 +55,10 @@ public class InspectionServiceImpl implements InspectionService{
         inspection.setGeneralScore(inspectionRequestDto.generalScore());
         inspectionRepository.save(inspection);
     }
-//
-//    @Override
-//    public void updateInspection(InspectionRequestDto inspectionRequestDto, long inspectionId) {
-//        Inspection inspectionUpdate = getInspectionById(inspectionId);
-//        saveInspection(inspectionRequestDto, inspectionUpdate);
-//    }
-//
+
     @Override
     public void deleteInspection(long inspectionId) {
         Inspection inspectionDelete = getInspectionById(inspectionId);
         inspectionRepository.delete(inspectionDelete);
     }
-//
-//    private void saveInspection(InspectionRequestDto inspectionRequestDto, Inspection inspection){
-//        inspection.setDepartment(inspectionRequestDto.department());
-//        inspection.setDate(inspectionRequestDto.date());
-//        inspection.setTotalScore(inspectionRequestDto.totalScore());
-//        inspection.setGeneralScore(inspectionRequestDto.generalScore());
-//        inspectionRepository.save(inspection);
-//    }
-//
-//    private InspectionResponseDto convertInspectionToInspectionResponseDto(Inspection inspection) {
-//        return new InspectionResponseDto(
-//                inspection.getId(),
-//                inspection.getDepartment(),
-//                inspection.getDate(),
-//                inspection.getTotalScore(),
-//                inspection.getGeneralScore()
-//        );
-//    }
 }
