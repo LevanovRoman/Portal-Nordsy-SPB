@@ -34,10 +34,10 @@ public class SuggestionDirectorServiceImpl implements SuggestionDirectorService{
                 implemented += suggestionRepository.findImplementedValuePerDepartment(department);
                 total += personRepository.countPersonByDepartmentTrim(department);
             }
-//            System.out.println(director.getId());
-//            System.out.println(registered);
-//            System.out.println(total);
-//            System.out.println((int) ((float) registered / (float) total * 100));
+            System.out.println(director.getId());
+            System.out.println(registered);
+            System.out.println(total);
+            System.out.println((int) ((float) registered / (float) total * 100));
             resultList.add(new StatisticsDirectorsResponseDto(
                     director.getPosition(),
                     registered,
