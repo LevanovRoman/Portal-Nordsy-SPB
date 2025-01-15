@@ -65,9 +65,9 @@ INSERT INTO unit_values(unit_id, values) VALUES (1, 40),(2, 40),(3, 40),(3, 50),
 INSERT INTO unit_details(date, unit_id)
    VALUES ('2024-11-21', 6);
 
-INSERT INTO details_persons(unit_details_id, persons) VALUES (2, '10101,Николаев И.И,Руководитель'),
-                                                             (2, '10102,Петров И.И,Руководитель'),
-                                                             (2, '10103,Сидоров И.И,Руководитель');
+INSERT INTO details_persons(unit_details_id, persons) VALUES (1, '10101,Николаев И.И,Руководитель'),
+                                                             (1, '10102,Петров И.И,Руководитель'),
+                                                             (1, '10103,Сидоров И.И,Руководитель');
 
 SELECT unit_id FROM unit_details ud JOIN details_persons dp on ud.id = dp.unit_details_id WHERE dp.persons LIKE '10103%';
 

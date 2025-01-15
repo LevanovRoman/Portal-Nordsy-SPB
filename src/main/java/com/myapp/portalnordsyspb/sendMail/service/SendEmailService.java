@@ -2,6 +2,7 @@ package com.myapp.portalnordsyspb.sendMail.service;
 
 import com.myapp.portalnordsyspb.exceptions.ObjectNotFoundException;
 import com.myapp.portalnordsyspb.sendMail.dto.MailRequestDto;
+import com.myapp.portalnordsyspb.sendMail.dto.MailResponseDto;
 import com.myapp.portalnordsyspb.trainingStatistics.entity.Person;
 import com.myapp.portalnordsyspb.trainingStatistics.repository.PersonRepository;
 import com.myapp.portalnordsyspb.trainingStatistics.service.DirectionService;
@@ -9,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.MailSendException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -60,6 +62,7 @@ public class SendEmailService {
 
         String message = "Сотрудник " + person.getFullName() +
                 ", табельный номер " + person.getTabNumber() +
+                " цех/отдел " + person.getDepartmentTrim()+
                 ", хочет пройти обучение по направлению "
                 + directionService.getDirectionById(mailRequestDto.directionId()).getName();
         try {
@@ -71,6 +74,14 @@ public class SendEmailService {
         } catch (MessagingException | UnsupportedEncodingException e) {
             logger.error("Error when sending an email: ", e);
         }
+    }
 
+    public MailResponseDto getPersonData(String tabnumber) {
+        Person person = personRepository.findByTabNumber(tabnumber)
+                .orElseThrow(() -> new ObjectNotFoundException("Person not found."));
+        return new MailResponseDto(
+                tabnumber,
+                person.getFullName(),
+                person.getDepartmentTrim());
     }
 }
