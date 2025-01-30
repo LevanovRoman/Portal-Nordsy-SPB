@@ -28,8 +28,6 @@ public interface UnitRepository extends JpaRepository<Unit, Long> {
 
     @Query(value = """
         SELECT u.* FROM unit u
-        JOIN unit_details ud ON u.id = ud.unit_id
-        JOIN details_persons dp ON ud.id = dp.unit_details_id
         JOIN unit_values uv ON u.id = uv.unit_id
         WHERE u.direction_id = :direction_id
            AND u.period_id = :period_id
