@@ -48,6 +48,7 @@ public class SecurityConfiguration {
 //                        .requestMatchers("/api/v1/auth/**", "/forgotPassword/**")
 //                        .requestMatchers("/admin/**").hasRole("ADMIN")
 //                        .requestMatchers("/user/**").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers("/api/table-5s/list").hasAnyRole("ADMIN", "USER")
                         .requestMatchers("/**").permitAll()
 //                        .requestMatchers(AUTH_WHITELIST).permitAll()
                         .anyRequest().authenticated())
