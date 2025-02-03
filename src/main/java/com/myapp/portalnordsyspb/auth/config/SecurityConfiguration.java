@@ -5,6 +5,7 @@ import com.myapp.portalnordsyspb.auth.service.AuthFilterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -36,6 +37,18 @@ public class SecurityConfiguration {
             "/swagger-ui/**",
             "/swagger-ui.html"
     };
+    private static final String[] AUTH_WHITELIST_2 = {
+            "/api/auth/**",
+            "/api/level-5s/all-areas5s",
+            "/api/table-pu/week-result/**",
+            "/api/table-pu/all-weeks/**",
+            "/api/table-pu/all-results",
+            "/actuator/**",
+            "/v3/api-docs/**",
+            "/v3/api-docs.yaml",
+            "/swagger-ui/**",
+            "/swagger-ui.html"
+    };
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -50,7 +63,11 @@ public class SecurityConfiguration {
 //                        .requestMatchers("/user/**").hasAnyRole("ADMIN", "USER")
 //                        .requestMatchers("/api/table-5s/list").hasRole("USER")
 //                        .requestMatchers("/api/auth/**").permitAll()
-                        .requestMatchers(AUTH_WHITELIST).permitAll()
+                        .requestMatchers(AUTH_WHITELIST_2).permitAll()
+//                        .requestMatchers(HttpMethod.PUT, "/api/table-pu/**").hasRole("USER")
+//                        .requestMatchers(HttpMethod.POST, "/api/table-pu/**").hasRole("USER")
+//                        .requestMatchers(HttpMethod.DELETE, "/api/table-pu/**").hasRole("USER")
+//                        .requestMatchers(HttpMethod.GET, "/api/counter/**").hasRole("USER")
                         .anyRequest().authenticated())
                 .exceptionHandling(exceptions -> exceptions
                         .authenticationEntryPoint(new JwtAuthenticationEntryPoint()))
