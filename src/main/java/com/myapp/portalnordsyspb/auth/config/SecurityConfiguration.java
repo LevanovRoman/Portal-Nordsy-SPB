@@ -48,10 +48,12 @@ public class SecurityConfiguration {
 //                        .requestMatchers("/api/v1/auth/**", "/forgotPassword/**")
 //                        .requestMatchers("/admin/**").hasRole("ADMIN")
 //                        .requestMatchers("/user/**").hasAnyRole("ADMIN", "USER")
-                        .requestMatchers("/api/table-5s/list").hasAnyRole("ADMIN", "USER")
-                        .requestMatchers("/**").permitAll()
-//                        .requestMatchers(AUTH_WHITELIST).permitAll()
+//                        .requestMatchers("/api/table-5s/list").hasRole("USER")
+//                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers(AUTH_WHITELIST).permitAll()
                         .anyRequest().authenticated())
+                .exceptionHandling(exceptions -> exceptions
+                        .authenticationEntryPoint(new JwtAuthenticationEntryPoint()))
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)

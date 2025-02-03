@@ -1,11 +1,13 @@
 package com.myapp.portalnordsyspb.auth.service;
 
+import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -46,7 +48,16 @@ public class AuthFilterService extends OncePerRequestFilter {
         jwt = authHeader.substring(7);
 
         // extract username from JWT
-        username = jwtService.extractUsername(jwt);
+        try {
+            username = jwtService.extractUsername(jwt);
+        } catch (ExpiredJwtException e) {
+            // Токен истек
+            throw new AuthenticationException("JWT expired", e) {};
+        } catch (Exception e) {
+            // Токен невалиден
+            throw new AuthenticationException("Invalid JWT", e) {};
+        }
+//        username = jwtService.extractUsername(jwt);
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);

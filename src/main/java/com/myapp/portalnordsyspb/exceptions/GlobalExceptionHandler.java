@@ -2,6 +2,7 @@ package com.myapp.portalnordsyspb.exceptions;
 
 import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.MessageDto;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -136,5 +137,4 @@ public class GlobalExceptionHandler {
     public MessageDto objectNotFoundException(ObjectNotFoundException ex){
         return new MessageDto(ex.getMessage());
     }
-
 }
