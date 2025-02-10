@@ -60,7 +60,7 @@ public class SecurityConfiguration {
 //                        .requestMatchers("/user/**").hasAnyRole("ADMIN", "USER")
 //                        .requestMatchers("/api/table-5s/list").hasRole("USER")
 //                        .requestMatchers("/api/auth/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, AUTH_WHITELIST).permitAll()
+                        .requestMatchers(AUTH_WHITELIST).permitAll()
 //                        .requestMatchers(HttpMethod.POST, AUTH_WHITELIST).permitAll()
 //                        .requestMatchers(HttpMethod.PUT, AUTH_WHITELIST).permitAll()
 //                        .requestMatchers(HttpMethod.DELETE, AUTH_WHITELIST).permitAll()
