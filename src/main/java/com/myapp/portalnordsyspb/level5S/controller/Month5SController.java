@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,6 +30,7 @@ public class Month5SController {
     }
 
     @PostMapping("/create-month5s")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<MessageDto> createMonth5S(@RequestBody Month5SRequestDto month5SRequestDto){
         month5SService.createMonth(month5SRequestDto);
         return new ResponseEntity<>(new MessageDto("Month created successfully."), HttpStatus.CREATED);

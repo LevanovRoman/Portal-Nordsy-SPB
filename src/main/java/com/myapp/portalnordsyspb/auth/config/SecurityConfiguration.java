@@ -25,7 +25,7 @@ public class SecurityConfiguration {
 
     private final AuthFilterService authFilterService;
     private final AuthenticationProvider authenticationProvider;
-//    private final EncodingFilterConfig encodingFilterConfig;
+    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
     private static final String[] AUTH_WHITELIST = {
             "/**",
@@ -52,9 +52,6 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        CharacterEncodingFilter filter = new CharacterEncodingFilter();
-//        filter.setEncoding("UTF-8");
-//        filter.setForceEncoding(true);
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
@@ -63,18 +60,20 @@ public class SecurityConfiguration {
 //                        .requestMatchers("/user/**").hasAnyRole("ADMIN", "USER")
 //                        .requestMatchers("/api/table-5s/list").hasRole("USER")
 //                        .requestMatchers("/api/auth/**").permitAll()
-                        .requestMatchers(AUTH_WHITELIST_2).permitAll()
+                        .requestMatchers(HttpMethod.GET, AUTH_WHITELIST).permitAll()
+//                        .requestMatchers(HttpMethod.POST, AUTH_WHITELIST).permitAll()
+//                        .requestMatchers(HttpMethod.PUT, AUTH_WHITELIST).permitAll()
+//                        .requestMatchers(HttpMethod.DELETE, AUTH_WHITELIST).permitAll()
 //                        .requestMatchers(HttpMethod.PUT, "/api/table-pu/**").hasRole("USER")
-//                        .requestMatchers(HttpMethod.POST, "/api/table-pu/**").hasRole("USER")
+                        .requestMatchers(HttpMethod.POST, "/api/table-5s/create-month5s").hasRole("USER")
 //                        .requestMatchers(HttpMethod.DELETE, "/api/table-pu/**").hasRole("USER")
 //                        .requestMatchers(HttpMethod.GET, "/api/counter/**").hasRole("USER")
                         .anyRequest().authenticated())
                 .exceptionHandling(exceptions -> exceptions
-                        .authenticationEntryPoint(new JwtAuthenticationEntryPoint()))
+                        .authenticationEntryPoint(jwtAuthenticationEntryPoint))
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
-//                .addFilterBefore(filter, CsrfFilter.class)
                 .addFilterBefore(authFilterService, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
