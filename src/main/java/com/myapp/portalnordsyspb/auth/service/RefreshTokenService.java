@@ -7,6 +7,7 @@ import com.myapp.portalnordsyspb.auth.repository.UserRepository;
 import com.myapp.portalnordsyspb.exceptions.ObjectNotFoundException;
 import com.myapp.portalnordsyspb.exceptions.RefreshTokenExpiredException;
 import com.myapp.portalnordsyspb.exceptions.RefreshTokenNotFoundException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,9 @@ public class RefreshTokenService {
         this.refreshTokenRepository = refreshTokenRepository;
     }
 
+    @Value("${spring.app.jwtRefreshExpirationMs}")
+    private long jwtRefreshExpirationMs;
+
     public RefreshToken createRefreshToken(String username) {
         User user = userRepository.findByEmail(username)
                 .orElseThrow(() -> new ObjectNotFoundException("Пользователь с почтой : " + username + " не найден."));
@@ -32,11 +36,9 @@ public class RefreshTokenService {
         RefreshToken refreshToken = user.getRefreshToken();
 
         if (refreshToken == null) {
-            long refreshTokenValidity = 120000L;
-//            long refreshTokenValidity = 2_592_000_000L;
             refreshToken = RefreshToken.builder()
                     .refreshToken(UUID.randomUUID().toString())
-                    .expirationTime(Instant.now().plusMillis(refreshTokenValidity))
+                    .expirationTime(Instant.now().plusMillis(jwtRefreshExpirationMs))
                     .user(user)
                     .build();
 
