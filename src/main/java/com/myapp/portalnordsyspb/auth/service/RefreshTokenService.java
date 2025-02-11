@@ -7,31 +7,27 @@ import com.myapp.portalnordsyspb.auth.repository.UserRepository;
 import com.myapp.portalnordsyspb.exceptions.ObjectNotFoundException;
 import com.myapp.portalnordsyspb.exceptions.RefreshTokenExpiredException;
 import com.myapp.portalnordsyspb.exceptions.RefreshTokenNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class RefreshTokenService {
 
     private final UserRepository userRepository;
 
     private final RefreshTokenRepository refreshTokenRepository;
 
-    public RefreshTokenService(UserRepository userRepository, RefreshTokenRepository refreshTokenRepository) {
-        this.userRepository = userRepository;
-        this.refreshTokenRepository = refreshTokenRepository;
-    }
-
     @Value("${spring.app.jwtRefreshExpirationMs}")
     private long jwtRefreshExpirationMs;
 
     public RefreshToken createRefreshToken(String username) {
         User user = userRepository.findByEmail(username)
-                .orElseThrow(() -> new ObjectNotFoundException("Пользователь с почтой : " + username + " не найден."));
+                .orElseThrow(() -> new ObjectNotFoundException("User with mail : " + username + " not found."));
 
         RefreshToken refreshToken = user.getRefreshToken();
 
@@ -50,7 +46,7 @@ public class RefreshTokenService {
 
     public RefreshToken verifyRefreshToken(String refreshToken) {
         RefreshToken refToken = refreshTokenRepository.findByRefreshToken(refreshToken)
-                .orElseThrow(() -> new RefreshTokenNotFoundException("Refresh token не найден!"));
+                .orElseThrow(() -> new RefreshTokenNotFoundException("Refresh token not found!"));
 
         if (refToken.getExpirationTime().compareTo(Instant.now()) < 0) {
             refreshTokenRepository.delete(refToken);

@@ -1,0 +1,34 @@
+###
+< {%
+    // request.variables.set("host_test", "http://172.16.15.77:8080");
+    client.global.set("host_test", "http://172.16.15.77:8080");
+
+%}
+POST {{host_test}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@gmail.com",
+  "password": "admin"
+}
+
+> {%
+    client.global.set("token", response.body.accessToken);
+%}
+
+<> 2025-02-06T154809.200.json
+<> 2025-02-06T154631.200.json
+<> 2025-02-06T154501.200.json
+<> 2025-02-06T154002.200.json
+<> 2025-02-06T153110.200.json
+<> 2025-02-06T152929.200.json
+###
+GET {{host_test}}/api/xwiki/chapter/all
+Authorization: Bearer {{token}}
+
+<> 2025-02-06T154813.200.json
+<> 2025-02-06T154714.200.json
+<> 2025-02-06T154704.200.json
+<> 2025-02-06T154641.200.json
+<> 2025-02-06T154504.200.json
+###

@@ -26,11 +26,10 @@ public class ChapterServiceTest {
 
     @Test
     public void ChapterService_CreateChapter_ReturnsChapterDto(){
+
         Chapter chapter = Chapter.builder().name("test-name").build();
 
-        ChapterRequestDto chapterRequestDto = new ChapterRequestDto(
-                "test-name"
-        );
+        ChapterRequestDto chapterRequestDto = new ChapterRequestDto("test-name");
 
         when(chapterRepository.save(Mockito.any(Chapter.class))).thenReturn(chapter);
 
