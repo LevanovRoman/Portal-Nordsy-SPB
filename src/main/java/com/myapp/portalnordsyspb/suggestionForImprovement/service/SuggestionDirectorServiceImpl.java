@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
 
 @Service
 @RequiredArgsConstructor
@@ -54,11 +53,11 @@ public class SuggestionDirectorServiceImpl implements SuggestionDirectorService{
 
     @Override
     public List<StatisticsInvolvedForDiagram> getDataForDiagramInvolvedPerDepartment() {
-        return deparmentsList.stream().map(this::convertDepartmentToStatisticsInvolved).toList();
+        return deparmentsList.stream().map(el -> convertDepartmentToStatisticsInvolved(el, deparmentsList.indexOf(el))).toList();
     }
 
-    private StatisticsInvolvedForDiagram convertDepartmentToStatisticsInvolved(String department) {
-        return new StatisticsInvolvedForDiagram(department,
+    private StatisticsInvolvedForDiagram convertDepartmentToStatisticsInvolved(String department, int index) {
+        return new StatisticsInvolvedForDiagram(index, department,
                 suggestionRepository.findImplementedValuePerDepartment(department));
     }
 }
