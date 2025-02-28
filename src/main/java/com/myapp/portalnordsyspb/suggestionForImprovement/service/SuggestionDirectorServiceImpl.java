@@ -1,6 +1,7 @@
 package com.myapp.portalnordsyspb.suggestionForImprovement.service;
 
 import com.myapp.portalnordsyspb.suggestionForImprovement.dto.response.StatisticsDirectorsResponseDto;
+import com.myapp.portalnordsyspb.suggestionForImprovement.dto.response.StatisticsInvolvedForDiagram;
 import com.myapp.portalnordsyspb.suggestionForImprovement.entity.SuggestionDirector;
 import com.myapp.portalnordsyspb.suggestionForImprovement.repository.SuggestionDirectorRepository;
 import com.myapp.portalnordsyspb.suggestionForImprovement.repository.SuggestionRepository;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 @Service
 @RequiredArgsConstructor
@@ -18,6 +20,8 @@ public class SuggestionDirectorServiceImpl implements SuggestionDirectorService{
     private final SuggestionDirectorRepository suggestionDirectorRepository;
     private final PersonRepository personRepository;
     private final SuggestionRepository suggestionRepository;
+
+    private final List<String> deparmentsList = List.of("016", "020", "035", "036", "040", "041", "047");
 
     @Override
     public List<StatisticsDirectorsResponseDto> getAllDirectors() {
@@ -46,5 +50,15 @@ public class SuggestionDirectorServiceImpl implements SuggestionDirectorService{
             ));
         }
         return resultList;
+    }
+
+    @Override
+    public List<StatisticsInvolvedForDiagram> getDataForDiagramInvolvedPerDepartment() {
+        return deparmentsList.stream().map(this::convertDepartmentToStatisticsInvolved).toList();
+    }
+
+    private StatisticsInvolvedForDiagram convertDepartmentToStatisticsInvolved(String department) {
+        return new StatisticsInvolvedForDiagram(department,
+                suggestionRepository.findImplementedValuePerDepartment(department));
     }
 }

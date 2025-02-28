@@ -36,6 +36,8 @@ GET {{host_test}}/api/xwiki/chapter/all
 
 <> 2025-02-10T140839.200.json
 ###
+GET http://localhost:8080/api/suggestion/diagram-involved
+###
 GET {{host_develop}}/api/xwiki/chapter/all
 
 > {%

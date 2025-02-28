@@ -2,6 +2,7 @@ package com.myapp.portalnordsyspb.exceptions;
 
 import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.MessageDto;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -24,11 +25,18 @@ public class GlobalExceptionHandler {
         return errors;
     }
 
-    @ResponseStatus(HttpStatus.NOT_FOUND)
+//    @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Area not found exception")
+    @ResponseStatus(HttpStatus.NOT_FOUND) // возможно это излишне - обрабатывает необработанные исключения
     @ExceptionHandler(AreaNotFoundException.class)
     public MessageDto areaNotFound(AreaNotFoundException ex){
         return new MessageDto(ex.getMessage());
     }
+
+//    @ResponseStatus(HttpStatus.NOT_FOUND)
+//    @ExceptionHandler(AreaNotFoundException.class)
+//    public ResponseEntity<Object> areaNotFound(AreaNotFoundException ex){
+//        return new ResponseEntity<>("Area not found!!", HttpStatus.NOT_FOUND);
+//    }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(WeekNotFoundException.class)

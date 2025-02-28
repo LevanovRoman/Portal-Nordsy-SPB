@@ -1,6 +1,7 @@
 package com.myapp.portalnordsyspb.suggestionForImprovement.controller;
 
 import com.myapp.portalnordsyspb.suggestionForImprovement.dto.response.StatisticsDirectorsResponseDto;
+import com.myapp.portalnordsyspb.suggestionForImprovement.dto.response.StatisticsInvolvedForDiagram;
 import com.myapp.portalnordsyspb.suggestionForImprovement.dto.response.SuggestionAllResponseDto;
 import com.myapp.portalnordsyspb.suggestionForImprovement.dto.response.SuggestionDirectorResponseDto;
 import com.myapp.portalnordsyspb.suggestionForImprovement.service.SuggestionDirectorService;
@@ -24,5 +25,10 @@ public class SuggestionDirectorController {
     @GetMapping("/directors/all")
     public ResponseEntity<List<StatisticsDirectorsResponseDto>> getAllDirectors(){
         return ResponseEntity.ok(suggestionDirectorService.getAllDirectors());
+    }
+
+    @GetMapping("/diagram-involved")
+    public ResponseEntity<List<StatisticsInvolvedForDiagram>> getDataForDiagramInvolvedPerDepartment(){
+        return ResponseEntity.ok(suggestionDirectorService.getDataForDiagramInvolvedPerDepartment());
     }
 }
