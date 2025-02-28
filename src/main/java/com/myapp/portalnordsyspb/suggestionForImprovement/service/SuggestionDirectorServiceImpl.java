@@ -37,10 +37,6 @@ public class SuggestionDirectorServiceImpl implements SuggestionDirectorService{
                 implemented += suggestionRepository.findImplementedValuePerDepartment(department);
                 total += personRepository.countPersonByDepartmentTrim(department);
             }
-            System.out.println(director.getId());
-            System.out.println(registered);
-            System.out.println(total);
-            System.out.println((int) ((float) registered / (float) total * 100));
             resultList.add(new StatisticsDirectorsResponseDto(
                     director.getPosition(),
                     registered,
@@ -57,7 +53,10 @@ public class SuggestionDirectorServiceImpl implements SuggestionDirectorService{
     }
 
     private StatisticsInvolvedForDiagram convertDepartmentToStatisticsInvolved(String department, int index) {
+        int registered = suggestionRepository.findRegisteredValuePerDepartment(department);
+        int total = personRepository.countPersonByDepartmentTrim(department);
+        int result = (int) ((float) registered / (float) total * 100);
         return new StatisticsInvolvedForDiagram(index, department,
-                suggestionRepository.findImplementedValuePerDepartment(department));
+                result);
     }
 }
