@@ -30,7 +30,7 @@ public class Month5SController {
     }
 
     @PostMapping("/create-month5s")
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<MessageDto> createMonth5S(@RequestBody Month5SRequestDto month5SRequestDto){
         month5SService.createMonth(month5SRequestDto);
         return new ResponseEntity<>(new MessageDto("Month created successfully."), HttpStatus.CREATED);

@@ -59,7 +59,7 @@ public class SecurityConfiguration {
 //                        .requestMatchers("/admin/**").hasRole("ADMIN")
 //                        .requestMatchers("/user/**").hasAnyRole("ADMIN", "USER")
 //                        .requestMatchers("/api/table-5s/list").hasRole("USER")
-//                        .requestMatchers("/api/auth/**").permitAll()
+//                        .requestMatchers("/api/**").permitAll()
                         .requestMatchers(AUTH_WHITELIST).permitAll()
 //                        .requestMatchers(HttpMethod.POST, AUTH_WHITELIST).permitAll()
 //                        .requestMatchers(HttpMethod.PUT, AUTH_WHITELIST).permitAll()

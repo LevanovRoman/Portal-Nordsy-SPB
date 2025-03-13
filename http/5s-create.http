@@ -1,0 +1,105 @@
+### GET request to example server
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@gmail.com",
+  "password": "admin"
+}
+
+###
+###
+POST http://localhost:8080/api/table-5s/create-month5s
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3NDE4NTE3NjEsImV4cCI6MTc0MjQ1NjU2MX0.ez5AVKkCISMfkqDAHb94Leamr4ImPHdDzsB3TpBytLY
+
+{
+  "monthAndYear": "май 2025",
+  "results": [
+    {"areaId":1,"criterionId":1,"value":65},
+    {"areaId":2,"criterionId":1,"value":97},
+    {"areaId":3,"criterionId":1,"value":50},
+    {"areaId":4,"criterionId":1,"value":33},
+    {"areaId":5,"criterionId":1,"value":76},
+    {"areaId":6,"criterionId":1,"value":33},
+    {"areaId":7,"criterionId":1,"value":93},
+    {"areaId":8,"criterionId":1,"value":67},
+    {"areaId":9,"criterionId":1,"value":93},
+    {"areaId":10,"criterionId":1,"value":56},
+    {"areaId":11,"criterionId":1,"value":10},
+    {"areaId":12,"criterionId":1,"value":37},
+    {"areaId":13,"criterionId":1,"value":10},
+    {"areaId":14,"criterionId":1,"value":37},
+    {"areaId":15,"criterionId":1,"value":46},
+    {"areaId":16,"criterionId":1,"value":55},
+    {"areaId":17,"criterionId":1,"value":12},
+    {"areaId":18,"criterionId":1,"value":33},
+    {"areaId":19,"criterionId":1,"value":76},
+    {"areaId":20,"criterionId":1,"value":68},
+    {"areaId":21,"criterionId":1,"value":18},
+    {"areaId":22,"criterionId":1,"value":69},
+    {"areaId":23,"criterionId":1,"value":22},
+    {"areaId":24,"criterionId":1,"value":88},
+    {"areaId":25,"criterionId":1,"value":58},
+    {"areaId":26,"criterionId":1,"value":91},
+    {"areaId":28,"criterionId":1,"value":41},
+    {"areaId":29,"criterionId":1,"value":52},
+    {"areaId":30,"criterionId":1,"value":65},
+    {"areaId":31,"criterionId":1,"value":25},
+    {"areaId":32,"criterionId":1,"value":86},
+    {"areaId":49,"criterionId":1,"value":18},
+    {"areaId":50,"criterionId":1,"value":69},
+    {"areaId":51,"criterionId":1,"value":58},
+    {"areaId":52,"criterionId":1,"value":91},
+    {"areaId":53,"criterionId":1,"value":52},
+    {"areaId":54,"criterionId":1,"value":65},
+    {"areaId":55,"criterionId":1,"value":90},
+    {"areaId":56,"criterionId":1,"value":21},
+    {"areaId":57,"criterionId":1,"value":17},
+    {"areaId":58,"criterionId":1,"value":83},
+    {"areaId":68,"criterionId":1,"value":50},
+
+    {"areaId":1,"criterionId":2,"value":65},
+    {"areaId":2,"criterionId":2,"value":97},
+    {"areaId":3,"criterionId":2,"value":50},
+    {"areaId":4,"criterionId":2,"value":33},
+    {"areaId":5,"criterionId":2,"value":76},
+    {"areaId":6,"criterionId":2,"value":33},
+    {"areaId":7,"criterionId":2,"value":93},
+    {"areaId":8,"criterionId":2,"value":67},
+    {"areaId":9,"criterionId":2,"value":93},
+    {"areaId":10,"criterionId":2,"value":56},
+    {"areaId":11,"criterionId":2,"value":10},
+    {"areaId":12,"criterionId":2,"value":37},
+    {"areaId":13,"criterionId":2,"value":10},
+    {"areaId":14,"criterionId":2,"value":37},
+    {"areaId":15,"criterionId":2,"value":46},
+    {"areaId":16,"criterionId":2,"value":55},
+    {"areaId":17,"criterionId":2,"value":12},
+    {"areaId":18,"criterionId":2,"value":33},
+    {"areaId":19,"criterionId":2,"value":76},
+    {"areaId":20,"criterionId":2,"value":68},
+    {"areaId":21,"criterionId":2,"value":18},
+    {"areaId":22,"criterionId":2,"value":69},
+    {"areaId":23,"criterionId":2,"value":22},
+    {"areaId":24,"criterionId":2,"value":88},
+    {"areaId":25,"criterionId":2,"value":58},
+    {"areaId":26,"criterionId":2,"value":91},
+    {"areaId":28,"criterionId":2,"value":41},
+    {"areaId":29,"criterionId":2,"value":52},
+    {"areaId":30,"criterionId":2,"value":65},
+    {"areaId":31,"criterionId":2,"value":25},
+    {"areaId":32,"criterionId":2,"value":86},
+    {"areaId":49,"criterionId":2,"value":18},
+    {"areaId":50,"criterionId":2,"value":69},
+    {"areaId":51,"criterionId":2,"value":58},
+    {"areaId":52,"criterionId":2,"value":91},
+    {"areaId":53,"criterionId":2,"value":52},
+    {"areaId":54,"criterionId":2,"value":65},
+    {"areaId":55,"criterionId":2,"value":90},
+    {"areaId":56,"criterionId":2,"value":21},
+    {"areaId":57,"criterionId":2,"value":17},
+    {"areaId":58,"criterionId":2,"value":83},
+    {"areaId":68,"criterionId":2,"value":50}
+  ]
+}
