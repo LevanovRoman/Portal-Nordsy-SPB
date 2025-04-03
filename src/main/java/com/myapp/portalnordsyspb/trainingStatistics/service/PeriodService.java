@@ -3,6 +3,7 @@ package com.myapp.portalnordsyspb.trainingStatistics.service;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.request.FilterDto;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.request.PeriodRequestDto;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.response.PeriodResponseDto;
+import com.myapp.portalnordsyspb.trainingStatistics.dto.response.PersonsByDirectionsForMonthDto;
 import com.myapp.portalnordsyspb.trainingStatistics.entity.Period;
 
 import java.util.List;
@@ -18,4 +19,6 @@ public interface PeriodService {
     void updatePeriod(PeriodRequestDto periodRequestDto, long periodId);
 
     void deletePeriod(long periodId);
+
+    List<PersonsByDirectionsForMonthDto> getPersonsByDirectionsForMonth(int year);
 }

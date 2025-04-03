@@ -1,0 +1,11 @@
+###
+GET http://localhost:8080/api/training/period/all
+
+###
+GET http://localhost:8080/api/training/unit-details/{{unitId}}
+
+###
+GET http://localhost:8080/api/training/unit-details/diagram/{{year}}
+
+###
+GET http://localhost:8080/api/training/period/persons-by-directions/2025

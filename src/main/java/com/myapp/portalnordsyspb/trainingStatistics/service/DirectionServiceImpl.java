@@ -3,6 +3,7 @@ package com.myapp.portalnordsyspb.trainingStatistics.service;
 import com.myapp.portalnordsyspb.exceptions.ObjectNotFoundException;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.request.DirectionRequestDto;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.request.FilterDto;
+import com.myapp.portalnordsyspb.trainingStatistics.dto.response.DirectionNameDto;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.response.DirectionOnlyResponseDto;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.response.DirectionResponseDto;
 import com.myapp.portalnordsyspb.trainingStatistics.entity.Direction;
@@ -39,6 +40,18 @@ public class DirectionServiceImpl implements DirectionService{
                 .stream()
                 .map(this::convertDirectionToDirectionOnlyResponseDto)
                 .toList();
+    }
+
+    @Override
+    public List<DirectionNameDto> getAllDirectionsNames() {
+        return directionRepository.findAll()
+                .stream()
+                .map(this::convertDirectionToDirectionNameDto)
+                .toList();
+    }
+
+    private DirectionNameDto convertDirectionToDirectionNameDto(Direction direction) {
+        return new DirectionNameDto(direction.getId(), direction.getName());
     }
 
     private DirectionOnlyResponseDto convertDirectionToDirectionOnlyResponseDto(Direction direction) {

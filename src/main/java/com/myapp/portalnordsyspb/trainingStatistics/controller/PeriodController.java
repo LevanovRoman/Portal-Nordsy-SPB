@@ -4,6 +4,7 @@ import com.myapp.portalnordsyspb.evaluationPU.dto.responseDto.MessageDto;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.request.FilterDto;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.request.PeriodRequestDto;
 import com.myapp.portalnordsyspb.trainingStatistics.dto.response.PeriodResponseDto;
+import com.myapp.portalnordsyspb.trainingStatistics.dto.response.PersonsByDirectionsForMonthDto;
 import com.myapp.portalnordsyspb.trainingStatistics.service.PeriodService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,11 @@ public class PeriodController {
     public ResponseEntity<List<PeriodResponseDto>> getAllPeriodResponseDto(@RequestParam(required = false) String tabNumber,
                                                                            @RequestParam(required = false) Integer unitValue){
         return ResponseEntity.ok(periodService.getAllPeriodResponseDto(new FilterDto(tabNumber, unitValue)));
+    }
+
+    @GetMapping("/persons-by-directions/{year}")
+    public ResponseEntity<List<PersonsByDirectionsForMonthDto>> getPersonsByDirectionsForMonth(@PathVariable("year") int year){
+        return ResponseEntity.ok(periodService.getPersonsByDirectionsForMonth(year));
     }
 
     @PostMapping("/create")

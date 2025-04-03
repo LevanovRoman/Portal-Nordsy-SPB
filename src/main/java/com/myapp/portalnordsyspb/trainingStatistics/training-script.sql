@@ -78,5 +78,8 @@ SELECT COUNT(*) FROM details_persons dp JOIN unit_details ud ON dp.unit_details_
                 WHERE EXTRACT(MONTH FROM ud.date) =12 AND EXTRACT(YEAR FROM ud.date) =2025;
 
 
-
+SELECT COUNT(*) FROM details_persons dp JOIN unit_details ud ON dp.unit_details_id = ud.id
+                                        JOIN unit u on u.id = ud.unit_id
+                                        JOIN public.direction d on d.id = u.direction_id
+WHERE d.id = 2 AND EXTRACT(MONTH FROM ud.date) = 3 AND EXTRACT(YEAR FROM ud.date) = 2025;
 
