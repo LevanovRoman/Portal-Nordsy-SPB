@@ -28,7 +28,7 @@ public class PeriodServiceImpl implements PeriodService{
     public List<PeriodResponseDto> getAllPeriodResponseDto(FilterDto filterDto) {
         return periodRepository.findAll()
                 .stream()
-                .sorted(Comparator.comparing(Period::getId))
+                .sorted(Comparator.comparing(Period::getNumber))
                 .map(period -> convertPeriodToPeriodResponseDto(period, filterDto))
                 .toList();
     }

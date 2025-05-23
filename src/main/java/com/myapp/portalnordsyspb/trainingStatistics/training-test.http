@@ -9,3 +9,6 @@ GET http://localhost:8080/api/training/unit-details/diagram/{{year}}
 
 ###
 GET http://localhost:8080/api/training/period/persons-by-directions/2025
+
+###
+GET http://172.16.15.92:8080/api/training/period/persons-by-directions/2025
